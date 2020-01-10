@@ -23,7 +23,7 @@ class AppTest extends React.Component {
     return(
       <div className="app-wrapper">
         <Header handleController={this.handleController}/>
-        <Contents controller={this.state.controller} />
+        <Contents handleController={this.handleController} controller={this.state.controller} />
         <Footer></Footer>
       </div>
     )

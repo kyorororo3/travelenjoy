@@ -10,11 +10,13 @@ class PostMenu extends Component {
         return (
             <div className="post-menu-wrap">
                 <p>{this.state.info}</p>
-                <p>홈</p>
-                <p>검색</p>
-                <p>추가</p>
-                <p>좋아요</p>
-                <p>프로필</p>
+                <ul>
+                    <li>홈</li>
+                    <li>검색</li>
+                    <li><a href="">작성</a></li>
+                    <li>좋아요</li>
+                    <li>프로필</li>
+                </ul>
             </div>
         );
     }

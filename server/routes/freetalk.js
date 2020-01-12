@@ -13,4 +13,18 @@ router.get('/free/get/all', (req, res) =>
     })
 );
 
+router.post('/free/save', function (req, res, param) {
+        console.log('free save req : ' + req);
+
+        // let stmt = "select * from test_min";
+        // connection.query(stmt, function(err, result) {
+        //     if(err) console.error("err : " + err);
+        //     console.log(result);
+        // })
+        res.json({
+            resp : "ok"
+        })
+    }
+);
+
 module.exports = router

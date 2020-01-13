@@ -7,7 +7,7 @@ class Contents extends React.Component {
   // 회원가입 정보를 node서버로 전달하는 메소드
   handleAccount = (mem_info) => {
     // console.log(mem_info);
-    fetch('http://localhost:3002/api/account', {
+    fetch('http://localhost:3002/account', {
       method: 'post',
       headers: {
         "Content-Type": "application/json; charset=utf-8"
@@ -25,7 +25,7 @@ class Contents extends React.Component {
 
   // 로그인 정보를 node서버로 전달하는 메소드
   handleLogin = (login_info) => {
-    fetch('http://localhost:3002/api/login', {
+    fetch('http://localhost:3002/login', {
       method: 'post',
       headers: {
         "Content-Type": "application/json; charset=utf-8"

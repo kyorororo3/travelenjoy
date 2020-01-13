@@ -5,13 +5,32 @@ class Account extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.handleAccount({
+    this.handleAccount({
       email: e.target.email.value,
       pwd: e.target.pwd.value,
       nickname: e.target.nickname.value,
       name: e.target.name.value
     });
   }
+
+  // 회원가입 정보를 node서버로 전달하는 메소드
+  handleAccount = (mem_info) => {
+    // console.log(mem_info);
+    fetch('http://localhost:3002/api/account', {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify(mem_info)
+    })
+      .then(res => res.json())
+      .then(obj => {
+        if(obj.result === 'succ') {
+          alert("회원가입이 완료되었습니다.");
+          this.props.history.push('/'); // 홈으로 이동시켜준다!
+        }
+      });
+  }  
 
   render() {
     return(

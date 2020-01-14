@@ -1,11 +1,14 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// COMPONENTS
 import Header from './Header_test';
-import Contents from './Contents_test';
+// import Contents from './Contents_test';
 import Login from './Login_test';
 import Account from './Account_test';
 import Home from './Home_test';
 import Footer from './Footer_test';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Tourlist from '../app/tour/tourlist';
 
 class AppTest extends React.Component {
   constructor(props) {
@@ -33,6 +36,7 @@ class AppTest extends React.Component {
               <Route exact path='/' component={Home} />
               <Route path='/login' component={Login} />
               <Route path='/account' component={Account} />
+              <Route path='/tour' component={Tourlist} />
             </Switch>
           </div>
         </Router>

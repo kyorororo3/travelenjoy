@@ -19,6 +19,11 @@ class Header extends React.Component {
           <Link to='/login'>LOGIN</Link>
           <Link to='/account'>JOIN</Link>
         </div>
+        <div className='top-menu-wrapper'>
+          <ul className='top-menu'>
+            <Link to='/tour'><li>Tour</li></Link>
+          </ul>
+        </div>
       </div>
     )
   }

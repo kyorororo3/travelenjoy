@@ -9,6 +9,7 @@ import Account from './Account_test';
 import Home from './Home_test';
 import Footer from './Footer_test';
 import Tourlist from '../app/tour/tourlist';
+import Tourdetail from '../app/tour/tourdetail';
 
 class AppTest extends React.Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class AppTest extends React.Component {
               <Route exact path='/' component={Home} />
               <Route path='/login' component={Login} />
               <Route path='/account' component={Account} />
-              <Route path='/tour' component={Tourlist} />
+              <Route exact path='/tour' component={Tourlist} />
+              <Route path='/tour/detail/:seq' component={Tourdetail} />
             </Switch>
           </div>
         </Router>

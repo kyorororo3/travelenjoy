@@ -1,20 +1,14 @@
 import React from 'react';
-<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-// COMPONENTS
-import Header from './Header_test';
-// import Contents from './Contents_test';
-=======
 import Header from '../components/common/Header';
-import Contents from './Contents_test';
->>>>>>> hyeyeon
-import Login from './Login_test';
+
+import Login from '../components/login/login';
 import Account from './Account_test';
 import Home from './Home_test';
 import Footer from './Footer_test';
-import Tourlist from '../app/tour/tourlist';
-import Tourdetail from '../app/tour/tourdetail';
+import Tourlist from '../components/tour/tourlist';
+import Tourdetail from '../components/tour/tourdetail';
 
 class AppTest extends React.Component {
   constructor(props) {

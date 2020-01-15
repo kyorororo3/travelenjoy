@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import  '../../resources/css/header.css';
 
+
 class Header extends React.Component {
 
 
   render() {
     return(
+      
       <div className="header-wrapper">
         {/* <div className='login_info'>
           <Link to='/login'>LOGIN</Link>

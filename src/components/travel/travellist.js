@@ -29,7 +29,7 @@ class TravelList extends React.Component {
     return(
       <div className='tour-list-wrapper'>
        <h2>list component</h2>
-       {isLoaded? list.map(tour => <TravelListObj key={tour.SEQ} tour={tour} />) : <h1>Loading....</h1>}
+       {isLoaded? list.map(tour => <TravelListObj key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
       </div>
     )
   }

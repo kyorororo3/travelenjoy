@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+// COMPONENTS
+import TravelInfo from './traveldetail_info';
+import TravelSche from './traveldetail_sche';
+import TravelPath from './traveldetail_path';
 
 class Tourdetail extends React.Component {
 
@@ -27,10 +32,26 @@ class Tourdetail extends React.Component {
   }
 
   render() {
+
+    let { isLoaded, tour_info, tour_sche, tour_des } = this.state;
+    
+    // let loaded_page = <Fragment>
+    //   <TravelInfo info={tour_info} />
+    //   <TravelSche sche={tour_sche} period={tour_info.period} />
+    //   <TravelPath path={tour_des} />
+    // </Fragment>
+
     return(
       <div className='tour-detail-wrapper'>
         <h2>detail component</h2>
-        
+        {isLoaded && 
+          ( <Fragment>
+              <TravelInfo info={tour_info} />
+              <TravelSche sche={tour_sche} period={tour_info.period} />
+              <TravelPath path={tour_des} />
+            </Fragment>
+          )
+        }
       </div>
     )
   }

@@ -1,11 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-class TourlistObj extends React.Component {
+class TravelListObj extends React.Component {
   goToDetail = (e) => {
     // console.log(e.target.dataset.seq);
     let seq = e.target.dataset.seq;
-    this.props.history.push('/tour/detail/' + seq);
+    this.props.history.push('/travel/detail/' + seq);
   }
 
   render() {
@@ -20,4 +20,4 @@ class TourlistObj extends React.Component {
   }
 }
 
-export default withRouter(TourlistObj);
+export default withRouter(TravelListObj);

@@ -1,7 +1,7 @@
 import React from 'react';
-import TourlistObj from './tourlist_obj';
+import TravelListObj from './travellist_obj';
 
-class Tourlist extends React.Component {
+class TravelList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -29,10 +29,10 @@ class Tourlist extends React.Component {
     return(
       <div className='tour-list-wrapper'>
        <h2>list component</h2>
-       {isLoaded? list.map(tour => <TourlistObj key={tour.SEQ} tour={tour} />) : <h1>Loading....</h1>}
+       {isLoaded? list.map(tour => <TravelListObj key={tour.SEQ} tour={tour} />) : <h1>Loading....</h1>}
       </div>
     )
   }
 }
 
-export default Tourlist
+export default TravelList

@@ -1,5 +1,5 @@
 CREATE TABLE TE_TOUR(
-    SEQ INT,
+    SEQ INT AUTO_INCREMENT PRIMARY KEY,
     EMAIL VARCHAR(50),
     NICKNAME VARCHAR(100),
     CATEGORY VARCHAR(10),
@@ -11,15 +11,21 @@ CREATE TABLE TE_TOUR(
     MAX_PEOPLE INT
 );
 
+insert into te_tour(email, nickname, category, title, content, period, min_people, max_people)
+values('aaa', '치키치킨', '인천', '우리동네투어ㅋ', '동춘동 함께 투어합시다ㅋ', '1', '2', '4');
+
 CREATE TABLE TE_TOUR_SCHE(
-    SEQ INT,
+    SEQ INT AUTO_INCREMENT PRIMARY KEY,
     TOUR_SEQ INT,
     JOIN_PEOPLE INT,
     START_DATE DATETIME
 );
 
+insert into te_tour_sche(tour_seq, join_people, start_date)
+values(1, 0, '20200105000000');
+
 CREATE TABLE TE_TOUR_DES(
-    SEQ INT,
+    SEQ INT AUTO_INCREMENT PRIMARY KEY,
     TOUR_SEQ INT,
     DES_NAME VARCHAR(100),
     DES_IMG VARCHAR(50),
@@ -32,6 +38,9 @@ CREATE TABLE TE_TOUR_DES(
     END_TIME INT
 );
 
+insert into te_tour_des(tour_seq, des_name, des_description, postcode, address, address_detail, tour_day, start_time, end_time)
+values(1, '로스타임', '내가 좋아하는 치킨집이지롱 ㅋ', '21972', '인천 연수구 앵고개로 260', '', 1, 18, 21);
+
 CREATE TABLE TE_MEMBER(
     EMAIL VARCHAR(50),
     PWD VARCHAR(20),
@@ -41,3 +50,11 @@ CREATE TABLE TE_MEMBER(
     PHONE VARCHAR(50),
     AUTH INT
 );
+
+delimiter $$
+create function ordered_uuid(uuid binary(36))
+returns binary(16) deterministic
+begin
+  return UNHEX(CONCAT(SUBSTR(uuid, 15, 4),SUBSTR(uuid, 10, 4),SUBSTR(uuid, 1, 8),SUBSTR(uuid, 20, 4),SUBSTR(uuid, 25)));
+end$$
+delimiter;

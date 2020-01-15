@@ -1,9 +1,14 @@
 import React from 'react';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // COMPONENTS
 import Header from './Header_test';
 // import Contents from './Contents_test';
+=======
+import Header from '../components/common/Header';
+import Contents from './Contents_test';
+>>>>>>> hyeyeon
 import Login from './Login_test';
 import Account from './Account_test';
 import Home from './Home_test';

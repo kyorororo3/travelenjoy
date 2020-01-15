@@ -8,7 +8,8 @@ module.exports = function () {
                 port: '3306',
                 user: 'te',
                 password: ',,,,',
-                database: 'travelenjoy'
+                database: 'travelenjoy',
+                multipleStatements: true  // 다중쿼리용 설정
             })
         },
 

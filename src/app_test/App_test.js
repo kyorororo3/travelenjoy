@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header_test';
+import Header from '../components/common/Header';
 import Contents from './Contents_test';
 import Login from './Login_test';
 import Account from './Account_test';

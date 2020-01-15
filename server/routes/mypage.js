@@ -9,3 +9,4 @@ mysql_dbc.conn_test(connection);
 router.use(bodyParser.json());
 
 
+module.exports = router;

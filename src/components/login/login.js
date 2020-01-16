@@ -1,62 +1,65 @@
 import React from 'react';
+import  '../../resources/css/login.css';
 
 class Login extends React.Component {
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    this.handleLogin({
-      email: e.target.email.value,
-      pwd: e.target.pwd.value
-    })
+    // state 초기값 설정
+  constructor(props){
+    super(props);
+    this.state = {users: []}
   }
 
-  // 로그인 정보를 node서버로 전달하는 메소드
-  handleLogin = (login_info) => {
-    fetch('http://localhost:3002/api/login', {
-      method: 'post',
+  componentDidMount() {
+    fetch('http://localhost:3002/users/getUser')
+      .then(res => res.json())
+      .then(data => {
+        if(data.EMAIL !== undefined)
+          this.setState({users : data})
+        }
+      );
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.email.value, event.target.pwd.value);
+     this.login({
+         email: event.target.email.value,
+         pwd: event.target.pwd.value
+     })
+  }
+
+  login = (login_info) => {
+    console.log("App.js login() " + JSON.stringify(login_info))
+    fetch('http://localhost:3002/users/login', {
+      method: "post",
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       },
+      credentials: 'same-origin',
+      mode: 'cors',
       body: JSON.stringify(login_info)
     })
-      .then(res => res.json())
-      .then(obj => {
-        // console.log(obj);
-        if(obj.NAME !== undefined) {
-          alert("환영합니다! " + obj.NAME + "님!");
-
-          // 세션에 저장해야되는데 세션을 아직 할줄 모름...ㅎ
-
-          this.props.history.push('/'); // 홈으로 이동시켜준다!
-
-        }else {
-          alert("잘못된 이메일 또는 비밀번호입니다.");
-        }
-      });
+    .then(res => res.json())
+    .then(data => {
+      console.log("App.js login .then " , data);
+      if(data.EMAIL === undefined){
+        alert('login fail!');
+      }
+      this.setState({ users : data })    
+    })
   }
 
   render() {
     return(
-      <div className="login-form-wrapper">
+      <div className="login-wrapper">
         <h3>Login</h3>
-        <form onSubmit={this.handleSubmit}>
-          <table>
-            <tbody>
-              <tr>
-                <th>이메일</th>
-                <td><input type='text' name='email' /></td>
-              </tr>
-              <tr>
-                <th>비밀번호</th>
-                <td><input type='password' name='pwd' /></td>
-              </tr>
-              <tr>
-                <td colSpan='2'><input type='submit'/></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
+        <div className="login-form">
+        <div>{JSON.stringify(this.state.users)}</div>
+          <form onSubmit={this.handleSubmit}>
+            <p><input type='text' name='email' placeholder='EMAIL' autoComplete='true'/></p>
+            <p><input type='password' name='pwd' placeholder='PASSWORD' autoComplete='true' /></p>
+            <p><input type='submit' value='LOGIN'/></p>
+          </form>
+        </div>
       </div>
     )
   }

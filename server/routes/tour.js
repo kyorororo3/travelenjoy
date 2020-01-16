@@ -14,7 +14,7 @@ router.get('/list', function (req, res) {
   var sql = "select * from te_tour";
   conn.query(sql, function (err, rows) {
     if(err) return console.log("ERR!! " + err);
-    console.log(rows);
+   // console.log(rows);
     res.send(rows);
   })
 });

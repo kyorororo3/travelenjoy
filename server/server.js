@@ -1,15 +1,14 @@
 var express = require('express');
 var app = express();
+const cors = require('cors');
 
 // ROUTERS
-const login = require('./routes/login');
+const users = require('./routes/users');
 const mypage = require('./routes/mypage');
 const tour = require('./routes/tour');
 
-const cors = require('cors');
-
-app.use(cors());
-app.use('/login', login);
+app.use(cors({origin:true, credentials:true}));
+app.use('/users', users);
 app.use('/mypage', mypage);
 app.use('/tour', tour);
 

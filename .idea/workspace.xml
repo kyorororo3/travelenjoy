@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/query/freetalk.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/freetalk/resources/css/free.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/freetalk/Free.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/freetalk/Free.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/freetalk/PostList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/freetalk/PostList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/freetalk/Write.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/freetalk/Write.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,10 +115,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="52" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1578491687323" />
-    <state x="289" y="0" key="CommitChangelistDialog2" timestamp="1578803696739">
+    <state x="289" y="0" key="CommitChangelistDialog2" timestamp="1579180730164">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="289" y="0" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1578803696739" />
+    <state x="289" y="0" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1579180730164" />
     <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1578795937054">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -154,6 +160,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="228" y="0" width="1011" height="684" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1578802272142" />
+    <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog" timestamp="1579180717821">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579180717821" />
     <state x="366" y="145" key="search.everywhere.popup" timestamp="1578489974644">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

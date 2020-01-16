@@ -9,6 +9,7 @@ import PostList from "./PostList"
 import Write from "./Write";
 import Likes from "./Likes"
 import {FreeConstants} from "./FreeConstants";
+import './resources/css/free.css'
 
 // Each logical "route" has two components, one for
 // the sidebar and one for the main area. We want to
@@ -41,14 +42,30 @@ const routes = [
 export default function SidebarExample() {
     return (
         <Router>
-            <div style={{ display: "flex" }}>
-                <div
-                    style={{
-                        padding: "10px",
-                        width: "40%",
-                        background: "#f0f0f0"
-                    }}
-                >
+            <div id="post-main-wrap">
+                <div id="post-content-wrap" style={{ flex: 1, padding: "10px" }}>
+                    <Switch>
+                        {routes.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                exact={route.exact}
+                                children={<route.sidebar />}
+                            />
+                        ))}
+                    </Switch>
+                    <Switch>
+                        {routes.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                exact={route.exact}
+                                children={<route.main />}
+                            />
+                        ))}
+                    </Switch>
+                </div>
+                <div id="bottom-menu-wrap">
                     <ul style={{ listStyleType: "none", padding: 0 }}>
                         <li>
                             <a href={"/"}>메인으로</a>
@@ -63,70 +80,8 @@ export default function SidebarExample() {
                             <Link to={FreeConstants.URL_POST_LIKES}>좋아요</Link>
                         </li>
                     </ul>
-
-                    <Switch>
-                        {routes.map((route, index) => (
-                            // You can render a <Route> in as many places
-                            // as you want in your app. It will render along
-                            // with any other <Route>s that also match the URL.
-                            // So, a sidebar or breadcrumbs or anything else
-                            // that requires you to render multiple things
-                            // in multiple places at the same URL is nothing
-                            // more than multiple <Route>s.
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                children={<route.sidebar />}
-                            />
-                        ))}
-                    </Switch>
-                </div>
-
-                <div style={{ flex: 1, padding: "10px" }}>
-                    <Switch>
-                        {routes.map((route, index) => (
-                            // Render more <Route>s with the same paths as
-                            // above, but different components this time.
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                children={<route.main />}
-                            />
-                        ))}
-                    </Switch>
                 </div>
             </div>
         </Router>
     );
 }
-
-// import React from "react";
-// import {BrowserRouter as Router, Link, Route} from "react-router-dom";
-// import App from "../../App";
-// import Post from "./Post";
-// import PostMenu from "./PostMenu";
-//
-// export default function Free() {
-//     return (
-//         <Router>
-//             <div>
-//                 <ul>
-//                     <li><Link to="/">Home</Link></li>
-//                     <li><Link to="/post">Post</Link></li>
-//                     <li><Link to="/post-menu">PostMenu</Link></li>
-//                 </ul>
-//             </div>
-//             <Route path="/" component={App}>
-//                 <Route path="post" component={Post}>
-//                     <Post/>
-//                 </Route>
-//                 <Route path="post-menu" component={PostMenu}>
-//                     <PostMenu/>
-//                 </Route>
-//             </Route>
-//         </Router>
-//     );
-// }
-

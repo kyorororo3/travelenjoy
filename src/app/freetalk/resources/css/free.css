@@ -1,0 +1,22 @@
+#post-main-wrap {
+    width: 95%;
+}
+
+#bottom-menu-wrap ul{
+    margin: auto;
+    position: absolute;
+    left: 27%;
+}
+
+#bottom-menu-wrap ul li {
+    background: #d9e1e8;
+    float: left;
+    align: center;
+    margin: 0px 10px 0px 10px;
+    align: center;
+
+}
+/*검정  #282c37*/
+/*회색 #9baec8*/
+/*밝은 회색 #d9e1e8*/
+/*파랑색 #2b90d9*/

@@ -9,7 +9,9 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3002/users/getUser')
+    fetch('http://localhost:3002/users/getUser',{
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(data => {
         if(data.EMAIL !== undefined)
@@ -34,8 +36,7 @@ class Login extends React.Component {
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       },
-      credentials: 'same-origin',
-      mode: 'cors',
+      credentials: 'include',
       body: JSON.stringify(login_info)
     })
     .then(res => res.json())

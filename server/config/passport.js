@@ -6,26 +6,37 @@ let mysql = mysql_config.init();
 mysql_config.conn_test(mysql);
 
 module.exports = () => {
+    passport.serializeUser(function(user, done) {
+        console.log("serializeUser ", user)
+        if(user){
+            done(null, user.EMAIL);
+        }  
+      });
+      
+    passport.deserializeUser(function(id, done) {
+        console.log("deserializeUser id ", id)
+        var sql = 'SELECT * FROM TE_MEMBER WHERE EMAIL=?';
+        mysql.query(sql , [id], function (err, result) {
+            if(err) {done(err,null);}           
+            console.log("deserializeUser mysql result : " , result);
+            done(null, result[0]);
+        })    
+    });
+      
     passport.use(new LocalStrategy({
             usernameField: 'email',
-            passwordField: 'pwd'
+            passwordField: 'pwd',
+            session: true
         },
         function(username, password, done) {
             var sql = 'SELECT * FROM TE_MEMBER WHERE EMAIL=? AND PWD=?';
             mysql.query(sql , [username, password], function (err, result) {
-            if(err) console.log('mysql 에러');  
-            // 입력받은 ID와 비밀번호에 일치하는 회원정보가 없는 경우   
-            if(result.length === 0){
-                console.log("결과 없음");
-                return done(null, false);
-            }else{
-                console.log("로그인 성공" + result);
-                var json = JSON.stringify(result[0]);
-                var userinfo = JSON.parse(json);
-                console.log("userinfo " + userinfo);
-                return done(null, userinfo);  // result값으로 받아진 회원정보를 return해줌
-            }
-            })
+              if (err) { return done(err); }
+              if (result.length === 0) {
+                return done(null, false, { message: 'Incorrect username.' });
+              }
+              return done(null, JSON.parse(JSON.stringify(result[0])));
+            });
         }
     ));
 }

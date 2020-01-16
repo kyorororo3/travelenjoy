@@ -16,38 +16,18 @@ let passport_config = require('../config/passport');
 router.use(express.static("public"));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
-router.use(cookieParser());
+router.use(cookieParser('keyboard cat'));
 router.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie:{maxAge:30000}
+  cookie:{maxAge:30000, 
+          secure:false,
+          httpOnly:false}
 }));
 router.use(passport.initialize());
 router.use(passport.session());
 passport_config();
-
-
-passport.serializeUser(function(user, done) {
-  console.log("serializeUser ", user)
-  if(user){
-      done(null, user.EMAIL);
-  }  
-});
-
-passport.deserializeUser(function(id, done) {
-  console.log("deserializeUser id ", id)
-  var userinfo;
-  var sql = 'SELECT * FROM TE_MEMBER WHERE EMAIL=?';
-  mysql.query(sql , [id], function (err, result) {
-    if(err) {console.log('mysql 에러'); done(err,null);}
-   
-    console.log("deserializeUser mysql result : " , result);
-    var json = JSON.stringify(result[0]);
-    userinfo = JSON.parse(json);
-    done(null, userinfo);
-  })    
-});
 
 router.get('/getUser',function(req, res){
   console.log('req.isAuthenticated() = ', req.isAuthenticated(), req.user);
@@ -59,14 +39,11 @@ router.get('/getUser',function(req, res){
 })
 
 router.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.send([]); }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.send(user);
+  passport.authenticate('local', function (err, user) {
+    req.logIn(user, function (err) { 
+       return res.send(user);        
     });
-  })(req, res, next);
+  })(req, res);
 });
 
 module.exports = router;

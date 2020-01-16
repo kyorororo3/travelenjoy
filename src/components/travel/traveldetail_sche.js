@@ -37,7 +37,13 @@ class TravelSche extends React.Component {
   }
   
   // 날짜 선택 시 투어 기간에 맞게 날짜가 전부 선택됨.
-  handleDayChange = (date) => {
+  handleDayChange = (date, modifiers = {}) => {
+    
+    // 선택이 불가능한 날짜일 경우 선택 못함.
+    if(modifiers.disabled) {
+      return;
+    }
+
     const addDay = this.props.period;
     const _selectedDays = [date]
     const day = date.getDate();
@@ -72,6 +78,7 @@ class TravelSche extends React.Component {
         travel schedule<br/>
         <DayPicker 
           showOutsideDays
+          disabledDays={ [new Date(), {before: new Date()}] }
           selectedDays={selectedDays}
           onDayClick={this.handleDayChange} />
         <div className='travel-schedule-selected'>

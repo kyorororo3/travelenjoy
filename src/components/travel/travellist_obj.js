@@ -10,11 +10,11 @@ class TravelListObj extends React.Component {
 
   render() {
     return(
-      <div className='tour-list-obj' data-seq={this.props.tour.SEQ}
+      <div className='tour-list-obj' data-seq={this.props.tour.seq}
        onClick={this.goToDetail}>
-        <div data-seq={this.props.tour.SEQ}>{this.props.tour.TITLE}</div>
-        <div data-seq={this.props.tour.SEQ}>{this.props.tour.CONTENT}</div>
-        <div data-seq={this.props.tour.SEQ}>{this.props.tour.NICKNAME}</div>
+        <div data-seq={this.props.tour.seq}>{this.props.tour.title}</div>
+        <div data-seq={this.props.tour.seq}>{this.props.tour.content}</div>
+        <div data-seq={this.props.tour.seq}>{this.props.tour.nickname}</div>
       </div>
     )
   }

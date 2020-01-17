@@ -7,10 +7,10 @@ class TalkList extends Component {
     state = {
         talkLength: 3,
         talkList: [
-            {id:1, title: '제목1', content:'내용1', email:'111', nickname: '1111', reg_date: '111'}
+            {id: 1, title: '제목1', content: '내용1', email: '111', nickname: '1111', reg_date: '111'}
         ],
         list: []
-    }     
+    }
 
     componentDidMount() {
         fetch('http://localhost:3002/free/get/all')

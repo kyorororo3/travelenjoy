@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
       <change afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/components/freetalk/TalkMain.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -12,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/freetalk/Free.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/freetalk/Free.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/freetalk/PostList.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

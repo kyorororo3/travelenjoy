@@ -21,9 +21,7 @@ router.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie:{maxAge:30000, 
-          secure:false,
-          httpOnly:false}
+  cookie:{maxAge:30000}
 }));
 router.use(passport.initialize());
 router.use(passport.session());
@@ -40,6 +38,7 @@ router.get('/getUser',function(req, res){
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function (err, user) {
+    if (!user) { return res.send([]); }
     req.logIn(user, function (err) { 
        return res.send(user);        
     });

@@ -28,15 +28,6 @@ router.get('/free/get/all', function (req, res) {
         if (err) console.log('connection result err : ' + result);
         console.log(result);
         res.json({list: result});
-        // result = JSON.stringify(rows);
-        // console.log('result : ' + result);
-        // console.log('fields : ' + fields);
-        // res.json({
-        //     result: rows
-            // resp: "ok",
-            // result: rows,
-            // checker: "done"
-        // });
     });
 });
 

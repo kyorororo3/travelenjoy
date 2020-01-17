@@ -5,7 +5,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import PostList from "./PostList"
+import PostList from "../../components/freetalk/PostList"
 import Write from "./Write";
 import Likes from "./Likes"
 import {FreeConstants} from "./FreeConstants";

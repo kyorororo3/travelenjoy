@@ -35,12 +35,6 @@ class Tourdetail extends React.Component {
 
     let { isLoaded, tour_info, tour_sche, tour_des } = this.state;
     
-    // let loaded_page = <Fragment>
-    //   <TravelInfo info={tour_info} />
-    //   <TravelSche sche={tour_sche} period={tour_info.period} />
-    //   <TravelPath path={tour_des} />
-    // </Fragment>
-
     return(
       <div className='tour-detail-wrapper'>
         <h2>detail component</h2>

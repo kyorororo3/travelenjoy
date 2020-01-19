@@ -1,0 +1,81 @@
+/*
+검정  #282c37
+회색 #9baec8
+밝은 회색 #d9e1e8
+파랑색 #2b90d9
+*/
+.main-text {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  font-weight: 900;
+}
+
+.tour-search-wrapper {
+  width: 100%;
+  height: 200px;
+  background-color: #2b90d9;
+  border-radius: 5px;
+  text-align: center;
+}
+
+input[type='text'] {
+  width: 250px;
+  height: 30px;
+  border: 0;
+  border-radius: 3px;
+  margin-right: 10px;
+  padding: 0 0 0 10px;
+}
+
+.btn-search {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: url('../images/btn_search.png') no-repeat;
+  transform: translate(10px, 10px);
+}
+
+.card-container {
+  width: 250px;
+  height: 300px;
+  float: left;
+  border: 1px solid #9baec8;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tour-thumbnail {
+  width: 100%;
+  height: 180px;
+  border-bottom: 1px solid #9baec8;
+}
+
+.tour-infos {
+  width: 230px;
+  height: 100px;
+  padding: 10px
+}
+
+.tour-infos div {
+  height: 33px;
+}
+
+.tour-category {
+  color: #9baec8;
+  font-weight: bold;
+}
+
+.tour-title {
+  color: #2b90d9;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.tour-nickname {
+  text-align: right;
+  color: black;
+}

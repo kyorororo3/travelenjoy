@@ -23,13 +23,25 @@ class TravelList extends React.Component {
   }
 
   render() {
-
     var { list, isLoaded } = this.state;
     
     return(
-      <div className='tour-list-wrapper'>
-       <h2>list component</h2>
-       {isLoaded? list.map(tour => <TravelListObj key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
+      <div className='container'>
+        <div className='tour-search-wrapper'>
+          <div className='main-text'>
+            어디로 떠나고 싶으신가요?
+          </div>
+          <div className='tour-search-form-wrapper'>
+            <form className='tour-search-form'>
+              <input type='text' name='location' />
+              <input className='btn-search' type='submit' value=''/>
+            </form>
+          </div>
+        </div>
+        <div className='tour-list-wrapper'>
+        <h2>list component</h2>
+          {isLoaded? list.map(tour => <TravelListObj key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
+        </div>
       </div>
     )
   }

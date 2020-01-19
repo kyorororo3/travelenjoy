@@ -10,6 +10,7 @@ import Footer from './components/common/Footer';
 import TravelList from './components/travel/travellist';
 import TravelDetail from './components/travel/traveldetail';
 import TalkMain from './components/freetalk/TalkMain';
+import TalkWrite from "./components/freetalk/TalkWrite";
 
 class AppTest extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class AppTest extends React.Component {
               <Route exact path='/travel' component={TravelList} />
               <Route path='/travel/detail/:seq' component={TravelDetail} />
               <Route path='/talk' component={TalkMain} />
+              <Route path='/talk/write' component={TalkWrite} />
             </Switch>
           </div>
         </Router>

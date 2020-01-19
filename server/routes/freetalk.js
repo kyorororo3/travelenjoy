@@ -1,28 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
 
-let mysql_dbc = require('../config/dbconfig')();
-let connection = mysql_dbc.init();
+router.use(bodyParser.json());
 
-router.get('/free/get/alltest', (req, res) =>
+const mysql = require('mysql');
+let dbconfig = require('../config/dbconfig')();
+let connection = dbconfig.init();
+dbconfig.conn_test(connection, 'freetalk!!');
+
+router.get('/test', function (req, res) {
     res.json({
         list: [
-            {id: 1, content: "free1111"},
-            {id: 2, content: "free2222"}
+            {id: 1, content: 'content1'},
+            {id: 2, content: 'content2'}
         ]
     })
-);
+    console.log('get ok');
+});
 
-router.get('/routes/dbtest', function (req, res) {
-        let stmt = "select * from test_min";
-        connection.query(stmt, function(err, result) {
-            if(err) console.error("err : " + err);
-            console.log(result);
-        })
-    }
-);
-
-router.get('/free/get/all', function (req, res) {
+router.get('/list', function (req, res) {
     let stmt = "select * from te_freetalk";
     connection.query(stmt, function (err, result) {
         if (err) console.log('connection result err : ' + result);

@@ -13,53 +13,44 @@ class TalkList extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3002/free/get/all')
+        fetch('http://localhost:3002/freetalk/list')
             .then(res => res.json())
-            .then(data => this.setState({
-                    list: data,
-                    isLoaded: true
-                })
-            );
+            .then(res => this.setState({list: res.list}))
     }
 
     _callApi = async () => {
 
     }
 
-    addTalkToTalkList() {
-        console.log('ok!');
-        fetch('http://localhost:3002/free/get/alltest')
-            .then(res => res.json())
-            .then(data => this.setState({
-                    list: data,
-                    isLoaded: true
-                })
-            );
-        console.log('ok!');
+    addTalk = (data) => {
+        const {info} = this.state;
+        this.setState({
+            list: this.state.list.concat({seq:66})
+        })
+    }
+
+    writeTalk = () => {
+        alert('sdfsdfsdfsdf');
     }
 
     render() {
         return (
-            <div class="talk-list-wrap">
-
-                {this.state.list.map( (post, i) => (
-                    <p>rr!! {post.id}</p>
-                    )
-                )}
-
+            <div className="talk-list-wrap">
 
                 <h2>여기부터 게시물들이 나갈겁니다</h2>
-                {this.state.talkList.map( (talk, i) => (
-                        <Talk id={talk.id}
-                            title={talk.title}
-                            content={talk.content}
-                            email={talk.email}
-                            nickname={talk.nickname}
-                            reg_date={talk.reg_date}/>
+                {(this.state.list != null)?
+                    this.state.list.map( (talk, i) => (
+                        <Talk key={talk.seq}
+                              seq={talk.seq}
+                              title={talk.title}
+                              content={talk.content}
+                              email={talk.email}
+                              nickname={talk.nickname}
+                              reg_date={talk.reg_date}/>
                     )
-                )}
+                ):' '}
 
-                <input class="btn-primary" type="button" value={"더보기"} onClick={this.addTalkToTalkList}/>
+                <input className="btn-primary" type="button" value={"더보기"} onClick={this.addTalk}/>
             </div>
         );
     }

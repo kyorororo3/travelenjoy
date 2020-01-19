@@ -15,13 +15,12 @@ class Talk extends Component {
     render() {
         return (
             <div className="talk-main-wrap">
-
                 <p>요게 하나에요</p>
-                <div>No : {this.props.id}</div>
+                <div>No : {this.props.seq}</div>
                 <div>Title : {this.props.title}</div>
-                <div>Content : {this.props.Content}</div>
-                <div>Email : {this.props.Email}</div>
-                <div>Nickname : {this.props.Nickname}</div>
+                <div>Content : {this.props.content}</div>
+                <div>Email : {this.props.email}</div>
+                <div>Nickname : {this.props.nickname}</div>
                 <div>reg_date : {this.props.reg_date}</div>
             </div>
         );

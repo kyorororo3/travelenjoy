@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkWrite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkWrite.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,13 +71,13 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Workspace\travelenjoy\src\app\freetalk" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Workspace\travelenjoy\src\components\freetalk" />
       <recent name="C:\Workspace\travelenjoy\src\resources\freetalk\css" />
       <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\src\components\freetalk" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Workspace\travelenjoy\src\app\freetalk" />
     </key>
   </component>
   <component name="ServiceViewManager">

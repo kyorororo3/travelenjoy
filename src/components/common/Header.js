@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import  '../../resources/css/header.css';
+import  '../../resources/common/css/header.css';
 
 
 class Header extends React.Component {
@@ -27,7 +27,8 @@ class Header extends React.Component {
                             <ul>
                                 <li><NavLink exact to='/' className='menu' activeClassName='active'>Home</NavLink></li>
                                 <li><NavLink to='/travel' className='menu'>Travel</NavLink></li>
-                                <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>                               
+                                <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>
+                                <li><NavLink to='/mypage' className='menu'>Mypage</NavLink></li>
                                 <li className='login-btn'><NavLink to='/login'><span>Login</span></NavLink></li>
                             </ul>
                         </div>

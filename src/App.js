@@ -1,7 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// CSS
+import './resources/common/css/contents.css';
 
+// Components
 import Header from './components/common/Header';
 import Login from './components/login/login';
 import Account from './components/account/account';
@@ -9,6 +12,11 @@ import Home from './components/common/Home';
 import Footer from './components/common/Footer';
 import TravelList from './components/travel/travellist';
 import TravelDetail from './components/travel/traveldetail';
+import TalkMain from './components/freetalk/TalkMain';
+import TalkWrite from "./components/freetalk/TalkWrite";
+
+
+import MypageHome from './components/mypage/MypageHome';
 
 class AppTest extends React.Component {
   // constructor(props) {
@@ -37,6 +45,9 @@ class AppTest extends React.Component {
               <Route path='/account' component={Account} />
               <Route exact path='/travel' component={TravelList} />
               <Route path='/travel/detail/:seq' component={TravelDetail} />
+              <Route path='/talk' component={TalkMain} />
+              <Route path='/talk/write' component={TalkWrite} />
+              <Route exact path='/mypage' component={MypageHome}/>
             </Switch>
           </div>
         </Router>

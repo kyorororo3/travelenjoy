@@ -148,3 +148,10 @@ create table te_freetalk_images(
     reg_date datetime default current_timestamp
 );
 
+insert into te_freetalk_images(te_freetalk_seq, name_real, name_saved) values (1, 'cat1.jpg', 'cat1.jpg');
+insert into te_freetalk_images(te_freetalk_seq, name_real, name_saved) values (1, 'cat2.jpg', 'cat2.jpg');
+insert into te_freetalk_images(te_freetalk_seq, name_real, name_saved) values (1, 'cat3.jpg', 'cat3.jpg');
+insert into te_freetalk_images(te_freetalk_seq, name_real, name_saved) values (2, 'cat4.jpg', 'cat4.jpg');
+insert into te_freetalk_images(te_freetalk_seq, name_real, name_saved) values (2, 'cat5.jpg', 'cat5.jpg');
+update te_freetalk set image_count=3 where seq=1;
+update te_freetalk set image_count=2 where seq=2;

@@ -13,6 +13,16 @@
     float: left;
 }
 
+.talk-list-wrap .talk-wrap .talk-image-wrap{
+    width: 380px;
+    height: 250px;
+}
+.talk-list-wrap .talk-wrap .talk-image-wrap img{
+    /*width: 100%;*/
+    width: auto;
+    height: 100%;
+}
+
 .talk-list-wrap .talk-list-function-wrap{
     background: black;
     height: 100px;

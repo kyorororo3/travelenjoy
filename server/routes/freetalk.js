@@ -21,12 +21,14 @@ router.get('/test', function (req, res) {
 
 //게시물 페이징 + 검색
 router.get('/list', function (req, res) {
+    let talkList;
     const seq = (req.query.seq == null)?1:req.query.seq;
     let stmt = "select * from te_freetalk order by seq desc limit " + seq + ", 9";
     connection.query(stmt, function (err, result) {
         if (err) console.log('connection result err : ' + result);
-        console.log(result);
-        res.json({list: result});
+        talkList = result;
+        console.log('result len : ' + result.length);
+        res.json({list: result, image: '1212'});
     });
     console.log('req seq : ' + req.query.seq);
     console.log('req seq == null' + (req.query.seq == null));

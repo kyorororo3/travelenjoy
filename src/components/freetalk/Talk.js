@@ -4,6 +4,10 @@ import React, {Component} from "react";
 
 class Talk extends Component {
 
+    state = {
+        file: 'cat1.jpg'
+    }
+
     componentDidMount() {
 
     }
@@ -17,7 +21,7 @@ class Talk extends Component {
             <div className="talk-wrap">
                 <p>요게 하나에요</p>
                 <div className="talk-image-wrap">
-                <img src="src/resources/freetalk/image/cat1.jpg"/>
+                <img src={require('../../resources/freetalk/image/' + this.state.file)}/>
                 </div>
                 <div className="talk-text-wrap">
                     <div>No : {this.props.seq}</div>

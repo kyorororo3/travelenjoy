@@ -11,7 +11,7 @@ class Travel extends Component {
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
-                            MyTravel is here. let me go Canada please....
+                            My Travel is here. let me go Canada please....
 
                         </div>
                     </div>

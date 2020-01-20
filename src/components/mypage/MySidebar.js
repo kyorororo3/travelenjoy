@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import profile_img from '../../resources/mypage/images/profile_img.jpg';
 
-
-//components
-import Calendar from '../mypage/MyCalendar';
-
 class Sidebar extends Component {
 
     constructor(props){
         super(props);
     }
+
     render(){
         return( 
                 <div className='mypage-sidebar'>
@@ -20,7 +17,13 @@ class Sidebar extends Component {
                                 <img className ='profile-img' src={profile_img}/>
                             </div>
                             <div className='profile-info'>
-                                Profile info will be here 
+                                <p>{this.props.users.nickname}</p>
+                                <p>( {this.props.users.email} )</p>
+                                <Link to={{
+                                    pathname:'/mypage/info',
+                                    state:{ users:this.props.users }
+                                }}
+                                className='settings' users={this.props.users}><i className="fas fa-cog"></i> Profile Setting</Link>
                             </div> 
                         </div>
                         <div className='item-container box'>
@@ -31,13 +34,10 @@ class Sidebar extends Component {
                                 <Link to='/mypage/travel'>My Travel</Link>
                             </div>
                             <div className='item'>
-                                <Link to='/mypage/wishlist'>My Wishlist</Link>
+                                <Link to='/mypage/scrap'>My Scrap</Link>
                             </div>
                             <div className='item'>
                                  <Link to='/mypage/history'>My History</Link>
-                            </div>
-                            <div className='item'>
-                                <Link to='/mypage/info'>My Info</Link>
                             </div>
                         </div>            
                     </div>

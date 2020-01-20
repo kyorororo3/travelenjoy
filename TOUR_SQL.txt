@@ -51,15 +51,6 @@ CREATE TABLE TE_MEMBER(
     AUTH INT
 );
 
-delimiter $$
-create function ordered_uuid(uuid binary(36))
-returns binary(16) deterministic
-begin
-  return UNHEX(CONCAT(SUBSTR(uuid, 15, 4),SUBSTR(uuid, 10, 4),SUBSTR(uuid, 1, 8),SUBSTR(uuid, 20, 4),SUBSTR(uuid, 25)));
-end$$
-delimiter;
-
-
 create table te_tour_search(
   location varchar(50),
   autocomplete varchar(100),
@@ -81,3 +72,30 @@ insert into te_tour_search values ('전라도', 'ㅈㅓㄴㄹㅏㄷㅗ', '대한
 insert into te_tour_search values ('경상도', 'ㄱㅕㅇㅅㅏㅇㄷㅗ', '대한민국');
 insert into te_tour_search values ('충청도', 'ㅊㅜㅇㅊㅓㅇㄷㅗ', '대한민국');
 insert into te_tour_search values ('제주도', 'ㅈㅔㅈㅜㄷㅗ', '대한민국');
+
+
+자유게시판 테이블 생성 쿼리
+create table te_freetalk(
+	seq INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	title varchar(4000),
+    content varchar(4000),
+    email varchar(4000),
+    nickname varchar(4000),
+    image_count int(100),
+    reg_date datetime default current_timestamp
+);
+
+insert into te_freetalk(title, content, email, nickname, image_count) values('title1', 'content2', 'admin', 'admin', 0);
+insert into te_freetalk(title, content, email, nickname, image_count) values('title222', 'content222', 'admin', 'admin', 0);
+insert into te_freetalk(title, content, email, nickname, image_count) values('title3333', 'content3333', 'admin', 'admin', 0);
+
+자유게시판 이미지 테이블 생성 쿼리
+create table te_freetalk_images(
+	seq INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	te_freetalk_seq INT,
+	name_real varchar(4000),
+    name_saved varchar(4000),
+    reg_date datetime default current_timestamp
+);
+
+>>>>>>> 0151324d1cab76e043ace5457e07a8c26d2e730d

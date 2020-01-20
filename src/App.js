@@ -10,8 +10,8 @@ import Login from './components/login/login';
 import Account from './components/account/account';
 import Home from './components/common/Home';
 import Footer from './components/common/Footer';
-import TravelList from './components/travel/travellist';
-import TravelDetail from './components/travel/traveldetail';
+import TravelList from './components/travel/list/travellist';
+import TravelDetail from './components/travel/detail/traveldetail';
 import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
 

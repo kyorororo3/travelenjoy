@@ -36,6 +36,13 @@ input[type='text'] {
   border: 0;
   background: url('../images/btn_search.png') no-repeat;
   transform: translate(10px, 10px);
+  cursor: pointer;
+}
+
+
+
+.tour-list-wrapper {
+  padding-top: 20px;
 }
 
 .card-container {
@@ -60,7 +67,7 @@ input[type='text'] {
   padding: 10px
 }
 
-.tour-infos div {
+.tour-infos .rows {
   height: 33px;
 }
 
@@ -76,6 +83,11 @@ input[type='text'] {
 }
 
 .tour-nickname {
-  text-align: right;
-  color: black;
+  display: inline-block;
+  float: right;
+}
+
+.tour-price {
+  display: inline-block;
+  float: left;
 }

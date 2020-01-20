@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import '../../resources/travel/css/travellist.css';
 
 class TravelListObj extends React.Component {
   goToDetail = (e) => {
@@ -10,7 +9,7 @@ class TravelListObj extends React.Component {
   }
 
   render() {
-    const {seq, title, nickname, category, thumbnail, min_people, max_people} = this.props.tour
+    const {seq, title, nickname, category, thumbnail, min_people, max_people, price} = this.props.tour
 
     return(
       <div className='tour-list-obj card-container' data-seq={seq}
@@ -19,9 +18,12 @@ class TravelListObj extends React.Component {
           <div>썸네일 자리</div>
         </div>
         <div className='tour-infos' data-seq={seq}>
-          <div className='tour-category' data-seq={seq}>[{category}]</div>
-          <div className='tour-title' data-seq={seq}>{title}</div>
-          <div className='tour-nickname' data-seq={seq}>{nickname}</div>
+          <div className='rows tour-category' data-seq={seq}>[{category}]</div>
+          <div className='rows tour-title' data-seq={seq}>{title}</div>
+          <div className='rows'>
+            <div className='tour-price' data-seq={seq}>{price}원</div>
+            <div className='tour-nickname' data-seq={seq}>{nickname}</div>
+          </div>
         </div>
       </div>
     )

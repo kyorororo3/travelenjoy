@@ -10,7 +10,7 @@ module.exports = () => {
     passport.serializeUser(function(user, done) {
         console.log("serializeUser ", user)
         if(user){
-            done(null, user.EMAIL);
+            done(null, user.email);
         }  
       });
       
@@ -50,9 +50,9 @@ module.exports = () => {
       function(accessToken, refreshToken, profile, done) {
 
           let user = {
-            'EMAIL': profile._json.email,
-            'NAME': profile._json.email.name,
-            'NICKNAME': profile._json.email.name
+            'email': profile._json.email,
+            'name': profile._json.email.name,
+            'nickname': profile._json.email.name
           }
 
           let sql = 'SELECT * FROM TE_MEMBER WHERE EMAIL=?';

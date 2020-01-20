@@ -14,7 +14,7 @@ class Login extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        if(data.EMAIL !== undefined)
+        if(data.email !== undefined)
           this.setState({users : data})
         }
       );
@@ -48,7 +48,7 @@ class Login extends React.Component {
     .then(res => res.json())
     .then(data => {
       console.log('App.js login .then ' , data);
-      if(data.EMAIL === undefined){
+      if(data.email === undefined){
         alert('login fail!');
       }
       this.setState({ users : data })    

@@ -7,10 +7,17 @@ input{
     width: 250px;
     height: 40px;
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 .login-form{
     border: 1px solid red;
     margin-left: auto;
     margin-right: auto;
+}
+
+.facebookLogin{
+    width: 250px;
+    height: 40px;
+    display: block;
 }

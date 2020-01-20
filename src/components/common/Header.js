@@ -27,7 +27,7 @@ class Header extends React.Component {
                             <ul>
                                 <li><NavLink exact to='/' className='menu' activeClassName='active'>Home</NavLink></li>
                                 <li><NavLink to='/travel' className='menu'>Travel</NavLink></li>
-                                <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>
+                                <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>                               
                                 <li className='login-btn'><NavLink to='/login'><span>Login</span></NavLink></li>
                             </ul>
                         </div>

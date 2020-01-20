@@ -15,6 +15,9 @@ import TravelDetail from './components/travel/traveldetail';
 import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
 
+
+import MypageHome from './components/mypage/MypageHome';
+
 class AppTest extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +48,7 @@ class AppTest extends React.Component {
               <Route path='/travel/detail/:seq' component={TravelDetail} />
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
+              <Route exact path='/mypage' component={MypageHome}/>
             </Switch>
           </div>
         </Router>

@@ -5,8 +5,8 @@ body{
 a{
     color:#282c37;
     text-decoration: none;
-    padding:20px 10px;
-    line-height: 20px;
+    padding: 0 10px;
+    line-height: 30px;
     font-weight: 700;
 }
 
@@ -57,6 +57,21 @@ a{
     margin: 7px 0;
 }
 
+
+@media screen and (max-width:990px){
+    .box .profile-container {
+        height:200px;
+    }
+    .mypage-sidebar{
+        width:100%;
+    }
+    .mypage-body{
+        margin-top:8px;
+        width:100%;
+    }
+}
+
+
 .mypage-body{
     display: inline-block;
     min-width: 77%;
@@ -70,7 +85,7 @@ a{
 
 .body-info-container{
     font-size: 14px;
-    min-height: 415px;
+    min-height: 465px;
     padding: 50px 40px 40px;
     position: relative;
 }

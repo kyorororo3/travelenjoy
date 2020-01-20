@@ -1,0 +1,88 @@
+/*
+검정  #282c37
+회색 #9baec8
+밝은 회색 #d9e1e8
+파랑색 #2b90d9
+*/
+
+.login-wrapper{
+    /* border: 1px solid black; */
+    margin-top: 80px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.input_email{
+    width: 300px;
+    height: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 1px solid #d9e1e8;
+    color: #282c37;
+}
+
+.input_pwd{
+    width: 300px;
+    height: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 1px solid #d9e1e8;
+    color: #282c37;
+}
+
+.login-form{
+    /* border: 1px solid red; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loginBtn{
+    width: 330px;
+    height: 50px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: 17px;
+    border-radius: 2px;
+    background-color: #2b90d9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.facebookLogin{
+    width: 310px;
+    height: 50px;
+    display: block;
+    background-color: gold;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+}
+
+.accountLink{
+    text-decoration-line: underline;
+    color: #9baec8;
+    font-weight: 400;
+}
+.accountLink:hover {
+    font-weight: bold;
+}
+
+.login-logo {
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    font-family: "Inconsolata", Arial, sans-serif;
+    padding-bottom: 30px;
+}
+
+.login-logo span {
+    font-size: 38px;
+    color:#2b90d9;
+    text-decoration: none;
+}

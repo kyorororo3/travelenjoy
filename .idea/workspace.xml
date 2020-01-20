@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOUR_SQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TOUR_SQL.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/query/freetalk.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/query/freetalk.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,11 +40,6 @@
       <list>
         <option value="HyeongJunMin &lt;alsgudwns007@naver.com&gt;" />
       </list>
-    </option>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -102,7 +99,7 @@
       <workItem from="1578389709280" duration="58000" />
       <workItem from="1578389778305" duration="2297000" />
       <workItem from="1578392676867" duration="1173000" />
-      <workItem from="1579405930287" duration="10799000" />
+      <workItem from="1579405930287" duration="9926000" />
     </task>
     <task id="LOCAL-00001" summary="자유게시판 틀 작성 중">
       <created>1578803653702</created>

@@ -1,0 +1,103 @@
+
+body{
+    font-family: "Inconsolata", Arial, sans-serif;
+}
+a{
+    color:#282c37;
+    text-decoration: none;
+    padding: 0 10px;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+
+.mypage-heading{
+    color: #495056;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 17px;
+    padding: 0 5px;
+}
+
+.mypage-sidebar{
+    color: #343a40;
+    display: inline-block;
+    float:left;
+    margin-right: 18px;
+    min-width: 250px;
+}
+
+.container .box{
+    background-color:#d9e1e8;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 0 #e9ecef;
+    margin-bottom: 8px;
+}
+
+.mypage-sidebar .box{
+    margin-bottom: 0;
+}
+
+.profile-container{
+    border-bottom: 1px solid #e9ecef;
+    height: 250px;
+    padding: 42px 10px 30px;
+    text-align: center;
+}
+
+.item-container{
+    margin-top: 8px;
+    padding: 16px 20px;
+    
+}
+
+.item{
+    display: block;
+    font-weight: 500;
+    margin: 7px 0;
+}
+
+
+@media screen and (max-width:990px){
+    .box .profile-container {
+        height:200px;
+    }
+    .mypage-sidebar{
+        width:100%;
+    }
+    .mypage-body{
+        margin-top:8px;
+        width:100%;
+    }
+}
+
+
+.mypage-body{
+    display: inline-block;
+    min-width: 77%;
+}
+
+.body-wrapper{
+    color: #495056;
+    font-weight: 500;
+    position: relative;
+}
+
+.body-info-container{
+    font-size: 14px;
+    min-height: 465px;
+    padding: 50px 40px 40px;
+    position: relative;
+}
+
+
+.profile-container .profile-img{
+    border: 2px solid #e9ecef;
+    border-radius: 50%;
+    width:90px;
+    vertical-align:middle;
+    
+}
+.profile-info{
+    padding: 10px 0;
+}

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import TalkList from "./TalkList";
 import Write from "./TalkWrite";
+import '../../resources/freetalk/css/free.css';
+import TalkSearch from "./TalkSearch";
 
 //게시판 메인 컴포넌트
 
@@ -33,16 +35,19 @@ class TalkMain extends Component {
             break;
         }
         return (
-            <div className="talk-main-wrap">
+            <div className="container">
+                <TalkSearch/>
+                <div className="talk-list-wrap">
 
-                <h1>여기가 자유게시판 메인입니다.</h1>
-                {/*<TalkList/>*/}
-                {currentPage}
+                    {currentPage}
 
-                <input className="btn-primary" type="button" value={"글 목록"} onClick={() => this.changeMode('list')}/>
-                <input className="btn-primary" type="button" value={"새 게시물 작성"} onClick={() => this.changeMode('write')}/>
-                <input className="btn-primary" type="button" value={"내 글"} onClick={() => this.changeMode('my')}/>
-                <a href={"/free/write"}>새 게시물 작성</a>
+                    <div className="talk-main-function-wrap">
+                        <input className="btn-primary" type="button" value={"글 목록"} onClick={() => this.changeMode('list')}/>
+                        <input className="btn-primary" type="button" value={"새 게시물 작성"} onClick={() => this.changeMode('write')}/>
+                        <input className="btn-primary" type="button" value={"내 글"} onClick={() => this.changeMode('my')}/>
+                        <a href={"/free/write"}>새 게시물 작성</a>
+                    </div>
+                </div>
             </div>
         );
     }

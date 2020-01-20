@@ -62,18 +62,22 @@ delimiter;
 
 create table te_tour_search(
   location varchar(50),
+  autocomplete varchar(100),
   country varchar(50)
 );
 
-insert into te_tour_search values ('서울', '대한민국');
-insert into te_tour_search values ('인천', '대한민국');
-insert into te_tour_search values ('광주', '대한민국');
-insert into te_tour_search values ('대구', '대한민국');
-insert into te_tour_search values ('울산', '대한민국');
-insert into te_tour_search values ('부산', '대한민국');
-insert into te_tour_search values ('대전', '대한민국');
-insert into te_tour_search values ('경기도', '대한민국');
-insert into te_tour_search values ('강원도', '대한민국');
-insert into te_tour_search values ('전라도', '대한민국');
-insert into te_tour_search values ('경상도', '대한민국');
-insert into te_tour_search values ('충청도', '대한민국');
+drop table te_tour_search;
+
+insert into te_tour_search values ('서울', 'ㅅㅓㅇㅜㄹ', '대한민국');
+insert into te_tour_search values ('인천', 'ㅇㅣㄴㅊㅓㄴ', '대한민국');
+insert into te_tour_search values ('광주', 'ㄱㅗㅏㅇㅈㅜ','대한민국');
+insert into te_tour_search values ('대구', 'ㄷㅐㄱㅜ', '대한민국');
+insert into te_tour_search values ('울산', 'ㅇㅜㄹㅅㅏㄴ', '대한민국');
+insert into te_tour_search values ('부산', 'ㅂㅜㅅㅏㄴ', '대한민국');
+insert into te_tour_search values ('대전', 'ㄷㅐㅈㅓㄴ', '대한민국');
+insert into te_tour_search values ('경기도', 'ㄱㅕㅇㄱㅣㄷㅗ', '대한민국');
+insert into te_tour_search values ('강원도', 'ㄱㅏㅇㅇㅜㅓㄴㄷㅗ', '대한민국');
+insert into te_tour_search values ('전라도', 'ㅈㅓㄴㄹㅏㄷㅗ', '대한민국');
+insert into te_tour_search values ('경상도', 'ㄱㅕㅇㅅㅏㅇㄷㅗ', '대한민국');
+insert into te_tour_search values ('충청도', 'ㅊㅜㅇㅊㅓㅇㄷㅗ', '대한민국');
+insert into te_tour_search values ('제주도', 'ㅈㅔㅈㅜㄷㅗ', '대한민국');

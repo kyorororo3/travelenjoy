@@ -1,8 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import  '../../resources/css/login.css';
-
-import Account from '../account/account';
+import  '../../resources/users/css/login.css';
 
 class Login extends React.Component {
   constructor(props){
@@ -59,19 +57,21 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div className='login-wrapper'>
-        <h3>Login</h3>
-        <div className='login-form'>
-        <div>{JSON.stringify(this.state.users)}</div>
-          <form onSubmit={this.handleSubmit}>
-            <p><input type='text' name='email' placeholder='EMAIL' autoComplete='true'/></p>
-            <p><input type='password' name='pwd' placeholder='PASSWORD' autoComplete='true' /></p>
-            <p><input type='submit' value='LOGIN'/></p>
-          </form>
-          <Link to='/account'>회원가입</Link>
-        </div>
-        <div className='loginStragtegyBtns'>
-          <a className='facebookLogin' href='http://localhost:3002/users/login/facebook'>페이스북 로그인</a>
+      <div className='container'>
+        <div className='login-wrapper'>
+          <h1>LOGIN</h1>
+          <div className='login-form'>
+          <div>{JSON.stringify(this.state.users)}</div>
+            <form onSubmit={this.handleSubmit}>
+              <p><input type='text' className='input_email' name='email' placeholder='EMAIL' autoComplete='true'/></p>
+              <p><input type='password' className='input_pwd' name='pwd' placeholder='PASSWORD' autoComplete='true' /></p>
+              <p><input type='submit' className='loginBtn' value='LOGIN'/></p>
+            </form>
+            <Link  to='/account'>회원가입</Link>
+          </div>
+          <div className='loginStragtegyBtns'>
+            <a className='facebookLogin' href='http://localhost:3002/users/login/facebook'>페이스북 로그인</a>
+          </div>
         </div>
       </div>
     )

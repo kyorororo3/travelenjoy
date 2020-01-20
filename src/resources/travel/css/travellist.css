@@ -20,14 +20,14 @@
   text-align: center;
 }
 
-input[type='text'] {
+/* input[type='text'] {
   width: 250px;
   height: 30px;
   border: 0;
   border-radius: 3px;
   margin-right: 10px;
   padding: 0 0 0 10px;
-}
+} */
 
 .btn-search {
   width: 30px;

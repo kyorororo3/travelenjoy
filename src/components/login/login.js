@@ -59,7 +59,7 @@ class Login extends React.Component {
     return(
       <div className='container'>
         <div className='login-wrapper'>
-          <h1>LOGIN</h1>
+         <p className='login-logo'><Link to='/'>Travel <span>&</span>joy</Link></p>
           <div className='login-form'>
           <div>{JSON.stringify(this.state.users)}</div>
             <form onSubmit={this.handleSubmit}>
@@ -67,10 +67,10 @@ class Login extends React.Component {
               <p><input type='password' className='input_pwd' name='pwd' placeholder='PASSWORD' autoComplete='true' /></p>
               <p><input type='submit' className='loginBtn' value='LOGIN'/></p>
             </form>
-            아직 Travel&Joy회원이 아니신가요? <Link  to='/account'>회원가입</Link>
+            아직 Travel&Joy회원이 아니신가요? <Link class='accountLink' to='/account'>회원가입</Link>
           </div>
           <div className='loginStragtegyBtns'>
-            <a className='facebookLogin' href='http://localhost:3002/users/login/facebook'>페이스북 로그인</a>
+            <a className='facebookLogin' href='http://localhost:3002/users/login/facebook'><i class="fab fa-facebook"></i>페이스북 로그인</a>
           </div>
         </div>
       </div>

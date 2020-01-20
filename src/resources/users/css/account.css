@@ -4,6 +4,12 @@
 밝은 회색 #d9e1e8
 파랑색 #2b90d9
 */
+.account-wrapper{
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 100px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
 .input_normal{
     width: 300px;
@@ -14,6 +20,7 @@
     border-radius: 2px;
     border: 1px solid #d9e1e8;
     color: #282c37;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .input_password{
@@ -25,6 +32,7 @@
     border-radius: 2px;
     border: 1px solid #d9e1e8;
     color: #282c37;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .accountBtn{
@@ -39,12 +47,6 @@
     border: none;
     cursor: pointer;
     margin-top: 10px;
-}
-
-.account-wrapper{
-    text-align: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
 }
 .account-form{
     /* border: 1px solid darkslateblue; */

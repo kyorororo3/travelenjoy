@@ -23,7 +23,7 @@ router.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie:{maxAge:3000000} //30분으로 변경함 
+  cookie:{maxAge:30000} //30분으로 변경함 
 }));
 router.use(passport.initialize());
 router.use(passport.session());
@@ -60,12 +60,22 @@ router.get('/login/facebook/callback', function(req, res, next) {
   })(req, res);
 });
 
+router.post('/logout', function(req, res, next) {
+  req.logOut();
+  res.send({msg:'로그아웃'})
+});
+
 router.post('/account', upload.single('profile_img'), function (req, res, next) {
   console.log('/account ' , req.body);
   console.log(req.file);
-  let filetype = req.file.mimetype.substring(6);
-  let profile_img = req.file.filename + '.' + filetype;
-  console.log(profile_img);
+  let profile_img = '';
+  if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
+    profile_img = null;
+  }else{
+    let filetype = req.file.mimetype.substring(6);
+    profile_img = req.file.filename + '.' + filetype;
+    console.log(profile_img);
+  }
   let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROFILE_IMG, NAME, NICKNAME, PHONE, AUTH)'
             + 'VALUES(?,?,?,?,?,?,3)';
   let datas = [req.body.email, req.body.pwd, profile_img, req.body.name, req.body.nickname, req.body.phone];
@@ -76,8 +86,6 @@ router.post('/account', upload.single('profile_img'), function (req, res, next) 
     }
     res.send({msg:'success'});
   })
- 
 })
-
 
 module.exports = router;

@@ -3,6 +3,8 @@ import TravelListObj from './travellist_obj';
 
 // CSS
 import '../../../resources/travel/css/travellist.css';
+
+// Components
 import TravelSearch from './travellist_search';
 
 class TravelList extends React.Component {

@@ -23,6 +23,8 @@ router.get('/list', function (req, res) {
     sql = mysql.format(sql, params);
   }
 
+  console.log(sql);
+
   conn.query(sql, function (err, rows) {
     if(err) return console.log("ERR!! " + err);
     console.log(rows);

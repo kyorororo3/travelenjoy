@@ -58,3 +58,22 @@ begin
   return UNHEX(CONCAT(SUBSTR(uuid, 15, 4),SUBSTR(uuid, 10, 4),SUBSTR(uuid, 1, 8),SUBSTR(uuid, 20, 4),SUBSTR(uuid, 25)));
 end$$
 delimiter;
+
+
+create table te_tour_search(
+  location varchar(50),
+  country varchar(50)
+);
+
+insert into te_tour_search values ('서울', '대한민국');
+insert into te_tour_search values ('인천', '대한민국');
+insert into te_tour_search values ('광주', '대한민국');
+insert into te_tour_search values ('대구', '대한민국');
+insert into te_tour_search values ('울산', '대한민국');
+insert into te_tour_search values ('부산', '대한민국');
+insert into te_tour_search values ('대전', '대한민국');
+insert into te_tour_search values ('경기도', '대한민국');
+insert into te_tour_search values ('강원도', '대한민국');
+insert into te_tour_search values ('전라도', '대한민국');
+insert into te_tour_search values ('경상도', '대한민국');
+insert into te_tour_search values ('충청도', '대한민국');

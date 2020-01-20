@@ -20,7 +20,7 @@
   text-align: center;
 }
 
-input[type='text'] {
+.tour-search-input {
   width: 250px;
   height: 30px;
   border: 0;
@@ -39,6 +39,35 @@ input[type='text'] {
   cursor: pointer;
 }
 
+.tour-search-autocomplite-wrapper {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.tour-search-autocomplite {
+  /* display: none; */
+  width: 250px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  transform: translate(-20px, 0);
+}
+
+.tour-search-autocomplite li:hover {
+  background: #d9e1e8;
+}
+
+.tour-search-autocomplite li {
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.tour-search-autocomplite li i{
+  color: #2b90d9
+}
 
 
 .tour-list-wrapper {

@@ -16,7 +16,7 @@ import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
 
 
-import MypageHome from './components/mypage/MypageHome';
+import MypageHome from './components/mypage/Mypage';
 
 class AppTest extends React.Component {
   // constructor(props) {

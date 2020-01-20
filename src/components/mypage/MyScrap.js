@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class Travel extends Component {
+class Scrap extends Component {
 
     constructor(props){
         super(props);
@@ -11,7 +11,7 @@ class Travel extends Component {
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
-                            My Travel is here. let me go Canada please....
+                            My Scrap is here. let me go Canada please....
 
                         </div>
                     </div>
@@ -21,4 +21,4 @@ class Travel extends Component {
 }
 
 
-export default Travel;
+export default Scrap;

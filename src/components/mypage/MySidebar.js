@@ -19,7 +19,11 @@ class Sidebar extends Component {
                             <div className='profile-info'>
                                 <p>{this.props.users.nickname}</p>
                                 <p>( {this.props.users.email} )</p>
-                                <Link to='/mypage/info'>Profile Setting</Link>
+                                <Link to={{
+                                    pathname:'/mypage/info',
+                                    state:{ users:this.props.users }
+                                }}
+                                className='settings' users={this.props.users}><i className="fas fa-cog"></i> Profile Setting</Link>
                             </div> 
                         </div>
                         <div className='item-container box'>
@@ -30,7 +34,7 @@ class Sidebar extends Component {
                                 <Link to='/mypage/travel'>My Travel</Link>
                             </div>
                             <div className='item'>
-                                <Link to='/mypage/wishlist'>My Wishlist</Link>
+                                <Link to='/mypage/scrap'>My Scrap</Link>
                             </div>
                             <div className='item'>
                                  <Link to='/mypage/history'>My History</Link>

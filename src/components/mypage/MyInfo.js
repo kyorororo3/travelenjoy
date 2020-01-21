@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import profile_img from '../../resources/mypage/images/profile_img.jpg';
 
-class Info extends Component {
+class MyInfo extends Component {
 
     constructor(props){
         super(props);
@@ -92,4 +92,4 @@ class Info extends Component {
 }
 
 
-export default Info;
+export default MyInfo;

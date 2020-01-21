@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import profile_img from '../../resources/mypage/images/profile_img.jpg';
 
-class Sidebar extends Component {
+class MySidebar extends Component {
 
     constructor(props){
         super(props);
@@ -23,7 +23,7 @@ class Sidebar extends Component {
                                     pathname:'/mypage/info',
                                     state:{ users:this.props.users }
                                 }}
-                                className='settings' users={this.props.users}><i className="fas fa-cog"></i> Profile Setting</Link>
+                                className='settings'><i className="fas fa-cog"></i> Profile Setting</Link>
                             </div> 
                         </div>
                         <div className='item-container box'>
@@ -47,4 +47,4 @@ class Sidebar extends Component {
 }
 
 
-export default Sidebar;
+export default MySidebar;

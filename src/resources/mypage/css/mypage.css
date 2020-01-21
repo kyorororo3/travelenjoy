@@ -190,7 +190,15 @@ a{
 
 #user-info-edit-form{
     padding:0 200px;
-    float:center;
+  
+}
+
+
+@media screen and (max-width:990px){
+ 
+    #user-info-edit-form{
+        padding:0 130px;
+    }
 }
 
 .update-group-btn{

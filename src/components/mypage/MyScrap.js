@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class Scrap extends Component {
+class MyScrap extends Component {
 
     constructor(props){
         super(props);
@@ -21,4 +21,4 @@ class Scrap extends Component {
 }
 
 
-export default Scrap;
+export default MyScrap;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class Travel extends Component {
+class MyTravel extends Component {
 
     constructor(props){
         super(props);
@@ -21,4 +21,4 @@ class Travel extends Component {
 }
 
 
-export default Travel;
+export default MyTravel;

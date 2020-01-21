@@ -12,6 +12,17 @@
   font-weight: 900;
 }
 
+.sub-title-text {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.sub-title-text span {
+  color: #2b90d9;
+  font-size: 30px;
+}
+
 .tour-search-wrapper {
   width: 100%;
   height: 200px;
@@ -93,8 +104,9 @@
   filter: brightness(50%);
 }
 
-.tour-list-wrapper {
-  padding-top: 20px;
+.travel-list-wrapper {
+  overflow: auto;
+  margin-bottom: 40px;
 }
 
 .card-container {

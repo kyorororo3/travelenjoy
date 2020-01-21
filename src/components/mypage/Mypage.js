@@ -41,7 +41,7 @@ class Mypage extends Component {
                 <Sidebar users={this.state.users}/>
                 <Switch>
                     <Route exact path='/mypage' component={Home} />
-                    <Route path='/mypage/calendar' component={Calendar} />
+                    <Route path='/mypage/calendar/' component={Calendar} />
                     <Route path='/mypage/travel' component={Travel}/>
                     <Route path='/mypage/scrap' component={Scrap}/>
                     <Route path='/mypage/history' component={History}/>

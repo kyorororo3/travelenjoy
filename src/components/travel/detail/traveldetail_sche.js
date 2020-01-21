@@ -63,6 +63,42 @@ class TravelSche extends React.Component {
     })
   }
 
+  // 인원수 증가
+  handleCountUp = () => {
+    const el_input = document.getElementById('_person');
+    let num = el_input.value;
+
+    if(num === '') {
+      el_input.value = 1;
+    }else {
+      el_input.value = parseInt(num) + 1;
+    }
+  }
+
+  // 인원수 감소
+  handleCountDown = () => {
+    const el_input = document.getElementById('_person');
+    let num = el_input.value;
+
+    if(num === '') {
+      el_input.value = 1;
+    }else if(parseInt(num) <= 0){
+      el_input.value = 0;
+    }else {
+      el_input.value = parseInt(num) - 1;
+    }
+  }
+
+  // 예약하기 버튼 클릭!
+  handleReservation = (e) => {
+    e.preventDefault();
+    const { selectedDays } = this.state;
+    const person = e.target.person.value;
+
+    console.log(selectedDays);
+    console.log(person);
+  }
+
   render() {
     const { isSelected, selectedDays} = this.state;
     let startDay = undefined;
@@ -75,7 +111,6 @@ class TravelSche extends React.Component {
 
     return(
       <div className='travel-schedule-wrapper'>
-        travel schedule<br/>
         <DayPicker 
           showOutsideDays
           disabledDays={ [new Date(), {before: new Date()}] }
@@ -87,6 +122,22 @@ class TravelSche extends React.Component {
             <h3>날짜를 선택해주세요.</h3>
           }
         </div>
+        <form onSubmit={this.handleReservation}>
+          <div className='travel-schedule-input'>
+            <input type='text' id='_person' name='person' placeholder='인원수를 입력해주세요' />
+            <div className='input-up-down'>
+              <div className='input-up' onClick={this.handleCountUp}>
+                <i className="fas fa-caret-up"></i>
+              </div>
+              <div className='input-down' onClick={this.handleCountDown}>
+                <i className="fas fa-caret-down"></i>
+              </div>
+            </div>
+          </div>
+          <div className='travel-schedule-input'>
+            <input className='btn-m' type='submit' value='예약하기'/>
+          </div>
+        </form>
       </div>
     )
   }

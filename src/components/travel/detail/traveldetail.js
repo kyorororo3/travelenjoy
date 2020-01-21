@@ -5,6 +5,9 @@ import TravelInfo from './traveldetail_info';
 import TravelSche from './traveldetail_sche';
 import TravelPath from './traveldetail_path';
 
+// CSS
+import '../../../resources/travel/css/traveldetail.css';
+
 class Tourdetail extends React.Component {
 
   constructor(props) {
@@ -32,20 +35,22 @@ class Tourdetail extends React.Component {
   }
 
   render() {
-
     let { isLoaded, tour_info, tour_sche, tour_des } = this.state;
     
     return(
-      <div className='tour-detail-wrapper'>
-        <h2>detail component</h2>
-        {isLoaded && 
-          ( <Fragment>
-              <TravelInfo info={tour_info} />
-              <TravelSche sche={tour_sche} period={tour_info.period} />
-              <TravelPath path={tour_des} />
-            </Fragment>
-          )
-        }
+      <div className='travel-detail-wrapper container'>
+        <div className='travel-detail-infomation'>
+          {isLoaded && 
+            ( <Fragment>
+                <TravelInfo info={tour_info} />
+                <TravelPath path={tour_des} />
+              </Fragment>
+            )
+          }
+        </div>
+        <div className='travel-detail-reservation'>
+          {isLoaded && <TravelSche sche={tour_sche} period={tour_info.period} /> }
+        </div>
       </div>
     )
   }

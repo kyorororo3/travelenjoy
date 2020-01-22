@@ -4,6 +4,10 @@ import React, {Component} from "react";
 
 class Talk extends Component {
 
+    state = {
+        file: 'cat1.jpg'
+    }
+
     componentDidMount() {
 
     }
@@ -14,15 +18,19 @@ class Talk extends Component {
 
     render() {
         return (
-            <div className="talk-main-wrap">
-
+            <div className="talk-wrap">
                 <p>요게 하나에요</p>
-                <div>No : {this.props.id}</div>
-                <div>Title : {this.props.title}</div>
-                <div>Content : {this.props.Content}</div>
-                <div>Email : {this.props.Email}</div>
-                <div>Nickname : {this.props.Nickname}</div>
-                <div>reg_date : {this.props.reg_date}</div>
+                <div className="talk-image-wrap">
+                <img src={require('../../resources/freetalk/image/' + this.state.file)}/>
+                </div>
+                <div className="talk-text-wrap">
+                    <div>No : {this.props.seq}</div>
+                    <div>Title : {this.props.title}</div>
+                    <div>Content : {this.props.content}</div>
+                    <div>Email : {this.props.email}</div>
+                    <div>Nickname : {this.props.nickname}</div>
+                    <div>reg_date : {this.props.reg_date}</div>
+                </div>
             </div>
         );
     }

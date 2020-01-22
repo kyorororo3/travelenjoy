@@ -13,10 +13,21 @@ dbconfig.conn_test(conn);
 
 // List 조회
 router.get('/list', function (req, res) {
+  const {search} = req.query;
+  // console.log(search);
   let sql = "select * from te_tour";
+
+  if(search !== undefined) {
+    sql = "select * from te_tour where title like ? or category=?";
+    const params = [ `%${search}%`, search ];
+    sql = mysql.format(sql, params);
+  }
+
+  console.log(sql);
+
   conn.query(sql, function (err, rows) {
     if(err) return console.log("ERR!! " + err);
-    console.log(rows);
+   // console.log(rows);
     res.send(rows);
   })
 })

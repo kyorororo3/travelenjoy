@@ -16,11 +16,17 @@
 .talk-list-wrap .talk-wrap .talk-image-wrap{
     width: 380px;
     height: 250px;
+    max-width: 300px;
+    max-height: 200px;
+    overflow: hidden;
 }
 .talk-list-wrap .talk-wrap .talk-image-wrap img{
     /*width: 100%;*/
-    width: auto;
-    height: 100%;
+    /*width: auto;*/
+    max-width: initial;
+    /*height: 100%;*/
+    margin-top: 0%;
+    margin-left: 0%;
 }
 
 .talk-list-wrap .talk-list-function-wrap{

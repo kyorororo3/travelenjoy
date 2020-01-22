@@ -5,11 +5,16 @@ import React, {Component} from "react";
 class Talk extends Component {
 
     state = {
-        file: 'cat1.jpg'
+        file: 'cat21.jpg',
+        images: []
     }
 
     componentDidMount() {
-
+        fetch('http://localhost:3002/freetalk/list/images?seq=' + this.props.seq)
+            .then(res => res.json())
+            .then(res => this.setState({images: res.images}))
+            .then(res => this.setState({file: (this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
+            .then(res => console.log("images : " + this.state.images))
     }
 
     _callApi = async () => {
@@ -19,9 +24,16 @@ class Talk extends Component {
     render() {
         return (
             <div className="talk-wrap">
-                <p>요게 하나에요</p>
                 <div className="talk-image-wrap">
-                <img src={require('../../resources/freetalk/image/' + this.state.file)}/>
+                    <img src={require('../../resources/freetalk/image/' + this.state.file)}/>
+                    <div className={"talk-image-files"} hidden={"true"}>
+                        {(this.state.images != null)?
+                            this.state.images.map( (image, i) => (
+                                    <img key={image.seq}
+                                         src={require('../../resources/freetalk/image/' + image.name_real)}/>
+                                )
+                            ):' '}
+                    </div>
                 </div>
                 <div className="talk-text-wrap">
                     <div>No : {this.props.seq}</div>

@@ -11,6 +11,7 @@ import Calendar from './MyCalendar';
 import Travel from './MyTravel';
 import History from './MyHistory';
 import Info from './MyInfo';
+import Scrap from './MyScrap';
 
 class Mypage extends Component {
 
@@ -40,8 +41,9 @@ class Mypage extends Component {
                 <Sidebar users={this.state.users}/>
                 <Switch>
                     <Route exact path='/mypage' component={Home} />
-                    <Route path='/mypage/calendar' component={Calendar} />
+                    <Route path='/mypage/calendar/' component={Calendar} />
                     <Route path='/mypage/travel' component={Travel}/>
+                    <Route path='/mypage/scrap' component={Scrap}/>
                     <Route path='/mypage/history' component={History}/>
                     <Route path='/mypage/info' component={Info}/>
                 </Switch>

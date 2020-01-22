@@ -21,6 +21,7 @@
     border-radius: 2px;
     border: 1px solid #d9e1e8;
     color: #282c37;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .input_pwd{
@@ -32,6 +33,7 @@
     border-radius: 2px;
     border: 1px solid #d9e1e8;
     color: #282c37;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .login-form{
@@ -57,16 +59,35 @@
     width: 310px;
     height: 50px;
     display: block;
-    background-color: gold;
+    background-color: #3B5998;
     margin-left: auto;
     margin-right: auto;
     border-radius: 2px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 41px;
+}
+.facebookLogin:hover{
+    color: #fff;
 }
 
+.facebook-icon {
+    font-size: 25px;
+    font-weight: 400;
+    display: inline-block;
+    transform: translate(0px, 2px);
+}
+.account-text{
+    color:  #282c37;
+    font-size: 13px;
+    transform: translate(0px, -15px);
+}
 .accountLink{
+    font-size: 13px;
     text-decoration-line: underline;
     color: #9baec8;
-    font-weight: 400;
+    font-weight: 600;
 }
 .accountLink:hover {
     font-weight: bold;

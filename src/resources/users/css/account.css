@@ -86,6 +86,48 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.email-fail{
+    font-size: 13px;
+    font-weight: 500;
+    color: #cd1f1f;
+    background-color: #fde1e6;
+    margin-top: -14px;
+    padding: 2px;
+    padding-bottom: 3px;
+}
+.email-succ{
+    font-size: 13px;
+    font-weight: 500;
+    color: #187ddf;
+    background-color: #def7ff;
+    margin-top: -14px;
+    padding: 2px;
+    padding-bottom: 3px;
+}
+.email-already{
+    font-size: 13px;
+    font-weight: 500;
+    color: #dc4900;
+    background-color: #ffefcb;
+    margin-top: -14px;
+    padding: 2px;
+    padding-bottom: 3px;
+}
+
+.nickname-fail{
+    font-size: 15pt;
+    color: tomato;
+    position: absolute;
+    transform: translate(125px, 29px);
+}
+
+.nickname-succ{
+    font-size: 15pt;
+    color: #2b90d9;
+    position: absolute;
+    transform: translate(125px, 29px);
+}
+
 .accountBtn{
     width: 100%;
     height: 45px;

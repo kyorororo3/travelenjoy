@@ -87,9 +87,39 @@ router.get('/login/naver/callback', function (req, res, next) {
 });
 
 
-router.post('/logout', function(req, res, next) {
+router.post('/logout', function(req, res) {
   req.logOut();
   res.send({msg:'로그아웃'})
+});
+
+
+router.post('/sign-up/duplicationCheck', function(req, res){
+  //이메일 중복확인
+ // console.log('/sign-up/emailCheck', req.body);
+ if(req.body.email !== undefined){
+    console.log('이메일 중복 체크');
+    let sql = 'SELECT * FROM TE_MEMBER WHERE EMAIL=?';
+    mysql.query(sql, [req.body.email], function(err, result){
+      if(err) {res.send({msg:'err'})}
+      if(result.length === 0){
+        res.send({emailCheck:'ok'})
+      }else{
+        res.send({emailCheck:'no'})
+      }
+    });
+ }else if(req.body.nickname !== undefined){
+    console.log('닉네임 중복 체크');
+    let sql = 'SELECT * FROM TE_MEMBER WHERE NICKNAME=?';
+    mysql.query(sql, [req.body.nickname], function(err, result){
+      if(err) {res.send({msg:'err'})}
+      if(result.length === 0){
+        res.send({nicknameCheck:'ok'})
+      }else{
+        res.send({nicknameCheck:'no'})
+      }
+    });
+ }
+  
 });
 
 router.post('/sign-up/member', upload.single('profile_img'), function (req, res, next) {

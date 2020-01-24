@@ -60,13 +60,40 @@ router.get('/login/facebook/callback', function(req, res, next) {
   })(req, res);
 });
 
+router.get('/login/kakao', passport.authenticate('kakao'));
+
+router.get('/login/kakao/callback', function (req, res, next) {
+  passport.authenticate('kakao', function (err, user) {
+    console.log('passport.authenticate(kakao)실행');
+    if (!user) { return res.redirect('http://localhost:3000/login'); }
+    req.logIn(user, function (err) { 
+       console.log('kakao/callback user : ', user);
+       return res.redirect('http://localhost:3000/');        
+    });
+  })(req, res);
+});
+
+router.get('/login/naver', passport.authenticate('naver'));
+
+router.get('/login/naver/callback', function (req, res, next) {
+  passport.authenticate('naver', function (err, user) {
+    console.log('passport.authenticate(naver)실행');
+    if (!user) { return res.redirect('http://localhost:3000/login'); }
+    req.logIn(user, function (err) { 
+       console.log('naver/callback user : ', user);
+       return res.redirect('http://localhost:3000/');        
+    });
+  })(req, res);
+});
+
+
 router.post('/logout', function(req, res, next) {
   req.logOut();
   res.send({msg:'로그아웃'})
 });
 
-router.post('/account', upload.single('profile_img'), function (req, res, next) {
-  console.log('/account ' , req.body);
+router.post('/sign-up/member', upload.single('profile_img'), function (req, res, next) {
+  console.log('/sign-up/member ' , req.body);
   console.log(req.file);
   let profile_img = '';
   if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
@@ -76,8 +103,8 @@ router.post('/account', upload.single('profile_img'), function (req, res, next) 
     profile_img = req.file.filename + '.' + filetype;
     console.log(profile_img);
   }
-  let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROFILE_IMG, NAME, NICKNAME, PHONE, AUTH)'
-            + 'VALUES(?,?,?,?,?,?,3)';
+  let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH)'
+            + 'VALUES(?,?,NULL,NULL,?,?,?,?,3)';
   let datas = [req.body.email, req.body.pwd, profile_img, req.body.name, req.body.nickname, req.body.phone];
   mysql.query(sql, datas, function (err, result) {
     if(err) {

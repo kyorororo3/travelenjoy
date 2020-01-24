@@ -48,9 +48,11 @@ class Login extends React.Component {
       if(data.email === undefined){
         alert('login fail!');
         this.props.getLogin(false);
+      }else{
+        this.setState({ users : data });   
+        this.props.getLogin(true);
       }
-      this.setState({ users : data });   
-      this.props.getLogin(true);
+      
     })
   }
 
@@ -74,6 +76,14 @@ class Login extends React.Component {
           <div className='loginStragtegyBtns'>
             <a className='facebookLogin' href='http://localhost:3002/users/login/facebook'>
               <div className='facebook-icon'><i className="fab fa-facebook" /></div>&nbsp;&nbsp;페이스북 로그인
+            </a>
+
+            <a className='kakaoLogin' href='http://localhost:3002/users/login/kakao'>
+              <img className='kakao-icon' src={require('../../resources/users/css/images/kakao.png')} />&nbsp;&nbsp;카카오 로그인
+            </a>
+
+            <a className='naverLogin' href='http://localhost:3002/users/login/naver'>
+              <img className='naver-icon' src={require('../../resources/users/css/images/naver.png')} />&nbsp;&nbsp;네이버 로그인
             </a>
           </div>
         </div>

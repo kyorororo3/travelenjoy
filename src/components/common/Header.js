@@ -12,7 +12,7 @@ class Header extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      alert(data.msg)
+      alert(data.msg);
       this.props.getLogout(false);
     });
   }

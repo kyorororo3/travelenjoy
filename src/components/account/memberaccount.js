@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import  '../../resources/users/css/account.css';
 
 class Member_Account extends React.Component {
@@ -6,10 +7,16 @@ class Member_Account extends React.Component {
     super(props);
     this.state = {
       file : '',
-      previewURL : ''
+      previewURL : '',
+      signUpStatus : false
     }
   }
 
+  handleCheckEmail = (even) => {
+    event.preventDefault();
+  }
+
+  // 회원가입 버튼 클릭 시 form에 입력받은 값들을 formData로 만들어주는 부분
   handleSubmit = (event) => {
     event.preventDefault();
     // console.log(event.target.profile_img.files[0]);
@@ -22,23 +29,15 @@ class Member_Account extends React.Component {
     formData.append('name', event.target.name.value);
     formData.append('nickname', event.target.nickname.value);
     formData.append('phone', event.target.phone.value);
-
     this.register(formData)
-
-    // this.register({
-    //   email : event.target.email.value,
-    //   pwd : event.target.pwd.value,
-    //   profile_img : event.target.profile_img.files[0],
-    //   name : event.target.name.value,
-    //   nickname : event.target.nickname.value,
-    //   phone : event.target.phone.value
-    // })
   }
 
+  // 이미지 업로드 후 미리보기용 URL획득
   handleFileOnChange = (event) => {
     event.preventDefault();
     let reader = new FileReader();
     let file = event.target.files[0];
+    
     reader.onloadend = () => {
       this.setState({
         file : file,
@@ -48,17 +47,28 @@ class Member_Account extends React.Component {
     reader.readAsDataURL(file);
   }
 
+  // 회원가입 내용 서버로 전송
   register = (regiInfo) => {
-
-    fetch('http://localhost:3002/users/account', {
+    fetch('http://localhost:3002/users/sign-up/member', {
       method:'post',
       body: regiInfo
     })
     .then(res => res.json())
-    .then(data => alert(data.msg))
+    .then(data => {
+      if(data.msg === 'success'){
+        this.setState({signUpStatus : true});
+        alert('회원가입 완료')    
+      }     
+    })
   }
 
   render() {
+    // 회원가입이 완료되면 로그인 화면으로 redirect
+    if(this.state.signUpStatus === true){
+      return <Redirect to='/login' />
+    }
+
+    // 프로필 이미지 업로드 미리보기
     let profile_preview = null;
     if(this.state.file !== ''){
       profile_preview = <img className='profile_preview' src={this.state.previewURL}></img>

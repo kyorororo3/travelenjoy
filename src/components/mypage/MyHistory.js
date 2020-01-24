@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class History extends Component {
+class MyHistory extends Component {
 
     constructor(props){
         super(props);
@@ -21,4 +21,4 @@ class History extends Component {
 }
 
 
-export default History;
+export default MyHistory;

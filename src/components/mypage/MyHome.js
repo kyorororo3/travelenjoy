@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
-const propTypes = {
 
-};
-const defaultProps = {
-
-};
-
-class Home extends Component {
+class MyHome extends Component {
 
     constructor(props){
         super(props);
@@ -27,7 +20,4 @@ class Home extends Component {
     }
 }
 
-Home.propTypes = propTypes;
-Home.defaultProps = defaultProps;
-
-export default Home;
+export default MyHome;

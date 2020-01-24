@@ -5,6 +5,9 @@
 파랑색 #2b90d9
 */
 
+body {
+  margin: 0px;
+} 
 
 .contents-wrapper {
   width: 100%;

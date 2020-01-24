@@ -10,8 +10,9 @@ import Login from './components/login/login';
 import Account from './components/account/account';
 import Home from './components/common/Home';
 import Footer from './components/common/Footer';
-import TravelList from './components/travel/list/travellist';
+import TravelMain from './components/travel/travel_main';
 import TravelDetail from './components/travel/detail/traveldetail';
+import TravelCity from './components/travel/list/travellist_city';
 import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
 import Member_Account from './components/account/memberaccount';
@@ -57,8 +58,9 @@ class AppTest extends React.Component {
               <Route exact path='/account' component={Account} />
               <Route path='/account/member' component={Member_Account} />
               <Route path='/account/guide' component={Guide_Account} />
-              <Route exact path='/travel' component={TravelList} />
+              <Route exact path='/travel' component={TravelMain} />
               <Route path='/travel/detail/:seq' component={TravelDetail} />
+              <Route path='/travel/city' component={TravelCity} />
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
               <Route exact path='/mypage' component={MypageHome}/>

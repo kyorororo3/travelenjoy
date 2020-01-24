@@ -32,6 +32,35 @@ router.get('/list', function (req, res) {
   })
 })
 
+// Autocomplite
+router.get('/autocomplite', (req, res) => {
+  const {keyword} = req.query;
+  const sql = "select * from te_tour_search where location like ?";
+
+  conn.query(sql, `${keyword}%`, (err, rows) => {
+    if(err) return console.log("ERR!! " + err);
+    res.send(rows);
+  })
+})
+
+// 검색어가 db에 저장된 location인지 확인!
+router.get('/location', (req, res) => {
+  const {loc} = req.query;
+  const sql = "select * from te_tour_search where location=?";
+
+  conn.query(sql, loc, (err, rows) => {
+    if(err) return console.log("ERR!! " + err);
+    
+    if(rows.length === 0) {
+      console.log('조회 결과가 없습니다.');
+      res.send({isLoc: false});
+    }else {
+      console.log('조회 결과가 존재합니다.');
+      res.send({isLoc: true});
+    }
+  })
+})
+
 // Detail 조회
 router.get('/detail/:seq', (req, res) => {
   let { seq } = req.params;

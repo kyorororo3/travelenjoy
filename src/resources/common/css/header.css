@@ -79,12 +79,12 @@ a:hover, a:active, a:focus {
     color: black;
 
 }
-.header-nav ul li.login-btn a {
+.header-nav ul li.login-logout-btn a {
     padding: 30px 0px !important;
     color: #fff;
   
   }
-  .header-nav ul li.login-btn a span {
+  .header-nav ul li.login-logout-btn a span {
     background: #2b90d9;
     padding: 4px 10px;
     display: -moz-inline-stack;
@@ -100,7 +100,7 @@ a:hover, a:active, a:focus {
     border-radius: 100px;
    
   }
-  .header-nav ul li.login-btn a:hover span {
+  .header-nav ul li.login-logout-btn a:hover span {
     -webkit-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.55);
     -moz-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.55);
     box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.55);

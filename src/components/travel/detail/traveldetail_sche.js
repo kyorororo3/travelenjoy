@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import DayPicker from "react-day-picker";
 import DayPickerInput from "react-day-picker/DayPickerInput";
+import { withRouter } from 'react-router-dom';
 
 // CSS
 import 'react-day-picker/lib/style.css';
@@ -92,11 +93,35 @@ class TravelSche extends React.Component {
   // 예약하기 버튼 클릭!
   handleReservation = (e) => {
     e.preventDefault();
-    const { selectedDays } = this.state;
+    const startday = this.state.selectedDays[0];
     const person = e.target.person.value;
+    const tour_seq = e.target.seq.value;
 
-    console.log(selectedDays);
+    console.log(startday);
     console.log(person);
+    console.log(tour_seq);
+
+    // 로그인이 되어있는지 체크
+    fetch('http://localhost:3002/users/getUser', {
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(user => {
+        if(user.email === undefined) {  // 로그인 정보가 없을 경우
+          alert('로그인이 필요한 페이지입니다.');
+          this.props.history.push('/login');  // 로그인 페이지로 이동.
+        }else { // 로그인 정보가 있을 경우
+          this.props.history.push({
+            pathname: '/travel/reservation',
+            state: {
+              startday: startday,
+              tour_seq: tour_seq,
+              person: person,
+              email: user.email
+            }
+          });
+        }
+      })
   }
 
   render() {
@@ -123,6 +148,7 @@ class TravelSche extends React.Component {
           }
         </div>
         <form onSubmit={this.handleReservation}>
+          <input type='hidden' name='seq' value={this.props.sche[0].tour_seq}/>
           <div className='travel-schedule-input'>
             <input type='text' id='_person' name='person' placeholder='인원수를 입력해주세요' />
             <div className='input-up-down'>
@@ -143,4 +169,4 @@ class TravelSche extends React.Component {
   }
 }
 
-export default TravelSche;
+export default withRouter(TravelSche);

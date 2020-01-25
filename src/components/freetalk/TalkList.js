@@ -27,6 +27,8 @@ class TalkList extends Component {
         alert('sdfsdfsdfsdf');
     }
 
+
+
     render() {
         return (
             <div className="talk-list-wrap">
@@ -39,7 +41,8 @@ class TalkList extends Component {
                               content={talk.content}
                               email={talk.email}
                               nickname={talk.nickname}
-                              reg_date={talk.reg_date}/>
+                              reg_date={talk.reg_date}
+                              />
                     )
                 ):' '}
                 <div className="talk-list-function-wrap">

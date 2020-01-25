@@ -21,6 +21,10 @@ class Talk extends Component {
 
     }
 
+    handleHover = () => {
+        console.log('handle hover');
+    }
+
     render() {
         return (
             <div className="talk-wrap">
@@ -30,7 +34,8 @@ class Talk extends Component {
                         {(this.state.images != null)?
                             this.state.images.map( (image, i) => (
                                     <img key={image.seq}
-                                         src={require('../../resources/freetalk/image/' + image.name_real)}/>
+                                         src={require('../../resources/freetalk/image/' + image.name_real)}
+                                    onMouseOver={this.handleHover}/>
                                 )
                             ):' '}
                     </div>

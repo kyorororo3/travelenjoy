@@ -1,0 +1,191 @@
+/*
+검정  #282c37
+회색 #9baec8
+밝은 회색 #d9e1e8
+파랑색 #2b90d9
+*/
+.travel-reservation-wrapper {
+  overflow: auto;
+  margin: 0 auto;
+  width: 410px;
+}
+
+@media (min-width: 992px) {
+  .travel-reservation-wrapper{
+    width: 900px;
+  }
+}
+/* @media (min-width: 768px) and (max-width: 991px) {
+  .travel-reservation-wrapper{
+    width: 410px;
+  }
+} */
+
+.panel-l {
+  width: 400px;
+  height: 780px;
+  border: 1px solid #9baec8;
+  margin-right: 50px;
+  float: left;
+}
+
+.reservation-row {
+  width: 370px;
+  height: 24px;
+  padding: 28px 15px;
+}
+
+span.label {
+  color: #2b90d9;
+  font-weight: 800;
+  float: left;
+}
+
+span.data {
+  float: right;
+}
+
+.tourdesc {
+  width: 100%;
+  height: 460px;
+  border-bottom: 1px dashed #9baec8;
+}
+
+.tourdesc-image {
+  width: 100%;
+  height: 300px;
+  border-bottom: 1px dotted #9baec8;
+}
+
+.tourdesc-title{
+  height: 30px;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 20px 15px;
+}
+
+.tourdesc-guide{
+  width: 370px;
+  height: 60px;
+  padding: 10px 15px 20px 15px;
+}
+
+.tourdesc-guide .profile-image{
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: 1px solid #9baec8;
+}
+.tourdesc-guide .company-name{
+  height: 21px;
+  padding-top: 15px;
+  text-align: right;
+  float: right;
+}
+
+.selected {
+  width: 100%;
+  height: 160px;
+  border-bottom: 1px dashed #9baec8;
+}
+
+.price {
+  width: 100%;
+  height: 160px;
+}
+
+.total-price .data {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.total-price .label {
+  font-size: 18px;
+}
+
+.panel-m {
+  width: 400px;
+  height: 300px;
+  border: 1px solid #9baec8;
+  margin-bottom: 50px;
+  float: left;
+}
+
+.panel-m .sub-title-text {
+  padding-left: 15px;
+  color: #2b90d9;
+}
+
+.client-info-content{
+  padding: 0px 15px;
+}
+
+.client-info-content div {
+  padding: 5px 0;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.input-phone input[type='text'] {
+  height: 30px;
+  width: 250px;
+  border: 1px solid #2b90d9;
+  padding: 0 10px;
+  border-radius: 3px;
+}
+
+.help-message {
+  font-size: 13px;
+  text-align: right;
+}
+
+.input-require textarea {
+  width: 340px;
+  border: 1px solid #2b90d9;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.tos-content {
+  padding: 0px 15px 20px 15px;
+}
+
+.tos-text {
+  height: 180px;
+  overflow: scroll;
+}
+
+.tos-check {
+  padding-top: 10px;
+  text-align: right;
+}
+
+.travel-pay {
+  width: 400px;
+  height: 100px;
+  float: left;
+}
+
+.btn-l {
+  width: 400px;
+  height: 80px;
+  font-size: 30px;
+  border: 0;
+  background-color: #2b90d9;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.btn-l:hover {
+  background-color: #d9e1e8;
+  color: #000000;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}

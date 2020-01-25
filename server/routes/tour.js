@@ -94,6 +94,12 @@ router.get('/detail/:seq', (req, res) => {
       tour_des: _tour_des,
     });
   });
+
+  router.post('/reservation', (req, res) => {
+    const { email, tour_seq, startday, join_people } = req.body;
+    
+  })
+
 });
 
 module.exports = router;

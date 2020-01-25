@@ -7,26 +7,34 @@
     width: 100%;
     margin: 0px;
     text-align: center;
+    align-content: center;
 }
 .talk-list-wrap .talk-wrap {
-    width: 33.3%;
+    width: 30%;
     float: left;
+    align-content: center;
+    margin-top: 40px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .talk-list-wrap .talk-wrap .talk-image-wrap{
     width: 380px;
     height: 250px;
-    max-width: 300px;
-    max-height: 200px;
+    /*max-width: 300px;*/
+    max-height: 250px;
     overflow: hidden;
 }
 .talk-list-wrap .talk-wrap .talk-image-wrap img{
-    /*width: 100%;*/
+    width: 100%;
     /*width: auto;*/
-    max-width: initial;
+    min-width: 250px !important;
+    /*max-width: initial;*/
+    max-width: 100%;
+    max-height: initial;
     /*height: 100%;*/
-    margin-top: 0%;
-    margin-left: 0%;
+    margin-top: -10%;
+    margin-bottom: 50px;
 }
 
 .talk-list-wrap .talk-list-function-wrap{

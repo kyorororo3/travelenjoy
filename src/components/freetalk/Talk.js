@@ -35,7 +35,7 @@ class Talk extends Component {
                             ):' '}
                     </div>
                 </div>
-                <div className="talk-text-wrap">
+                <div className="talk-text-wrap" hidden={"true"}>
                     <div>No : {this.props.seq}</div>
                     <div>Title : {this.props.title}</div>
                     <div>Content : {this.props.content}</div>

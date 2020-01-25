@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/freetalk/Talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/freetalk/css/free.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free.css" afterDir="false" />
     </list>
@@ -98,7 +96,7 @@
       <workItem from="1578389709280" duration="58000" />
       <workItem from="1578389778305" duration="2297000" />
       <workItem from="1578392676867" duration="1173000" />
-      <workItem from="1579691184387" duration="5207000" />
+      <workItem from="1579691184387" duration="6681000" />
     </task>
     <task id="LOCAL-00001" summary="자유게시판 틀 작성 중">
       <created>1578803653702</created>
@@ -174,6 +172,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1483" y="72" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1579699271615" />
+    <state x="1514" y="316" width="613" height="807" key="find.popup" timestamp="1579942402933">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1579942402933" />
     <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog" timestamp="1579180717821">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

@@ -2,4 +2,4 @@
     "clientID": "482015766064656",
     "clientSecret": "5b6301be37b429e3e401c0a51cea48db",
     "callbackURL": "http://localhost:3002/users/login/facebook/callback"
-  }
+}

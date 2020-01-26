@@ -93,13 +93,9 @@ class TravelSche extends React.Component {
   // 예약하기 버튼 클릭!
   handleReservation = (e) => {
     e.preventDefault();
-    const startday = this.state.selectedDays[0];
+    const {selectedDays} = this.state;
     const person = e.target.person.value;
     const tour_seq = e.target.seq.value;
-
-    console.log(startday);
-    console.log(person);
-    console.log(tour_seq);
 
     // 로그인이 되어있는지 체크
     fetch('http://localhost:3002/users/getUser', {
@@ -114,7 +110,7 @@ class TravelSche extends React.Component {
           this.props.history.push({
             pathname: '/travel/reservation',
             state: {
-              startday: startday,
+              selectedDays: selectedDays,
               tour_seq: tour_seq,
               person: person,
               email: user.email

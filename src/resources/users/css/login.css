@@ -78,6 +78,55 @@
     display: inline-block;
     transform: translate(0px, 2px);
 }
+
+.kakaoLogin{
+    width: 310px;
+    height: 50px;
+    display: block;
+    background-color: #F7E317;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+    border-radius: 2px;
+    color: #3C1E1E;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 50px;
+}
+.kakaoLogin:hover{
+    color: #3C1E1E;
+}
+
+.kakao-icon{
+    width: 25px;
+    vertical-align: text-top;
+}
+
+.naverLogin{
+    width: 310px;
+    height: 50px;
+    display: block;
+    background-color:#03CF5D;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 50px;
+}
+.naverLogin:hover{
+    color: #fff;
+}
+
+.naver-icon{
+    width: 30px;
+    vertical-align: text-bottom;
+    transform: translate(0px, 2px);
+
+}
+
 .account-text{
     color:  #282c37;
     font-size: 13px;

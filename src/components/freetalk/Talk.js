@@ -6,8 +6,10 @@ import '../../resources/freetalk/css/free_talk.css'
 class Talk extends Component {
 
     state = {
-        file: 'cat21.jpg',
-        images: []
+        file: 'cat19.jpg',
+        images: [],
+        likes: 0,
+        comments: 0
     }
 
     componentDidMount() {
@@ -16,6 +18,9 @@ class Talk extends Component {
             .then(res => this.setState({images: res.images}))
             .then(res => this.setState({file: (this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
             .then(res => console.log("images : " + this.state.images))
+        fetch('http://localhost:3002/freetalk/list/likes?seq=' + this.props.seq)
+            .then(res => res.json())
+            .then(res => this.setState({likes: res.likes}))
     }
 
     _callApi = async () => {
@@ -31,16 +36,17 @@ class Talk extends Component {
             <div className="talk-wrap">
                 <div className="talk-image-wrap" onMouseOver={this.handleHover}>
                     <div className={"talk-image-description"}>
-                        좋아요 : 1
-                        댓글 : 5
+                        <i className={"far fa-heart"}/> {this.state.likes}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <i className="far fa-comment-dots"/> {this.state.comments}
                     </div>
-                    <img src={require('../../resources/freetalk/image/' + this.state.file)}/>
+                    <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
 
                     <div className={"talk-image-files"} style={{display:'none'}}>
                         {(this.state.images.length > 0)?
                             this.state.images.map( (image, i) => (
                                     <img key={image.seq}
-                                         src={require('../../resources/freetalk/image/' + image.name_real)}/>
+                                         src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
                                 ))
                             :' '}
                     </div>

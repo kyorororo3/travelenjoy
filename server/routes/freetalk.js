@@ -25,20 +25,25 @@ router.get('/list', function (req, res) {
     let stmt = "select * from te_freetalk order by seq desc limit " + seq + ", 9";
     connection.query(stmt, function (err, result) {
         if (err) console.log('connection result err : ' + result);
-        console.log('result len : ' + result.length);
         res.json({list: result});
     });
-    console.log('req seq : ' + req.query.seq);
-    console.log('req seq == null' + (req.query.seq == null));
-    console.log('req seq == undefined' + (req.query.seq == undefined));
 });
 
 router.get('/list/images', function(req, res) {
     // const {seq} = req.query.seq;
-    console.log("seq : " + req.query.seq);
     const stmt = "select * from te_freetalk_images where te_freetalk_seq=?";
     connection.query(stmt, req.query.seq, function(err, result){
-        console.log("result : " + result.length);
+        if(result == null)
+            res.send(false)
+        else
+            res.json({images:result});
+    });
+})
+
+router.get('/list/likes', function(req, res) {
+    // const {seq} = req.query.seq;
+    const stmt = "select * from te_freetalk_images where te_freetalk_seq=?";
+    connection.query(stmt, req.query.seq, function(err, result){
         if(result == null)
             res.send(false)
         else

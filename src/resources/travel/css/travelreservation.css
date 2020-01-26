@@ -114,6 +114,7 @@ span.data {
 
 .panel-m .sub-title-text {
   padding-left: 15px;
+  font-size: 20px;
   color: #2b90d9;
 }
 
@@ -148,6 +149,7 @@ span.data {
   border: 1px solid #2b90d9;
   border-radius: 3px;
   padding: 5px 10px;
+  resize: none;
 }
 
 .tos-content {

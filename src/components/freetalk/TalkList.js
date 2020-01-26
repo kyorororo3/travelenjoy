@@ -27,10 +27,6 @@ class TalkList extends Component {
         alert('sdfsdfsdfsdf');
     }
 
-    handleHover = () => {
-        console.log('handle hover');
-    }
-
     render() {
         return (
             <div className="talk-list-wrap">

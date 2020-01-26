@@ -3,31 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TOUR_SQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TOUR_SQL.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/freetalk/Talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat10.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat11.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat12.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat13.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat13.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat14.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat14.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat15.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat16.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat16.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat17.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat17.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat18.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat18.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat19.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat19.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat20.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat20.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat21.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat21.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat7.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat8.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/image/cat9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/image/talk/cat9.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +64,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -200,10 +180,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1483" y="72" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1580004615580" />
-    <state x="1514" y="316" width="613" height="807" key="find.popup" timestamp="1580003931246">
+    <state x="1514" y="316" width="613" height="807" key="find.popup" timestamp="1580005473133">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580003931246" />
+    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580005473133" />
     <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog" timestamp="1579180717821">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

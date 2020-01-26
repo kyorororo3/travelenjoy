@@ -1,5 +1,6 @@
 .talk-list-wrap .talk-wrap .talk-image-wrap:hover img{
     opacity: 0.4;
+    background: black;
     cursor: pointer;
 }
 .talk-list-wrap .talk-wrap .talk-image-wrap:hover .talk-image-description{

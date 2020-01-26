@@ -42,12 +42,17 @@ router.get('/list/images', function(req, res) {
 
 router.get('/list/likes', function(req, res) {
     // const {seq} = req.query.seq;
-    const stmt = "select * from te_freetalk_images where te_freetalk_seq=?";
+    const stmt = "select count(*) as cnt from te_freetalk_likes where te_freetalk_seq=?";
     connection.query(stmt, req.query.seq, function(err, result){
-        if(result == null)
-            res.send(false)
-        else
-            res.json({images:result});
+        res.json({likes: result[0].cnt})
+    });
+})
+
+router.get('/list/comments', function(req, res) {
+    // const {seq} = req.query.seq;
+    const stmt = "select count(*) as cnt from te_comment where talk_seq=?";
+    connection.query(stmt, req.query.seq, function(err, result){
+        res.json({comments: result[0].cnt})
     });
 })
 

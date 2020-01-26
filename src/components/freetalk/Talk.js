@@ -17,10 +17,12 @@ class Talk extends Component {
             .then(res => res.json())
             .then(res => this.setState({images: res.images}))
             .then(res => this.setState({file: (this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
-            .then(res => console.log("images : " + this.state.images))
         fetch('http://localhost:3002/freetalk/list/likes?seq=' + this.props.seq)
             .then(res => res.json())
             .then(res => this.setState({likes: res.likes}))
+        fetch('http://localhost:3002/freetalk/list/comments?seq=' + this.props.seq)
+            .then(res => res.json())
+            .then(res => this.setState({comments: res.comments}))
     }
 
     _callApi = async () => {
@@ -30,11 +32,13 @@ class Talk extends Component {
     handleHover = (e) => {
         console.log('handle hover');
     }
-
+    handleOnClickTalk = () => {
+        alert('on click');
+    }
     render() {
         return (
-            <div className="talk-wrap">
-                <div className="talk-image-wrap" onMouseOver={this.handleHover}>
+            <div className="talk-wrap" onClick={this.handleOnClickTalk}>
+                <div className="talk-image-wrap">
                     <div className={"talk-image-description"}>
                         <i className={"far fa-heart"}/> {this.state.likes}
                         &nbsp;&nbsp;&nbsp;&nbsp;

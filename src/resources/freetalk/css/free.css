@@ -20,12 +20,15 @@
     height: 250px;
     overflow: hidden;
 }
+
 .talk-list-wrap .talk-wrap .talk-image-wrap img{
     display: inline-block;
     min-width: 100%;
     min-height: 100%;
     -ms-interpolation-mode: bicubic; /* Better image scaling in IE */
 }
+
+
 
 .talk-list-wrap .talk-list-function-wrap{
     background: black;

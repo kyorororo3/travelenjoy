@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
+      <change afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/freetalk/Talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/css/free.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,10 +174,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="681" y="12" width="778" height="768" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1578492648659" />
-    <state x="1483" y="72" width="1039" height="676" key="dock-window-1" timestamp="1579699271615">
+    <state x="1483" y="72" width="1039" height="676" key="dock-window-1" timestamp="1579999087098">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1483" y="72" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1579699271615" />
+    <state x="1483" y="72" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1579999087098" />
     <state x="1514" y="316" width="613" height="807" key="find.popup" timestamp="1579942402933">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

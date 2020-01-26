@@ -1,0 +1,14 @@
+.talk-list-wrap .talk-wrap .talk-image-wrap:hover img{
+    opacity: 0.4;
+    cursor: pointer;
+}
+.talk-list-wrap .talk-wrap .talk-image-wrap:hover .talk-image-description{
+    opacity: 1;
+}
+
+.talk-image-description{
+    opacity: 0;
+    position: sticky;
+    text-align: center;
+    top: 50%;
+}

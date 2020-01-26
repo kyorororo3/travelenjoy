@@ -27,12 +27,13 @@ class TalkList extends Component {
         alert('sdfsdfsdfsdf');
     }
 
-
+    handleHover = () => {
+        console.log('handle hover');
+    }
 
     render() {
         return (
             <div className="talk-list-wrap">
-
                 {(this.state.list != null)?
                     this.state.list.map( (talk, i) => (
                         <Talk key={talk.seq}

@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import '../../resources/freetalk/css/free_talk.css'
 
 //게시물
 
@@ -21,26 +22,31 @@ class Talk extends Component {
 
     }
 
-    handleHover = () => {
+    handleHover = (e) => {
         console.log('handle hover');
     }
 
     render() {
         return (
             <div className="talk-wrap">
-                <div className="talk-image-wrap">
+                <div className="talk-image-wrap" onMouseOver={this.handleHover}>
+                    <div className={"talk-image-description"}>
+                        좋아요 : 1
+                        댓글 : 5
+                    </div>
                     <img src={require('../../resources/freetalk/image/' + this.state.file)}/>
-                    <div className={"talk-image-files"} hidden={"true"}>
-                        {(this.state.images != null)?
+
+                    <div className={"talk-image-files"} style={{display:'none'}}>
+                        {(this.state.images.length > 0)?
                             this.state.images.map( (image, i) => (
                                     <img key={image.seq}
-                                         src={require('../../resources/freetalk/image/' + image.name_real)}
-                                    onMouseOver={this.handleHover}/>
-                                )
-                            ):' '}
+                                         src={require('../../resources/freetalk/image/' + image.name_real)}/>
+                                ))
+                            :' '}
                     </div>
                 </div>
-                <div className="talk-text-wrap" hidden={"true"}>
+                <div className="talk-text-wrap" style={{display:'none'}}>
+                {/*<div className="talk-text-wrap">*/}
                     <div>No : {this.props.seq}</div>
                     <div>Title : {this.props.title}</div>
                     <div>Content : {this.props.content}</div>

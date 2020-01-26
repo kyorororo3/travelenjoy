@@ -73,6 +73,13 @@ insert into te_tour_search values ('경상도', 'ㄱㅕㅇㅅㅏㅇㄷㅗ', '대
 insert into te_tour_search values ('충청도', 'ㅊㅜㅇㅊㅓㅇㄷㅗ', '대한민국');
 insert into te_tour_search values ('제주도', 'ㅈㅔㅈㅜㄷㅗ', '대한민국');
 
+create table te_tour_join(
+  tour_seq int,
+  email varchar(50),
+  start_date date,
+  join_people int
+)
+
 
 자유게시판 테이블 생성 쿼리
 create table te_freetalk(

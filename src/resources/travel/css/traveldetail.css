@@ -1,0 +1,103 @@
+/*
+검정  #282c37
+회색 #9baec8
+밝은 회색 #d9e1e8
+파랑색 #2b90d9
+*/
+.travel-detail-wrapper {
+  overflow: auto;
+}
+
+.travel-detail-infomation {
+  width: 590px;
+  overflow: auto;
+  /* background-color: darkgreen; */
+  float: left;
+  margin-right: 60px;
+  padding-left: 10px;
+}
+
+.travel-detail-reservation {
+  width: 300px;
+  height: 600px;
+  border: 1px solid #d9e1e8;
+  border-radius: 5px;
+  text-align: center;
+  float: left;
+  padding: 20px 0;
+}
+
+
+.travel-info-category {
+  color: #2b90d9;
+  font-weight: 700;
+}
+
+.travel-info-title {
+  color: black;
+  font-size: 25px;
+  font-weight: 900;
+  padding: 20px 0;
+}
+
+.travel-info-images {
+  height: 500px;
+  border: 1px solid black;
+}
+
+.travel-info-contents {
+  padding: 20px 0;
+}
+
+.travel-schedule-input {
+  padding: 10px 0;
+}
+
+.travel-schedule-input input[type='text'] {
+  width: 200px;
+  height: 30px;
+  font-size: 15px;
+  border: 1px solid #2b90d9;
+  border-radius: 3px;
+  padding-left: 20px;
+}
+
+.btn-m {
+  width: 250px;
+  height: 50px;
+  font-size: 20px;
+  border: 0;
+  background-color: #2b90d9;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.btn-m:hover {
+  background-color: #d9e1e8;
+  color: #000000;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.input-up-down {
+  display: inline-block;
+  width: 15px;
+  height: 30px;
+  transform: translate(10px, 10px);
+}
+
+.input-up {
+  cursor: pointer;
+}
+
+.input-down {
+  cursor: pointer;
+}
+
+
+.fas {
+  color: #2b90d9;
+}

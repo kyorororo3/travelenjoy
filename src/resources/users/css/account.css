@@ -6,9 +6,60 @@
 */
 .account-wrapper{
     text-align: center;
-    padding-top: 80px;
+    /* padding-top: 50px; */
     padding-bottom: 100px;
     font-family: 'Noto Sans KR', sans-serif;
+}
+.account-title{
+    font-size: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    color: #9baec8;
+    padding-bottom: 40px;
+}
+.account-type-wrapper{ 
+    padding-top: 80px;
+    width: max-content;
+    margin: auto;
+}
+
+.account-type-div{
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 400px;
+    height: 220px;
+    display: inline-block;
+    border-radius: 0.5rem;
+    border: 1px solid #d9e1e8;
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.account-type-img{
+    width: 150px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+.account-type-msg-wrapper{
+    overflow: hidden;
+    margin-top: 15px;
+    
+}
+.account-type-msg-1{
+    font-size: 15px;
+    display: inline-block;
+    color: #4e525f;
+}
+.account-type-msg-2{
+    font-size: 20px;
+    display: block;
+    color:  #2b90d9;
+}
+
+.account-type-Link:hover{
+    color: black;
 }
 
 .input_normal{
@@ -35,6 +86,48 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.email-fail{
+    font-size: 13px;
+    font-weight: 500;
+    color: #cd1f1f;
+    background-color: #fde1e6;
+    margin-top: -14px;
+    padding: 2px;
+    padding-bottom: 3px;
+}
+.email-succ{
+    font-size: 13px;
+    font-weight: 500;
+    color: #187ddf;
+    background-color: #def7ff;
+    margin-top: -14px;
+    padding: 2px;
+    padding-bottom: 3px;
+}
+.email-already{
+    font-size: 13px;
+    font-weight: 500;
+    color: #dc4900;
+    background-color: #ffefcb;
+    margin-top: -14px;
+    padding: 2px;
+    padding-bottom: 3px;
+}
+
+.nickname-fail{
+    font-size: 15pt;
+    color: tomato;
+    position: absolute;
+    transform: translate(125px, 29px);
+}
+
+.nickname-succ{
+    font-size: 15pt;
+    color: #2b90d9;
+    position: absolute;
+    transform: translate(125px, 29px);
+}
+
 .accountBtn{
     width: 100%;
     height: 45px;
@@ -47,6 +140,8 @@
     border: none;
     cursor: pointer;
     margin-top: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
 }
 .account-form{
     /* border: 1px solid darkslateblue; */

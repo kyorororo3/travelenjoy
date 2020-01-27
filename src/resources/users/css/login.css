@@ -36,6 +36,11 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.caps-lock-warning{
+    font-size: 13px;
+    color: firebrick;
+}
+
 .login-form{
     /* border: 1px solid red; */
     margin-left: auto;

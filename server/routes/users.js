@@ -143,6 +143,30 @@ router.post('/sign-up/member', upload.single('profile_img'), function (req, res,
     }
     res.send({msg:'success'});
   })
-})
+});
+
+router.post('/sign-up/guide', upload.single('profile_img'), function (req, res, next) {
+  console.log('/sign-up/guide ' , req.body);
+  console.log(req.file);
+  let profile_img = '';
+  if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
+    profile_img = null;
+  }else{
+    let filetype = req.file.mimetype.substring(6);
+    profile_img = req.file.filename + '.' + filetype;
+    console.log(profile_img);
+  }
+  let sql = 'INSERT INTO TE_GUIDE(EMAIL, PWD, COMPANYNAME, BRN, NAME, PROFILE_IMG, PHONE, AUTH)'
+            + 'VALUES(?,?,?,?,?,?,?,3)';
+  let datas = [req.body.email, req.body.pwd, req.body.companyname, req.body.brn, req.body.name, profile_img, req.body.phone];
+  mysql.query(sql, datas, function (err, result) {
+    if(err) {
+      console.log('회원가입 INSERT ERR!!!!');
+      res.send({msg:'fail'});
+    }
+    res.send({msg:'success'});
+  })
+});
+
 
 module.exports = router;

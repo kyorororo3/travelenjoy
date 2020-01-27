@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import DayPicker from "react-day-picker";
 import DayPickerInput from "react-day-picker/DayPickerInput";
+import { withRouter } from 'react-router-dom';
 
 // CSS
 import 'react-day-picker/lib/style.css';
@@ -63,6 +64,62 @@ class TravelSche extends React.Component {
     })
   }
 
+  // 인원수 증가
+  handleCountUp = () => {
+    const el_input = document.getElementById('_person');
+    let num = el_input.value;
+
+    if(num === '') {
+      el_input.value = 1;
+    }else {
+      el_input.value = parseInt(num) + 1;
+    }
+  }
+
+  // 인원수 감소
+  handleCountDown = () => {
+    const el_input = document.getElementById('_person');
+    let num = el_input.value;
+
+    if(num === '') {
+      el_input.value = 1;
+    }else if(parseInt(num) <= 0){
+      el_input.value = 0;
+    }else {
+      el_input.value = parseInt(num) - 1;
+    }
+  }
+
+  // 예약하기 버튼 클릭!
+  handleReservation = (e) => {
+    e.preventDefault();
+    const {selectedDays} = this.state;
+    const person = e.target.person.value;
+    const tour_seq = e.target.seq.value;
+
+    // 로그인이 되어있는지 체크
+    fetch('http://localhost:3002/users/getUser', {
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(user => {
+        if(user.email === undefined) {  // 로그인 정보가 없을 경우
+          alert('로그인이 필요한 페이지입니다.');
+          this.props.history.push('/login');  // 로그인 페이지로 이동.
+        }else { // 로그인 정보가 있을 경우
+          this.props.history.push({
+            pathname: '/travel/reservation',
+            state: {
+              selectedDays: selectedDays,
+              tour_seq: tour_seq,
+              person: person,
+              email: user.email
+            }
+          });
+        }
+      })
+  }
+
   render() {
     const { isSelected, selectedDays} = this.state;
     let startDay = undefined;
@@ -75,7 +132,6 @@ class TravelSche extends React.Component {
 
     return(
       <div className='travel-schedule-wrapper'>
-        travel schedule<br/>
         <DayPicker 
           showOutsideDays
           disabledDays={ [new Date(), {before: new Date()}] }
@@ -87,9 +143,26 @@ class TravelSche extends React.Component {
             <h3>날짜를 선택해주세요.</h3>
           }
         </div>
+        <form onSubmit={this.handleReservation}>
+          <input type='hidden' name='seq' value={this.props.sche[0].tour_seq}/>
+          <div className='travel-schedule-input'>
+            <input type='text' id='_person' name='person' placeholder='인원수를 입력해주세요' />
+            <div className='input-up-down'>
+              <div className='input-up' onClick={this.handleCountUp}>
+                <i className="fas fa-caret-up"></i>
+              </div>
+              <div className='input-down' onClick={this.handleCountDown}>
+                <i className="fas fa-caret-down"></i>
+              </div>
+            </div>
+          </div>
+          <div className='travel-schedule-input'>
+            <input className='btn-m' type='submit' value='예약하기'/>
+          </div>
+        </form>
       </div>
     )
   }
 }
 
-export default TravelSche;
+export default withRouter(TravelSche);

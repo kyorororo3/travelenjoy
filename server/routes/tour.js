@@ -11,6 +11,8 @@ const dbconfig = require('../config/dbconfig')();
 const conn = dbconfig.init();
 dbconfig.conn_test(conn);
 
+router.use(bodyParser.json());
+
 // List 조회
 router.get('/list', function (req, res) {
   const {search} = req.query;
@@ -94,6 +96,24 @@ router.get('/detail/:seq', (req, res) => {
       tour_des: _tour_des,
     });
   });
+
+  router.post('/reservation', (req, res) => {
+    const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;
+
+    console.log(start_date);
+
+    const sql = 'insert into te_tour_reservation values(?, ?, ?, ?, ?, ?)';
+    const params = [reservation_number, tour_seq, email, start_date, join_people, total_price];
+    conn.query(sql, params, (err) => {
+      if(err) {
+        console.log("ERR!! " + err);
+        res.send({result: 'fail'});
+      } else{
+        res.send({result: 'succ'}); 
+      }
+    })
+  })
+
 });
 
 module.exports = router;

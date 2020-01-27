@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Modal, Button, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
+import '../../resources/freetalk/css/free_talk_modal.css'
+import TalkModalBody from "./talk/TalkModalBody";
 
 //게시물
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
@@ -24,7 +26,7 @@ class Talk extends Component {
         fetch('http://localhost:3002/freetalk/list/likes?seq=' + this.props.seq)
             .then(res => res.json())
             .then(res => this.setState({likes: res.likes}))
-        fetch('http://localhost:3002/freetalk/list/comments?seq=' + this.props.seq)
+        fetch('http://localhost:3002/freetalk/list/comments/count?seq=' + this.props.seq)
             .then(res => res.json())
             .then(res => this.setState({comments: res.comments}))
     }
@@ -46,24 +48,22 @@ class Talk extends Component {
         return (
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
                 <Modal show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
-                    <Row>
+                    <Row noGutters="true">
                        <Col>
                             <div className="modal-image-wrap">
-                                <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                                <div className="modal-image-aligner">
+                                    <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                                </div>
                             </div>
                        </Col>
                         <Col>
                             <div className="modal-content-wrap">
                                 <Modal.Body>
-                                    <div className="modal-body-profile">
-                                        프로필 영역
-                                    </div>
-                                    <div className="modal-body-comments">
-                                        댓글 스크롤 영역
-                                    </div>
-                                    <div className="modal-body-function">
-                                        좋아요, 스크랩, 댓글남기기 등
-                                    </div>
+                                    <TalkModalBody
+                                        talkSeq={this.props.seq}
+                                        email={this.props.email}
+                                        nickname={this.props.nickname}
+                                    />
                                 </Modal.Body>
                             </div>
                         </Col>

@@ -6,37 +6,10 @@
 .talk-list-wrap .talk-wrap .talk-image-wrap:hover .talk-image-description{
     opacity: 1;
 }
-
 .talk-image-description{
     opacity: 0;
     position: sticky;
     text-align: center;
     top: 50%;
     font-size: 20px;
-}
-
-.modal-content {
-    min-width: 800px;
-}
-
-.modal-image-wrap {
-    margin: 5px;
-    padding: 5px;
-}
-
-.modal-image-wrap img{
-    min-width: 300px;
-}
-.modal-content-wrap{
-    min-width: 400px;
-}
-
-.modal-body-profile {
-    position: absolute;
-}
-.modal-body-comments {
-    position: absolute;
-}
-.modal-body-function {
-    position: absolute;
 }

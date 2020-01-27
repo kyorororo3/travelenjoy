@@ -22,7 +22,7 @@ function dateToString(date) {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  const dateStr = year + "/" + two(month) + "/" + two(day);
+  const dateStr = year + "-" + two(month) + "-" + two(day);
 
   return dateStr;
 }
@@ -33,17 +33,36 @@ class TravelSche extends React.Component {
 
     this.state = {
       isSelected: false,
-      selectedDays: []
+      selectedDays: [],
+      available: undefined
     }
   }
   
   // 날짜 선택 시 투어 기간에 맞게 날짜가 전부 선택됨.
   handleDayChange = (date, modifiers = {}) => {
-    
     // 선택이 불가능한 날짜일 경우 선택 못함.
     if(modifiers.disabled) {
       return;
     }
+
+    const data = {
+      tour_seq: this.props.tour_seq,
+      date: dateToString(date)
+    }
+
+    fetch(`http://localhost:3002/tour/available`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(result => {
+        this.setState({
+          available: result
+        })
+      })
 
     const addDay = this.props.period;
     const _selectedDays = [date]
@@ -97,31 +116,38 @@ class TravelSche extends React.Component {
     const person = e.target.person.value;
     const tour_seq = e.target.seq.value;
 
-    // 로그인이 되어있는지 체크
-    fetch('http://localhost:3002/users/getUser', {
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(user => {
-        if(user.email === undefined) {  // 로그인 정보가 없을 경우
-          alert('로그인이 필요한 페이지입니다.');
-          this.props.history.push('/login');  // 로그인 페이지로 이동.
-        }else { // 로그인 정보가 있을 경우
-          this.props.history.push({
-            pathname: '/travel/reservation',
-            state: {
-              selectedDays: selectedDays,
-              tour_seq: tour_seq,
-              person: person,
-              email: user.email
-            }
-          });
-        }
+    // 폼이 기입됬는지 체크
+    if(selectedDays.length === 0) { // 날짜선택이 안됬을 경우
+      alert('[필수] 투어 날짜를 선택하세요');
+    }else if(parseInt(person) <= '0' || person === '') { // 인원이 없을 경우
+      alert('[필수] 투어 인원을 입력하세요');
+    }else {
+      // 로그인이 되어있는지 체크
+      fetch('http://localhost:3002/users/getUser', {
+        credentials: "include"
       })
+        .then(res => res.json())
+        .then(user => {
+          if(user.email === undefined) {  // 로그인 정보가 없을 경우
+            alert('로그인이 필요한 페이지입니다.');
+            this.props.history.push('/login');  // 로그인 페이지로 이동.
+          }else { // 로그인 정보가 있을 경우
+            this.props.history.push({
+              pathname: '/travel/reservation',
+              state: {
+                selectedDays: selectedDays,
+                tour_seq: tour_seq,
+                person: person,
+                email: user.email
+              }
+            });
+          }
+        })  
+    }
   }
 
   render() {
-    const { isSelected, selectedDays} = this.state;
+    const { isSelected, selectedDays, available} = this.state;
     let startDay = undefined;
     let endDay = undefined;
 
@@ -139,9 +165,12 @@ class TravelSche extends React.Component {
           onDayClick={this.handleDayChange} />
         <div className='travel-schedule-selected'>
           {isSelected?
-            <h3>{startDay} - {endDay}</h3> : 
+            <h3>{startDay} ~ {endDay}</h3> : 
             <h3>날짜를 선택해주세요.</h3>
           }
+        </div>
+        <div className='travel-schedule-available'>
+          {available !== undefined && <h3>현재신청인원 : {available}</h3>}
         </div>
         <form onSubmit={this.handleReservation}>
           <input type='hidden' name='seq' value={this.props.tour_seq}/>

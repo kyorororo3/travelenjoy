@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import GuideDes from './guide_des';
 
 //draft editor
 import { EditorState, convertToRaw } from 'draft-js';
@@ -16,11 +17,14 @@ class GuideMake extends Component{
             uploadedImages:[],
             text:'',
             file : '',
-            imagePreviewUrl: ''
+            imagePreviewUrl: '',
+            period: ''
         };
         this.onSubmitHandler =this.onSubmitHandler.bind(this);
         this.onEditorStateChange =this.onEditorStateChange.bind(this);
         this.uploadImageCallBack = this.uploadImageCallBack.bind(this);
+        this.buttonHandler = this.buttonHandler.bind(this);
+        this.periodChange =  this.periodChange.bind(this);
     }
 
     onSubmitHandler(e){
@@ -77,7 +81,7 @@ class GuideMake extends Component{
         );
     }
 
-    handleImageChange = e => {
+    handleImageChange = (e) => {
       e.preventDefault();  
       let reader = new FileReader();
       let file = e.target.files[0];
@@ -89,6 +93,26 @@ class GuideMake extends Component{
 
       reader.readAsDataURL(file);
     };
+
+    buttonHandler(e) {
+      e.preventDefault(); 
+      alert(this.state.period);
+
+      var i = 0 ;
+      while(i < Number(this.state.period)){
+
+        var periodCheck = <div dangerouslySetInnerHTML={ {__html: <input id="period'+i+'" type="text"/>} } />;
+        document.getElementById('ininput').append(periodCheck);
+        console.log(periodCheck);
+        i = i+1;
+      }
+    }
+   
+    periodChange(e){
+      this.setState({
+        period : e.target.value
+      })
+    }
 
     render(){
         const { editorState } = this.state;
@@ -110,7 +134,8 @@ class GuideMake extends Component{
                최소인원:<input type="text" name="min_people"/><br/>
                최대인원:<input type="text" name="max_people"/><br/>
                가격:<input type="text" name="price"/><br/>
-               투어기간: <input type="text" name="period"/><br/>
+               투어기간: <input type="text" value={this.state.period} name="period" onChange={this.periodChange} /><input type='button' value='투어기간' onClick={this.buttonHandler}/> <br/>
+               <div id='ininput'></div><br/>
                내용: 
                     <div className="App">
                         <header className="App-header">

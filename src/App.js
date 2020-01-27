@@ -16,7 +16,6 @@ import TravelCity from './components/travel/list/travellist_city';
 import TravelReservation from './components/travel/reservation/travelreservation';
 import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
-import GuideMake from "./components/guide/guide_make";
 import Member_Account from './components/account/memberaccount';
 import Guide_Account from './components/account/guideaccount';
 
@@ -67,7 +66,6 @@ class AppTest extends React.Component {
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
               <Route exact path='/mypage' component={MypageHome}/>
-              <Route path='/guide/make' component={GuideMake} />
             </Switch>
           </div>
         </Router>

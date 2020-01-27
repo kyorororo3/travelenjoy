@@ -144,7 +144,7 @@ class TravelSche extends React.Component {
           }
         </div>
         <form onSubmit={this.handleReservation}>
-          <input type='hidden' name='seq' value={this.props.sche[0].tour_seq}/>
+          <input type='hidden' name='seq' value={this.props.tour_seq}/>
           <div className='travel-schedule-input'>
             <input type='text' id='_person' name='person' placeholder='인원수를 입력해주세요' />
             <div className='input-up-down'>

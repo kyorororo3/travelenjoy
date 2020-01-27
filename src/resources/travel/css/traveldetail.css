@@ -4,6 +4,7 @@
 밝은 회색 #d9e1e8
 파랑색 #2b90d9
 */
+
 .travel-detail-wrapper {
   overflow: auto;
 }
@@ -11,10 +12,13 @@
 .travel-detail-infomation {
   width: 590px;
   overflow: auto;
-  /* background-color: darkgreen; */
   float: left;
   margin-right: 60px;
   padding-left: 10px;
+}
+
+.travel-detail-infomation .sub-title-text {
+  border-top: 1px dashed #2b90d9;
 }
 
 .travel-detail-reservation {
@@ -26,7 +30,6 @@
   float: left;
   padding: 20px 0;
 }
-
 
 .travel-info-category {
   color: #2b90d9;

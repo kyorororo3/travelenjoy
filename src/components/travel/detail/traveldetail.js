@@ -16,7 +16,6 @@ class Tourdetail extends React.Component {
     this.state = {
       isLoaded : false,
       tour_info : null,
-      tour_sche : null,
       tour_des : null
     }
   }
@@ -29,13 +28,12 @@ class Tourdetail extends React.Component {
       .then( data => this.setState({
         isLoaded: true,
         tour_info: data.tour_info,
-        tour_sche: data.tour_sche,
         tour_des: data.tour_des
       }) );
   }
 
   render() {
-    let { isLoaded, tour_info, tour_sche, tour_des } = this.state;
+    let { isLoaded, tour_info, tour_des } = this.state;
     
     return(
       <div className='travel-detail-wrapper container'>
@@ -49,7 +47,7 @@ class Tourdetail extends React.Component {
           }
         </div>
         <div className='travel-detail-reservation'>
-          {isLoaded && <TravelSche sche={tour_sche} period={tour_info.period} /> }
+          {isLoaded && <TravelSche tour_seq={tour_info.seq} period={tour_info.period} /> }
         </div>
       </div>
     )

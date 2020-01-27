@@ -37,7 +37,7 @@ class Mypage extends Component {
         return(
             <div className='container'>
                 <Router>
-                <div className='mypage-heading'>마이페이지 홈</div>
+                <div className='mypage-heading'>My Page</div>
                 <Sidebar users={this.state.users}/>
                 <Switch>
                     <Route exact path='/mypage' component={Home} />

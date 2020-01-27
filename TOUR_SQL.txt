@@ -14,16 +14,6 @@ CREATE TABLE TE_TOUR(
 insert into te_tour(email, nickname, category, title, content, period, min_people, max_people)
 values('aaa', '치키치킨', '인천', '우리동네투어ㅋ', '동춘동 함께 투어합시다ㅋ', '1', '2', '4');
 
-CREATE TABLE TE_TOUR_SCHE(
-    SEQ INT AUTO_INCREMENT PRIMARY KEY,
-    TOUR_SEQ INT,
-    JOIN_PEOPLE INT,
-    START_DATE DATETIME
-);
-
-insert into te_tour_sche(tour_seq, join_people, start_date)
-values(1, 0, '20200105000000');
-
 CREATE TABLE TE_TOUR_DES(
     SEQ INT AUTO_INCREMENT PRIMARY KEY,
     TOUR_SEQ INT,

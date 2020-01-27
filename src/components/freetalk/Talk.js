@@ -1,7 +1,10 @@
 import React, {Component} from "react";
+import {Modal, Button, Row, Col} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 
 //게시물
+//modal 문서 : https://react-bootstrap.github.io/components/modal/
 
 class Talk extends Component {
 
@@ -9,7 +12,8 @@ class Talk extends Component {
         file: 'cat19.jpg',
         images: [],
         likes: 0,
-        comments: 0
+        comments: 0,
+        showModal: false
     }
 
     componentDidMount() {
@@ -33,12 +37,39 @@ class Talk extends Component {
         console.log('handle hover');
     }
     handleOnClickTalk = () => {
-        alert('on click');
     }
+
+    handleClose = () => this.setState({showModal:false});
+    handleShow = () => this.setState({showModal:true});
+
     render() {
         return (
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
-                <div className="talk-image-wrap">
+                <Modal show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
+                    <Row>
+                       <Col>
+                            <div className="modal-image-wrap">
+                                <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                            </div>
+                       </Col>
+                        <Col>
+                            <div className="modal-content-wrap">
+                                <Modal.Body>
+                                    <div className="modal-body-profile">
+                                        프로필 영역
+                                    </div>
+                                    <div className="modal-body-comments">
+                                        댓글 스크롤 영역
+                                    </div>
+                                    <div className="modal-body-function">
+                                        좋아요, 스크랩, 댓글남기기 등
+                                    </div>
+                                </Modal.Body>
+                            </div>
+                        </Col>
+                    </Row>
+                </Modal>
+                <div className="talk-image-wrap" onClick={this.handleShow}>
                     <div className={"talk-image-description"}>
                         <i className={"far fa-heart"}/> {this.state.likes}
                         &nbsp;&nbsp;&nbsp;&nbsp;

@@ -14,3 +14,29 @@
     top: 50%;
     font-size: 20px;
 }
+
+.modal-content {
+    min-width: 800px;
+}
+
+.modal-image-wrap {
+    margin: 5px;
+    padding: 5px;
+}
+
+.modal-image-wrap img{
+    min-width: 300px;
+}
+.modal-content-wrap{
+    min-width: 400px;
+}
+
+.modal-body-profile {
+    position: absolute;
+}
+.modal-body-comments {
+    position: absolute;
+}
+.modal-body-function {
+    position: absolute;
+}

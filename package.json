@@ -36,12 +36,8 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-<<<<<<< HEAD
-    "sass-loader": "^8.0.2"
-=======
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3"
->>>>>>> 4f77f004367027b937d119831a947e69ee379955
   },
   "scripts": {
     "start": "react-scripts start",

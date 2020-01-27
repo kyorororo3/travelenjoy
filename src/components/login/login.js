@@ -26,7 +26,7 @@ class Login extends React.Component {
   handleCapsLock = (event) => {
     event.preventDefault();
     let caps_lock = event.getModifierState('CapsLock');
-    console.log(caps_lock);
+   // console.log(caps_lock);
     if(caps_lock){
       this.setState({capsLock:true})
     }else{
@@ -38,30 +38,29 @@ class Login extends React.Component {
   // 로그인하는 login메서드에 인자값을 넣어주는 곳
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.email.value, event.target.pwd.value);
+  //  console.log(event.target.email.value, event.target.pwd.value);
     if(event.target.email.value.trim() === ''){
       alert('이메일을 입력해 주세요!')
       document.getElementsByName('email')[0].focus();
     }else if(event.target.pwd.value.trim() === ''){
       alert('비밀번호를 입력해 주세요!')
       document.getElementsByName('pwd')[0].focus();
+    }else{
+      // let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+      // if(!emailCheck.test(event.target.email.value.trim())){
+      //   alert('이메일 형식을 지켜주세요');
+      //   document.getElementsByName('email')[0].focus();
+      // }
+      this.login({
+        email: event.target.email.value.trim(),
+        pwd: event.target.pwd.value.trim()
+      })
     }
-
-    // let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-    // if(!emailCheck.test(event.target.email.value.trim())){
-    //   alert('이메일 형식을 지켜주세요');
-    //   document.getElementsByName('email')[0].focus();
-    // }
-
-     this.login({
-         email: event.target.email.value.trim(),
-         pwd: event.target.pwd.value.trim()
-     })
   }
 
   // 서버로 로그인 요청
   login = (login_info) => {
-    console.log('App.js login() ' + JSON.stringify(login_info))
+   // console.log('App.js login() ' + JSON.stringify(login_info))
     fetch('http://localhost:3002/users/login', {
       method: 'post',
       headers: {
@@ -80,7 +79,6 @@ class Login extends React.Component {
         this.setState({ users : data });   
         this.props.getLogin(true);
       }
-      
     })
   }
 
@@ -109,15 +107,15 @@ class Login extends React.Component {
           </div>
           <div className='account-text'>아직 Travel&Joy회원이 아니신가요?<Link className='accountLink' to='/account'>회원가입</Link></div>
           <div className='loginStragtegyBtns'>
-            <a className='facebookLogin' href='http://localhost:3002/users/login/facebook'>
+            <a className='social-login facebook' href='http://localhost:3002/users/login/facebook'>
               <div className='facebook-icon'><i className="fab fa-facebook" /></div>&nbsp;&nbsp;페이스북 로그인
             </a>
 
-            <a className='kakaoLogin' href='http://localhost:3002/users/login/kakao'>
+            <a className='social-login kakao' href='http://localhost:3002/users/login/kakao'>
               <img className='kakao-icon' src={require('../../resources/users/css/images/kakao.png')} />&nbsp;&nbsp;카카오 로그인
             </a>
 
-            <a className='naverLogin' href='http://localhost:3002/users/login/naver'>
+            <a className='social-login naver' href='http://localhost:3002/users/login/naver'>
               <img className='naver-icon' src={require('../../resources/users/css/images/naver.png')} />&nbsp;&nbsp;네이버 로그인
             </a>
           </div>

@@ -14,6 +14,7 @@ import TravelList from './components/travel/travellist';
 import TravelDetail from './components/travel/traveldetail';
 import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
+import GuideMake from "./components/guide/guide_make";
 
 
 import MypageHome from './components/mypage/Mypage';
@@ -48,6 +49,7 @@ class AppTest extends React.Component {
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
               <Route exact path='/mypage' component={MypageHome}/>
+              <Route path='/guide/make' component={GuideMake} />
             </Switch>
           </div>
         </Router>

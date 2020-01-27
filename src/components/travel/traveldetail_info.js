@@ -11,7 +11,7 @@ class TravelInfo extends React.Component {
         작성자 : {nickname} <br/>
         카테고리 : {category} <br/>
         제목 : {title} <br/>
-        내용 : {content} <br/>
+        내용 : <div dangerouslySetInnerHTML={ {__html: content} }/><br/>
         기간 : {period}일 <br/>
         참여인원 : {min_people} ~ {max_people}명 <br/><br/>
       </div>

@@ -30,6 +30,7 @@ class Tourdetail extends React.Component {
         tour_info: data.tour_info,
         tour_des: data.tour_des
       }) );
+
   }
 
   render() {
@@ -47,7 +48,7 @@ class Tourdetail extends React.Component {
           }
         </div>
         <div className='travel-detail-reservation'>
-          {isLoaded && <TravelSche tour_seq={tour_info.seq} period={tour_info.period} /> }
+          {isLoaded && <TravelSche tour_seq={tour_info.seq} period={tour_info.period} max={tour_info.max_people}/> }
         </div>
       </div>
     )

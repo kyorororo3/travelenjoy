@@ -128,6 +128,9 @@ router.get('/detail/:seq', (req, res) => {
     })
   })
 
+  // 투어 신청이 불가능한 날짜 반환
+  
+
 });
 
 module.exports = router;

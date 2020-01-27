@@ -30,8 +30,8 @@
 }
 
 .reservation-row {
-  width: 370px;
-  height: 24px;
+  width: 400px;
+  height: 80px;
   padding: 28px 15px;
 }
 
@@ -58,15 +58,15 @@ span.data {
 }
 
 .tourdesc-title{
-  height: 30px;
+  height: 70px;
   font-size: 20px;
   font-weight: 900;
   padding: 20px 15px;
 }
 
 .tourdesc-guide{
-  width: 370px;
-  height: 60px;
+  width: 100%;
+  height: 90px;
   padding: 10px 15px 20px 15px;
 }
 
@@ -145,7 +145,7 @@ span.data {
 }
 
 .input-require textarea {
-  width: 340px;
+  width: 100%;
   border: 1px solid #2b90d9;
   border-radius: 3px;
   padding: 5px 10px;

@@ -13,8 +13,8 @@
 }
 
 .input_email{
-    width: 300px;
-    height: 45px;
+    width: 330px;
+    height: 50px;
     padding-left: 15px;
     padding-right: 15px;
     font-size: 14px;
@@ -25,8 +25,8 @@
 }
 
 .input_pwd{
-    width: 300px;
-    height: 45px;
+    width: 330px;
+    height: 50px;
     padding-left: 15px;
     padding-right: 15px;
     font-size: 14px;
@@ -35,6 +35,35 @@
     color: #282c37;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+.caps-lock-warning{
+    font-size: 13px;
+    color: black;
+    position: absolute;
+    background: #d9e1e8;
+    width: 250px;
+    margin: -10px auto 10px 410px;
+    border-radius: 2px;
+    padding: 5px;
+    font-weight: 500;
+}
+
+.caps-lock-warning:after {
+    bottom: 100%;
+    left: 15%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #d9e1e8;
+    border-width: 6px;
+    margin-left: -10px;
+}
+
+
 
 .login-form{
     /* border: 1px solid red; */
@@ -55,23 +84,27 @@
     cursor: pointer;
 }
 
-.facebookLogin{
-    width: 310px;
+.social-login{
+    width: 330px;
     height: 50px;
     display: block;
-    background-color: #3B5998;
     margin-left: auto;
     margin-right: auto;
     border-radius: 2px;
-    color: #fff;
     font-size: 17px;
     font-weight: 400;
     line-height: 41px;
-}
-.facebookLogin:hover{
-    color: #fff;
+    margin-bottom: 5px;
 }
 
+.facebook{
+    background-color: #3B5998;
+    color: #fff;
+}
+.facebook:hover{
+    color: #fff;
+    text-decoration: none;
+}
 .facebook-icon {
     font-size: 25px;
     font-weight: 400;
@@ -79,52 +112,34 @@
     transform: translate(0px, 2px);
 }
 
-.kakaoLogin{
-    width: 310px;
-    height: 50px;
-    display: block;
+.kakao{
     background-color: #F7E317;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 8px;
-    border-radius: 2px;
     color: #3C1E1E;
-    font-size: 17px;
     font-weight: 500;
     line-height: 50px;
 }
-.kakaoLogin:hover{
+.kakao:hover{
     color: #3C1E1E;
+    text-decoration: none;
 }
-
 .kakao-icon{
     width: 25px;
     vertical-align: text-top;
 }
 
-.naverLogin{
-    width: 310px;
-    height: 50px;
-    display: block;
+.naver{
     background-color:#03CF5D;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 8px;
-    border-radius: 2px;
     color: #fff;
-    font-size: 17px;
-    font-weight: 500;
     line-height: 50px;
 }
-.naverLogin:hover{
+.naver:hover{
     color: #fff;
+    text-decoration: none;
 }
-
 .naver-icon{
     width: 30px;
     vertical-align: text-bottom;
     transform: translate(0px, 2px);
-
 }
 
 .account-text{

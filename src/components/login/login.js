@@ -83,8 +83,14 @@ class Login extends React.Component {
   }
 
   render() {
+    
+
     if(this.state.users.email !== undefined) {
-      return <Redirect to='/' />
+      if(this.state.users.auth === 1){
+        return <Redirect to='/guide/main' />
+      }else{
+        return <Redirect to='/' />
+      }
     } 
 
     let CheckCapsLock = null;

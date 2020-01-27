@@ -114,12 +114,17 @@ router.get('/detail/:seq', (req, res) => {
     console.log('http://localhost:3002/tour/available POST');
     const { tour_seq, date } = req.body;
     console.log(tour_seq, date);
-    const sql = 'select count(*) as count from te_tour_reservation where tour_seq=? and start_date=?'
+    const sql = 'select sum(join_people) as count from te_tour_reservation where tour_seq=? and start_date=?'
     const params = [tour_seq, date];
 
     conn.query(sql, params, (err, rows) => {
       if(err) return console.log("ERR!! " + err);
-      res.send((rows[0].count).toString());
+      let count = '0';
+      console.log(rows);
+      if(rows[0].count !== null) {
+        count = (rows[0].count).toString();
+      }
+      res.send(count);
     })
   })
 

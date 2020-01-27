@@ -1,10 +1,3 @@
-.modal-content-wrap a{
-    text-decoration: none;
-}
-
-Col{
-    padding:0px;
-}
 .modal-content {
     min-width: 800px;
     height: 100%;
@@ -33,7 +26,7 @@ Col{
 }
 .modal-body-profile {
     padding: 10px;
-    height: 20%;
+    height: 55px;
 }
 .modal-body-profile div {
     height: 32px;
@@ -52,8 +45,8 @@ Col{
 .modal-body-comments {
     padding: 10px;
     width: 100%;
-    overflow: hidden;
-    height: 60%;
+    overflow: auto !important;
+    height: 300px;
 }
 .modal-body-comments .media{
     margin: 15px 0px 15px 0px;
@@ -62,4 +55,16 @@ Col{
     padding: 10px;
     width: 100%;
     height: 20%;
+}
+
+
+/*ICON, COMMONS*/
+.fa-ellipsis-h {
+    font-size: 27px;
+}
+.modal-content-wrap a{
+    text-decoration: none;
+}
+Col{
+    padding:0px;
 }

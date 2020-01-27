@@ -39,6 +39,7 @@ class TalkModalBody extends Component {
                     <div className="modal-body-profile">
                             <div className="modal-body-profile-detail">
                                 <Media>
+                                    <a href="">
                                     <img
                                         width={32}
                                         height={32}
@@ -46,13 +47,16 @@ class TalkModalBody extends Component {
                                         alt='profile image'
                                         onError={(e)=>{e.target.onerror = null; e.target.src=require('../../../resources/mypage/images/profile_img.jpg')}}
                                     />
+                                    </a>
                                     <Media.Body>
                                         <a href="#">{this.state.author.NICKNAME}</a>
                                     </Media.Body>
                                 </Media>
                             </div>
                             <div className="modal-body-profile-function">
-                                기능
+                                <a href="#">
+                                    <i className="fas fa-ellipsis-h"/>
+                                </a>
                             </div>
                     </div>
 

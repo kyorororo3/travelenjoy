@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
-      <change afterPath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk_modal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/freetalk/Talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk.css" afterDir="false" />
-    </list>
+    <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +103,7 @@
       <workItem from="1578389778305" duration="2297000" />
       <workItem from="1578392676867" duration="1173000" />
       <workItem from="1579691184387" duration="6681000" />
-      <workItem from="1580096435575" duration="13820000" />
+      <workItem from="1580096435575" duration="14647000" />
     </task>
     <task id="LOCAL-00001" summary="자유게시판 틀 작성 중">
       <created>1578803653702</created>

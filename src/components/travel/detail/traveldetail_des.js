@@ -11,7 +11,7 @@ class TravelDestination extends React.Component {
         <div className='travel-destination-info'>
           <div className='course-mark'>
             <i className="fas fa-map-marker-alt"></i>
-            <div className='border'></div>
+            <div className='line'></div>
           </div>
           <div className='info-text'>
             <div className='destination-name'>{des_name}</div>

@@ -5,7 +5,10 @@ import  '../../resources/users/css/login.css';
 class Login extends React.Component {
   constructor(props){
     super(props);
-    this.state = {users: []}
+    this.state = {
+      users: [],
+      capsLock : false
+    }
   }
 
   // componentDidMount() {
@@ -20,14 +23,39 @@ class Login extends React.Component {
   //     );
   // }
 
+  handleCapsLock = (event) => {
+    event.preventDefault();
+    let caps_lock = event.getModifierState('CapsLock');
+    console.log(caps_lock);
+    if(caps_lock){
+      this.setState({capsLock:true})
+    }else{
+      this.setState({capsLock:false})
+    }
+  }
+
 
   // 로그인하는 login메서드에 인자값을 넣어주는 곳
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(event.target.email.value, event.target.pwd.value);
+    if(event.target.email.value.trim() === ''){
+      alert('이메일을 입력해 주세요!')
+      document.getElementsByName('email')[0].focus();
+    }else if(event.target.pwd.value.trim() === ''){
+      alert('비밀번호를 입력해 주세요!')
+      document.getElementsByName('pwd')[0].focus();
+    }
+
+    // let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    // if(!emailCheck.test(event.target.email.value.trim())){
+    //   alert('이메일 형식을 지켜주세요');
+    //   document.getElementsByName('email')[0].focus();
+    // }
+
      this.login({
-         email: event.target.email.value,
-         pwd: event.target.pwd.value
+         email: event.target.email.value.trim(),
+         pwd: event.target.pwd.value.trim()
      })
   }
 
@@ -60,6 +88,11 @@ class Login extends React.Component {
     if(this.state.users.email !== undefined) {
       return <Redirect to='/' />
     } 
+
+    let CheckCapsLock = null;
+    if(this.state.capsLock){
+      CheckCapsLock = <div className='caps-lock-warning'>Caps Lock이 켜져있습니다.</div>
+    }
     
     return(
       <div className='container'>
@@ -68,7 +101,9 @@ class Login extends React.Component {
           <div className='login-form'>
             <form onSubmit={this.handleSubmit}>
               <p><input type='text' className='input_email' name='email' placeholder='이메일을 입력해주세요.' autoComplete='true'/></p>
-              <p><input type='password' className='input_pwd' name='pwd' placeholder='비밀번호를 입력해주세요.' autoComplete='true' /></p>
+              <p><input type='password' className='input_pwd' name='pwd' placeholder='비밀번호를 입력해주세요.' autoComplete='true'
+                  onKeyUp={this.handleCapsLock} /></p>
+              {CheckCapsLock}
               <p><input type='submit' className='loginBtn' value='LOGIN'/></p>
             </form>           
           </div>

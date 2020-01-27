@@ -10,6 +10,8 @@
     padding-bottom: 100px;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+/* 회원가입 유형 선택 창 */
 .account-title{
     font-size: 30px;
     font-family: 'Noto Sans KR', sans-serif;
@@ -23,7 +25,6 @@
     width: max-content;
     margin: auto;
 }
-
 .account-type-div{
     font-family: 'Noto Sans KR', sans-serif;
     width: 400px;
@@ -36,7 +37,6 @@
     margin-right: 10px;
     text-align: center;
 }
-
 .account-type-img{
     width: 150px;
     vertical-align: middle;
@@ -45,7 +45,6 @@
 .account-type-msg-wrapper{
     overflow: hidden;
     margin-top: 15px;
-    
 }
 .account-type-msg-1{
     font-size: 15px;
@@ -57,11 +56,11 @@
     display: block;
     color:  #2b90d9;
 }
-
 .account-type-Link:hover{
     color: black;
 }
 
+/* 회원가입 창 */
 .input_normal{
     width: 300px;
     height: 40px;
@@ -73,7 +72,6 @@
     color: #282c37;
     font-family: 'Noto Sans KR', sans-serif;
 }
-
 .input_password{
     width: 300px;
     height: 40px;
@@ -85,49 +83,48 @@
     color: #282c37;
     font-family: 'Noto Sans KR', sans-serif;
 }
-
-.email-fail{
+.account-form .email-fail{
     font-size: 13px;
     font-weight: 500;
     color: #cd1f1f;
     background-color: #fde1e6;
-    margin-top: -14px;
+    margin-top: 15px;
+    margin-bottom: -14px;
     padding: 2px;
     padding-bottom: 3px;
 }
-.email-succ{
+.account-form .email-succ{
     font-size: 13px;
     font-weight: 500;
     color: #187ddf;
     background-color: #def7ff;
-    margin-top: -14px;
+    margin-top: 15px;
+    margin-bottom: -14px;
     padding: 2px;
     padding-bottom: 3px;
 }
-.email-already{
+.account-form .email-already{
     font-size: 13px;
     font-weight: 500;
     color: #dc4900;
     background-color: #ffefcb;
-    margin-top: -14px;
+    margin-top: 15px;
+    margin-bottom: -14px;
     padding: 2px;
     padding-bottom: 3px;
 }
-
-.nickname-fail{
+.format-fail{
     font-size: 15pt;
     color: tomato;
     position: absolute;
     transform: translate(125px, 29px);
 }
-
-.nickname-succ{
+.format-succ{
     font-size: 15pt;
     color: #2b90d9;
     position: absolute;
     transform: translate(125px, 29px);
 }
-
 .accountBtn{
     width: 100%;
     height: 45px;
@@ -144,24 +141,21 @@
     font-weight: 600;
 }
 .account-form{
-    /* border: 1px solid darkslateblue; */
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
 }
-
 .row-name{
-    /* border: 1px solid deeppink; */
     text-align: left;
     margin-bottom: -12px;
     color: #282c37;
     font-size: 13px;
     font-weight: 500;
 }
-
 .profile_preview {
     width: 250px;
     height: 250px;
     border-radius: 50%;
     object-fit: cover;
+    border: 3px solid #9baec882;
 }

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 // COMPONENTS
 import TravelInfo from './traveldetail_info';
 import TravelSche from './traveldetail_sche';
-import TravelPath from './traveldetail_path';
+import TravelCourse from './traveldetail_course';
 
 // CSS
 import '../../../resources/travel/css/traveldetail.css';
@@ -43,7 +43,7 @@ class Tourdetail extends React.Component {
           {isLoaded && 
             ( <Fragment>
                 <TravelInfo info={tour_info} />
-                <TravelPath path={tour_des} />
+                <TravelCourse course={tour_des} />
               </Fragment>
             )
           }

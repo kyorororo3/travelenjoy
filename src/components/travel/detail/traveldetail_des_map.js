@@ -1,10 +1,6 @@
 import React from 'react';
 
 class TravelDestinationMap extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { seq, address, des_name } = this.props.destination;
     const restAPI_key = '66ab3611db265217a420cc857f4b76af';
@@ -25,7 +21,7 @@ class TravelDestinationMap extends React.Component {
         var container = document.getElementById('map' + seq); //지도를 담을 영역의 DOM 레퍼런스
         var options = { //지도를 생성할 때 필요한 기본 옵션
           center: new window.kakao.maps.LatLng(y, x), //지도의 중심좌표.
-          level: 3 //지도의 레벨(확대, 축소 정도)
+          level: 4 //지도의 레벨(확대, 축소 정도)
         };
         var map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
         
@@ -61,14 +57,10 @@ class TravelDestinationMap extends React.Component {
   }
 
   render() {
-    const style = {
-      width: 500 + 'px',
-      height: 300 + 'px'
-    }
     const { seq } = this.props.destination;
 
     return(
-      <div id={'map' + seq} style={style}></div>
+      <div className='travel-destination-map' id={'map' + seq}></div>
     )
   }
 }

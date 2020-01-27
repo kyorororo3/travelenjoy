@@ -11,13 +11,55 @@ const dbconfig = require('../config/dbconfig')();
 const conn = dbconfig.init();
 dbconfig.conn_test(conn);
 
+router.use(bodyParser.json());
+
 // List 조회
 router.get('/list', function (req, res) {
+  const {search} = req.query;
+  // console.log(search);
   let sql = "select * from te_tour";
+
+  if(search !== undefined) {
+    sql = "select * from te_tour where title like ? or category=?";
+    const params = [ `%${search}%`, search ];
+    sql = mysql.format(sql, params);
+  }
+
+  console.log(sql);
+
   conn.query(sql, function (err, rows) {
     if(err) return console.log("ERR!! " + err);
    // console.log(rows);
     res.send(rows);
+  })
+})
+
+// Autocomplite
+router.get('/autocomplite', (req, res) => {
+  const {keyword} = req.query;
+  const sql = "select * from te_tour_search where location like ?";
+
+  conn.query(sql, `${keyword}%`, (err, rows) => {
+    if(err) return console.log("ERR!! " + err);
+    res.send(rows);
+  })
+})
+
+// 검색어가 db에 저장된 location인지 확인!
+router.get('/location', (req, res) => {
+  const {loc} = req.query;
+  const sql = "select * from te_tour_search where location=?";
+
+  conn.query(sql, loc, (err, rows) => {
+    if(err) return console.log("ERR!! " + err);
+    
+    if(rows.length === 0) {
+      console.log('조회 결과가 없습니다.');
+      res.send({isLoc: false});
+    }else {
+      console.log('조회 결과가 존재합니다.');
+      res.send({isLoc: true});
+    }
   })
 })
 
@@ -54,6 +96,24 @@ router.get('/detail/:seq', (req, res) => {
       tour_des: _tour_des,
     });
   });
+
+  router.post('/reservation', (req, res) => {
+    const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;
+
+    console.log(start_date);
+
+    const sql = 'insert into te_tour_reservation values(?, ?, ?, ?, ?, ?)';
+    const params = [reservation_number, tour_seq, email, start_date, join_people, total_price];
+    conn.query(sql, params, (err) => {
+      if(err) {
+        console.log("ERR!! " + err);
+        res.send({result: 'fail'});
+      } else{
+        res.send({result: 'succ'}); 
+      }
+    })
+  })
+
 });
 
 module.exports = router;

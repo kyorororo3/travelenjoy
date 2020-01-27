@@ -1,30 +1,39 @@
-
+/*
+검정  #282c37
+회색 #9baec8
+밝은 회색 #d9e1e8
+파랑색 #2b90d9
+*/
 
 .login-wrapper{
     /* border: 1px solid black; */
+    margin-top: 80px;
     text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .input_email{
     width: 300px;
-    height: 40px;
+    height: 45px;
     padding-left: 15px;
     padding-right: 15px;
     font-size: 14px;
     border-radius: 2px;
     border: 1px solid #d9e1e8;
     color: #282c37;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .input_pwd{
     width: 300px;
-    height: 40px;
+    height: 45px;
     padding-left: 15px;
     padding-right: 15px;
     font-size: 14px;
     border-radius: 2px;
     border: 1px solid #d9e1e8;
     color: #282c37;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .login-form{
@@ -35,10 +44,10 @@
 
 .loginBtn{
     width: 330px;
-    height: 45px;
+    height: 50px;
     padding-left: 7px;
     padding-right: 7px;
-    font-size: 16px;
+    font-size: 17px;
     border-radius: 2px;
     background-color: #2b90d9;
     color: #fff;
@@ -47,7 +56,103 @@
 }
 
 .facebookLogin{
-    width: 250px;
-    height: 40px;
+    width: 310px;
+    height: 50px;
     display: block;
+    background-color: #3B5998;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 41px;
+}
+.facebookLogin:hover{
+    color: #fff;
+}
+
+.facebook-icon {
+    font-size: 25px;
+    font-weight: 400;
+    display: inline-block;
+    transform: translate(0px, 2px);
+}
+
+.kakaoLogin{
+    width: 310px;
+    height: 50px;
+    display: block;
+    background-color: #F7E317;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+    border-radius: 2px;
+    color: #3C1E1E;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 50px;
+}
+.kakaoLogin:hover{
+    color: #3C1E1E;
+}
+
+.kakao-icon{
+    width: 25px;
+    vertical-align: text-top;
+}
+
+.naverLogin{
+    width: 310px;
+    height: 50px;
+    display: block;
+    background-color:#03CF5D;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 50px;
+}
+.naverLogin:hover{
+    color: #fff;
+}
+
+.naver-icon{
+    width: 30px;
+    vertical-align: text-bottom;
+    transform: translate(0px, 2px);
+
+}
+
+.account-text{
+    color:  #282c37;
+    font-size: 13px;
+    transform: translate(0px, -15px);
+}
+.accountLink{
+    font-size: 13px;
+    text-decoration-line: underline;
+    color: #9baec8;
+    font-weight: 600;
+}
+.accountLink:hover {
+    font-weight: bold;
+}
+
+.login-logo {
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    font-family: "Inconsolata", Arial, sans-serif;
+    padding-bottom: 30px;
+}
+
+.login-logo span {
+    font-size: 38px;
+    color:#2b90d9;
+    text-decoration: none;
 }

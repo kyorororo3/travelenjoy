@@ -12,6 +12,17 @@
   font-weight: 900;
 }
 
+.sub-title-text {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.sub-title-text span {
+  color: #2b90d9;
+  font-size: 30px;
+}
+
 .tour-search-wrapper {
   width: 100%;
   height: 200px;
@@ -20,14 +31,14 @@
   text-align: center;
 }
 
-/* input[type='text'] {
+.tour-search-input {
   width: 250px;
   height: 30px;
   border: 0;
   border-radius: 3px;
   margin-right: 10px;
   padding: 0 0 0 10px;
-} */
+}
 
 .btn-search {
   width: 30px;
@@ -36,6 +47,66 @@
   border: 0;
   background: url('../images/btn_search.png') no-repeat;
   transform: translate(10px, 10px);
+  cursor: pointer;
+}
+
+.tour-search-autocomplete-wrapper {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.tour-search-autocomplete {
+  /* display: none; */
+  width: 250px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  transform: translate(-20px, 0);
+}
+
+.tour-search-autocomplete li:hover {
+  background: #d9e1e8;
+}
+
+.tour-search-autocomplete li {
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.tour-search-autocomplete li i{
+  color: #2b90d9
+}
+
+.travel-city-banner{
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.trevel-city-banner-text{
+  position: absolute;
+  z-index: 1;
+  font-size: 70px;
+  font-weight: 900;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  transform: translateY(100px);
+}
+
+.travel-city-banner img{
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  filter: brightness(50%);
+}
+
+.travel-list-wrapper {
+  overflow: auto;
+  margin-bottom: 40px;
 }
 
 .card-container {
@@ -60,7 +131,7 @@
   padding: 10px
 }
 
-.tour-infos div {
+.tour-infos .rows {
   height: 33px;
 }
 
@@ -76,6 +147,11 @@
 }
 
 .tour-nickname {
-  text-align: right;
-  color: black;
+  display: inline-block;
+  float: right;
+}
+
+.tour-price {
+  display: inline-block;
+  float: left;
 }

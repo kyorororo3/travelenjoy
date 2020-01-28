@@ -134,9 +134,11 @@ router.post('/sign-up/member', upload.single('profile_img'), function (req, res,
     profile_img = req.file.filename;
     console.log(profile_img);
   }
+
   let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
             + 'VALUES(?,?,NULL,NULL,?,?,?,?,3,NULL,NULL)';
   let datas = [req.body.email, req.body.pwd, req.body.name, req.body.nickname, profile_img, req.body.phone];
+
   mysql.query(sql, datas, function (err, result) {
     if(err) {
       console.log('회원가입 INSERT ERR!!!!');

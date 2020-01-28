@@ -96,3 +96,13 @@ create table te_freetalk_images(
     name_saved varchar(4000),
     reg_date datetime default current_timestamp
 );
+
+
+create table te_comment(
+    seq INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    talk_seq int(255),
+    email varchar(4000),
+    nickname varchar(4000),
+    content varchar(4000),
+    reg_date datetime default current_timestamp
+);

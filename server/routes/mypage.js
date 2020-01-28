@@ -10,7 +10,7 @@ let connection = mysql_dbc.init();
 mysql_dbc.conn_test(connection);
 
 
-router.use(express.static("public"));
+router.use(express.static("/public/uploads"));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import profileImg from '../../resources/mypage/images/profile_img.jpg';
 
+
 class MyInfo extends Component {
 
     constructor(props){
@@ -22,7 +23,6 @@ class MyInfo extends Component {
 
     editInfoHanlder(e){
         e.preventDefault();
-        this.props.history.push('/mypage/info/edit');
         let inputs = document.getElementsByClassName('editable');
         
         for (let index = 0; index < inputs.length; index++) {
@@ -56,7 +56,16 @@ class MyInfo extends Component {
             })
             .then(res => res.json())
             .then (data => {
-                console.log(data.isUpdateSuccess);
+                this.setState({
+                    isUpdateSuccess: data.isUpdateSuccess
+                }, () => {
+                    if(this.state.isUpdateSuccess){
+                        this.props.history.push({
+                            pathname:'/mypage/info',
+                            state:{users:this.props.location.state.users}
+                        })
+                    }
+                })
             })
         }
         
@@ -107,10 +116,8 @@ class MyInfo extends Component {
       }
 
     render(){
-
-        if(this.state.isUpdateSuccess){
-            <Redirect to='/mypage/info'/>
-        }
+        
+        
         return(
             <div className='mypage-body'>
                 <div className='body-wrapper box'>
@@ -120,7 +127,10 @@ class MyInfo extends Component {
                         <form id='user-info-edit-form' onSubmit={this.saveEditedInfoHandler} encType='multipart/form-data'>
                             <div className='body-profile-info-container'>
                                 <div className='profile-img-wrapper'>
-                                    <img className ='profile-img' src={requuire(`./uploads/${this.state.previewURL? this.state.previewURL : this.props.location.state.users.profile_img}`)} alt={profileImg}/>
+                                    <img className ='profile-img'
+                                     src={this.state.previewURL? this.state.previewURL : require(`../../uploads/${this.props.location.state.users.profile_img}`)}
+                                     alt={profileImg}/>
+                    
                                     <div id='file-uploader-wrapper'>
                                     <i className="fas fa-camera input-camera"></i>
                                     <input className='profile-uploader' type='file' accept='image/jpg,impge/png,image/jpeg,image/gif' name='profile_img' onChange={this.profilePreviewHandler}/>

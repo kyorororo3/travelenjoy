@@ -23,7 +23,7 @@ router.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie:{maxAge:30000} //30분으로 변경함 
+  cookie:{maxAge:300000} //30분으로 변경함 
 }));
 router.use(passport.initialize());
 router.use(passport.session());
@@ -129,8 +129,9 @@ router.post('/sign-up/member', upload.single('profile_img'), function (req, res,
   if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
     profile_img = null;
   }else{
-    let filetype = req.file.mimetype.substring(6);
-    profile_img = req.file.filename + '.' + filetype;
+   // let filetype = req.file.mimetype.substring(6);
+   // profile_img = req.file.filename + '.' + filetype;
+    profile_img = req.file.filename;
     console.log(profile_img);
   }
   let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
@@ -152,9 +153,7 @@ router.post('/sign-up/guide', upload.single('profile_img'), function (req, res, 
   if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
     profile_img = null;
   }else{
-    let filetype = req.file.mimetype.substring(6);
-    profile_img = req.file.filename + '.' + filetype;
-    console.log(profile_img);
+    profile_img = req.file.filename;
   }
   let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
             + 'VALUES(?,?,NULL,NULL,?,NULL,?,?,1,?,?)';

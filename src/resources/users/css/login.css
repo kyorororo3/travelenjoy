@@ -38,11 +38,11 @@
 
 .caps-lock-warning{
     font-size: 13px;
-    color: black;
+    color: #2f2f2f;
     position: absolute;
-    background: #d9e1e8;
+    background: #ffc880;
     width: 250px;
-    margin: -10px auto 10px 410px;
+    margin: -10px auto 10px 390px;
     border-radius: 2px;
     padding: 5px;
     font-weight: 500;
@@ -50,7 +50,7 @@
 
 .caps-lock-warning:after {
     bottom: 100%;
-    left: 15%;
+    left: 12%;
     border: solid transparent;
     content: " ";
     height: 0;
@@ -58,7 +58,7 @@
     position: absolute;
     pointer-events: none;
     border-color: rgba(136, 183, 213, 0);
-    border-bottom-color: #d9e1e8;
+    border-bottom-color: #ffc880;
     border-width: 6px;
     margin-left: -10px;
 }

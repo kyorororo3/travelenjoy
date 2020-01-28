@@ -82,11 +82,7 @@ class TalkModalBody extends Component {
                                 </Media>
                             ))
                         :'등록된 댓글이 없습니다 :)'}
-                        <br/><br/><br/><br/>
-                        댓글 스크롤 영역<br/>
-                        댓글 스크롤 영역<br/>
-                        댓글 스크롤 영역<br/>
-                        댓글 스크롤 영역<br/>
+                        <br/>
                     </div>
 
                     <div className="modal-body-function">

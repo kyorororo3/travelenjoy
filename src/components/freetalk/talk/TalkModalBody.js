@@ -10,15 +10,15 @@ class TalkModalBody extends Component {
 
     state = {
         author: {
-            EMAIL: 'admin',
-            PWD: 'admin',
-            PROVIDER: null,
-            PROVIDER_ID: null,
-            NAME: 'admin',
-            NICKNAME: 'admin',
-            PROFILE_IMG: 'admin_profile.jpg',
-            PHONE: 1111,
-            AUTH:3
+            email: 'admin',
+            pwd: 'admin',
+            provider: null,
+            provider_id: null,
+            name: 'admin',
+            nickname: 'admin',
+            profile_img: 'default_profile_image.jpg',
+            phone: 1111,
+            auth:3
         },
         comments: []
     }
@@ -26,7 +26,8 @@ class TalkModalBody extends Component {
     componentDidMount() {
         fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.email + '&nickname=' + this.props.nickname)
             .then(res => res.json())
-            .then(res => this.setState({author: res.author}));
+            // .then(res => this.setState({author: res.author}))
+            .then(res => console.log(res.author.profile_img) )
 
         fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
             .then(res => res.json())
@@ -39,7 +40,7 @@ class TalkModalBody extends Component {
                     <div className="modal-body-profile">
                             <div className="modal-body-profile-detail">
                                 <Media>
-                                    <a href="">
+                                    <a href="#">
                                     <img
                                         width={32}
                                         height={32}
@@ -49,7 +50,7 @@ class TalkModalBody extends Component {
                                     />
                                     </a>
                                     <Media.Body>
-                                        <a href="#">{this.state.author.NICKNAME}</a>
+                                        <a href="#">{this.state.author.nickname}</a>
                                     </Media.Body>
                                 </Media>
                             </div>
@@ -68,7 +69,7 @@ class TalkModalBody extends Component {
                                     <img
                                         width={32}
                                         height={32}
-                                        src={require('../../../../server/src/uploads/' + comment.PROFILE_IMG)}
+                                        src={require('../../../../public/uploads/' + comment.profile_img)}
                                         alt='profile image'
                                         onError={(e)=>{e.target.onerror = null; e.target.src=require('../../../resources/mypage/images/profile_img.jpg')}}
                                     /></a>

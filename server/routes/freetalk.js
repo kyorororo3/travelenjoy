@@ -52,6 +52,7 @@ router.get('/list/likes', function(req, res) {
 router.get('/list/comments', function(req, res) {
     const stmt = "select * from te_comment a, te_member b where talk_seq=? and a.email = b.email";
     connection.query(stmt, req.query.talk_seq, function(err, result){
+        console.log(JSON.stringify(result))
         res.json({comments: result})
     });
 

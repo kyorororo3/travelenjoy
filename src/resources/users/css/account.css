@@ -4,9 +4,9 @@
 밝은 회색 #d9e1e8
 파랑색 #2b90d9
 */
+
 .account-wrapper{
     text-align: center;
-    /* padding-top: 50px; */
     padding-bottom: 100px;
     font-family: 'Noto Sans KR', sans-serif;
 }
@@ -28,7 +28,7 @@
 .account-type-div{
     font-family: 'Noto Sans KR', sans-serif;
     width: 400px;
-    height: 220px;
+    height: 260px;
     display: inline-block;
     border-radius: 0.5rem;
     border: 1px solid #d9e1e8;
@@ -58,12 +58,13 @@
 }
 .account-type-Link:hover{
     color: black;
+    text-decoration: none;
 }
 
 /* 회원가입 창 */
 .input_normal{
-    width: 300px;
-    height: 40px;
+    width: 320px;
+    height: 42px;
     padding-left: 7px;
     padding-right: 7px;
     font-size: 14px;
@@ -73,8 +74,8 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 .input_password{
-    width: 300px;
-    height: 40px;
+    width: 320px;
+    height: 42px;
     padding-left: 7px;
     padding-right: 7px;
     font-size: 14px;
@@ -83,47 +84,38 @@
     color: #282c37;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.account-form .email-fail{
+
+.emailCheck{
     font-size: 13px;
     font-weight: 500;
+    margin: auto auto 2px auto;
+    padding: 2px;
+    padding-bottom: 3px;
+    width: 320px;
+}
+.fail{
     color: #cd1f1f;
     background-color: #fde1e6;
-    margin-top: 15px;
-    margin-bottom: -14px;
-    padding: 2px;
-    padding-bottom: 3px;
 }
-.account-form .email-succ{
-    font-size: 13px;
-    font-weight: 500;
+.succ{
     color: #187ddf;
     background-color: #def7ff;
-    margin-top: 15px;
-    margin-bottom: -14px;
-    padding: 2px;
-    padding-bottom: 3px;
 }
-.account-form .email-already{
-    font-size: 13px;
-    font-weight: 500;
+.already{
     color: #dc4900;
     background-color: #ffefcb;
-    margin-top: 15px;
-    margin-bottom: -14px;
-    padding: 2px;
-    padding-bottom: 3px;
 }
 .format-fail{
     font-size: 15pt;
     color: tomato;
     position: absolute;
-    transform: translate(125px, 29px);
+    transform: translate(127px, 28px);
 }
 .format-succ{
     font-size: 15pt;
     color: #2b90d9;
     position: absolute;
-    transform: translate(125px, 29px);
+    transform: translate(127px, 28px);
 }
 .accountBtn{
     width: 100%;
@@ -147,7 +139,7 @@
 }
 .row-name{
     text-align: left;
-    margin-bottom: -12px;
+    margin-bottom: 3px;
     color: #282c37;
     font-size: 13px;
     font-weight: 500;
@@ -158,4 +150,5 @@
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #9baec882;
+    margin-bottom: 25px;
 }

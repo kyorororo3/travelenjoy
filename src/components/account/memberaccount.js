@@ -194,11 +194,11 @@ class Member_Account extends React.Component {
     // 이메일 형식, 중복 검사 화면 반영
     let emailChecking = null;
     if(this.state.checkEmailDuplicate){  // 이메일 중복인 경우
-      emailChecking = <div className='email-already'><i className="far fa-times-circle" />&nbsp;이미 사용 중인 이메일입니다.</div>
+      emailChecking = <div className='emailCheck already'><i className="far fa-times-circle" />&nbsp;이미 사용 중인 이메일입니다.</div>
     }else if(this.state.checkEmailFormat && !this.state.checkEmailDuplicate){ // 이메일 형식을 지켰으며 중복이 아닌 경우
-      emailChecking = <div className='email-succ'><i className="far fa-check-circle" />&nbsp;사용 가능한 이메일입니다.</div>
+      emailChecking = <div className='emailCheck succ'><i className="far fa-check-circle" />&nbsp;사용 가능한 이메일입니다.</div>
     }else if(this.state.checkEmailFormat !== '' && !this.state.checkEmailFormat){ // 이메일 형식을 지키지 않은 경우
-      emailChecking = <div className='email-fail'><i className="far fa-times-circle" />&nbsp;정확한 이메일을 입력해주세요.</div>
+      emailChecking = <div className='emailCheck fail'><i className="far fa-times-circle" />&nbsp;정확한 이메일을 입력해주세요.</div>
     }
 
     // 비밀번호 형식

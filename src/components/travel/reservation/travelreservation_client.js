@@ -17,7 +17,7 @@ class TravelReservationClient extends React.Component {
           </div>
           <div className='label'>요구사항</div>
           <div className='input-require'>
-            <textarea name='require' onChange={this.props.handleRequireChange} cols='40' rows='4'></textarea>
+            <textarea name='require' onChange={this.props.handleRequireChange} rows='2'></textarea>
           </div>
         </div>
       </div>

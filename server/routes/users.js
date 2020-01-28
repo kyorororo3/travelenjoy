@@ -23,7 +23,7 @@ router.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie:{maxAge:30000} //30분으로 변경함 
+  cookie:{maxAge:300000} //30분으로 변경함 
 }));
 router.use(passport.initialize());
 router.use(passport.session());
@@ -97,7 +97,7 @@ router.post('/sign-up/duplicationCheck', function(req, res){
   //이메일 중복확인
  // console.log('/sign-up/emailCheck', req.body);
  if(req.body.email !== undefined){
-    console.log('이메일 중복 체크');
+    //console.log('이메일 중복 체크');
     let sql = 'SELECT * FROM TE_MEMBER WHERE EMAIL=?';
     mysql.query(sql, [req.body.email], function(err, result){
       if(err) {res.send({msg:'err'})}
@@ -108,7 +108,7 @@ router.post('/sign-up/duplicationCheck', function(req, res){
       }
     });
  }else if(req.body.nickname !== undefined){
-    console.log('닉네임 중복 체크');
+    //console.log('닉네임 중복 체크');
     let sql = 'SELECT * FROM TE_MEMBER WHERE NICKNAME=?';
     mysql.query(sql, [req.body.nickname], function(err, result){
       if(err) {res.send({msg:'err'})}
@@ -129,13 +129,16 @@ router.post('/sign-up/member', upload.single('profile_img'), function (req, res,
   if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
     profile_img = null;
   }else{
-    let filetype = req.file.mimetype.substring(6);
-    profile_img = req.file.filename + '.' + filetype;
+   // let filetype = req.file.mimetype.substring(6);
+   // profile_img = req.file.filename + '.' + filetype;
+    profile_img = req.file.filename;
     console.log(profile_img);
   }
-  let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH)'
-            + 'VALUES(?,?,NULL,NULL,?,?,?,?,3)';
-  let datas = [req.body.email, req.body.pwd, profile_img, req.body.name, req.body.nickname, req.body.phone];
+
+  let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
+            + 'VALUES(?,?,NULL,NULL,?,?,?,?,3,NULL,NULL)';
+  let datas = [req.body.email, req.body.pwd, req.body.name, req.body.nickname, profile_img, req.body.phone];
+
   mysql.query(sql, datas, function (err, result) {
     if(err) {
       console.log('회원가입 INSERT ERR!!!!');
@@ -152,13 +155,11 @@ router.post('/sign-up/guide', upload.single('profile_img'), function (req, res, 
   if(req.file === undefined){ // 프로필 이미지 등록 안 한 경우
     profile_img = null;
   }else{
-    let filetype = req.file.mimetype.substring(6);
-    profile_img = req.file.filename + '.' + filetype;
-    console.log(profile_img);
+    profile_img = req.file.filename;
   }
-  let sql = 'INSERT INTO TE_GUIDE(EMAIL, PWD, COMPANYNAME, BRN, NAME, PROFILE_IMG, PHONE, AUTH)'
-            + 'VALUES(?,?,?,?,?,?,?,3)';
-  let datas = [req.body.email, req.body.pwd, req.body.companyname, req.body.brn, req.body.name, profile_img, req.body.phone];
+  let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
+            + 'VALUES(?,?,NULL,NULL,?,NULL,?,?,1,?,?)';
+  let datas = [req.body.email, req.body.pwd, req.body.name, profile_img, req.body.phone, req.body.companyname, req.body.brn];
   mysql.query(sql, datas, function (err, result) {
     if(err) {
       console.log('회원가입 INSERT ERR!!!!');

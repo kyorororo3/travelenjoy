@@ -19,7 +19,7 @@ module.exports = () => {
       
     passport.deserializeUser(function(id, done) {
         console.log("deserializeUser id ", id)
-        var sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=?';
+        var sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH FROM TE_MEMBER WHERE EMAIL=?';
         mysql.query(sql , [id], function (err, result) {
             if(err) {done(err,null);}           
             console.log("deserializeUser mysql result : " , result);
@@ -35,7 +35,7 @@ module.exports = () => {
             session: true
         },
         function(username, password, done) {
-            var sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=? AND PWD=?';
+            var sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH FROM TE_MEMBER WHERE EMAIL=? AND PWD=?';
             mysql.query(sql , [username, password], function (err, result) {
               if (err) { return done(err); }
               if (result.length === 0) {
@@ -53,7 +53,7 @@ module.exports = () => {
       function(accessToken, refreshToken, profile, done) {
         //console.log('facebook profile ' , profile);
 
-          let sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=?';
+          let sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH FROM TE_MEMBER WHERE EMAIL=?';
           mysql.query(sql , [profile._json.email], function (err, result) {
               if(err) {return done(err);}         
 
@@ -61,8 +61,8 @@ module.exports = () => {
                 console.log('페이스북으로 첫 로그인입니다');
               
                   // DB INSERT 진행
-                  let sql1 = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, PROFILE_IMG, NAME, NICKNAME, PHONE, AUTH)'
-                            + 'VALUES(?,NULL,?,?,NULL,?,?,NULL,3); ';
+                  let sql1 = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
+                            + 'VALUES(?,NULL,?,?,?,?,NULL,NULL,3,NULL,NULL); ';
                   let sql1Datas = [profile._json.email, profile.provider, profile._json.id, profile._json.name, profile._json.name];
                   
                   let sql2 = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=?; ';
@@ -93,14 +93,14 @@ module.exports = () => {
     function(accessToken, refreshToken, profile, done){
       //console.log('kakaoStrategy ', profile);
 
-      let sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=?';
+      let sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH FROM TE_MEMBER WHERE EMAIL=?';
       mysql.query(sql , [profile._json.kakao_account.email], function (err, result) {
           if(err) {return done(err);}           
           if(result.length === 0 ){ 
             console.log('카카오로 첫 로그인입니다');
               // DB INSERT 진행
-              let sql1 = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, PROFILE_IMG, NAME, NICKNAME, PHONE, AUTH)'
-                        + 'VALUES(?,NULL,?,?,NULL,?,?,NULL,3); ';
+              let sql1 = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
+                        + 'VALUES(?,NULL,?,?,?,?,NULL,NULL,3,NULL,NULL); ';
               let sql1Datas = [profile._json.kakao_account.email, profile.provider, profile.id, profile.username, profile._json.properties.nickname];
               
               let sql2 = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=?; ';
@@ -133,14 +133,14 @@ module.exports = () => {
   function(accessToken, refreshToken, profile, done) {
       //console.log('naver strategy ', profile);
 
-      let sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PHONE FROM TE_MEMBER WHERE EMAIL=?';
+      let sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH FROM TE_MEMBER WHERE EMAIL=?';
       mysql.query(sql , [profile._json.email], function (err, result) {
           if(err) {return done(err);}           
           if(result.length === 0 ){ // naver최초 로그인
             console.log('네이버로 첫 로그인입니다');
               // DB INSERT 진행
-              let sql1 = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, PROFILE_IMG, NAME, NICKNAME, PHONE, AUTH)'
-                        + 'VALUES(?,NULL,?,?,NULL,?,?,NULL,3); ';
+              let sql1 = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
+                        + 'VALUES(?,NULL,?,?,?,?,NULL,NULL,3,NULL,NULL); ';
               let sql1Datas = [profile._json.email, profile.provider, profile.id, profile.displayName, profile._json.nickname];
               
               let sql2 = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE FROM TE_MEMBER WHERE EMAIL=?; ';

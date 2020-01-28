@@ -14,16 +14,6 @@ CREATE TABLE TE_TOUR(
 insert into te_tour(email, nickname, category, title, content, period, min_people, max_people)
 values('aaa', '치키치킨', '인천', '우리동네투어ㅋ', '동춘동 함께 투어합시다ㅋ', '1', '2', '4');
 
-CREATE TABLE TE_TOUR_SCHE(
-    SEQ INT AUTO_INCREMENT PRIMARY KEY,
-    TOUR_SEQ INT,
-    JOIN_PEOPLE INT,
-    START_DATE DATETIME
-);
-
-insert into te_tour_sche(tour_seq, join_people, start_date)
-values(1, 0, '20200105000000');
-
 CREATE TABLE TE_TOUR_DES(
     SEQ INT AUTO_INCREMENT PRIMARY KEY,
     TOUR_SEQ INT,
@@ -104,5 +94,15 @@ create table te_freetalk_images(
 	te_freetalk_seq INT,
 	name_real varchar(4000),
     name_saved varchar(4000),
+    reg_date datetime default current_timestamp
+);
+
+
+create table te_comment(
+    seq INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    talk_seq int(255),
+    email varchar(4000),
+    nickname varchar(4000),
+    content varchar(4000),
     reg_date datetime default current_timestamp
 );

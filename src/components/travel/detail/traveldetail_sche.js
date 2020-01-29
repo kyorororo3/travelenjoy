@@ -6,34 +6,8 @@ import { withRouter } from 'react-router-dom';
 // CSS
 import 'react-day-picker/lib/style.css';
 
-// 자릿수가 하나일 경우 앞에 0을 붙여줌
-function two(str) {
-  str = str + "";
-
-  if(str.length === 1) {
-    str = "0" + str;
-  }
-  return str;
-}
-
-// Date를 String으로 변환시켜주는 함수 (yyyy-mm-dd)
-function dateToString(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  const dateStr = year + "-" + two(month) + "-" + two(day);
-
-  return dateStr;
-}
-
-
-// 날짜 String -> Date 변경함수
-function stringToDate(str) {
-  const ymdArr = str.split('-');
-  return new Date(ymdArr[0], ymdArr[1] - 1, ymdArr[2]);
-}
-
+// Utility
+import * as UtilityFunctions from '../../../utils/Functions';
 
 class TravelSche extends React.Component {
   constructor(props) {
@@ -55,7 +29,7 @@ class TravelSche extends React.Component {
 
     const data = {
       tour_seq: this.props.tour_seq,
-      date: dateToString(date)
+      date: UtilityFunctions.dateToString(date)
     }
 
     fetch(`http://localhost:3002/tour/available`, {
@@ -181,9 +155,11 @@ class TravelSche extends React.Component {
     let startDay = undefined;
     let endDay = undefined;
 
+    console.log(UtilityFunctions);
+
     if(isSelected) {
-      startDay = dateToString(selectedDays[0]);
-      endDay = dateToString(selectedDays[selectedDays.length - 1]);
+      startDay = UtilityFunctions.dateToString(selectedDays[0]);
+      endDay = UtilityFunctions.dateToString(selectedDays[selectedDays.length - 1]);
     }
 
     const disabledDaysObj = this.props.disabledDays
@@ -191,7 +167,7 @@ class TravelSche extends React.Component {
 
     for (let i = 0; i < disabledDaysObj.length; i++) {
       const obj = disabledDaysObj[i];
-      _disabledDays.push(stringToDate(obj.start_date));
+      _disabledDays.push(UtilityFunctions.stringToDate(obj.start_date));
     }
 
     _disabledDays.push(new Date());

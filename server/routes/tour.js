@@ -76,25 +76,43 @@ router.get('/location', (req, res) => {
 //   });
 // })
 
-// 스크랩 여부 확인
-router.get('/detail/scrap/isScrapped', (req, res) => {
-  // const {tour_seq, email} = req.body;
+// 스크랩 여부 확인 / 추가 / 삭제
+router.get('/detail/scrap/:command', (req, res) => {
+  const { command } = req.params;
   const {email, tour_seq} = req.query;
   console.log(email + " " + tour_seq);
-  const sql = 'select * from te_tour_scrap where email=? and tour_seq=?';
+  
   const params = [email, tour_seq];
+  if(command === 'isScrapped') {
+    const sql = 'select * from te_tour_scrap where email=? and tour_seq=?';
 
-  conn.query(sql, params, (err, result) => {
-    if(err) return console.log(err);
-    let isScrapped = false;
+    conn.query(sql, params, (err, result) => {
+      if(err) return console.log(err);
+      
+      let isScrapped = false;
+      if(result[0] !== undefined) {
+        isScrapped = true;
+      }
+      res.send({isScrapped: isScrapped});
+    })
+  }else if(command === 'insert') {
+    const sql = 'insert into te_tour_scrap values(?, ?)';
 
-    if(result[0] !== undefined) {
-      isScrapped = true;
-    }
+    conn.query(sql, params, (err) => {
+      if(err) return console.log(err);
+      res.send();
+    })
+  }else if(command === 'delete') {
+    const sql = 'delete from te_tour_scrap where email=? and tour_seq=?';
 
-    res.send({isScrapped: isScrapped});
-  })
+    conn.query(sql, params, (err) => {
+      if(err) return console.log(err);
+      res.send();
+    })
+  }
 })
+
+// 스크랩 삭제
 
 // Detail 조회
 router.get('/detail/:seq', (req, res) => {

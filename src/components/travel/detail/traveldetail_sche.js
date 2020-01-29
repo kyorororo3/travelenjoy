@@ -16,7 +16,7 @@ function two(str) {
   return str;
 }
 
-// Date를 String으로 변환시켜주는 함수 (yyyy/mm/dd)
+// Date를 String으로 변환시켜주는 함수 (yyyy-mm-dd)
 function dateToString(date) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -26,6 +26,14 @@ function dateToString(date) {
 
   return dateStr;
 }
+
+
+// 날짜 String -> Date 변경함수
+function stringToDate(str) {
+  const ymdArr = str.split('-');
+  return new Date(ymdArr[0], ymdArr[1] - 1, ymdArr[2]);
+}
+
 
 class TravelSche extends React.Component {
   constructor(props) {
@@ -178,11 +186,23 @@ class TravelSche extends React.Component {
       endDay = dateToString(selectedDays[selectedDays.length - 1]);
     }
 
+    const disabledDaysObj = this.props.disabledDays
+    let _disabledDays = [];
+
+    for (let i = 0; i < disabledDaysObj.length; i++) {
+      const obj = disabledDaysObj[i];
+      _disabledDays.push(stringToDate(obj.start_date));
+    }
+
+    _disabledDays.push(new Date());
+    _disabledDays.push({before: new Date()});
+
     return(
       <div className='travel-schedule-wrapper'>
         <DayPicker 
           showOutsideDays
-          disabledDays={ [new Date(), {before: new Date()}] }
+          // disabledDays={ [new Date(), {before: new Date()}] }
+          disabledDays={_disabledDays}
           selectedDays={selectedDays}
           onDayClick={this.handleDayChange} />
         <div className='travel-schedule-selected'>

@@ -72,6 +72,11 @@ create table te_tour_reservation(
   total_price int
 )
 
+create table te_tour_scrap(
+  email varchar(50),
+  tour_seq int
+)
+
 
 자유게시판 테이블 생성 쿼리
 create table te_freetalk(

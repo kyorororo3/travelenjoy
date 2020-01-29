@@ -76,6 +76,26 @@ router.get('/location', (req, res) => {
 //   });
 // })
 
+// 스크랩 여부 확인
+router.get('/detail/scrap/isScrapped', (req, res) => {
+  // const {tour_seq, email} = req.body;
+  const {email, tour_seq} = req.query;
+  console.log(email + " " + tour_seq);
+  const sql = 'select * from te_tour_scrap where email=? and tour_seq=?';
+  const params = [email, tour_seq];
+
+  conn.query(sql, params, (err, result) => {
+    if(err) return console.log(err);
+    let isScrapped = false;
+
+    if(result[0] !== undefined) {
+      isScrapped = true;
+    }
+
+    res.send({isScrapped: isScrapped});
+  })
+})
+
 // Detail 조회
 router.get('/detail/:seq', (req, res) => {
   const { seq } = req.params;
@@ -116,6 +136,7 @@ router.get('/detail/:seq', (req, res) => {
     });
   });
 
+  // 예약하기
   router.post('/reservation', (req, res) => {
     const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;
 
@@ -151,6 +172,7 @@ router.get('/detail/:seq', (req, res) => {
       res.send(count);
     })
   })
+
 
 
 });

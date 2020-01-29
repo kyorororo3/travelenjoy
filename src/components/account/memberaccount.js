@@ -296,7 +296,7 @@ class Member_Account extends React.Component {
                 value={this.state.input_phone} onChange={this.handleCheckPhone} maxLength='11'/></p>
 
             <p className='row-name'>프로필 사진</p>
-            <p><input type='file' accept='image/jpg,impge/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange} /></p>
+            <p><input type='file' accept='image/jpg,image/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange} /></p>
             {profile_preview}
             <p><input type='submit' className='accountBtn' value='회원가입'></input></p>
           </form>

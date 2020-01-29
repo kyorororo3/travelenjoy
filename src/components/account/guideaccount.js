@@ -87,7 +87,7 @@ class Guide_Account extends React.Component {
                 <p><input type='text' className='input_normal' name='phone' placeholder='-를 생략하여 입력해주세요.'></input></p>
     
                 <p className='row-name'>프로필 사진</p>
-                <p><input type='file' accept='image/jpg,impge/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange}></input></p>
+                <p><input type='file' accept='image/jpg,image/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange}></input></p>
                 {profile_preview}
                 <p><input type='submit' className='accountBtn' value='회원가입'></input></p>
               </form>

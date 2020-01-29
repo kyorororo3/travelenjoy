@@ -9,30 +9,29 @@
   overflow: auto;
 }
 
-.travel-detail-infomation {
-  width: 600px;
-  overflow: auto;
-  float: left;
-  margin-right: 60px;
-  padding-left: 10px;
+.travel-detail-wrapper .far {
+  color: #2b90d9;
 }
 
-.travel-detail-infomation .sub-title-text {
-  border-top: 1px dashed #2b90d9;
+.travel-detail-infomation {
+  width: 700px;
+  overflow: auto;
+  float: left;
+  padding-left: 10px;
 }
 
 .travel-detail-reservation {
   width: 300px;
   height: 600px;
-  border: 1px solid #d9e1e8;
+  border: 1px solid #9baec8;
   border-radius: 5px;
   text-align: center;
-  float: left;
+  float: right;
   padding: 20px;
 }
 
 .travel-info-category {
-  color: #2b90d9;
+  color: #9baec8;
   font-weight: 700;
 }
 
@@ -41,6 +40,11 @@
   font-size: 25px;
   font-weight: 900;
   padding: 20px 0;
+}
+
+.tour-scrap {
+  float: right;
+  cursor: pointer;
 }
 
 .travel-info-images {
@@ -65,13 +69,26 @@
   padding-left: 20px;
 }
 
+.travel-schedule-selected, .travel-schedule-unselected,
+.travel-schedule-selected div {
+  overflow: auto;
+}
+
+.travel-schedule-selected div {
+  padding-top: 10px;
+}
+
 .travel-schedule-wrapper .label{
   font-weight: 600;
-  padding-top: 10px;
-  padding-left: 20px;
   text-align: left;
-  font-size: 18px;
+  font-size: 15px;
   color: #555;
+}
+
+.travel-schedule-unselected {
+  color: #888;
+  font-weight: 600;
+  font-size: 15px;
 }
 
 .btn-m {
@@ -119,16 +136,18 @@
   width: 100%;
   height: 400px;
   margin-bottom: 20px;
+  border: 1px solid #9baec8;
+  border-radius: 5px;
 }
 
 .travel-destination-info {
   width: 100%;
   height: 200px;
-  padding: 15px;
+  padding: 13px;
 }
 
 .travel-destination-info .info-text {
-  width: 370px;
+  width: 400px;
   height: 100%;
   padding: 0 10px;
   float: left;
@@ -141,7 +160,7 @@
 }
 
 .course-mark .line{
-  height: 120px;
+  height: 140px;
   width: 0px;
   transform: translate(4px, 2px);
   border: 1px solid #2b90d9;
@@ -163,7 +182,7 @@
 }
 
 .travel-destination-info .info-image {
-  width: 170px;
+  width: 240px;
   height: 170px;
   border: 1px dotted #9baec8;
   float: left;
@@ -171,6 +190,7 @@
 
 .travel-destination-map {
   width: 100%;
-  height: 200px;
+  height: 198px;
+  border-radius: inherit;
 }
 

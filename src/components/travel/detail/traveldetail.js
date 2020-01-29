@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import TravelInfo from './traveldetail_info';
 import TravelSche from './traveldetail_sche';
 import TravelCourse from './traveldetail_course';
+import TravelReview from './traveldetail_review';
 
 // CSS
 import '../../../resources/travel/css/traveldetail.css';
@@ -45,6 +46,7 @@ class Tourdetail extends React.Component {
             ( <Fragment>
                 <TravelInfo info={tour_info} />
                 <TravelCourse course={tour_des} />
+                <TravelReview />
               </Fragment>
             )
           }

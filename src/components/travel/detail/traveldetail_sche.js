@@ -42,6 +42,8 @@ class TravelSche extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState({
+          isSelected: true,
+          selectedDays: [date],
           available: this.props.max - parseInt(result)
         })
       });
@@ -60,10 +62,10 @@ class TravelSche extends React.Component {
     // }
     // console.log(_selectedDays);
     
-    this.setState({
-      isSelected: true,
-      selectedDays: [date]
-    })
+    // this.setState({
+    //   isSelected: true,
+    //   selectedDays: [date]
+    // })
   }
 
   // 입력된 인원 수가 신청 가능한 인원수인지 체크
@@ -182,12 +184,22 @@ class TravelSche extends React.Component {
           disabledDays={_disabledDays}
           selectedDays={selectedDays}
           onDayClick={this.handleDayChange} />
-        <div className='travel-schedule-selected label'>
-          {isSelected? '시작일 : ' + UtilityFunctions.dateToString(selectedDays[0]) : '시작날짜를 선택해주세요'}
-        </div>
-        <div className='travel-schedule-available label'>
-          {available !== undefined && <span>예약가능인원 : {available}명</span>}
-        </div>
+          {isSelected?
+          <div className='travel-schedule-selected'>
+            <div className='travel-schedule-day'>
+              <span className='label'>예약일</span>
+              <span className='data'>{UtilityFunctions.dateToString(selectedDays[0])}</span>
+            </div>
+            <div className='travel-schedule-available'>
+              <span className='label'>예약가능인원</span>
+              <span className='data'>{available}명</span>
+            </div>
+          </div> : 
+          <div className='travel-schedule-unselected'>
+            시작 날짜를 선택해주세요.
+          </div>
+          }
+        
         <form onSubmit={this.handleReservation}>
           <input type='hidden' name='seq' value={this.props.tour_seq}/>
           <div className='travel-schedule-input'>

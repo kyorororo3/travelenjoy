@@ -1,0 +1,10 @@
+{
+    "service": "Gmail",
+    "auth": {
+        "user": "mskkl770@gmail.com",
+        "pass": "alsthdrlarkddl1"
+    },
+    "tls": {
+        "rejectUnauthorized": false
+    }
+}

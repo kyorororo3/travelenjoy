@@ -3,6 +3,8 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+
+// multer
 const multer = require('multer');
 const upload = multer({ dest: 'src/uploads/'});
 
@@ -29,6 +31,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 passport_config();
 
+// 로그인 한 유저 정보 얻음
 router.get('/getUser',function(req, res){
   console.log('req.isAuthenticated() = ', req.isAuthenticated(), req.user);
   var loginUser = [];
@@ -38,6 +41,7 @@ router.get('/getUser',function(req, res){
   res.send(loginUser);
 })
 
+// passport-local 로그인
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function (err, user) {
     if (!user) { return res.send([]); }
@@ -47,6 +51,7 @@ router.post('/login', function(req, res, next) {
   })(req, res);
 });
 
+// passport-facebook 로그인
 router.get('/login/facebook', passport.authenticate('facebook', {scope:'email'}));
 
 router.get('/login/facebook/callback', function(req, res, next) {
@@ -60,6 +65,7 @@ router.get('/login/facebook/callback', function(req, res, next) {
   })(req, res);
 });
 
+// passport-kakao 로그인
 router.get('/login/kakao', passport.authenticate('kakao'));
 
 router.get('/login/kakao/callback', function (req, res, next) {
@@ -73,6 +79,7 @@ router.get('/login/kakao/callback', function (req, res, next) {
   })(req, res);
 });
 
+// passport-naver 로그인
 router.get('/login/naver', passport.authenticate('naver'));
 
 router.get('/login/naver/callback', function (req, res, next) {
@@ -86,15 +93,14 @@ router.get('/login/naver/callback', function (req, res, next) {
   })(req, res);
 });
 
-
+// 로그아웃
 router.post('/logout', function(req, res) {
   req.logOut();
   res.send({msg:'로그아웃'})
 });
 
-
+//이메일, 닉네임 중복확인
 router.post('/sign-up/duplicationCheck', function(req, res){
-  //이메일 중복확인
  // console.log('/sign-up/emailCheck', req.body);
  if(req.body.email !== undefined){
     //console.log('이메일 중복 체크');
@@ -119,9 +125,9 @@ router.post('/sign-up/duplicationCheck', function(req, res){
       }
     });
  }
-  
 });
 
+// 일반 회원 가입
 router.post('/sign-up/member', upload.single('profile_img'), function (req, res, next) {
   console.log('/sign-up/member ' , req.body);
   console.log(req.file);
@@ -134,11 +140,9 @@ router.post('/sign-up/member', upload.single('profile_img'), function (req, res,
     profile_img = req.file.filename;
     console.log(profile_img);
   }
-
   let sql = 'INSERT INTO TE_MEMBER(EMAIL, PWD, PROVIDER, PROVIDER_ID, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME, BRN)'
             + 'VALUES(?,?,NULL,NULL,?,?,?,?,3,NULL,NULL)';
   let datas = [req.body.email, req.body.pwd, req.body.name, req.body.nickname, profile_img, req.body.phone];
-
   mysql.query(sql, datas, function (err, result) {
     if(err) {
       console.log('회원가입 INSERT ERR!!!!');
@@ -148,6 +152,7 @@ router.post('/sign-up/member', upload.single('profile_img'), function (req, res,
   })
 });
 
+// 가이드 가입
 router.post('/sign-up/guide', upload.single('profile_img'), function (req, res, next) {
   console.log('/sign-up/guide ' , req.body);
   console.log(req.file);
@@ -168,6 +173,8 @@ router.post('/sign-up/guide', upload.single('profile_img'), function (req, res, 
     res.send({msg:'success'});
   })
 });
+
+
 
 
 module.exports = router;

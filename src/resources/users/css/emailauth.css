@@ -1,0 +1,49 @@
+/*
+검정  #282c37
+회색 #9baec8
+밝은 회색 #d9e1e8
+파랑색 #2b90d9
+*/
+
+.sendEmail-btn{
+    border: 1px solid #d9e1e8;
+    background-color: #fff;
+    color: #2b90d9;
+    border-radius: 2rem;
+    padding: 8px 17px 8px 17px;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: 1px 2px 3px 0px #f2f2f2;
+    outline: none;
+}
+.sendEmail-btn:disabled{
+    color: #9baec8;
+    cursor: no-drop;
+}
+
+.input-authnumber{
+    width: 170px;
+    height: 32px;
+    padding: 0px 7px 0px 7px;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #d9e1e8;
+    color: #282c37;
+}
+
+.tryAuth-btn{
+    width: 60px;
+    height: 35px;
+    border: 1px solid #d9e1e8;
+    background-color: #2b90d9;
+    color: #fff;
+    border-radius: 2rem;
+    font-weight: 400;
+    font-size: 15px;
+    outline: none;
+}
+
+#afterSendEmail{
+    display: none;
+    padding-bottom: 20px;
+}

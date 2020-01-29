@@ -2,6 +2,8 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import  '../../resources/users/css/account.css';
 
+import EmailAuthentication from '../account/emailauthentication';
+
 class Member_Account extends React.Component {
   constructor(props) {
     super(props);
@@ -107,7 +109,6 @@ class Member_Account extends React.Component {
     str = str.replace(/\-/g,'');
     this.setState({input_phone : str})
   }
-
 
   // 이미지 업로드 후 미리보기용 URL획득
   handleFileOnChange = (event) => {
@@ -258,6 +259,9 @@ class Member_Account extends React.Component {
             <p><input type='text' className='input_normal' name='email' placeholder='이메일을 입력해주세요.'
                 onChange={this.handleCheckEmail} /></p>
             
+            <p className='row-name'>이메일 인증*</p>
+            <EmailAuthentication 
+              isAble={!this.state.checkEmailDuplicate && this.state.checkEmailFormat ? true:false} />
 
             {pwdChecking}
             <p className='row-name'>비밀번호*</p>

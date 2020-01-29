@@ -30,6 +30,9 @@ class TravelInfo extends React.Component {
             })
         }
       })  
+
+    const el_div = document.getElementsByClassName('description-content')[0];
+    el_div.innerHTML = this.props.info.content;
   }
 
   handleScrap = () => {
@@ -83,8 +86,8 @@ class TravelInfo extends React.Component {
         </div>
         <div className='travel-info-contents'>
           <div className='sub-title-text'><i className="fas fa-atlas"></i> Tour Description</div>
-          내용 : {content} <br/>
           참여인원 : {min_people} ~ {max_people}명 <br/><br/>
+          <div className='description-content'></div>
         </div>
       </div>
     )

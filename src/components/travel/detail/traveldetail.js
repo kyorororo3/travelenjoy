@@ -15,8 +15,9 @@ class Tourdetail extends React.Component {
 
     this.state = {
       isLoaded : false,
-      tour_info : null,
-      tour_des : null
+      tour_info : undefined,
+      tour_des : undefined,
+      disabledDays : undefined
     }
   }
 
@@ -28,12 +29,14 @@ class Tourdetail extends React.Component {
       .then( data => this.setState({
         isLoaded: true,
         tour_info: data.tour_info,
-        tour_des: data.tour_des
+        tour_des: data.tour_des,
+        disabledDays: data.disabledDays
       }) );
+
   }
 
   render() {
-    let { isLoaded, tour_info, tour_des } = this.state;
+    let { isLoaded, tour_info, tour_des, disabledDays } = this.state;
     
     return(
       <div className='travel-detail-wrapper container'>
@@ -47,7 +50,7 @@ class Tourdetail extends React.Component {
           }
         </div>
         <div className='travel-detail-reservation'>
-          {isLoaded && <TravelSche tour_seq={tour_info.seq} period={tour_info.period} /> }
+          {isLoaded && <TravelSche disabledDays={disabledDays} tour_seq={tour_info.seq} period={tour_info.period} max={tour_info.max_people}/> }
         </div>
       </div>
     )

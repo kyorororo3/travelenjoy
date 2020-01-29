@@ -63,32 +63,56 @@ router.get('/location', (req, res) => {
   })
 })
 
+// 투어 신청이 불가능한 날짜 반환
+// router.get('/disabledays', (req, res) => {
+//   console.log('http://localhost:3002/tour/disabledays GET');
+//   const {tour_seq} = req.query;
+//   const sql = 
+//   const params = [tour_seq, tour_seq];
+
+//   conn.query(sql, params, (err, result) => {
+//     if(err) return console.log(err);
+//     res.send(result);
+//   });
+// })
+
 // Detail 조회
 router.get('/detail/:seq', (req, res) => {
-  let { seq } = req.params;
+  const { seq } = req.params;
   console.log(seq);
 
   let sql1 = "select * from te_tour where seq=?; ";
   let sql2 = "select * from te_tour_des where tour_seq=?; ";
 
-  let params = [ seq ];
+  sql1 = mysql.format(sql1, seq);
+  sql2 = mysql.format(sql2, seq);
 
-  sql1 = mysql.format(sql1, params);
-  sql2 = mysql.format(sql2, params);
-  let sqls = sql1 + sql2;  // multiple statements
+  let sql3 = 'select start_date' 
+  + ' from (select start_date, sum(join_people) as count'
+  + ' from te_tour_reservation'
+  + ' where tour_seq=? and start_date > now()'
+  + ' group by start_date'
+  + ') a'
+  + ' where count >=(select max_people from te_tour where seq=?)'
+  + ' order by start_date;';
 
-  let _tour_info;
-  let _tour_des;
+  const params = [seq, seq]
+  
+  sql3 = mysql.format(sql3, params);
+
+  let sqls = sql1 + sql2 + sql3;  // multiple statements
 
   conn.query(sqls, (err, result) => {
     if(err) return console.log("ERR!! " + err);
     console.log(result);
-    _tour_info = result[0][0];  // 1개의 정보가 json으로
-    _tour_des = result[1];  // 여러개의 정보(json)가 배열로
-
+    const _tour_info = result[0][0];  // 1개의 정보가 json으로
+    const _tour_des = result[1];  // 여러개의 정보(json)가 배열로
+    const _disabledDays = result[2];
+    
     res.send({
       tour_info: _tour_info,
       tour_des: _tour_des,
+      disabledDays: _disabledDays
     });
   });
 
@@ -114,14 +138,20 @@ router.get('/detail/:seq', (req, res) => {
     console.log('http://localhost:3002/tour/available POST');
     const { tour_seq, date } = req.body;
     console.log(tour_seq, date);
-    const sql = 'select count(*) as count from te_tour_reservation where tour_seq=? and start_date=?'
+    const sql = 'select sum(join_people) as count from te_tour_reservation where tour_seq=? and start_date=?'
     const params = [tour_seq, date];
 
     conn.query(sql, params, (err, rows) => {
       if(err) return console.log("ERR!! " + err);
-      res.send((rows[0].count).toString());
+      let count = '0';
+      console.log(rows);
+      if(rows[0].count !== null) {
+        count = (rows[0].count).toString();
+      }
+      res.send(count);
     })
   })
+
 
 });
 

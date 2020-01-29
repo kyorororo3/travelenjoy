@@ -9,7 +9,8 @@ module.exports = function () {
                 user: 'te',
                 password: ',,,,',
                 database: 'travelenjoy',
-                multipleStatements: true  // 다중쿼리용 설정
+                multipleStatements: true,  // 다중쿼리용 설정
+                dateStrings: 'date' // 날짜컬럼 설정
             })
         },
 

@@ -6,26 +6,8 @@ import { withRouter } from 'react-router-dom';
 // CSS
 import 'react-day-picker/lib/style.css';
 
-// 자릿수가 하나일 경우 앞에 0을 붙여줌
-function two(str) {
-  str = str + "";
-
-  if(str.length === 1) {
-    str = "0" + str;
-  }
-  return str;
-}
-
-// Date를 String으로 변환시켜주는 함수 (yyyy/mm/dd)
-function dateToString(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  const dateStr = year + "-" + two(month) + "-" + two(day);
-
-  return dateStr;
-}
+// Utility
+import * as UtilityFunctions from '../../../utils/Functions';
 
 class TravelSche extends React.Component {
   constructor(props) {
@@ -47,7 +29,7 @@ class TravelSche extends React.Component {
 
     const data = {
       tour_seq: this.props.tour_seq,
-      date: dateToString(date)
+      date: UtilityFunctions.dateToString(date)
     }
 
     fetch(`http://localhost:3002/tour/available`, {
@@ -60,7 +42,7 @@ class TravelSche extends React.Component {
       .then(res => res.json())
       .then(result => {
         this.setState({
-          available: result
+          available: this.props.max - parseInt(result)
         })
       })
 
@@ -83,30 +65,52 @@ class TravelSche extends React.Component {
     })
   }
 
+  // 입력된 인원 수가 신청 가능한 인원수인지 체크
+  checkPerson = () => {
+    const {available} = this.state;
+    const input = document.getElementById('_person');
+    const input_val = parseInt(input.value);
+
+    const {selectedDays} = this.state;
+
+    if(selectedDays.length <= 0) {
+      alert('투어 날짜를 먼저 선택해주세요.');
+      input.value = '';
+    }else {
+      if(input_val > available) {
+        alert(`현재 예약 가능 인원을 초과했습니다.\n예약가능인원 : ${available}`);
+        input.value = available;
+      }
+    }
+  }
+
   // 인원수 증가
   handleCountUp = () => {
+    
     const el_input = document.getElementById('_person');
     let num = el_input.value;
-
+    
     if(num === '') {
       el_input.value = 1;
     }else {
       el_input.value = parseInt(num) + 1;
     }
+    
+    this.checkPerson();
   }
-
+  
   // 인원수 감소
   handleCountDown = () => {
     const el_input = document.getElementById('_person');
     let num = el_input.value;
 
-    if(num === '') {
+    if(num === '' || parseInt(num) <= 1) {
       el_input.value = 1;
-    }else if(parseInt(num) <= 0){
-      el_input.value = 0;
     }else {
       el_input.value = parseInt(num) - 1;
     }
+
+    this.checkPerson();
   }
 
   // 예약하기 버튼 클릭!
@@ -151,16 +155,30 @@ class TravelSche extends React.Component {
     let startDay = undefined;
     let endDay = undefined;
 
+    console.log(UtilityFunctions);
+
     if(isSelected) {
-      startDay = dateToString(selectedDays[0]);
-      endDay = dateToString(selectedDays[selectedDays.length - 1]);
+      startDay = UtilityFunctions.dateToString(selectedDays[0]);
+      endDay = UtilityFunctions.dateToString(selectedDays[selectedDays.length - 1]);
     }
+
+    const disabledDaysObj = this.props.disabledDays
+    let _disabledDays = [];
+
+    for (let i = 0; i < disabledDaysObj.length; i++) {
+      const obj = disabledDaysObj[i];
+      _disabledDays.push(UtilityFunctions.stringToDate(obj.start_date));
+    }
+
+    _disabledDays.push(new Date());
+    _disabledDays.push({before: new Date()});
 
     return(
       <div className='travel-schedule-wrapper'>
         <DayPicker 
           showOutsideDays
-          disabledDays={ [new Date(), {before: new Date()}] }
+          // disabledDays={ [new Date(), {before: new Date()}] }
+          disabledDays={_disabledDays}
           selectedDays={selectedDays}
           onDayClick={this.handleDayChange} />
         <div className='travel-schedule-selected'>
@@ -170,12 +188,14 @@ class TravelSche extends React.Component {
           }
         </div>
         <div className='travel-schedule-available'>
-          {available !== undefined && <h3>현재신청인원 : {available}</h3>}
+          {available !== undefined && <h3>예약가능인원 : {available}</h3>}
         </div>
         <form onSubmit={this.handleReservation}>
           <input type='hidden' name='seq' value={this.props.tour_seq}/>
           <div className='travel-schedule-input'>
-            <input type='text' id='_person' name='person' placeholder='인원수를 입력해주세요' />
+            <input type='text' id='_person' name='person' 
+              placeholder='인원수를 입력해주세요'
+              onChange={this.checkPerson} />
             <div className='input-up-down'>
               <div className='input-up' onClick={this.handleCountUp}>
                 <i className="fas fa-caret-up"></i>

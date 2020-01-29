@@ -13,6 +13,7 @@ class Member_Account extends React.Component {
       signUpStatus : false,
       checkEmailFormat : '',
       checkEmailDuplicate : '',
+      checkEmailAuth : '',
       checkPwdFormat: '',
       input_pwd : '',
       checkPwdSame : '',
@@ -55,6 +56,11 @@ class Member_Account extends React.Component {
         else if(data.nicknameCheck === 'no'){this.setState({checkNicknameDuplicate : true});}
       }
     })
+  }
+
+  // 이메일 인증 마쳤는지
+  isClearAuth = (result) => {
+    this.setState({checkEmailAuth : result});
   }
 
   // 비밀번호 형식확인
@@ -132,6 +138,9 @@ class Member_Account extends React.Component {
     if(event.target.email.value === ''){
       alert('이메일을 입력해주세요!');
       document.getElementsByName('email')[0].focus();
+    }else if(!this.state.checkEmailAuth){
+      alert('이메일을 인증해주세요!');
+      document.getElementsByClassName('sendEmail-btn')[0].focus();
     }else if(event.target.pwd.value === ''){
       alert('비밀번호를 입력해주세요!');
       document.getElementsByName('pwd')[0].focus();
@@ -144,7 +153,7 @@ class Member_Account extends React.Component {
     }
 
     let necessary_field = false;
-    if(this.state.checkEmailFormat && !this.state.checkNicknameDuplicate 
+    if(this.state.checkEmailFormat && !this.state.checkNicknameDuplicate && this.state.checkEmailAuth
         && this.state.checkPwdFormat && this.state.checkPwdSame){     
       necessary_field = true;
     }else{
@@ -261,7 +270,8 @@ class Member_Account extends React.Component {
             
             <p className='row-name'>이메일 인증*</p>
             <EmailAuthentication 
-              isAble={!this.state.checkEmailDuplicate && this.state.checkEmailFormat ? true:false} />
+              isAble={!this.state.checkEmailDuplicate && this.state.checkEmailFormat ? true:false}
+              emailAuth={this.isClearAuth} />
 
             {pwdChecking}
             <p className='row-name'>비밀번호*</p>

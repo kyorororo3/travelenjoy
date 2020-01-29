@@ -5,14 +5,15 @@ class EmailAuthentication extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isSend : false
+            isSend : false,
+            num : '',
+            chekcCorrect : ''
         }
     }
 
     getEmail = () => {
         let email = document.getElementsByName('email')[0].value.trim();
-       // this.sendEmail({email:email});
-        document.getElementById('afterSendEmail').style.display='block';
+        this.sendEmail({email:email});
     }
 
     sendEmail = (email) => {
@@ -26,22 +27,53 @@ class EmailAuthentication extends React.Component {
             console.log(data.msg);
             if(data.msg === 'sucess'){
                 this.setState({isSend : true});
+                document.getElementById('afterSendEmail').style.display='block';
             }else{
                 this.setState({isSend : false});
             }
         })
     }
 
+    getInputNum = () => {
+        let num = document.getElementsByName('input_number')[0].value.trim();
+        this.isCorrect({authCode : num});
+    }
+
+    isCorrect = (authCode) => {
+        fetch('http://localhost:3002/auth/emailAuth/check', {
+            method:'post',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify(authCode)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.msg == 'ok'){
+                this.setState({chekcCorrect : true})
+                document.getElementById('afterSendEmail').style.display='none';
+                this.props.emailAuth(true);
+            }else{
+                this.setState({chekcCorrect : false})
+                this.props.emailAuth(false);
+            }
+        })
+    }
 
     render(){ 
+        let resultAuth = null;
+        if(this.state.chekcCorrect){
+            resultAuth = <div className='authCode correct'><i className="far fa-check-circle"/>&nbsp;인증이 완료되었습니다.</div>
+        }else if(this.state.chekcCorrect !== '' && !this.state.chekcCorrect){
+            resultAuth = <div className='authCode incorrect'>인증번호가 일치하지 않습니다.</div>
+        }
         return(
             <div className='container'>
                 <p><button type='button' className='sendEmail-btn' onClick={this.getEmail}
                          disabled={this.props.isAble?false:true}><i className="far fa-envelope"/>&nbsp;인증번호 전송</button></p>
                 <div id='afterSendEmail'>
-                    <input type='text' className='input-authnumber' placeholder='인증번호를 입력하세요' />&nbsp;&nbsp;
-                    <button type='button' className='tryAuth-btn'>확인</button>
+                    <input type='text' className='input-authnumber' name='input_number' placeholder='인증번호를 입력하세요' />&nbsp;&nbsp;
+                    <button type='button' className='tryAuth-btn' onClick={this.getInputNum}>확인</button>
                 </div>
+                {resultAuth}
             </div>
         )
     }

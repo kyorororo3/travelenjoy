@@ -47,3 +47,15 @@
     display: none;
     padding-bottom: 20px;
 }
+
+.authCode{
+    font-size: 17px;
+    padding: 20px;
+    font-weight: 500;
+}
+.correct {
+    color: #00a18c;
+}
+.incorrect {
+    color: #e16161;
+}

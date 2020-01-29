@@ -20,11 +20,11 @@ class TravelReservationInfo extends React.Component {
 
   render() {
     const { selectedDays, person } = this.props;
-    const startDay = selectedDays[0];
-    const endDay = selectedDays[selectedDays.length - 1];
+    // const startDay = selectedDays[0];
+    // const endDay = selectedDays[selectedDays.length - 1];
 
-    console.log(startDay);
-    console.log(endDay);
+    // console.log(startDay);
+    // console.log(endDay);
 
     return(
       <div className='travel-reservation-info panel-l'>
@@ -42,7 +42,7 @@ class TravelReservationInfo extends React.Component {
           <div className='selected-date reservation-row'>
             <span className='label'>예약일</span>
             <span className='data'>
-              {startDay === endDay? dateToString(startDay): <span>{dateToString(startDay)} ~ {dateToString(endDay)}</span>}
+              {dateToString(selectedDays[0])}
             </span>
           </div>
           <div className='selected-people reservation-row'>

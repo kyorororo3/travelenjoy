@@ -10,25 +10,8 @@ import TravelReservationClient from './travelreservation_client';
 import TravelReservationTos from './travelreservation_tos';
 import TravelReservationComplete from './travelreservation_complete';
 
-function dateToString(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  const dateStr = year + "-" + two(month) + "-" + two(day);
-
-  return dateStr;
-}
-
-// 자릿수가 하나일 경우 앞에 0을 붙여줌
-function two(str) {
-  str = str + "";
-
-  if(str.length === 1) {
-    str = "0" + str;
-  }
-  return str;
-}
+// Utility
+import * as UtilityFunctions from '../../../utils/Functions';
 
 class TravelReservation extends React.Component {
   constructor(props) {
@@ -75,7 +58,7 @@ class TravelReservation extends React.Component {
             reservation_number: new Date().getTime() + "_" + tour_seq,
             tour_seq: tour_seq,
             email: email,
-            start_date: dateToString(selectedDays[0]),
+            start_date: UtilityFunctions.dateToString(selectedDays[0]),
             join_people: person,
             total_price: total_price
           }
@@ -128,7 +111,7 @@ class TravelReservation extends React.Component {
           //       reservation_number: rsp.merchant_uid,
           //       tour_seq: tour_seq,
           //       email: email,
-          //       start_date: dateToString(selectedDays[0]),
+          //       start_date: UtilityFunctions.dateToString(selectedDays[0]),
           //       join_people: person,
           //       total_price: total_price
           //     }

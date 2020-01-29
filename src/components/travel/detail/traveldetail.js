@@ -50,7 +50,7 @@ class Tourdetail extends React.Component {
           }
         </div>
         <div className='travel-detail-reservation'>
-          {isLoaded && <TravelSche disabledDays={disabledDays} tour_seq={tour_info.seq} period={tour_info.period} max={tour_info.max_people}/> }
+          {isLoaded && <TravelSche disabledDays={disabledDays} tour_seq={tour_info.seq} max={tour_info.max_people}/> }
         </div>
       </div>
     )

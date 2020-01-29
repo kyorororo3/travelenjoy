@@ -2,7 +2,7 @@ import React from 'react';
 
 class TravelInfo extends React.Component {
   render() {
-    let { email, nickname, category, title, content, thumbnail, period,
+    let { email, nickname, category, title, content, thumbnail,
       min_people, max_people } = this.props.info;
 
     return(
@@ -18,7 +18,6 @@ class TravelInfo extends React.Component {
         </div>
         <div className='travel-info-contents'>
           내용 : {content} <br/>
-          기간 : {period}일 <br/>
           참여인원 : {min_people} ~ {max_people}명 <br/><br/>
         </div>
       </div>

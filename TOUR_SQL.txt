@@ -77,6 +77,20 @@ create table te_tour_scrap(
   tour_seq int
 )
 
+create table te_tour_review(
+  seq int auto_increment primary key,
+  tour_seq int,
+  email varchar(50),
+  title varchar(200),
+  content varchar(1000),
+  score int,
+  review_img varchar(300),
+  wdate datetime default now()
+);
+
+insert into te_tour_review(tour_seq, email, title, content, score)
+values(1, 'aaa', '아주조아', '리뷰리븅', 5);
+
 
 자유게시판 테이블 생성 쿼리
 create table te_freetalk(

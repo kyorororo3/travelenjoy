@@ -194,3 +194,61 @@
   border-radius: inherit;
 }
 
+.travel-review-wrapper {
+  margin-bottom: 50px;
+}
+
+.reivew-avg{
+  width: 100%;
+  height: 150px;
+  background: #d9e1e8;
+  border-radius: 5px;
+}
+
+.travel-review-obj {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #9baec8;
+}
+
+.review-nickname-score-date {
+  padding-bottom: 5px;
+}
+
+.review-nickname{
+  display: inline-block;
+}
+
+.review-score {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.review-date {
+  display: inline-block;
+  float: right;
+}
+
+.review-title {
+  font-size: 17px;
+  font-weight: 700;
+  padding: 5px 0;
+}
+
+.review-content-image {
+  height: 150px;
+  width: 100%;
+}
+
+.review-content {
+  width: 520px;
+  float: left;
+  padding: 10px 10px 10px 0;
+}
+
+.review-image {
+  width: 150px;
+  height: 150px;
+  float: right;
+  border: 1px dotted;
+}

@@ -6,7 +6,6 @@ import '../../resources/travel/css/travellist.css';
 // Components
 import TravelSearch from './list/travellist_search';
 import TravelList from './list/travellist';
-import TicketList from './list/ticketlist'
 
 class TravelMain extends React.Component {
 
@@ -21,17 +20,9 @@ class TravelMain extends React.Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handelInfiniteScroll);
-
-    // fetch('http://localhost:3002/tour/list')
-    //   .then(res => res.json())
-    //   .then(data => this.setState({
-    //     list: data,
-    //     isLoaded: true
-    //     })
-    //   );
   }
 
-  isSearched = (_search) => {
+  handleSearchState = (_search) => {
     this.setState({
       isSearched: true,
       search: _search
@@ -58,8 +49,7 @@ class TravelMain extends React.Component {
     
     return(
       <div className='container'>
-        <TravelSearch isSearched={this.isSearched}/>
-        {/* <TravelList travel_list={list} isLoaded={isLoaded}/> */}
+        <TravelSearch isSearched={this.handleSearchState}/>
         <TravelList search={search} isSearched={isSearched} />
       </div>
     )

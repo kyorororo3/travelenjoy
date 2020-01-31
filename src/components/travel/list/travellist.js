@@ -13,39 +13,45 @@ class TravelList extends React.Component {
       isFull: false,
       list: undefined,
       start: 0,
-      end: 12,
       total: undefined
     }
   }
   
   handleMoreRead = () => {
-    this.setState({
-      start: this.state.start + 12,
-      end: this.state.end + 12
-    }, () => {
-      const {list, start, end, total} = this.state;
-      fetch(`http://localhost:3002/tour/list?start=${start}&end=${end}`)
+      const {isSearched, search} = this.props;
+      const {list, start, total} = this.state;
+
+      let url = `http://localhost:3002/tour/list?start=${start}`;
+      if(isSearched) {
+        url += `&search=${search}`;
+      }
+      fetch(url)
       .then(res => res.json())
       .then(data =>  {
         this.setState({
-          list: list.concat(data)
+          list: list.concat(data),
+          start: this.state.start + 12
+        }, () => {
+          const {total, start} = this.state
+          if(total <= start) {
+            this.setState({
+              isFull: true
+            })
+          }
         });
       })
-      // console.log(end);
-      if(total <= end) {
-        this.setState({
-          isFull: true
-        })
-      }
-    })
+
+      
+    
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3002/tour/list?start=0&end=12`)
+    fetch(`http://localhost:3002/tour/list?start=0`)
     .then(res => res.json())
     .then(data => this.setState({
         list: data,
-        isLoaded: true
+        isLoaded: true,
+        start: this.state.start + 12
       })
     );
 
@@ -55,8 +61,8 @@ class TravelList extends React.Component {
         this.setState({
           total: data.length
         }, () => {
-          const{total, end} = this.state;
-          if(total <= end) {
+          const{total, start} = this.state;
+          if(total <= start) {
             this.setState({
               isFull: true
             })
@@ -66,14 +72,16 @@ class TravelList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(JSON.stringify(nextProps));
+    // console.log(JSON.stringify(nextProps));
     const {isSearched, search} = nextProps;
 
     if(isSearched) {
-      fetch(`http://localhost:3002/tour/list?start=0&end=12&search=${search}`)
+      fetch(`http://localhost:3002/tour/list?start=0&search=${search}`)
         .then(res => res.json())
         .then(data => this.setState({
-            list: data
+            list: data,
+            start: 12,
+            isFull: false
           })
         );
 
@@ -83,8 +91,8 @@ class TravelList extends React.Component {
           this.setState({
             total: data.length
           }, () => {
-            const{total, end} = this.state;
-            if(total <= end) {
+            const{total, start} = this.state;
+            if(total <= start) {
               this.setState({
                 isFull: true
               })
@@ -96,7 +104,7 @@ class TravelList extends React.Component {
 
   render() {
     let { list, isLoaded, isFull } = this.state
-    console.log(list);
+    // console.log(list);
     return(
       <div className='travel-list-wrapper'>
         <div className='sub-title-text'>

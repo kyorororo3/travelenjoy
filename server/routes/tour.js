@@ -33,19 +33,16 @@ router.get('/list/length', (req, res) => {
 
 // List 조회
 router.get('/list', function (req, res) {
-  const {search, start, end} = req.query;
-  console.log("search : " + search + ", start : " + start + " end : " + end);
+  const {search, start} = req.query;
+  console.log("search : " + search + ", start : " + start);
   
-  let params = [parseInt(start), parseInt(end)];
-  let sql = "select @rownum := @rownum + 1 as rownum, tb.* "
+  let params = [parseInt(start)];
+  let sql = "select * from te_tour ";
   if(search !== undefined) {
-    sql += "from (select * from te_tour where title like ? or category=?) as tb, "
+    sql += "where title like ? or category=? "
     params = [ `%${search}%`, search ].concat(params);
-  }else {
-    sql += "from (select * from te_tour) as tb, "
   }
-  sql += "(select @rownum := 0) as r "
-  sql += "limit ?, ?";  
+  sql += "limit ?, 12";  
   sql = mysql.format(sql, params);
 
   console.log(sql);
@@ -136,12 +133,26 @@ router.get('/detail/scrap/:command', (req, res) => {
   }
 })
 
+// Detail-Review-Length 조회
+router.get('/detail/review/length', (req, res) => {
+  const {tour_seq} = req.query
+  const sql = 'select count(*) as length from te_tour_review where tour_seq=?';
+  conn.query(sql, tour_seq, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows[0]);
+  })
+});
+
 // Detail-Review 조회
 router.get('/detail/review', (req, res) => {
-  const {tour_seq} = req.query
+  const {tour_seq, start} = req.query
   console.log(`/tour/detail/review?tour_seq=${tour_seq}`);
-  const sql = 'select * from te_tour_review where tour_seq=?'
-  conn.query(sql, tour_seq, (err, rows) => {
+  let sql = 'select * from te_tour_review where tour_seq=? ';
+  sql += 'limit ?, 5';
+
+  const params = [tour_seq, parseInt(start)];
+  console.log(mysql.format(sql, params));
+  conn.query(sql, params, (err, rows) => {
     if(err) return console.log(err);
     res.send(rows);
   })

@@ -12,34 +12,36 @@ class TravelList extends React.Component {
       isLoaded: false,
       isFull: false,
       list: undefined,
-      start: 1,
+      start: 0,
       end: 12,
       total: undefined
     }
   }
   
   handleMoreRead = () => {
-    const {list, start, end, total} = this.state;
-    fetch(`http://localhost:3002/tour/list?start=${start}&end=${end}`)
-    .then(res => res.json())
-    .then(data =>  {
-      this.setState({
-        list: list.concat(data),
-        start: this.state.start + 12,
-        end: this.state.end + 12
-      });
-    })
-    // console.log(end);
-    if(total <= end) {
-      this.setState({
-        isFull: true
+    this.setState({
+      start: this.state.start + 12,
+      end: this.state.end + 12
+    }, () => {
+      const {list, start, end, total} = this.state;
+      fetch(`http://localhost:3002/tour/list?start=${start}&end=${end}`)
+      .then(res => res.json())
+      .then(data =>  {
+        this.setState({
+          list: list.concat(data)
+        });
       })
-    }
+      // console.log(end);
+      if(total <= end) {
+        this.setState({
+          isFull: true
+        })
+      }
+    })
   }
 
   componentDidMount() {
-    const {start, end} = this.state;
-    fetch(`http://localhost:3002/tour/list?start=${start}&end=${end}`)
+    fetch(`http://localhost:3002/tour/list?start=0&end=12`)
     .then(res => res.json())
     .then(data => this.setState({
         list: data,
@@ -49,30 +51,51 @@ class TravelList extends React.Component {
 
     fetch(`http://localhost:3002/tour/list/length`)
       .then(res => res.json())
-      .then(data => this.setState({
-        total: data.length
-      }));
-
-    this.setState({
-      start: start + 12,
-      end: end + 12
-    })
+      .then(data => {
+        this.setState({
+          total: data.length
+        }, () => {
+          const{total, end} = this.state;
+          if(total <= end) {
+            this.setState({
+              isFull: true
+            })
+          }
+        })
+      });
   }
 
-  // componentWillUpdate(nextProps, nextState){
-  //   const {end, total} = nextState;
-  //   console.log("componentWillUpdate: " + end + " " + total);
+  componentWillReceiveProps(nextProps) {
+    console.log(JSON.stringify(nextProps));
+    const {isSearched, search} = nextProps;
 
-  //   if(total <= end-12) {
-  //     this.setState({
-  //       isFull: true
-  //     })
-  //   }
-  // }
+    if(isSearched) {
+      fetch(`http://localhost:3002/tour/list?start=0&end=12&search=${search}`)
+        .then(res => res.json())
+        .then(data => this.setState({
+            list: data
+          })
+        );
+
+      fetch(`http://localhost:3002/tour/list/length?search=${search}`)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            total: data.length
+          }, () => {
+            const{total, end} = this.state;
+            if(total <= end) {
+              this.setState({
+                isFull: true
+              })
+            }
+          });
+        })
+    }
+  }
 
   render() {
     let { list, isLoaded, isFull } = this.state
-
 
     return(
       <div className='travel-list-wrapper'>
@@ -80,7 +103,7 @@ class TravelList extends React.Component {
           Travel <span>&</span>Joy Guide Tour
         </div>
         <div className='travel-lists'>
-          {isLoaded? list.map(tour => <TravelListObj key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
+          {isLoaded && list.map(tour => <TravelListObj key={tour.seq} tour={tour} />)}
         </div>
         <div className='more-btn' style={{textAlign: "center", marginBottom: 20 + "px"}}>
           {!isFull && <button type='button' id='more-btn' className='btn-m' onClick={this.handleMoreRead}>MORE</button>}

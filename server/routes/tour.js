@@ -15,29 +15,38 @@ router.use(bodyParser.json());
 
 // List 전체 길이
 router.get('/list/length', (req, res) => {
-  const sql = 'select count(*) as length from te_tour';
+  const {search} = req.query;
+  console.log("search : " + search);
+  let sql = 'select count(*) as length from te_tour';
+  if(search !== undefined) {
+    sql += ' where title like ? or category=?';
+    const params = [ `%${search}%`, search ];
+    sql = mysql.format(sql, params);
+  }
+
+  console.log(sql);
   conn.query(sql, (err, rows) => {
     if(err) return console.log("ERR!! " + err);
     res.send(rows[0]);
   })
 })
+
 // List 조회
 router.get('/list', function (req, res) {
   const {search, start, end} = req.query;
-
   console.log("search : " + search + ", start : " + start + " end : " + end);
-  // console.log(search);
-  let sql = "select @rownum := @rownum + 1 as rownum, tb.* " +
-    "from (select * from te_tour) as tb, (select @rownum := 0) as r " + 
-    "limit ?, ?";  
+  
   let params = [parseInt(start), parseInt(end)];
-  sql = mysql.format(sql, params);
-
+  let sql = "select @rownum := @rownum + 1 as rownum, tb.* "
   if(search !== undefined) {
-    sql = "select * from te_tour where title like ? or category=?";
-    const params = [ `%${search}%`, search ];
-    sql = mysql.format(sql, params);
+    sql += "from (select * from te_tour where title like ? or category=?) as tb, "
+    params = [ `%${search}%`, search ].concat(params);
+  }else {
+    sql += "from (select * from te_tour) as tb, "
   }
+  sql += "(select @rownum := 0) as r "
+  sql += "limit ?, ?";  
+  sql = mysql.format(sql, params);
 
   console.log(sql);
 
@@ -126,8 +135,6 @@ router.get('/detail/scrap/:command', (req, res) => {
     })
   }
 })
-
-// 스크랩 삭제
 
 // Detail 조회
 router.get('/detail/:seq', (req, res) => {

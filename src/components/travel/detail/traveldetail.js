@@ -25,7 +25,7 @@ class Tourdetail extends React.Component {
   componentDidMount() {
     let seq = this.props.match.params.seq;  // url path로 보내진 파라미터 받아옴.
 
-    fetch('http://localhost:3002/tour/detail/' + seq)
+    fetch(`http://localhost:3002/tour/detail?seq=${seq}`)
       .then( res => res.json() )
       .then( data => this.setState({
         isLoaded: true,
@@ -46,7 +46,7 @@ class Tourdetail extends React.Component {
             ( <Fragment>
                 <TravelInfo info={tour_info} />
                 <TravelCourse course={tour_des} />
-                <TravelReview />
+                <TravelReview tour_seq={tour_info.seq} />
               </Fragment>
             )
           }

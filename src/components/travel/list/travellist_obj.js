@@ -10,7 +10,7 @@ class TravelListObj extends React.Component {
 
   render() {
     const {seq, title, nickname, category, thumbnail, price} = this.props.tour
-    
+    console.log(seq);
     return(
       <div className='tour-list-obj card-container' data-seq={seq}
        onClick={this.goToDetail}>

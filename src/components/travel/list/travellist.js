@@ -96,7 +96,7 @@ class TravelList extends React.Component {
 
   render() {
     let { list, isLoaded, isFull } = this.state
-
+    console.log(list);
     return(
       <div className='travel-list-wrapper'>
         <div className='sub-title-text'>

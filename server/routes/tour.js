@@ -136,9 +136,20 @@ router.get('/detail/scrap/:command', (req, res) => {
   }
 })
 
+// Detail-Review 조회
+router.get('/detail/review', (req, res) => {
+  const {tour_seq} = req.query
+  console.log(`/tour/detail/review?tour_seq=${tour_seq}`);
+  const sql = 'select * from te_tour_review where tour_seq=?'
+  conn.query(sql, tour_seq, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows);
+  })
+})
+
 // Detail 조회
-router.get('/detail/:seq', (req, res) => {
-  const { seq } = req.params;
+router.get('/detail', (req, res) => {
+  const { seq } = req.query;
   console.log(seq);
 
   let sql1 = "select * from te_tour where seq=?; ";

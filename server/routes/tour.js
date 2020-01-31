@@ -13,11 +13,25 @@ dbconfig.conn_test(conn);
 
 router.use(bodyParser.json());
 
+// List 전체 길이
+router.get('/list/length', (req, res) => {
+  const sql = 'select count(*) as length from te_tour';
+  conn.query(sql, (err, rows) => {
+    if(err) return console.log("ERR!! " + err);
+    res.send(rows[0]);
+  })
+})
 // List 조회
 router.get('/list', function (req, res) {
-  const {search} = req.query;
+  const {search, start, end} = req.query;
+
+  console.log("search : " + search + ", start : " + start + " end : " + end);
   // console.log(search);
-  let sql = "select * from te_tour";
+  let sql = "select @rownum := @rownum + 1 as rownum, tb.* " +
+    "from (select * from te_tour) as tb, (select @rownum := 0) as r " + 
+    "limit ?, ?";  
+  let params = [parseInt(start), parseInt(end)];
+  sql = mysql.format(sql, params);
 
   if(search !== undefined) {
     sql = "select * from te_tour where title like ? or category=?";
@@ -29,10 +43,11 @@ router.get('/list', function (req, res) {
 
   conn.query(sql, function (err, rows) {
     if(err) return console.log("ERR!! " + err);
-   // console.log(rows);
+    // console.log(rows);
     res.send(rows);
   })
 })
+
 
 // Autocomplite
 router.get('/autocomplite', (req, res) => {

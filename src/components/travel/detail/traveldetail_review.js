@@ -12,7 +12,8 @@ class TravelReview extends React.Component {
       review_list: [],
       start: 0,
       total: undefined,
-      isFull: false
+      isFull: false,
+      average: 0
     }
   }
   componentDidMount() {
@@ -37,6 +38,12 @@ class TravelReview extends React.Component {
           })
         }
       }))
+    
+    fetch(`http://localhost:3002/tour/detail/review/average?tour_seq=${tour_seq}`)
+      .then(res => res.json())
+      .then(data => this.setState({
+        average: Math.round(data.avg * 10) / 10
+      }))
   }
 
   handleMoreRead = () => {
@@ -58,13 +65,18 @@ class TravelReview extends React.Component {
   }
 
   render() {
-    const {isLoaded, review_list, isFull} = this.state;
+    const {isLoaded, review_list, isFull, average} = this.state;
 
     return(
       <div className='travel-review-wrapper'>
         <div className='sub-title-text'><i className="fas fa-star"></i> Tour Review</div>
-        <div className='reivew-avg'>
-          평점평균...
+        <div className='review-avg-wrapper'>
+          <div className='review-avg'>
+            <div className='avg-number'>{average}점</div>
+            <div className='avg-star-inactive'>
+              <div className='avg-star-active' style={{width: (40 * average) + 'px'}}></div>
+            </div>
+          </div>
         </div>
         {isLoaded && review_list.map(review => <TravelReviewObj key={review.seq} review={review} />)}
         <div className='more-btn'>

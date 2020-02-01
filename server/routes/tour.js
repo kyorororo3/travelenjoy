@@ -132,6 +132,16 @@ router.get('/detail/scrap/:command', (req, res) => {
     })
   }
 })
+// Detail-Review-Average 조회
+router.get('/detail/review/average', (req, res) => {
+  const {tour_seq} = req.query;
+  const sql = 'select avg(score) as avg from te_tour_review where tour_seq=?';
+  conn.query(sql, tour_seq, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows[0]);
+  })
+})
+
 
 // Detail-Review-Length 조회
 router.get('/detail/review/length', (req, res) => {

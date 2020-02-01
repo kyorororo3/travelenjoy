@@ -198,11 +198,24 @@
   margin-bottom: 50px;
 }
 
-.reivew-avg{
+.review-avg-wrapper{
   width: 100%;
   height: 150px;
-  background: #d9e1e8;
+  /* background: #d9e1e8; */
+  border: 1px solid #d9e1e8;
   border-radius: 5px;
+}
+
+.review-avg {
+  margin: 47px 0;
+  text-align: center;
+}
+
+.avg-number {
+  font-weight: 900;
+  font-size: 35px;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .travel-review-obj {
@@ -251,4 +264,21 @@
   height: 150px;
   float: right;
   border: 1px dotted;
+}
+
+.avg-star-inactive {
+  width: 200px;
+  height: 40px;
+  background-image: url('../images/big-star-inactive.jpg');
+  display: inline-block;
+}
+
+.avg-star-active {
+  height: 40px;
+  background-image: url('../images/big-star-active.jpg');
+}
+
+.more-btn {
+  text-align: center;
+  margin-top: 20px;
 }

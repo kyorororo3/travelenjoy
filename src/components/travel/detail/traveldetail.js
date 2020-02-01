@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import TravelInfo from './traveldetail_info';
 import TravelSche from './traveldetail_sche';
 import TravelCourse from './traveldetail_course';
+import TravelReview from './traveldetail_review';
 
 // CSS
 import '../../../resources/travel/css/traveldetail.css';
@@ -24,7 +25,7 @@ class Tourdetail extends React.Component {
   componentDidMount() {
     let seq = this.props.match.params.seq;  // url path로 보내진 파라미터 받아옴.
 
-    fetch('http://localhost:3002/tour/detail/' + seq)
+    fetch(`http://localhost:3002/tour/detail?seq=${seq}`)
       .then( res => res.json() )
       .then( data => this.setState({
         isLoaded: true,
@@ -45,12 +46,13 @@ class Tourdetail extends React.Component {
             ( <Fragment>
                 <TravelInfo info={tour_info} />
                 <TravelCourse course={tour_des} />
+                <TravelReview tour_seq={tour_info.seq} />
               </Fragment>
             )
           }
         </div>
         <div className='travel-detail-reservation'>
-          {isLoaded && <TravelSche disabledDays={disabledDays} tour_seq={tour_info.seq} period={tour_info.period} max={tour_info.max_people}/> }
+          {isLoaded && <TravelSche disabledDays={disabledDays} tour_seq={tour_info.seq} max={tour_info.max_people}/> }
         </div>
       </div>
     )

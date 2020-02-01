@@ -13,26 +13,47 @@ dbconfig.conn_test(conn);
 
 router.use(bodyParser.json());
 
-// List 조회
-router.get('/list', function (req, res) {
+// List 전체 길이
+router.get('/list/length', (req, res) => {
   const {search} = req.query;
-  // console.log(search);
-  let sql = "select * from te_tour";
-
+  console.log("search : " + search);
+  let sql = 'select count(*) as length from te_tour';
   if(search !== undefined) {
-    sql = "select * from te_tour where title like ? or category=?";
+    sql += ' where title like ? or category=?';
     const params = [ `%${search}%`, search ];
     sql = mysql.format(sql, params);
   }
 
   console.log(sql);
+  conn.query(sql, (err, rows) => {
+    if(err) return console.log("ERR!! " + err);
+    res.send(rows[0]);
+  })
+})
+
+// List 조회
+router.get('/list', function (req, res) {
+  const {search, start} = req.query;
+  console.log("search : " + search + ", start : " + start);
+  
+  let params = [parseInt(start)];
+  let sql = "select * from te_tour ";
+  if(search !== undefined) {
+    sql += "where title like ? or category=? "
+    params = [ `%${search}%`, search ].concat(params);
+  }
+  sql += "limit ?, 12";  
+  sql = mysql.format(sql, params);
+
+  console.log(sql);
 
   conn.query(sql, function (err, rows) {
     if(err) return console.log("ERR!! " + err);
-   // console.log(rows);
+    // console.log(rows);
     res.send(rows);
   })
 })
+
 
 // Autocomplite
 router.get('/autocomplite', (req, res) => {
@@ -76,9 +97,80 @@ router.get('/location', (req, res) => {
 //   });
 // })
 
+// 스크랩 여부 확인 / 추가 / 삭제
+router.get('/detail/scrap/:command', (req, res) => {
+  const { command } = req.params;
+  const {email, tour_seq} = req.query;
+  console.log(email + " " + tour_seq);
+  
+  const params = [email, tour_seq];
+  if(command === 'isScrapped') {
+    const sql = 'select * from te_tour_scrap where email=? and tour_seq=?';
+
+    conn.query(sql, params, (err, result) => {
+      if(err) return console.log(err);
+      
+      let isScrapped = false;
+      if(result[0] !== undefined) {
+        isScrapped = true;
+      }
+      res.send({isScrapped: isScrapped});
+    })
+  }else if(command === 'insert') {
+    const sql = 'insert into te_tour_scrap values(?, ?)';
+
+    conn.query(sql, params, (err) => {
+      if(err) return console.log(err);
+      res.send();
+    })
+  }else if(command === 'delete') {
+    const sql = 'delete from te_tour_scrap where email=? and tour_seq=?';
+
+    conn.query(sql, params, (err) => {
+      if(err) return console.log(err);
+      res.send();
+    })
+  }
+})
+// Detail-Review-Average 조회
+router.get('/detail/review/average', (req, res) => {
+  const {tour_seq} = req.query;
+  const sql = 'select avg(score) as avg from te_tour_review where tour_seq=?';
+  conn.query(sql, tour_seq, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows[0]);
+  })
+})
+
+
+// Detail-Review-Length 조회
+router.get('/detail/review/length', (req, res) => {
+  const {tour_seq} = req.query
+  const sql = 'select count(*) as length from te_tour_review where tour_seq=?';
+  conn.query(sql, tour_seq, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows[0]);
+  })
+});
+
+// Detail-Review 조회
+router.get('/detail/review', (req, res) => {
+  const {tour_seq, start} = req.query
+  console.log(`/tour/detail/review?tour_seq=${tour_seq}`);
+  let sql = 'select * from te_tour_review where tour_seq=? ';
+  sql += 'limit ?, 5';
+
+  const params = [tour_seq, parseInt(start)];
+  console.log(mysql.format(sql, params));
+  conn.query(sql, params, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows);
+  })
+})
+
 // Detail 조회
-router.get('/detail/:seq', (req, res) => {
-  const { seq } = req.params;
+router.get('/detail', (req, res) => {
+  const { seq } = req.query;
   console.log(seq);
 
   let sql1 = "select * from te_tour where seq=?; ";
@@ -116,6 +208,7 @@ router.get('/detail/:seq', (req, res) => {
     });
   });
 
+  // 예약하기
   router.post('/reservation', (req, res) => {
     const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;
 
@@ -151,6 +244,7 @@ router.get('/detail/:seq', (req, res) => {
       res.send(count);
     })
   })
+
 
 
 });

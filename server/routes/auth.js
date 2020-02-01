@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const ejs = require('ejs');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -31,32 +33,25 @@ router.post('/emailAuth', async(req, res) => {
     let rnum = Math.random().toString().substr(2,6);
     setRandomNumber(rnum);
     let authNum = getRandomNumber();
-    let emailTemplete = '<div style="text-align: center;">'
-                        + '<p><img width="200px" src="cid:logoImg"></p>'
-                        + '<p>Travel&Joy 회원 가입을 위한 인증번호 입니다.</p>'
-                        + '<p>아래의 인증 번호를 입력하여 인증을 완료해주세요.</p>'
-                        + '<div style="margin: auto; width: 200px; border: 1px solid #d9e1e8; color: #2b90d9;">'
-                        + `<h2>${authNum}</h2>`
-                        + '</div></div>';
 
-    // 메일 작성
+   let emailTemplete;
+   ejs.renderFile('./src/resources/users/emailtemplete.ejs', {authCode : authNum}, function (err, data) {
+        if(err){console.log('ejs.renderFile err')}
+        emailTemplete = data;
+    });
+
     const mailOptions = {
-      from: 'mskkl770@gmail.com',
-      to: req.body.email,
-      subject: '[Travel&Joy] 회원가입 인증번호입니다.',
-      html : emailTemplete,
-      attachments: [{
-        filename: 'logo.png',
-        path: './src/resources/users/images/logo.png',
-        cid: 'logoImg'
-      }]
+        from: 'mskkl770@gmail.com',
+        to: req.body.email,
+        subject: '[Travel&Joy] 회원가입 인증번호입니다.',
+        html : emailTemplete
     };
     // 실제 메일 전송되는 부분
     await smtpTransport.sendMail(mailOptions, (error, info) =>{
         if(error){
-          res.json({msg:'err'});
+            res.json({msg:'err'});
         }else{
-          res.json({msg:'sucess'});
+            res.json({msg:'sucess'});
         }
         smtpTransport.close();
     });

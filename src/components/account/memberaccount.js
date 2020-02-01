@@ -258,11 +258,10 @@ class Member_Account extends React.Component {
 
     return(
       <div className="account-wrapper">
-        <h1>SIGN UP</h1>
+        <h2>회원가입</h2>
         <div className="account-form">
           <form name='accountFrm' onSubmit={this.handleSubmit} encType='multipart/form-data'>
            
-
             <p className='row-name'>이메일*</p>
             {emailChecking}
             <p><input type='text' className='input_normal' name='email' placeholder='이메일을 입력해주세요.'

@@ -14,6 +14,7 @@ class EmailAuthentication extends React.Component {
     getEmail = () => {
         let email = document.getElementsByName('email')[0].value.trim();
         this.sendEmail({email:email});
+        document.getElementById('afterSendEmail').style.display='block';
     }
 
     sendEmail = (email) => {
@@ -26,8 +27,7 @@ class EmailAuthentication extends React.Component {
         .then(data => {
             console.log(data.msg);
             if(data.msg === 'sucess'){
-                this.setState({isSend : true});
-                document.getElementById('afterSendEmail').style.display='block';
+                this.setState({isSend : true});               
             }else{
                 this.setState({isSend : false});
             }

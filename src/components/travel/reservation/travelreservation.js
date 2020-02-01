@@ -20,7 +20,8 @@ class TravelReservation extends React.Component {
     this.state = {
       isPaid: false,
       phone: undefined,
-      require: undefined
+      require: undefined,
+      reservation_number: undefined
     }
   }
 
@@ -54,7 +55,7 @@ class TravelReservation extends React.Component {
           alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
           this.props.history.push('/login');  // 로그인 페이지로 이동.
         }else if(user.email === email){ // 로그인 정보가 있을 경우
-          const data = {
+          const insert = {
             reservation_number: new Date().getTime() + "_" + tour_seq,
             tour_seq: tour_seq,
             email: email,
@@ -68,13 +69,14 @@ class TravelReservation extends React.Component {
             headers: {
               'Content-Type': 'application/json; charset=utf-8'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(insert)
           }) 
             .then(res => res.json())
             .then(data => {
               if(data.result === 'succ') {
                 alert('insert 성공!');
                 this.setState({
+                  reservation_number: insert.reservation_number,
                   isPaid: true
                 })
               }else if(data.result === 'fail') {
@@ -149,12 +151,12 @@ class TravelReservation extends React.Component {
   }
 
   render() {
-    const { tour_seq, selectedDays, person, email } = this.props.location.state;
+    const { tour_seq, selectedDays, person, email, reservation_number } = this.props.location.state;
     let { isPaid } = this.state;
 
     return(
       <div className='container'>
-        {isPaid? <TravelReservationComplete /> : 
+        {isPaid? <TravelReservationComplete number={reservation_number}/> : 
         <div className='travel-reservation-wrapper'>
           <TravelReservationInfo selectedDays={selectedDays} person={person} tour_seq={tour_seq} />
           <TravelReservationClient handlePhoneChange={this.handlePhoneChange} handleRequireChange={this.handleRequireChange}/>

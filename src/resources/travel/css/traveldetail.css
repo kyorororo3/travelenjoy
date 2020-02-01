@@ -201,13 +201,12 @@
 .review-avg-wrapper{
   width: 100%;
   height: 150px;
-  /* background: #d9e1e8; */
-  border: 1px solid #d9e1e8;
+  background: #d9e1e8;
   border-radius: 5px;
 }
 
 .review-avg {
-  margin: 47px 0;
+  padding: 47px 0;
   text-align: center;
 }
 
@@ -234,7 +233,10 @@
 
 .review-score {
   display: inline-block;
-  padding-left: 10px;
+  height: 20px;
+  background-image: url('../images/small-star-active.png');
+  margin-left: 10px;
+  transform: translateY(4px);
 }
 
 .review-date {
@@ -269,13 +271,14 @@
 .avg-star-inactive {
   width: 200px;
   height: 40px;
-  background-image: url('../images/big-star-inactive.jpg');
+  background-image: url('../images/big-star-inactive.png');
   display: inline-block;
+  transform: translateY(5px);
 }
 
 .avg-star-active {
   height: 40px;
-  background-image: url('../images/big-star-active.jpg');
+  background-image: url('../images/big-star-active.png');
 }
 
 .more-btn {

@@ -9,7 +9,7 @@ class TravelReviewObj extends React.Component {
       <div className='travel-review-obj'>
         <div className='review-nickname-score-date'>
           <div className='review-nickname'>{email}</div>
-          <div className='review-score'>{score}</div>
+          <div className='review-score' style={{width: (20 * score) + 'px'}}></div>
           <div className='review-date'>{wdate}</div>
         </div>
         <div className='review-title'>

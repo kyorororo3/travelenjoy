@@ -5,7 +5,7 @@ import {dateToString} from '../../../utils/Functions';
 class TravelReservationInfo extends React.Component {
 
   componentDidMount() {
-    fetch(`http://localhost:3002/tour/detail/${this.props.tour_seq}`)
+    fetch(`http://localhost:3002/tour/detail?seq=${this.props.tour_seq}`)
       .then(res => res.json())
       .then(data => {
         const info = data.tour_info;
@@ -20,11 +20,6 @@ class TravelReservationInfo extends React.Component {
 
   render() {
     const { selectedDays, person } = this.props;
-    // const startDay = selectedDays[0];
-    // const endDay = selectedDays[selectedDays.length - 1];
-
-    // console.log(startDay);
-    // console.log(endDay);
 
     return(
       <div className='travel-reservation-info panel-l'>

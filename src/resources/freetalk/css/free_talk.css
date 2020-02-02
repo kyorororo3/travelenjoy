@@ -13,3 +13,11 @@
     top: 50%;
     font-size: 20px;
 }
+.modal-author-profile{
+    height: 30px;
+    font-size: 20px;
+}
+.modal-author-profile .media{
+    margin: 15px 15px 15px 15px;
+    vertical-align: middle;
+}

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const fs = require('fs');
 const ejs = require('ejs');
 
 router.use(bodyParser.json());

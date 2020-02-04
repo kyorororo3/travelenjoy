@@ -6,7 +6,7 @@ class EmailAuthentication extends React.Component {
         super(props);
         this.state = {
             isSend : false,
-            chekcCorrect : ''
+            checkCorrect : ''
         }
     }
 
@@ -47,11 +47,11 @@ class EmailAuthentication extends React.Component {
         .then(res => res.json())
         .then(data => {
             if(data.msg == 'ok'){
-                this.setState({chekcCorrect : true})
+                this.setState({checkCorrect : true})
                 document.getElementById('afterSendEmail').style.display='none';
                 this.props.emailAuth(true);
             }else{
-                this.setState({chekcCorrect : false})
+                this.setState({checkCorrect : false})
                 this.props.emailAuth(false);
             }
         })
@@ -59,9 +59,9 @@ class EmailAuthentication extends React.Component {
 
     render(){ 
         let resultAuth = null;
-        if(this.state.chekcCorrect){
+        if(this.state.checkCorrect){
             resultAuth = <div className='authCode correct'><i className="far fa-check-circle"/>&nbsp;인증이 완료되었습니다.</div>
-        }else if(this.state.chekcCorrect !== '' && !this.state.chekcCorrect){
+        }else if(this.state.checkCorrect !== '' && !this.state.checkCorrect){
             resultAuth = <div className='authCode incorrect'>인증번호가 일치하지 않습니다.</div>
         }
         return(

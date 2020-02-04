@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+//https://github.com/SinghDigamber/react-image-preview
+
 export default class MultipleImageUploader extends Component {
 
     fileObj = [];

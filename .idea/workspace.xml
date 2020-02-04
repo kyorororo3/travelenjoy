@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
-      <change afterPath="$PROJECT_DIR$/src/components/freetalk/TalkWriteBtn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/freetalk/uploader/MultipleImageUploader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkWriteBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkWriteBtn.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,7 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1W3seBO6Ul5BCOhK8TQWYQJ4doL" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -73,13 +73,13 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\public\uploads" />
-      <recent name="C:\Workspace\travelenjoy\src\app\freetalk" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\src\resources\freetalk\image\talk" />
       <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\src\components\freetalk" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\public\uploads" />
+      <recent name="C:\Workspace\travelenjoy\src\app\freetalk" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -148,6 +148,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="289" y="0" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1579180730164" />
+    <state x="1196" y="118" width="1209" height="851" key="DiffContextDialog" timestamp="1580825141789">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1196" y="118" width="1209" height="851" key="DiffContextDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580825141789" />
     <state width="1058" height="265" key="GridCell.Tab.0.bottom" timestamp="1580214998229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -168,10 +172,10 @@
     </state>
     <state width="930" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578490306947" />
     <state width="1058" height="265" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580214998229" />
-    <state x="1527" y="431" key="RollbackChangesDialog" timestamp="1580089194135">
+    <state x="1527" y="431" key="RollbackChangesDialog" timestamp="1580825120031">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1527" y="431" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580089194135" />
+    <state x="1527" y="431" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580825120031" />
     <state x="196" y="110" key="SettingsEditor" timestamp="1578491646647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

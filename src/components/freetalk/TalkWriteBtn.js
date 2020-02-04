@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Media, Modal} from 'react-bootstrap';
+import MultipleImageUploader from './uploader/MultipleImageUploader';
 
 //게시물 작성버튼
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
@@ -51,7 +52,8 @@ class TalkWriteBtn extends Component {
                     <Media.Body>
                         <div className="talk-write-body-wrap">
                             <div className="write-file">
-
+                                이미지 업로더
+                                <MultipleImageUploader/>
                             </div>
                             <div className="write-content">
 

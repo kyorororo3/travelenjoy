@@ -6,7 +6,6 @@ class EmailAuthentication extends React.Component {
         super(props);
         this.state = {
             isSend : false,
-            num : '',
             chekcCorrect : ''
         }
     }

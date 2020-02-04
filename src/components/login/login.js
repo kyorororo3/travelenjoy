@@ -39,18 +39,19 @@ class Login extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
   //  console.log(event.target.email.value, event.target.pwd.value);
+    let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     if(event.target.email.value.trim() === ''){
       alert('이메일을 입력해 주세요!')
       document.getElementsByName('email')[0].focus();
     }else if(event.target.pwd.value.trim() === ''){
       alert('비밀번호를 입력해 주세요!')
       document.getElementsByName('pwd')[0].focus();
-    }else{
-      // let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-      // if(!emailCheck.test(event.target.email.value.trim())){
-      //   alert('이메일 형식을 지켜주세요');
-      //   document.getElementsByName('email')[0].focus();
-      // }
+    }
+    // else if(!emailCheck.test(event.target.email.value.trim())){      
+    //     alert('이메일 형식을 지켜주세요');
+    //     document.getElementsByName('email')[0].focus();
+    // }
+    else{
       this.login({
         email: event.target.email.value.trim(),
         pwd: event.target.pwd.value.trim()
@@ -84,7 +85,6 @@ class Login extends React.Component {
 
   render() {
     
-
     if(this.state.users.email !== undefined) {
       if(this.state.users.auth === 1){
         return <Redirect to='/guide/main' />
@@ -118,11 +118,11 @@ class Login extends React.Component {
             </a>
 
             <a className='social-login kakao' href='http://localhost:3002/users/login/kakao'>
-              <img className='kakao-icon' src={require('../../resources/users/css/images/kakao.png')} />&nbsp;&nbsp;카카오 로그인
+              <img className='kakao-icon' src={require('../../resources/users/images/kakao.png')} />&nbsp;&nbsp;카카오 로그인
             </a>
 
             <a className='social-login naver' href='http://localhost:3002/users/login/naver'>
-              <img className='naver-icon' src={require('../../resources/users/css/images/naver.png')} />&nbsp;&nbsp;네이버 로그인
+              <img className='naver-icon' src={require('../../resources/users/images/naver.png')} />&nbsp;&nbsp;네이버 로그인
             </a>
           </div>
         </div>

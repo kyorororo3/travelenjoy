@@ -56,6 +56,54 @@
   padding: 20px 0;
 }
 
+.travel-info-guide {
+  padding: 20px 0;
+}
+
+.guide-img-name {
+  width: 100%;
+  height: 60px;
+}
+
+.guide-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: 1px solid #9baec8;
+  margin-right: 15px;
+  float: left;
+}
+
+.guide-img img{
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+}
+
+.guide-name {
+  font-size: 18px;
+  font-weight: 600;
+  float: left;
+  padding-top: 15px
+}
+
+.question-btn-wrapper {
+  width: 150px;
+  float: right;
+  height: 40px;
+  margin: 10px 0;
+}
+
+.question-btn-wrapper button {
+  width: inherit;
+  height: inherit;
+  background-color: #2b90d9;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  border: 0;
+}
+
 .travel-schedule-input {
   padding-bottom: 20px;
 }

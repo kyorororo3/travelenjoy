@@ -2,6 +2,8 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import  '../../resources/users/css/account.css';
 
+import EmailAuthentication from '../account/emailauthentication';
+
 class Member_Account extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ class Member_Account extends React.Component {
       signUpStatus : false,
       checkEmailFormat : '',
       checkEmailDuplicate : '',
+      checkEmailAuth : '',
       checkPwdFormat: '',
       input_pwd : '',
       checkPwdSame : '',
@@ -53,6 +56,11 @@ class Member_Account extends React.Component {
         else if(data.nicknameCheck === 'no'){this.setState({checkNicknameDuplicate : true});}
       }
     })
+  }
+
+  // 이메일 인증 마쳤는지
+  isClearAuth = (result) => {
+    this.setState({checkEmailAuth : result});
   }
 
   // 비밀번호 형식확인
@@ -108,7 +116,6 @@ class Member_Account extends React.Component {
     this.setState({input_phone : str})
   }
 
-
   // 이미지 업로드 후 미리보기용 URL획득
   handleFileOnChange = (event) => {
     event.preventDefault();
@@ -131,6 +138,9 @@ class Member_Account extends React.Component {
     if(event.target.email.value === ''){
       alert('이메일을 입력해주세요!');
       document.getElementsByName('email')[0].focus();
+    }else if(!this.state.checkEmailAuth){
+      alert('이메일을 인증해주세요!');
+      document.getElementsByClassName('sendEmail-btn')[0].focus();
     }else if(event.target.pwd.value === ''){
       alert('비밀번호를 입력해주세요!');
       document.getElementsByName('pwd')[0].focus();
@@ -143,7 +153,7 @@ class Member_Account extends React.Component {
     }
 
     let necessary_field = false;
-    if(this.state.checkEmailFormat && !this.state.checkNicknameDuplicate 
+    if(this.state.checkEmailFormat && !this.state.checkNicknameDuplicate && this.state.checkEmailAuth
         && this.state.checkPwdFormat && this.state.checkPwdSame){     
       necessary_field = true;
     }else{
@@ -248,16 +258,19 @@ class Member_Account extends React.Component {
 
     return(
       <div className="account-wrapper">
-        <h1>SIGN UP</h1>
+        <h2>회원가입</h2>
         <div className="account-form">
           <form name='accountFrm' onSubmit={this.handleSubmit} encType='multipart/form-data'>
            
-
             <p className='row-name'>이메일*</p>
             {emailChecking}
             <p><input type='text' className='input_normal' name='email' placeholder='이메일을 입력해주세요.'
                 onChange={this.handleCheckEmail} /></p>
             
+            <p className='row-name'>이메일 인증*</p>
+            <EmailAuthentication 
+              isAble={!this.state.checkEmailDuplicate && this.state.checkEmailFormat ? true:false}
+              emailAuth={this.isClearAuth} />
 
             {pwdChecking}
             <p className='row-name'>비밀번호*</p>
@@ -282,7 +295,7 @@ class Member_Account extends React.Component {
                 value={this.state.input_phone} onChange={this.handleCheckPhone} maxLength='11'/></p>
 
             <p className='row-name'>프로필 사진</p>
-            <p><input type='file' accept='image/jpg,impge/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange} /></p>
+            <p><input type='file' accept='image/jpg,image/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange} /></p>
             {profile_preview}
             <p><input type='submit' className='accountBtn' value='회원가입'></input></p>
           </form>

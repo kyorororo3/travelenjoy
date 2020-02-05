@@ -20,6 +20,8 @@ import Member_Account from './components/account/memberaccount';
 import Guide_Account from './components/account/guideaccount';
 import Guide_Main from './components/guide/guide_main';
 import Guide_Make from './components/guide/guide_make';
+import Guide_Tour_List from './components/guide/guide_tour_list';
+import Guide_List_Detail from './components/guide/guide_list_detail';
 
 
 import MypageHome from './components/mypage/Mypage';
@@ -37,22 +39,24 @@ class AppTest extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        if(data.email !== undefined)
+        if(data.email !== undefined){
           this.setState({isLogin: true})
+        }else{
+          this.setState({isLogin: false})
         }
-      );
+      });
   }
  
   isAuth = (result) => {
     this.setState({isLogin: result})
-    console.log('App.js ' , this.state.isLogin);
   }
 
   render() {
+    console.log('App.js ' , this.state.isLogin);
     return(
       <div className="app-wrapper">
         <Router>
-          <Header isAuth={this.state.isLogin} getLogout = {this.isAuth}/>
+          <Header isAuth={this.state.isLogin} getLogout={this.isAuth}/>
           <div className="contents-wrapper">        
             <Switch>  {/* Switch: 불필요한 트래픽 방지. 해당 컴포넌트만 불러오게 해준다. */}
               <Route exact path='/' component={Home} />
@@ -70,6 +74,8 @@ class AppTest extends React.Component {
               <Route exact path='/mypage' component={MypageHome}/>
               <Route path='/guide/main' component={Guide_Main}></Route>
               <Route path='/guide/make' component={Guide_Make}></Route>
+              <Route path='/guide/list' component={Guide_Tour_List}></Route>
+              <Route path='/guide/list/detail/:seq' component={Guide_List_Detail}></Route>
             </Switch>
           </div>
         </Router>

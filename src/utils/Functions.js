@@ -24,3 +24,4 @@ export function stringToDate(str) {
   const ymdArr = str.split('-');
   return new Date(ymdArr[0], ymdArr[1] - 1, ymdArr[2]);
 }
+

@@ -7,7 +7,9 @@ class Login extends React.Component {
     super(props);
     this.state = {
       users: [],
-      capsLock : false
+      capsLock : false,
+      userEmail : '',
+      userPwd : ''
     }
   }
 
@@ -39,18 +41,19 @@ class Login extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
   //  console.log(event.target.email.value, event.target.pwd.value);
+    let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     if(event.target.email.value.trim() === ''){
       alert('이메일을 입력해 주세요!')
       document.getElementsByName('email')[0].focus();
     }else if(event.target.pwd.value.trim() === ''){
       alert('비밀번호를 입력해 주세요!')
       document.getElementsByName('pwd')[0].focus();
-    }else{
-      // let emailCheck = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-      // if(!emailCheck.test(event.target.email.value.trim())){
-      //   alert('이메일 형식을 지켜주세요');
-      //   document.getElementsByName('email')[0].focus();
-      // }
+    }
+    // else if(!emailCheck.test(event.target.email.value.trim())){      
+    //     alert('이메일 형식을 지켜주세요');
+    //     document.getElementsByName('email')[0].focus();
+    // }
+    else{
       this.login({
         email: event.target.email.value.trim(),
         pwd: event.target.pwd.value.trim()
@@ -73,8 +76,9 @@ class Login extends React.Component {
     .then(data => {
       console.log('App.js login .then ' , data);
       if(data.email === undefined){
-        alert('login fail!');
+        alert('정확한 이메일과 비밀번호를 입력해주세요.');
         this.props.getLogin(false);
+        document.getElementsByName('pwd')[0].value = '';
       }else{
         this.setState({ users : data });   
         this.props.getLogin(true);
@@ -82,9 +86,10 @@ class Login extends React.Component {
     })
   }
 
+
+
   render() {
     
-
     if(this.state.users.email !== undefined) {
       if(this.state.users.auth === 1){
         return <Redirect to='/guide/main' />
@@ -104,11 +109,11 @@ class Login extends React.Component {
          <p className='login-logo'><Link to='/'>Travel <span>&</span>joy</Link></p>
           <div className='login-form'>
             <form onSubmit={this.handleSubmit}>
-              <p><input type='text' className='input_email' name='email' placeholder='이메일을 입력해주세요.' autoComplete='true'/></p>
-              <p><input type='password' className='input_pwd' name='pwd' placeholder='비밀번호를 입력해주세요.' autoComplete='true'
-                  onKeyUp={this.handleCapsLock} /></p>
+              <input type='text' className='login email' name='email' placeholder='이메일을 입력해주세요.' autoComplete='true'/>
+              <input type='password' className='login pwd' name='pwd' placeholder='비밀번호를 입력해주세요.' autoComplete='true'
+                  onKeyUp={this.handleCapsLock} />
               {CheckCapsLock}
-              <p><input type='submit' className='loginBtn' value='LOGIN'/></p>
+              <input type='submit' className='login loginBtn' value='LOGIN'/>
             </form>           
           </div>
           <div className='account-text'>아직 Travel&Joy회원이 아니신가요?<Link className='accountLink' to='/account'>회원가입</Link></div>
@@ -118,11 +123,11 @@ class Login extends React.Component {
             </a>
 
             <a className='social-login kakao' href='http://localhost:3002/users/login/kakao'>
-              <img className='kakao-icon' src={require('../../resources/users/css/images/kakao.png')} />&nbsp;&nbsp;카카오 로그인
+              <img className='kakao-icon' src={require('../../resources/users/images/kakao.png')} />&nbsp;&nbsp;카카오 로그인
             </a>
 
             <a className='social-login naver' href='http://localhost:3002/users/login/naver'>
-              <img className='naver-icon' src={require('../../resources/users/css/images/naver.png')} />&nbsp;&nbsp;네이버 로그인
+              <img className='naver-icon' src={require('../../resources/users/images/naver.png')} />&nbsp;&nbsp;네이버 로그인
             </a>
           </div>
         </div>

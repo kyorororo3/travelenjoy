@@ -13,7 +13,7 @@ class Account extends React.Component {
 
           <div className='account-type-div'>
             <Link to='/account/member' className='account-type-Link'>
-              <img className='account-type-img' src={require('../../resources/users/css/images/high-five.png')} />
+              <img className='account-type-img' src={require('../../resources/users/images/high-five.png')} />
               <div className='account-type-msg-wrapper'>
                 <span className='account-type-msg-1'>Travel&Joy와 함께하세요!</span>
                 <span className='account-type-msg-2'>일반회원 가입</span>
@@ -23,7 +23,7 @@ class Account extends React.Component {
 
           <div className='account-type-div'>
             <Link to='/account/guide' className='account-type-Link'>
-              <img className='account-type-img' src={require('../../resources/users/css/images/partnership.png')} />
+              <img className='account-type-img' src={require('../../resources/users/images/partnership.png')} />
               <div className='account-type-msg-wrapper'>
                 <span className='account-type-msg-1'>Travel&Joy의 파트너가 되어보세요!</span>
                 <span className='account-type-msg-2'>파트너회원 가입</span> 

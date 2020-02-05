@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import TravelInfoGuide from './traveldeail_info_guide';
 
 class TravelInfo extends React.Component {
 
@@ -89,6 +90,7 @@ class TravelInfo extends React.Component {
           참여인원 : {min_people} ~ {max_people}명 <br/><br/>
           <div className='description-content'></div>
         </div>
+        <TravelInfoGuide email={email} />
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+
 import  '../../resources/common/css/header.css';
 
 
@@ -14,6 +15,7 @@ class Header extends React.Component {
     .then(data => {
       alert(data.msg);
       this.props.getLogout(false);
+      this.props.history.push('/');
     });
   }
 
@@ -64,4 +66,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

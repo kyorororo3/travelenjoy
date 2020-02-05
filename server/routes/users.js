@@ -95,6 +95,7 @@ router.get('/login/naver/callback', function (req, res, next) {
 
 // 로그아웃
 router.post('/logout', function(req, res) {
+  console.log('로그아웃로그아웃로그아웃')
   req.logOut();
   res.send({msg:'로그아웃'})
 });

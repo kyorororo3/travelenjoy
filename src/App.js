@@ -37,22 +37,24 @@ class AppTest extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        if(data.email !== undefined)
+        if(data.email !== undefined){
           this.setState({isLogin: true})
+        }else{
+          this.setState({isLogin: false})
         }
-      );
+      });
   }
  
   isAuth = (result) => {
     this.setState({isLogin: result})
-    console.log('App.js ' , this.state.isLogin);
   }
 
   render() {
+    console.log('App.js ' , this.state.isLogin);
     return(
       <div className="app-wrapper">
         <Router>
-          <Header isAuth={this.state.isLogin} getLogout = {this.isAuth}/>
+          <Header isAuth={this.state.isLogin} getLogout={this.isAuth}/>
           <div className="contents-wrapper">        
             <Switch>  {/* Switch: 불필요한 트래픽 방지. 해당 컴포넌트만 불러오게 해준다. */}
               <Route exact path='/' component={Home} />

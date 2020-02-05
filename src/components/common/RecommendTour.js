@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
 class RecommendTour extends React.Component {
     constructor(props){
@@ -10,6 +11,7 @@ class RecommendTour extends React.Component {
         }
     }
     componentDidMount() {
+        console.log('RecommendTour componentDidMount() 실행');
         fetch('http://localhost:3002/users/getUser',{
           credentials: 'include'
         })
@@ -21,35 +23,35 @@ class RecommendTour extends React.Component {
                     fetch(`http://localhost:3002/main/isScrap?email=${this.state.loginEmail}&seq=${this.props.tour.seq}`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                      //  console.log(data);
                         this.setState({isScrap : data.msg})
                     })
                 })
             }else{
-                this.setState({isLogin: false})
+                this.setState({isLogin: false, loginEmail : '', isScrap : false})
             }
         });
     }
     
     handleScrap = (event) => {
         event.preventDefault();
-        console.log(this.props.tour.seq);
         if(!this.state.isLogin){
             alert('로그인이 필요합니다.');
+            this.props.history.push('/login');
         }else{
             if(this.state.isScrap){
                 //스크랩 해제
                 fetch(`http://localhost:3002/main/deletetourScrap?email=${this.state.loginEmail}&seq=${this.props.tour.seq}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                 //   console.log(data);
                     this.setState({isScrap : data.msg})
                 })
             }else{
                 fetch(`http://localhost:3002/main/tourScrap?email=${this.state.loginEmail}&seq=${this.props.tour.seq}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                  //  console.log(data);
                     this.setState({isScrap : data.msg})
                 })
             }
@@ -61,6 +63,7 @@ class RecommendTour extends React.Component {
     }
 
     render() {
+        console.log('RecommendTour Render()')
         let {category, title, price, score} = this.props.tour;
        
         return(      
@@ -82,4 +85,4 @@ class RecommendTour extends React.Component {
         )
      }
 }
-export default RecommendTour;
+export default withRouter(RecommendTour);

@@ -88,7 +88,7 @@ class Home extends React.Component {
           <div className='recommendlist-wrapper'>
           <div className='home-subtitle'>이런 여행 어떠세요? 👀</div>
             <div id='recommendlist-row-tour'className='recommendlist-row'>
-              {tourlist.map(tour => <RecommendTour key={tour.seq} tour={tour} />)}
+              {tourlist.map(tour => <RecommendTour  key={tour.seq} tour={tour} />)}
             </div>
 
             <div className='recommendtourbtn prev' onClick={this.prevlist}>

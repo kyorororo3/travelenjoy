@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Media, Modal} from 'react-bootstrap';
 import MultipleImageUploader from './uploader/MultipleImageUploader';
+import '../../resources/freetalk/css/free_talk_write.css'
 
 //게시물 작성버튼
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
@@ -34,13 +35,14 @@ class TalkWriteBtn extends Component {
             display: "inline-block",
             position: "sticky",
             top: "100px",
-            left: "85%",
-            right: "100px",
-            bottom: "15%",
-            background: "white",
+            left: "82%",
+            right: "130px",
+            bottom: "5%",
+            background: "rgba(255, 255, 255, 0.8)",
             width: "150px",
-            height: "150px",
+            height: "125px",
             borderRadius: "100px",
+            border: "0.1px solid",
             textAlign: "center",
             verticalAlign: "middle",
             paddingTop: "22px",
@@ -48,7 +50,7 @@ class TalkWriteBtn extends Component {
         }
         return (
             <div className="talk-write-wrap" onClick={this.handleOnClickTalk}>
-                <Modal show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
+                <Modal id="talk-write-modal" show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
                     <Media.Body>
                         <div className="talk-write-body-wrap">
                             <div className="write-file">

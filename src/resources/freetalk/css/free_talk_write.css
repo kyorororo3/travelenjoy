@@ -1,0 +1,25 @@
+#btnFileSubmit{
+    width: 100%;
+}
+#talk-write-modal .media-body{
+}
+#talk-write-modal .modal-content{
+    width: 700px;
+    height: 600px;
+    margin: auto;
+    left: -15%;
+    overflow: auto !important;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+#talk-write-modal .modal-content div{
+    width: 97%;
+    margin: auto;
+    left: -2%;
+}
+
+.multi-preview img{
+    height: 100px;
+    width: auto;
+    margin: 5px;
+}

@@ -61,7 +61,7 @@ class Talk extends Component {
     render() {
         return (
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
-                <Modal show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
+                <Modal id="talk-modal-wrap" show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
                     <Row><Col>
                         <div className="modal-author-profile">
                             <div className="modal-body-profile-detail">

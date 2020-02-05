@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer({dest:'public/uploads/'})
 
+router.use(express.static("/public/uploads"));
 router.use(bodyParser.json());
 
 const mysql = require('mysql');
@@ -95,5 +98,13 @@ router.post('/free/save', function (req, res, next) {
             resp: "ok"
         });
 });
+
+router.post('/free/save/image',upload.single('file'), function(req, res, next) {
+    console.log('img save body : ' + JSON.stringify(req.body));
+})
+
+router.post('/free/save/images',upload.array('files'), function(req, res, next) {
+    console.log('img save body : ' + JSON.stringify(req.body));
+})
 
 module.exports = router

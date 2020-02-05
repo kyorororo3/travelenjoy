@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 
 class TravelSearch extends React.Component {
   
@@ -43,6 +42,25 @@ class TravelSearch extends React.Component {
     }
   }
 
+  handleSearch = (e) => {
+    e.preventDefault();
+    const searched_location = e.target.location.value;
+    // alert(searched_location);
+
+    fetch(`http://localhost:3002/tour/location?loc=${searched_location}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if(data.isLoc) {
+          // alert('/city로 이동합니다.');
+          this.props.history.push(`/travel/city?category=${searched_location}`);
+        }else if(!data.isLoc) {
+          // alert('검색 결과 리스트를 갱신합니다.');
+          this.props.isSearched(searched_location);
+        }
+      })
+  }
+
   render() {
     return(
       <div className='tour-search-wrapper'>
@@ -51,7 +69,7 @@ class TravelSearch extends React.Component {
         </div>
         <div className='tour-search-form-wrapper'>
           <form className='tour-search-form' action='/' autoComplete='off' 
-            onSubmit={this.props.handleSearch}>
+            onSubmit={this.handleSearch}>
             <input className='tour-search-input' type='text' name='location' 
              placeholder='여행지를 입력해주세요' 
              onChange={this.handleAutocomplete} 
@@ -69,4 +87,4 @@ class TravelSearch extends React.Component {
   }
 }
 
-export default withRouter(TravelSearch)
+export default TravelSearch

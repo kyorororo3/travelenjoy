@@ -9,13 +9,15 @@ class TravelListObj extends React.Component {
   }
 
   render() {
-    const {seq, title, nickname, category, thumbnail, min_people, max_people, price} = this.props.tour
-
+    const {seq, title, nickname, category, thumbnail, price} = this.props.tour;
+    
     return(
       <div className='tour-list-obj card-container' data-seq={seq}
        onClick={this.goToDetail}>
         <div className='tour-thumbnail' data-seq={seq}>
-          <div>썸네일 자리</div>
+          <img data-seq={seq}
+           alt='이미지없다'
+           src={require('../../../resources/travel/images/nyang.jpg')}/>
         </div>
         <div className='tour-infos' data-seq={seq}>
           <div className='rows tour-category' data-seq={seq}>[{category}]</div>

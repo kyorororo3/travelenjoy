@@ -1,28 +1,11 @@
 import React from 'react';
 
-// Date를 String으로 변환시켜주는 함수 (yyyy/mm/dd)
-function dateToString(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+import {dateToString} from '../../../utils/Functions';
 
-  const dateStr = year + "/" + two(month) + "/" + two(day);
-
-  return dateStr;
-}
-// 자릿수가 하나일 경우 앞에 0을 붙여줌
-function two(str) {
-  str = str + "";
-
-  if(str.length === 1) {
-    str = "0" + str;
-  }
-  return str;
-}
 class TravelReservationInfo extends React.Component {
 
   componentDidMount() {
-    fetch(`http://localhost:3002/tour/detail/${this.props.tour_seq}`)
+    fetch(`http://localhost:3002/tour/detail?seq=${this.props.tour_seq}`)
       .then(res => res.json())
       .then(data => {
         const info = data.tour_info;
@@ -37,8 +20,6 @@ class TravelReservationInfo extends React.Component {
 
   render() {
     const { selectedDays, person } = this.props;
-    const startDay = selectedDays[0];
-    const endDay = selectedDays[selectedDays.length - 1];
 
     return(
       <div className='travel-reservation-info panel-l'>
@@ -56,7 +37,7 @@ class TravelReservationInfo extends React.Component {
           <div className='selected-date reservation-row'>
             <span className='label'>예약일</span>
             <span className='data'>
-              {startDay === endDay? dateToString(startDay):dateToString(startDay) - dateToString(endDay)}
+              {dateToString(selectedDays[0])}
             </span>
           </div>
           <div className='selected-people reservation-row'>

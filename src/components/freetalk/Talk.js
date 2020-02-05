@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, Row, Col} from 'react-bootstrap';
+import {Modal, Button, Row, Col, Media} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
@@ -15,7 +15,18 @@ class Talk extends Component {
         images: [],
         likes: 0,
         comments: 0,
-        showModal: false
+        showModal: false,
+        author: {
+            email: 'admin',
+            pwd: 'admin',
+            provider: null,
+            provider_id: null,
+            name: 'admin',
+            nickname: 'admin',
+            profile_img: 'default_profile_image.jpg',
+            phone: 1111,
+            auth:3
+        }
     }
 
     componentDidMount() {
@@ -29,6 +40,9 @@ class Talk extends Component {
         fetch('http://localhost:3002/freetalk/list/comments/count?seq=' + this.props.seq)
             .then(res => res.json())
             .then(res => this.setState({comments: res.comments}))
+        fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.email + '&nickname=' + this.props.nickname)
+            .then(res => res.json())
+            .then(res => this.setState({author: res.author}))
     }
 
     _callApi = async () => {
@@ -48,26 +62,44 @@ class Talk extends Component {
         return (
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
                 <Modal show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
-                    <Row noGutters="true">
-                       <Col>
-                            <div className="modal-image-wrap">
-                                <div className="modal-image-aligner">
-                                    <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
-                                </div>
+                    <Row><Col>
+                        <div className="modal-author-profile">
+                            <div className="modal-body-profile-detail">
+                                <Media>
+                                    <a href="#">
+                                        <img
+                                            width={32}
+                                            height={32}
+                                            src='https://logodix.com/logo/1707081.png'
+                                            alt='profile image'
+                                            onError={(e)=>{e.target.onerror = null; e.target.src=require('../../resources/mypage/images/profile_img.jpg')}}
+                                        />
+                                    </a>
+                                    <Media.Body>
+                                        <a href="#">{this.state.author.nickname}</a>
+                                    </Media.Body>
+                                </Media>
                             </div>
-                       </Col>
-                        <Col>
-                            <div className="modal-content-wrap">
-                                <Modal.Body>
-                                    <TalkModalBody
-                                        talkSeq={this.props.seq}
-                                        email={this.props.email}
-                                        nickname={this.props.nickname}
-                                    />
-                                </Modal.Body>
+                        </div>
+                        <div className="modal-image-wrap">
+                            <div className="modal-image-aligner">
+                                <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
                             </div>
-                        </Col>
-                    </Row>
+                        </div>
+                    </Col></Row>
+                    <Row><Col>
+                        <div className="modal-content-wrap">
+                            <Modal.Body>
+                                <TalkModalBody
+                                    talkSeq={this.props.seq}
+                                    email={this.props.email}
+                                    nickname={this.props.nickname}
+                                    regDate={this.props.reg_date}
+                                    likes={this.state.likes}
+                                />
+                            </Modal.Body>
+                        </div>
+                    </Col></Row>
                 </Modal>
                 <div className="talk-image-wrap" onClick={this.handleShow}>
                     <div className={"talk-image-description"}>

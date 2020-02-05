@@ -1,60 +1,81 @@
 .modal-content {
-    min-width: 800px;
-    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 20%;
 }
 
 .modal-image-wrap {
-
+    width: 100%;
+    height: auto;
 }
 .modal-image-aligner {
-    margin: auto;
-    align-items: center;
+    text-align: center;
 }
 .modal-image-wrap img{
-    min-width: 400px;
-    max-width: 100%;
-    min-height: 100%;
-    /*min-height: 350px;*/
-    /*width: auto;*/
-    -ms-interpolation-mode: bicubic;
-}
-.modal-content-wrap{
+    width: auto;
     height: 100%;
+    margin: 15px;
+}
+
+.modal-content-wrap{
+
 }
 .modal-content-wrap .modal-body{
-    padding: 0px;
-}
-.modal-body-profile {
-    padding: 10px;
-    height: 55px;
-}
-.modal-body-profile div {
-    height: 32px;
-    margin: auto;
-    float: top;
-}
-.modal-body-profile-detail {
-    float: left;
-    width: 80%
-}
-.modal-body-profile-function {
-    float:right;
-    width: 20%;
+
 }
 
 .modal-body-comments {
-    padding: 10px;
-    width: 100%;
+    height: 270px;
     overflow: auto !important;
-    height: 300px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.modal-body-comments::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+.modal-body-comments .comment-body{
+    font-size: 13px;
+}
+.comment-author{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+.comment-author a{
+    vertical-align: middle;
 }
 .modal-body-comments .media{
-    margin: 15px 0px 15px 0px;
+
 }
-.modal-body-function {
-    padding: 10px;
-    width: 100%;
-    height: 20%;
+.modal-body-function{
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-body-function i{
+    font-size: 30px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+modal-body-write-comment{
+    margin: 10px;
+}
+.modal-body-write-comment form{
+    margin-top: 10px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+}
+.modal-body-write-comment form input{
+    width: 400px;
+    height: 30px;
+    border: none;
+    padding-left: 10px;
+}
+.modal-body-write-comment form #comment-submit{
+    border: none;
+    background-color: white;
 }
 
 
@@ -67,4 +88,8 @@
 }
 Col{
     padding:0px;
+}
+.moment-info {
+    font-size: 13px;
+    color: rgb(100, 100, 100) !important;
 }

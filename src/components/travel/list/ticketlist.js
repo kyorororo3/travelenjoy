@@ -6,6 +6,7 @@ class TicketList extends React.Component {
       <div className='ticket-list-wrapper'>
         <div className='sub-title-text'>
           Travel <span>&</span>Joy Ticket
+          
         </div>
       </div>
     )

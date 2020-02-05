@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import profile_img from '../../resources/mypage/images/profile_img.jpg';
 
 class MySidebar extends Component {
 
@@ -14,7 +13,7 @@ class MySidebar extends Component {
                     <div className='sidebar-wrapper'>
                         <div className='profile-container box'>
                             <div className='profile-img-wrapper'>
-                                <img className ='profile-img' src={profile_img}/>
+                                <img className ='profile-img' src={`../../uploads/${this.props.users.profile_img}`}/>
                             </div>
                             <div className='profile-info'>
                                 <p>{this.props.users.nickname}</p>

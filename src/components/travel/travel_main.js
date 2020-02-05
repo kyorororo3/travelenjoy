@@ -6,7 +6,6 @@ import '../../resources/travel/css/travellist.css';
 // Components
 import TravelSearch from './list/travellist_search';
 import TravelList from './list/travellist';
-import TicketList from './list/ticketlist'
 
 class TravelMain extends React.Component {
 
@@ -14,55 +13,44 @@ class TravelMain extends React.Component {
     super(props);
 
     this.state = {
-      list: [],
-      isLoaded: false
+      isSearched: false,
+      search: undefined
     }
   }
 
   componentDidMount() {
-    fetch('http://localhost:3002/tour/list')
-      .then(res => res.json())
-      .then(data => this.setState({
-        list: data,
-        isLoaded: true
-        })
-      );
+    window.addEventListener('scroll', this.handelInfiniteScroll);
   }
 
-  handleSearch = (e) => {
-    e.preventDefault();
-    const searched_location = e.target.location.value;
-    // alert(searched_location);
+  handleSearchState = (_search) => {
+    this.setState({
+      isSearched: true,
+      search: _search
+    })
+  }
 
-    fetch(`http://localhost:3002/tour/location?loc=${searched_location}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if(data.isLoc) {
-          alert('/city로 이동합니다.');
-          this.props.history.push(`/travel/city?category=${searched_location}`);
-        }else if(!data.isLoc) {
-          alert('검색 결과 리스트를 갱신합니다.');
-          fetch(`http://localhost:3002/tour/list?search=${searched_location}`)
-            .then(res => res.json())
-            .then(search_list => {
-              this.setState({
-                list: search_list
-              })
-            })
-        }
-      })
-
+  handelInfiniteScroll = () => {
+    // console.log('스크롤');
+    let { clientHeight, clientTop, scrollHeight, scrollTop, offsetHeight, offsetTop } = document.documentElement;
+    // console.log('ch : ' + clientHeight);
+    // console.log('ct : ' + clientTop);
+    // console.log('sh : ' + (scrollHeight - 261));
+    // console.log('st : ' + scrollTop);
+    // console.log('oh : ' + offsetHeight);
+    // console.log('st : ' + offsetTop);
+    if(scrollTop + clientHeight >= scrollHeight - 261) {
+      console.log('스크롤의 끝');
+      window.removeEventListener('scroll', this.handelInfiniteScroll);
+    }
   }
 
   render() {
-    var { list, isLoaded } = this.state;
+    var { search, isSearched } = this.state;
     
     return(
       <div className='container'>
-        <TravelSearch handleSearch={this.handleSearch}/>
-        <TravelList travel_list={list} isLoaded={isLoaded}/>
-        <TicketList />
+        <TravelSearch isSearched={this.handleSearchState}/>
+        <TravelList search={search} isSearched={isSearched} />
       </div>
     )
   }

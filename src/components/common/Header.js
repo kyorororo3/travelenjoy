@@ -21,7 +21,7 @@ class Header extends React.Component {
     let isLogin = '';
     let mypage = '';
     if(this.props.isAuth){       
-      isLogin = <li><NavLink to='/mypage' className='menu'>Mypage</NavLink></li>
+      isLogin = <li><NavLink exact to='/mypage' className='menu'>Mypage</NavLink></li>
       mypage = <li className='login-logout-btn'><NavLink exact to='/'><span onClick={this.handleLogout}>Logout</span></NavLink></li>
     }else{
       isLogin = <li className='login-logout-btn'><NavLink to='/login'><span>Login</span></NavLink></li>

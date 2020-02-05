@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import TalkList from "./TalkList";
 import Write from "./TalkWrite";
+import TalkWriteBtn from "./TalkWriteBtn";
 import '../../resources/freetalk/css/free.css';
 import TalkSearch from "./TalkSearch";
 
@@ -34,13 +35,15 @@ class TalkMain extends Component {
             default: currentPage = <TalkList/>
             break;
         }
+
         return (
             <div className="container">
                 <TalkSearch/>
                 <div className="talk-list-wrap">
 
                     {currentPage}
-
+                    <TalkWriteBtn/>
+                    {/*<i className="fab fa-instagram" style={instagramIconStyle} onClick={() => this.changeMode('write')}></i>*/}
                     <div className="talk-main-function-wrap">
                         <input className="btn-primary" type="button" value={"글 목록"} onClick={() => this.changeMode('list')}/>
                         <input className="btn-primary" type="button" value={"새 게시물 작성"} onClick={() => this.changeMode('write')}/>

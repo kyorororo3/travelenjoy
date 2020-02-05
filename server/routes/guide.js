@@ -56,4 +56,11 @@ router.get('/tourList', function (req, res) {
   })
 });
 
+//Tour Detail
+router.get('/tourDetail', function(req, res){
+  console.log('guide/tourDetail 접속!');
+  console.log(req.query);
+
+});
+
 module.exports = router;

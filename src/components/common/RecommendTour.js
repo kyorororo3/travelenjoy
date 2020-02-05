@@ -3,73 +3,82 @@ import React from 'react';
 class RecommendTour extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            isLogin : false,
+            loginEmail : '',
+            isScrap : false
+        }
     }
+    componentDidMount() {
+        fetch('http://localhost:3002/users/getUser',{
+          credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.email !== undefined){
+                this.setState({isLogin: true, loginEmail : data.email}
+                , () => {
+                    fetch(`http://localhost:3002/main/isScrap?email=${this.state.loginEmail}&seq=${this.props.tour.seq}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        this.setState({isScrap : data.msg})
+                    })
+                })
+            }else{
+                this.setState({isLogin: false})
+            }
+        });
+    }
+    
+    handleScrap = (event) => {
+        event.preventDefault();
+        console.log(this.props.tour.seq);
+        if(!this.state.isLogin){
+            alert('로그인이 필요합니다.');
+        }else{
+            if(this.state.isScrap){
+                //스크랩 해제
+                fetch(`http://localhost:3002/main/deletetourScrap?email=${this.state.loginEmail}&seq=${this.props.tour.seq}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    this.setState({isScrap : data.msg})
+                })
+            }else{
+                fetch(`http://localhost:3002/main/tourScrap?email=${this.state.loginEmail}&seq=${this.props.tour.seq}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    this.setState({isScrap : data.msg})
+                })
+            }
+        }
+    }
+
     numberFormat = (price) => {        
         return price.toLocaleString();      
     }
+
     render() {
         let {category, title, price, score} = this.props.tour;
        
         return(      
             <div className='recommendtour'>
                 <div className='thumbnail'>
-                <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/jeju.jpg')} />
+                <div className ='thumbnail-like' onClick={this.handleScrap}>
+                    {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}
+                </div>
+                    <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/jeju.jpg')} />
                 </div>
 
                 <div className='recommendtour-body'>
                     <div className='recommendtour-body loc'>{category}</div>
                     <div className='recommendtour-body title'>{title}</div>
-                    <div className='recommendtour-body tourprice'>{this.numberFormat(price)}won</div>
+                    <div className='recommendtour-body tourprice'>{this.numberFormat(price)}원 / 1인</div>
                     <div className='recommendtour-body tourscore'><i className="fas fa-star" style={{opacity:"0.5"}}/>&nbsp;{score}</div>
                 </div>  
             </div>
-                // {/* <div className='recommendtour'>
-                // <div className='thumbnail'>
-                // <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/haeundae.jpg')} />
-                // </div>
-
-                // <div className='recommendtour-body'>
-                //     <div className='recommendtour-body loc'>부산</div>
-                //     <div className='recommendtour-body title'>해운대 스냅샷</div>
-                //     <div className='recommendtour-body tourprice'>56,000won</div>
-                // </div>
-                // </div>
-
-                // <div className='recommendtour'>
-                // <div className='thumbnail'>
-                // <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/jeju.jpg')} />
-                // </div>
-
-                // <div className='recommendtour-body'>
-                //     <div className='recommendtour-body loc'>제주도</div>
-                //     <div className='recommendtour-body title'>서귀포 귤농장 체험</div>
-                //     <div className='recommendtour-body tourprice'>29,000won</div>
-                //     </div>
-                // </div>
-
-                // <div className='recommendtour'>
-                // <div className='thumbnail'>
-                // <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/coffee.jpg')} />
-                // </div>
-
-                // <div className='recommendtour-body'>
-                //     <div className='recommendtour-body loc'>강원도</div>
-                //     <div className='recommendtour-body title'>강릉 커피투어</div>
-                //     <div className='recommendtour-body tourprice'>20,000won</div>
-                // </div>  
-                // </div>
-
-                // <div className='recommendtour'>
-                // <div className='thumbnail'>
-                // <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/ulsan.jpg')} />
-                // </div>
-
-                // <div className='recommendtour-body'>
-                //     <div className='recommendtour-body loc'>울산</div>
-                //     <div className='recommendtour-body title'>맛집탐방 + 출사를 한번에</div>
-                //     <div className='recommendtour-body tourprice'>60,000won</div>
-                // </div>
-                // </div> */}
         )
      }
 }

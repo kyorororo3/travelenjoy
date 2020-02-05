@@ -92,10 +92,10 @@ class Home extends React.Component {
             </div>
 
             <div className='recommendtourbtn prev' onClick={this.prevlist}>
-              <i className="fas fa-chevron-left" style={{color:"#282c37"}}/>
+              <i className="fas fa-chevron-left" style={{color:"#abbff6"}}/>
             </div>
             <div className='recommendtourbtn next' onClick={this.nextlist}>
-              <i className="fas fa-chevron-right" style={{color:"#282c37"}}/>
+              <i className="fas fa-chevron-right" style={{color:"#abbff6"}}/>
             </div>
           </div>
 

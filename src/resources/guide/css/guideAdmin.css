@@ -1,0 +1,39 @@
+.List-thumbnail-img{
+    width: 150px;
+}
+.list-table-div{
+    display: table;
+    border: 1px solid;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.list-table-row{
+    display: table-row;
+    border: 1px solid;
+
+}
+.list-table-cell{
+    display: table-cell;
+    border: 1px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    font-size: 14pt;
+    text-align: center;
+}
+.list-table-header{
+    font-size: 16pt;
+    font-weight: bolder;
+    color:  #2b90d9;
+}
+.list-title{
+    border-bottom: 1px solid rgba(83, 82, 81, 0.123);
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+.list-title-span{
+    padding-left: 48px;
+    font-size: 15pt;
+    font-weight: bolder;
+}

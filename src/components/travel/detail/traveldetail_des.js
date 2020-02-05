@@ -19,7 +19,7 @@ class TravelDestination extends React.Component {
             <div className='destination-description'>{des_description}</div>
           </div>
           <div className='info-image'>
-            des_img 자리임
+            des_img 자리임 
           </div>
         </div>
         <TravelDestinationMap destination={this.props.destination}/>

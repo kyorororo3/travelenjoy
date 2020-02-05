@@ -20,6 +20,7 @@ import Member_Account from './components/account/memberaccount';
 import Guide_Account from './components/account/guideaccount';
 import Guide_Main from './components/guide/guide_main';
 import Guide_Make from './components/guide/guide_make';
+import Guide_Tour_List from './components/guide/guide_tour_list'
 
 
 import MypageHome from './components/mypage/Mypage';
@@ -70,6 +71,7 @@ class AppTest extends React.Component {
               <Route exact path='/mypage' component={MypageHome}/>
               <Route path='/guide/main' component={Guide_Main}></Route>
               <Route path='/guide/make' component={Guide_Make}></Route>
+              <Route path='/guide/list' component={Guide_Tour_List}></Route>
             </Switch>
           </div>
         </Router>

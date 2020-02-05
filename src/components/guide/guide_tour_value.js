@@ -3,10 +3,17 @@ import '../../resources/guide/css/guideAdmin.css';
 
 class TourValue extends Component {
 
+    constructor(props){
+        super(props);
+    }
+
+    clickHandler(){
+        alert("디테일");
+    }
+
     render(){
         const {seq, category, title, thumbnail} = this.props.list
-        return(
-            
+        return(            
                 <div className='list-table-row'>
                     <div className='list-table-cell'>
                         <input type='checkbox'></input>
@@ -17,7 +24,7 @@ class TourValue extends Component {
                     <div className='list-table-cell'>
                         <img className='List-thumbnail-img' src={require(`../../uploads/${thumbnail}`)}/>
                     </div>
-                    <div className='list-table-cell'>
+                    <div className='list-table-cell' onClick={this.clickHandler}>
                         {title}
                     </div>
                 </div>

@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const upload = multer({dest:'public/uploads/'})
 
-
+const mysql = require('mysql');
 let mysql_dbc = require('../config/dbconfig')();
 let connection = mysql_dbc.init();
 mysql_dbc.conn_test(connection);
@@ -69,6 +69,33 @@ router.post('/info/updatemember', upload.single('profile_img'), (req,res)=>{
         }
     })
 })
+
+router.get('/travel', function (req, res) {
+    const {search} = req.query;
+    const {email} = req.query;
+    console.log(
+    'calendar에서 접근 중 ', email        
+    );
+    let sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ?";
+    let params = [ email ];
+    sql = mysql.format(sql, params);
+
+    if(search !== undefined) {
+      sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ? and a.title like ? or a.category=?";
+      params  = [ email, `%${search}%`, search ];
+      
+      sql = mysql.format(sql, params);
+    }
+  
+    console.log(sql);
+  
+    connection.query(sql,  function (err, rows) {
+      if(err) return console.log("ERR!! " + err);
+      console.log( 'calendar에서 접근 중 ', rows);
+      res.send(rows);
+    })
+  })
+
 module.exports = router;
 
 

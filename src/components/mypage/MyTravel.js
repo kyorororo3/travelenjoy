@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
 import '../../resources/travel/css/travellist.css';
-
+import TravelList from '../travel/list/travellist_obj';
 
 class MyTravel extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-    }
+    
+        this.state = {
+          email:this.props.location.state.users.email,
+          list: [],
+          isLoaded: false
+        }
+      }
+      componentDidMount() {
+        fetch(`http://localhost:3002/mypage/travel?email=${this.state.email}`)
+          .then(res => res.json())
+          .then(data => this.setState({
+            list: data,
+            isLoaded: true
+            })
+          );
+      }
+
     render(){
+        let{ list, isLoaded, email } = this.state
         return(
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
-                            <form>
+                        <form>
                                 <select className='category-selection'>
                                     <option>title</option>
                                     <option>location</option>
@@ -20,22 +37,10 @@ class MyTravel extends Component {
                                 </select>
                                 <input type='text' name='search' className='search-input'/>
                                 <button className='basic-btn'>search</button>
-                            </form>
-                            <div className='list-container'>
-                                <div className='tour-list-obj card-container'>
-                                    <div className='tour-thumbnail'>
-                                        <div>썸네일 자리</div>
-                                    </div>
-                                    <div className='tour-infos'>
-                                        <div className='rows tour-category'></div>
-                                        <div className='rows tour-title'></div>
-                                        <div className='rows'>
-                                        <div className='tour-price'>원</div>
-                                        <div className='tour-nickname'></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </form>
+                        <div className='travel-wrapper'>
+                            {isLoaded? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
+                        </div>
                         </div>
                     </div>
             </div>

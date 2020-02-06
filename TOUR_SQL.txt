@@ -91,6 +91,22 @@ create table te_tour_review(
 insert into te_tour_review(tour_seq, email, title, content, score)
 values(1, 'aaa', '아주조아', '리뷰리븅', 5);
 
+채팅방 
+create table te_chat_room(
+  seq int auto_increment primary key,
+  guide varchar(50),
+  client varchar(50)
+)
+
+대화내용
+create table te_chat_msg(
+  seq int auto_increment primary key,
+  room_seq int,
+  writer varchar(50),
+  wdate datetime default now(),
+  isread int default 1,
+  content varchar(600)
+)
 
 자유게시판 테이블 생성 쿼리
 create table te_freetalk(

@@ -41,23 +41,6 @@ class MyTravel extends Component {
                         <div className='travel-wrapper'>
                             {isLoaded? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
                         </div>
-                            
-                            {/* 
-                            <div className='list-container'>
-                                <div className='tour-list-obj card-container'>
-                                    <div className='tour-thumbnail'>
-                                        <div>썸네일 자리</div>
-                                    </div>
-                                    <div className='tour-infos'>
-                                        <div className='rows tour-category'></div>
-                                        <div className='rows tour-title'></div>
-                                        <div className='rows'>
-                                        <div className='tour-price'>원</div>
-                                        <div className='tour-nickname'></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
             </div>

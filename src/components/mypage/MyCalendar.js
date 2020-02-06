@@ -22,14 +22,28 @@ class MyCalendar extends Component {
             list: data
             })
           );
-      }
+           
+      } 
     render(){
+        let { list } = this.state
+        let eventsList = list.map((event) => 
+            [{
+                id:event.seq,
+                title:event.title,
+                start:event.start_date,
+                backgroundColor:'#e1e9eb'
+            }][0]
+        )
+
+
         return(
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
                            <div className='calendar-wrapper'>
-                                <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}    events={this.state.list} />
+                                <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}    
+                                events={eventsList}
+                              />
                            </div>
                         </div>
                     </div>

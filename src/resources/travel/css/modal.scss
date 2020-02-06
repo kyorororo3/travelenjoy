@@ -36,7 +36,18 @@
       p{
         padding: 8px;
         font-size: 12pt;
-        color: #999;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        width: 250px;
+        &.me {
+          background: #eee;
+          float: right;
+        }
+        &.you {
+          background: #2b90d9;
+          color: #fff;
+          float: left;
+        }
       }
     }
 

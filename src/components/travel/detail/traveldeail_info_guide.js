@@ -58,7 +58,7 @@ class TravelInfoGuide extends React.Component {
   }
 
   render() {
-    const {isLoaded, guide_info, modal} = this.state;
+    const {isLoaded, guide_info, modal, loginId} = this.state;
 
     return(
       <React.Fragment>
@@ -76,7 +76,10 @@ class TravelInfoGuide extends React.Component {
           </div>
         </div>
       </div>
-      {modal && <TravelDetailModal handleModal={this.handleModal} />}
+      {modal && <TravelDetailModal
+                  handleModal={this.handleModal}
+                  client={loginId}
+                  guide={guide_info.companyname}/>}
       </React.Fragment>
     )
   }

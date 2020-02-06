@@ -219,6 +219,33 @@ router.get('/detail', (req, res) => {
     });
   });
 
+  // 문의하기 채팅방 생성
+  router.post('/question/chatroom', (req, res) => {
+    const {guide, client} = req.body;
+    let sql = 'select * from te_chat_room where guide=? and client=?';
+    const params = [guide, client];
+
+    sql = mysql.format(sql, params);
+
+    conn.query(sql, (err, rows) => {
+      if(err) return console.log(err);
+      // console.log(rows[0]);
+      if(rows[0] !== undefined) {
+        console.log('조회결과 있음.');
+        res.send(rows[0]);
+      }else {
+        console.log('조회결과 없음. insert 실행');
+        let insert_sql = 'insert into te_chat_room(guide, client) values(?, ?); ';
+        insert_sql = mysql.format(insert_sql, params);
+        const sqls = insert_sql + sql;
+        conn.query(sqls, (err, result) => {
+          if(err) return console.log(err);
+          res.send(result[1][0]);
+        });
+      }
+    });
+  })
+
   // 예약하기
   router.post('/reservation', (req, res) => {
     const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;
@@ -255,8 +282,6 @@ router.get('/detail', (req, res) => {
       res.send(count);
     })
   })
-
-
 
 });
 

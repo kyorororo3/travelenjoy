@@ -19,7 +19,7 @@ module.exports = () => {
       
     passport.deserializeUser(function(id, done) {
         console.log("deserializeUser id ", id)
-        var sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH FROM TE_MEMBER WHERE EMAIL=?';
+        var sql = 'SELECT EMAIL, PROVIDER, NAME, NICKNAME, PROFILE_IMG, PHONE, AUTH, COMPANYNAME FROM TE_MEMBER WHERE EMAIL=?';
         mysql.query(sql , [id], function (err, result) {
             if(err) {done(err,null);}           
             console.log("deserializeUser mysql result : " , result);

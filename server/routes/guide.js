@@ -18,9 +18,9 @@ router.post('/makeAf', upload.single('thumbnail'), function (req, res) {
   console.log(req.body);
   console.log("파일..", req.file);
 
-  var sql = "INSERT INTO TE_TOUR(EMAIL, NICKNAME, CATEGORY, TITLE, CONTENT, THUMBNAIL, PERIOD, MIN_PEOPLE, MAX_PEOPLE, PRICE)" +
+  var sql = "INSERT INTO TE_TOUR(EMAIL, COMPANYNAME, CATEGORY, TITLE, CONTENT, THUMBNAIL, PERIOD, MIN_PEOPLE, MAX_PEOPLE, PRICE)" +
     " VALUE(?,?,?,?,?,?,?,?,?,?)";
-  var val = [req.body.email, req.body.nickname, req.body.category, req.body.title, req.body.content, req.file.filename, req.body.period, req.body.min_people, req.body.max_people, req.body.price]
+  var val = [req.body.email, req.body.companyname, req.body.category, req.body.title, req.body.content, req.file.filename, req.body.period, req.body.min_people, req.body.max_people, req.body.price]
   conn.query(sql, val, function (err, result) {
     if (err) return console.log("err!! " + err);
     else {

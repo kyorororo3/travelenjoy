@@ -58,7 +58,7 @@ class GuideMake extends Component {
     e.preventDefault();
     const formData = new FormData();
     formData.append('email', this.state.users.email);
-    formData.append('nickname', this.state.users.nickname);
+    formData.append('companyname', this.state.users.companyname);
     formData.append('category', e.target.category.value);
     formData.append('title', e.target.title.value);
     formData.append('content', this.state.text);

@@ -84,7 +84,7 @@ class TravelDetailModal extends React.Component {
       <React.Fragment>
         <div className="Modal-overlay" />
         <div className="Modal">
-          <p className="title">Modal Title</p>
+          <p className="title">1:1 채팅문의</p>
           <div className="content">
             {msg_list.map(obj => {
               if(obj.writer === this.props.client) return <p className='me'>{obj.msg}</p>

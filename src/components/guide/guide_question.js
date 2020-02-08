@@ -44,7 +44,7 @@ class Guide_Question extends React.Component {
         })}
         {modal && <Guide_Modal
                     handleModal={this.handleModal}
-                    email={this.props.location.state.email}
+                    email={this.props.location.state.users.email}
                     seq={seq} />}
       </div>
     )

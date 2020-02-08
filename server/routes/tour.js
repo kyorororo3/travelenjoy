@@ -246,6 +246,19 @@ router.get('/detail', (req, res) => {
     });
   })
 
+  // 문의하기 채팅방 대화내용 불러오기
+  router.post('/question/chatmsg', (req, res) => {
+    const {seq} = req.body;
+    console.log(seq);
+    const sql = 'select * from te_chat_msg where room_seq=?';
+
+    conn.query(sql, seq, (err, rows) => {
+      if(err) return console.log(err);
+      console.log(rows);
+      res.send(rows);
+    })
+  })
+
   // 예약하기
   router.post('/reservation', (req, res) => {
     const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;

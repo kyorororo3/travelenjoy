@@ -44,7 +44,19 @@ class Guide_Modal extends React.Component {
     const {socket} = this.state;
     const {seq} = this.props;
     socket.emit('join', `room${seq}`);
-    this.handleRecvMsg();
+    
+    fetch('http://localhost:3002/tour/question/chatmsg', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({seq: seq})
+    })
+      .then(res => res.json())
+      .then(result => {
+        this.setState({msg_list: result})
+        this.handleRecvMsg();
+      });
   }
 
   componentWillUnmount() {

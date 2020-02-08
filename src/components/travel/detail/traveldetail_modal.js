@@ -9,7 +9,7 @@ class TravelDetailModal extends React.Component {
     this.state = {
       socket: socketio.connect('http://localhost:4000'),
       seq: undefined,
-      msg_list: [{writer: 'guide', msg: '가이드로부터의 메세지'}]
+      msg_list: []
     }
   }
 
@@ -55,9 +55,23 @@ class TravelDetailModal extends React.Component {
         }, () => {
           const {socket, seq} = this.state;
           socket.emit('join', `room${seq}`);
-          this.handleRecvMsg();
+
+          fetch('http://localhost:3002/tour/question/chatmsg', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({seq: seq})
+          })
+            .then(res => res.json())
+            .then(result => {
+              this.setState({msg_list: result})
+              this.handleRecvMsg();
+            });
         })
       });
+
+    
   }
 
   componentWillUnmount() {

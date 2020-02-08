@@ -62,12 +62,17 @@ class RecommendTour extends React.Component {
         return price.toLocaleString();      
     }
 
+    handleOnClick = (event) => {
+        //console.log(this.props.tour.seq);
+        this.props.history.push(`/travel/detail/${this.props.tour.seq}`);
+    }
+
     render() {
         console.log('RecommendTour Render()')
-        let {category, title, price, score} = this.props.tour;
+        let {seq, category, title, price, score} = this.props.tour;
        
         return(      
-            <div className='recommendtour'>
+            <div className='recommendtour' onClick={this.handleOnClick}>
                 <div className='thumbnail'>
                 <div className ='thumbnail-like' onClick={this.handleScrap}>
                     {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}

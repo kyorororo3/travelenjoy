@@ -15,6 +15,7 @@ class Header extends React.Component {
     .then(data => {
       alert(data.msg);
       this.props.getLogout(false);
+      window.location.reload();
       this.props.history.push('/');
     });
   }

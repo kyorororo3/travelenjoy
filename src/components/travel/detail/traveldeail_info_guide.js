@@ -79,7 +79,7 @@ class TravelInfoGuide extends React.Component {
       {modal && <TravelDetailModal
                   handleModal={this.handleModal}
                   client={loginId}
-                  guide={guide_info.companyname}/>}
+                  guide={guide_info.email}/>}
       </React.Fragment>
     )
   }

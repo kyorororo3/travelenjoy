@@ -171,7 +171,7 @@ router.get('/detail/review', (req, res) => {
 // 투어 가이드 조회
 router.get('/detail/guide', (req, res) => {
   const {email} = req.query;
-  const sql = 'select companyname, profile_img from te_member where email=?';
+  const sql = 'select email, companyname, profile_img from te_member where email=?';
 
   conn.query(sql, email, (err, rows) => {
     if(err) return console.log(err);

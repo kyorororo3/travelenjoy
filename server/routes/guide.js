@@ -63,4 +63,15 @@ router.get('/tourDetail', function(req, res){
 
 });
 
+// Question List
+router.get('/questionList', (req, res) => {
+  const {email} = req.query;
+  const sql = 'select * from te_chat_room where guide=?';
+
+  conn.query(sql, email, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows);
+  })
+})
+
 module.exports = router;

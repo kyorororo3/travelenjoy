@@ -34,6 +34,14 @@
     /* border: 1px solid; */
 }
 
+.guide-tour-btn3{
+  float: right;
+  margin: 65px 100px 30px 50px;
+  width: auto;
+  display: inline-block;
+  /* border: 1px solid; */
+}
+
 .guide-tour-label{
     font-weight: bold;
     font-size: 20pt;

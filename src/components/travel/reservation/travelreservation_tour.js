@@ -3,34 +3,49 @@ import React from 'react';
 import {dateToString} from '../../../utils/Functions';
 
 class TravelReservationInfo extends React.Component {
-
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      isLoaded: false,
+      tour_info: undefined,
+      guide_info: undefined
+    }
+  }
   componentDidMount() {
     fetch(`http://localhost:3002/tour/detail?seq=${this.props.tour_seq}`)
       .then(res => res.json())
       .then(data => {
-        const info = data.tour_info;
-        document.getElementsByClassName('tourdesc-title')[0].innerHTML = info.title;
-        document.getElementsByClassName('company-name')[0].innerHTML = info.nickname;
-        document.getElementsByClassName('data')[2].innerHTML = "₩" + info.price;
-        document.getElementsByClassName('data')[3].innerHTML = "₩" + (info.price * this.props.person);
-        document.getElementsByClassName('total-price')[0].dataset.total_price = info.price * this.props.person;
-        // 업체 프로필이미지 정보 가져오기 fetch 들어갈 자리임!
+        this.setState({
+          tour_info: data.tour_info
+        }, () => {
+          fetch(`http://localhost:3002/tour/detail/guide?email=${this.state.tour_info.email}`)
+            .then(res => res.json())
+            .then(data => {
+              this.setState({
+                isLoaded: true,
+                guide_info: data
+              })
+            })
+        })
       })
   }
 
   render() {
     const { selectedDays, person } = this.props;
+    const {isLoaded, tour_info, guide_info} = this.state;
 
     return(
+      
       <div className='travel-reservation-info panel-l'>
         <div className='tourdesc'>
           <div className='tourdesc-image'>
-            썸네일 자리입니다.
+            {isLoaded && <img src={require(`../../../uploads/${tour_info.thumbnail}`)}/>}
           </div>
-          <div className='tourdesc-title'></div>
+          <div className='tourdesc-title'>{isLoaded && tour_info.title}</div>
           <div className='tourdesc-guide'>
-            <span className='profile-image'></span>
-            <span className='company-name'></span>
+            <span className='profile-image'>{isLoaded && <img src={require(`../../../uploads/${guide_info.profile_img}`)}/>}</span>
+            <span className='company-name'>{isLoaded && tour_info.companyname}</span>
           </div>
         </div>
         <div className='selected'>
@@ -48,11 +63,11 @@ class TravelReservationInfo extends React.Component {
         <div className='price'>
           <div className='price-for-one reservation-row'>
             <span className='label'>1인당 가격</span>
-            <span className='data'></span>
+            <span className='data'>₩{isLoaded && tour_info.price}</span>
           </div>
-          <div className='total-price reservation-row'>
+          <div className='total-price reservation-row' data-total_price={isLoaded && tour_info.price * person}>
             <span className='label'>전체 가격</span>
-            <span className='data'></span>
+            <span className='data'>₩{isLoaded && tour_info.price * person}</span>
           </div>
         </div>
       </div>

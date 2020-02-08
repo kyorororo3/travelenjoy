@@ -68,7 +68,7 @@ class TravelInfo extends React.Component {
   }
 
   render() {
-    let { email, nickname, category, title, content, thumbnail,
+    let { email, category, title, content, thumbnail,
       min_people, max_people } = this.props.info;
 
     return(

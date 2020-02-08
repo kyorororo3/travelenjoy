@@ -54,7 +54,11 @@ span.data {
 .tourdesc-image {
   width: 100%;
   height: 300px;
-  border-bottom: 1px dotted #9baec8;
+}
+
+.tourdesc-image img {
+  width: inherit;
+  height: inherit;
 }
 
 .tourdesc-title{
@@ -75,8 +79,15 @@ span.data {
   width: 60px;
   height: 60px;
   border-radius: 30px;
-  border: 1px solid #9baec8;
 }
+
+.tourdesc-guide .profile-image img {
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 2px solid #2b90d9;
+}
+
 .tourdesc-guide .company-name{
   height: 21px;
   padding-top: 15px;

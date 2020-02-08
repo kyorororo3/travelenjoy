@@ -30,7 +30,7 @@ class TravelInfoGuide extends React.Component {
   }
 
   handleClick = () => {
-    alert('문의버튼 클릭');
+    // alert('문의버튼 클릭');
 
      // 로그인이 되어있는지 체크
      fetch('http://localhost:3002/users/getUser', {
@@ -66,7 +66,7 @@ class TravelInfoGuide extends React.Component {
         <div className='sub-title-text'><i className="fas fa-address-book"></i> Tour Guide</div>
         <div className='guide-img-name'>
           <div className='guide-img'>
-            {isLoaded && <img alt='이미지음슴' src=''></img>}
+            {isLoaded && <img alt='이미지음슴' src={require(`../../../uploads/${guide_info.profile_img}`)}></img>}
           </div>
           <div className='guide-name'>
             {isLoaded && guide_info.companyname}
@@ -79,7 +79,7 @@ class TravelInfoGuide extends React.Component {
       {modal && <TravelDetailModal
                   handleModal={this.handleModal}
                   client={loginId}
-                  guide={guide_info.companyname}/>}
+                  guide={guide_info.email}/>}
       </React.Fragment>
     )
   }

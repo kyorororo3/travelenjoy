@@ -171,7 +171,7 @@ router.get('/detail/review', (req, res) => {
 // 투어 가이드 조회
 router.get('/detail/guide', (req, res) => {
   const {email} = req.query;
-  const sql = 'select companyname, profile_img from te_member where email=?';
+  const sql = 'select email, companyname, profile_img from te_member where email=?';
 
   conn.query(sql, email, (err, rows) => {
     if(err) return console.log(err);
@@ -244,6 +244,19 @@ router.get('/detail', (req, res) => {
         });
       }
     });
+  })
+
+  // 문의하기 채팅방 대화내용 불러오기
+  router.post('/question/chatmsg', (req, res) => {
+    const {seq} = req.body;
+    console.log(seq);
+    const sql = 'select * from te_chat_msg where room_seq=?';
+
+    conn.query(sql, seq, (err, rows) => {
+      if(err) return console.log(err);
+      console.log(rows);
+      res.send(rows);
+    })
   })
 
   // 예약하기

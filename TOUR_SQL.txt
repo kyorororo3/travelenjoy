@@ -105,7 +105,7 @@ create table te_chat_msg(
   writer varchar(50),
   wdate datetime default now(),
   isread int default 1,
-  content varchar(600)
+  msg varchar(600)
 )
 
 자유게시판 테이블 생성 쿼리

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import profile_img from '../../resources/mypage/images/profile_img.jpg';
 
 class MySidebar extends Component {
 
@@ -27,10 +28,16 @@ class MySidebar extends Component {
                         </div>
                         <div className='item-container box'>
                             <div className='item'>
-                                <Link to='/mypage/calendar'>My Calendar</Link>
+                                <Link to={{
+                                    pathname:'/mypage/calendar',
+                                    state:{ users:this.props.users }
+                                }}>My Calendar</Link>
                             </div>
                             <div className='item'>
-                                <Link to='/mypage/travel'>My Travel</Link>
+                                <Link to={{
+                                    pathname:'/mypage/travel',
+                                    state:{ users:this.props.users }
+                                }}>My Travel</Link>
                             </div>
                             <div className='item'>
                                 <Link to='/mypage/scrap'>My Scrap</Link>

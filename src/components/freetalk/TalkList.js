@@ -43,7 +43,7 @@ class TalkList extends Component {
                     )
                 ):' '}
                 <div className="talk-list-function-wrap">
-                    <input className="btn-primary" type="button" value={"더보기"} onClick={this.addTalk}/>
+                    <input className="btn-primary" type="button" value={"infinite scroll로 변경 예정"} onClick={this.addTalk}/>
                 </div>
             </div>
         );

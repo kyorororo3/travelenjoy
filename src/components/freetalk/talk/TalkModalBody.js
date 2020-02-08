@@ -10,15 +10,15 @@ class TalkModalBody extends Component {
 
     state = {
         author: {
-            EMAIL: 'admin',
-            PWD: 'admin',
-            PROVIDER: null,
-            PROVIDER_ID: null,
-            NAME: 'admin',
-            NICKNAME: 'admin',
-            PROFILE_IMG: 'admin_profile.jpg',
-            PHONE: 1111,
-            AUTH:3
+            email: 'admin',
+            pwd: 'admin',
+            provider: null,
+            provider_id: null,
+            name: 'admin',
+            nickname: 'admin',
+            profile_img: 'default_profile_image.jpg',
+            phone: 1111,
+            auth:3
         },
         comments: []
     }
@@ -26,7 +26,8 @@ class TalkModalBody extends Component {
     componentDidMount() {
         fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.email + '&nickname=' + this.props.nickname)
             .then(res => res.json())
-            .then(res => this.setState({author: res.author}));
+            // .then(res => this.setState({author: res.author}))
+            .then(res => console.log(res.author.profile_img) )
 
         fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
             .then(res => res.json())
@@ -36,58 +37,57 @@ class TalkModalBody extends Component {
     render() {
         return(
             <div className="modal-body-wrap">
-                    <div className="modal-body-profile">
-                            <div className="modal-body-profile-detail">
-                                <Media>
-                                    <img
-                                        width={32}
-                                        height={32}
-                                        src='https://logodix.com/logo/1707081.png'
-                                        alt='profile image'
-                                        onError={(e)=>{e.target.onerror = null; e.target.src=require('../../../resources/mypage/images/profile_img.jpg')}}
-                                    />
-                                    <Media.Body>
-                                        <a href="#">{this.state.author.NICKNAME}</a>
-                                    </Media.Body>
-                                </Media>
-                            </div>
-                            <div className="modal-body-profile-function">
-                                기능
-                            </div>
+                <div className="modal-body-function">
+                    <div className="modal-body-function-left">
+                        <i className="far fa-heart"></i>
+                        <i className="far fa-comment"></i>
+                        <i className="fas fa-upload"></i>
                     </div>
-
-                    <div className="modal-body-comments">
-                        {(this.state.comments.length > 0)?
-                            this.state.comments.map( (comment, i) => (
-                                <Media key = {comment.seq}>
-                                    <a href="#">
-                                    <img
-                                        width={32}
-                                        height={32}
-                                        src={require('../../../../server/src/uploads/' + comment.PROFILE_IMG)}
-                                        alt='profile image'
-                                        onError={(e)=>{e.target.onerror = null; e.target.src=require('../../../resources/mypage/images/profile_img.jpg')}}
-                                    /></a>
-                                    <Media.Body>
+                    <div className="modal-body-function-right">
+                        <i className="far fa-bookmark"></i>
+                    </div>
+                </div>
+                <div className="modal-body-info">
+                    <a>좋아요 {this.props.likes}개</a>
+                    <a className="moment-info">{moment(this.props.regDate, 'YYYY-MM-DDTHH:mm:ss.SSS').fromNow()}</a>
+                </div>
+                <div className="modal-body-comments">
+                    {(this.state.comments.length > 0)?
+                        this.state.comments.map( (comment, i) => (
+                            <div className="comment-wrap" key = {comment.seq}>
+                                <div className="comment-author">
+                                    <div className="comment-author-profile">
+                                        <a href="#">
+                                            <img
+                                                width={32}
+                                                height={32}
+                                                src={require('../../../../public/uploads/' + comment.profile_img)}
+                                                alt='profile image'
+                                                onError={(e)=>{e.target.onerror = null; e.target.src=require('../../../resources/mypage/images/profile_img.jpg')}}
+                                            />
+                                        </a>
                                         <a href={'#'}>{comment.nickname}</a>
-                                        &nbsp; {comment.content}
-                                        <br/>
-                                        {moment(comment.reg_date, 'YYYY-MM-DDTHH:mm:ss.SSS').fromNow()}
-                                    </Media.Body>
-                                </Media>
-                            ))
-                        :'등록된 댓글이 없습니다 :)'}
-                        <br/><br/><br/><br/>
-                        댓글 스크롤 영역<br/>
-                        댓글 스크롤 영역<br/>
-                        댓글 스크롤 영역<br/>
-                        댓글 스크롤 영역<br/>
-                    </div>
-
-                    <div className="modal-body-function">
-                        좋아요, 스크랩, 댓글남기기 등
-                    </div>
-
+                                    </div>
+                                    <div className="comment-registration-date">
+                                        <a className="moment-info">{moment(comment.reg_date, 'YYYY-MM-DDTHH:mm:ss.SSS').fromNow()}</a>
+                                    </div>
+                                </div>
+                                <div className="comment-body">
+                                    <div className="comment-body-content">
+                                        &nbsp;&nbsp;{comment.content}
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    :'등록된 댓글이 없습니다 :)'}
+                    <br/>
+                </div>
+                <div className="modal-body-write-comment">
+                    <form>
+                        <input type="text" placeholder="댓글 입력..."/>
+                        <a id="comment-submit" type="submit">게시</a>
+                    </form>
+                </div>
             </div>
         )
     }

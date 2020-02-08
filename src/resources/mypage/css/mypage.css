@@ -28,10 +28,12 @@ a{
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
 }
 
+
+
 .container .box{
     
     border-radius: 2px;
-    box-shadow: 0 1px 0 0 #e9ecef;
+    /* box-shadow: 0 1px 0 0 #e9ecef; */
     margin-bottom: 8px;
 }
 
@@ -75,7 +77,8 @@ a{
 
 .mypage-body{
     display: inline-block;
-    min-width: 77%;
+    min-width: 75%;
+    max-width: 842px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
 }
 
@@ -208,7 +211,7 @@ a{
     font-size: 13px;
     height: 32px;
     line-height: 30px;
-    width: 180px;
+    width: 161px;
     z-index: 10;
     background-color: #fff;
     border: solid 1px #ced4da;
@@ -293,12 +296,17 @@ a{
     height: 25px;
     line-height: 25px;
     position: absolute;
-    right: -92px;
+    right: -111px;
     top: 0px;
-    width: 98px;
+    width: 120px;
     z-index: 10;
     background-color: #fff;
     border: 1px solid #ced4da;
     color: #495056 !important;
     font-family: "Inconsolata", Arial, sans-serif;
+}
+
+.travel-wrapper{
+    margin:50px 120px;
+
 }

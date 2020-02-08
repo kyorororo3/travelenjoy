@@ -17,7 +17,7 @@ class TravelListObj extends React.Component {
         <div className='tour-thumbnail' data-seq={seq}>
           <img data-seq={seq}
            alt='이미지없다'
-           src={require('../../../resources/travel/images/nyang.jpg')}/>
+           src={require(`../../../uploads/${thumbnail}`)}/>
         </div>
         <div className='tour-infos' data-seq={seq}>
           <div className='rows tour-category' data-seq={seq}>[{category}]</div>

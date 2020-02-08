@@ -1,7 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중" />
+    <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
+      <change afterPath="$PROJECT_DIR$/server/config/nodemailer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/routes/auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/account/emailauthentication.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/RecommendTalk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/RecommendTour.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/Slider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/guide/guide_Header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/guide/guide_list_detail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/guide/guide_tour_list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/guide/guide_tour_value.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/travel/detail/traveldeail_info_guide.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/coffee.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/haeundae.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/jeju.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/jeonju.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/talk.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/talk2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/common/images/ulsan.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/css/guideAdmin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/images/address.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/images/global.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/images/house.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/images/list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/images/map.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/guide/images/mylist.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/users/css/emailauth.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/users/emailtemplete.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/users/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/07bd2b1a688c5af63584f372c0f75019" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/0fbf34b0d0e260ae5363c862f79cf331" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/101aacebcef39f01bc90112ed4b4197d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/130500eceffb1e8bdc112ae26789abe4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/18820cd468190864c94be1cba66c9e1e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/1a00e538b1ba3c872764bb1150fbce56" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/1a41c47edd2c5654ed46dd2395b7491f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/2009b655ad5e472f3f159e28bf30e64e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/241e6780b4f05cff4ae2b88d5270736d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/2b8f925b97d48a87d170176778a46437" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/3b73b22dba60f4fbc2ccb180aaf56b7d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/3f3c9b92081397daa2218268a5176649" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/40ca8f5a28c22508b6d3ddc7080385fa" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/410ac62f993fcb4128cf157ae91d3880" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/49538ec079a27f7dde2a43d185a6ff20" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/534d2834a35694e0b3edaedd37c71167" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/5adc9dc6b4c401a73f07bf6ab64377ab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/5e20739ba4c7f374ef26abb43c6da811" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/66faa5979c6ec01d3f10638acef32b88" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/6c504533d04fc750141f7b625ff64ab1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/79c343839303e943ef8561d4833c7cb5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/7fff376fa7d158014668b5fdc20c476f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/809119e6bc8e08e1d18d427ab5283aa4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/85f12150e3de7682ff77db5c2c73fc26" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/88b9550e603d4feccc41dc0060838a51" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/8f5fa33a51f88d983343785ae05d9bc8" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/90851a67ad832422c719fe767353e2e8" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/969c23713e237a9c0a94a274ef779501" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/96cded3feee629825c4882ddb8bc8b7e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/9de18b6f1afe888d96f8bcc199db037d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/a71c63aea1b26ba06eeacc40adf61dc6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/aa7c57c896e759ea9e3e6ca4bbf4b071" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/aa8153f499dd66edb3c4d787cfc424d1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/b7f4d41d73b016e92e401fde8711aac4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/b9392323b55ce43566f5110e4a1856fc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/bfe3c1008902f9dece129403dccc3b04" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/cb55a7557f931574f69d7c8408b8d89b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/cc3305e6493c8b5850d624eaa4f6aeef" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/cc3f2ea3fc59e014b4a9693b1c33628c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/cce4a4c1ff9356ed58823a50f8f41fc6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/d411fcf305830d0d21c39cc08d2f0c0b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/d7997827fc748c931e665e1635edd493" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/d7b9d2b37d912c29b5d1053d51093402" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/da296c99c56a2d956943a64f04a6b665" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/dad9da2e968104e662512a6d208dca90" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/e0d8c5688d38e77c20030046453cdb4b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/e3d4b8f138e868c2a604ad840134cd7f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/ecb79c88d73c7a1feac83319a56c65bb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uploads/ffb98eaf1777698c62635ad3f5e202f2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/guide.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/guide.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/tour.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/tour.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/account/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/account/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/account/guideaccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/account/guideaccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/account/memberaccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/account/memberaccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/guide/guide_des.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/guide/guide_des.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/guide/guide_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/guide/guide_main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/guide/guide_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/guide/guide_make.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/findemail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/findpassword.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/travel/detail/traveldetail_des.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/travel/detail/traveldetail_des.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/travel/detail/traveldetail_info.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/travel/detail/traveldetail_info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/guide/css/guideMain.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/guide/css/guideMain.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/guide/css/guideMake.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/guide/css/guideMake.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/travel/css/traveldetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/travel/css/traveldetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/users/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/users/css/account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/users/css/images/high-five.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/users/images/high-five.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/users/css/images/kakao.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/users/images/kakao.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/users/css/images/naver.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/users/images/naver.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/users/css/images/partnership.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/users/images/partnership.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/users/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/users/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Functions.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,13 +152,24 @@
         <option value="HyeongJunMin &lt;alsgudwns007@naver.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="subin" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1W3seBO6Ul5BCOhK8TQWYQJ4doL" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -59,7 +181,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/freetalk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/uploads" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -69,12 +191,13 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\public\uploads" />
+      <recent name="C:\Workspace\travelenjoy\src\app\freetalk" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\src\resources\freetalk\image\talk" />
       <recent name="C:\Users\minhj\Desktop\민형준\공부\개발\nodejs\travelenjoy\src\components\freetalk" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Workspace\travelenjoy\src\app\freetalk" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -103,7 +226,8 @@
       <workItem from="1578389778305" duration="2297000" />
       <workItem from="1578392676867" duration="1173000" />
       <workItem from="1579691184387" duration="6681000" />
-      <workItem from="1580096435575" duration="14647000" />
+      <workItem from="1580096435575" duration="17736000" />
+      <workItem from="1580120769657" duration="623000" />
     </task>
     <task id="LOCAL-00001" summary="자유게시판 틀 작성 중">
       <created>1578803653702</created>
@@ -125,6 +249,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="자유게시판 틀 작성 중" />
     <option name="LAST_COMMIT_MESSAGE" value="자유게시판 틀 작성 중" />
@@ -134,68 +269,75 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="52" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1578491687323" />
-    <state x="725" y="199" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580110325673">
+    <state x="725" y="199" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580904605832">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="725" y="199" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1580110325673" />
+    <state x="725" y="199" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1580904605832" />
     <state x="289" y="0" key="CommitChangelistDialog2" timestamp="1579180730164">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="289" y="0" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1579180730164" />
-    <state width="1478" height="336" key="GridCell.Tab.0.bottom" timestamp="1579184557352">
+    <state x="718" y="69" width="1209" height="851" key="DiffContextDialog" timestamp="1580896993396">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="718" y="69" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1580896993396" />
+    <state x="1196" y="118" width="1209" height="851" key="DiffContextDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580825141789" />
+    <state width="1058" height="265" key="GridCell.Tab.0.bottom" timestamp="1580214998229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="930" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578490306947" />
-    <state width="1478" height="336" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1579184557352" />
-    <state width="1478" height="336" key="GridCell.Tab.0.center" timestamp="1579184557352">
+    <state width="1058" height="265" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580214998229" />
+    <state width="1058" height="265" key="GridCell.Tab.0.center" timestamp="1580214998229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="930" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578490306947" />
-    <state width="1478" height="336" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1579184557352" />
-    <state width="1478" height="336" key="GridCell.Tab.0.left" timestamp="1579184557352">
+    <state width="1058" height="265" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580214998229" />
+    <state width="1058" height="265" key="GridCell.Tab.0.left" timestamp="1580214998229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="930" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578490306946" />
-    <state width="1478" height="336" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1579184557352" />
-    <state width="1478" height="336" key="GridCell.Tab.0.right" timestamp="1579184557352">
+    <state width="1058" height="265" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580214998229" />
+    <state width="1058" height="265" key="GridCell.Tab.0.right" timestamp="1580214998229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="930" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578490306947" />
-    <state width="1478" height="336" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1579184557352" />
-    <state x="1527" y="431" key="RollbackChangesDialog" timestamp="1580089194135">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1058" height="265" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580214998229" />
+    <state x="916" y="247" key="RollbackChangesDialog" timestamp="1580904661636">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="1527" y="431" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580089194135" />
+    <state x="916" y="247" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1580904661636" />
+    <state x="1527" y="431" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580825120031" />
     <state x="196" y="110" key="SettingsEditor" timestamp="1578491646647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="196" y="110" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1578491646647" />
     <state x="327" y="296" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1578389766313" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1580108100635">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1580115171007">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1580108100635" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1580115171007" />
     <state x="325" y="64" key="Vcs.Push.Dialog.v2" timestamp="1578803706461">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="325" y="64" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1578803706461" />
-    <state x="787" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1579694192454">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="472" y="308" key="com.intellij.ide.util.TipDialog" timestamp="1580895703036">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="472" y="308" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580895703036" />
     <state x="787" y="524" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579694192454" />
-    <state x="681" y="12" width="778" height="768" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1578492648659">
+    <state x="681" y="12" width="778" height="768" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1580901609162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="681" y="12" width="778" height="768" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1578492648659" />
-    <state x="1483" y="72" width="1039" height="676" key="dock-window-1" timestamp="1580004615580">
+    <state x="681" y="12" width="778" height="768" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1580901609162" />
+    <state x="1549" y="351" width="1039" height="676" key="dock-window-1" timestamp="1580628804862">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1483" y="72" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1580004615580" />
-    <state x="908" y="186" width="618" height="538" key="find.popup" timestamp="1580109986439">
+    <state x="1549" y="351" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1580628804862" />
+    <state x="908" y="186" width="618" height="538" key="find.popup" timestamp="1580904462854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="908" y="186" width="618" height="538" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1580109986439" />
-    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580005473133" />
+    <state x="908" y="186" width="618" height="538" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1580904462854" />
+    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580215642582" />
     <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog" timestamp="1579180717821">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -204,10 +346,28 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="699" y="181" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1580104419061" />
-    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580110324392">
+    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580906063340">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580110324392" />
-    <state x="610" y="246" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580089899567" />
+    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580906063340" />
+    <state x="610" y="246" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1580823216796" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/freetalk/uploader/MultipleImageUploader.js</url>
+          <line>68</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/freetalk/uploader/MultipleImageUploader.js</url>
+          <line>32</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

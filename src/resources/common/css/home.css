@@ -219,12 +219,31 @@
   
 
 /* 자유게시판 글 */
+.recommendtalk-wrapper{
+    display: inline-block;
+    margin: 1px;
+}
 .recommendtalk{
     width: 220px;
     display: inline-block;
-    margin: 1px;
+    cursor: pointer;
 }
 .recommendtalk-thumbnail{
     object-fit: cover;
     width: 100%;
+}
+.recommnedtalk-hover{
+    background-color: #000;
+    opacity: 0.5;
+    color: #fff;
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    transform: translate(0px, -220px);
+    text-align: center;
+    font-size: 17pt;
+    font-size: 15pt;
+    font-weight: 400;
+    line-height: 11;
+    transition: 0.5s;
 }

@@ -66,6 +66,26 @@ router.get('/isScrap', function (req, res) {
             res.send({msg : true})
         }
     })
-})
+});
+
+router.get('/recommend/talklist', function (req, res) {
+    console.log('/recommend/talklist  req.start = ' , req.query.start);
+    let sql = 'select f.seq, f.title, f.content, f.email, f.nickname, f.reg_date, ifnull(l.likecount, 0) as likecount, ifnull(c.commentcount, 0) as commentcount, i.name_saved '
+            + 'from ((te_freetalk f '
+            + 'left join (select te_freetalk_seq, count(*) as likecount from te_freetalk_likes group by te_freetalk_seq) l '
+            + 'on f.seq = l.te_freetalk_seq) '
+            + 'left join (select talk_seq, count(*) as commentcount from te_comment group by talk_seq) c '
+            + 'on f.seq = c.talk_seq) '
+            + 'left join (select te_freetalk_seq, name_saved from te_freetalk_images group by te_freetalk_seq) i '
+            + 'on f.seq = i.te_freetalk_seq '
+            + 'order by likecount desc '
+            + 'limit ?, 10 ; ';
+    sql = mysql.format(sql, [parseInt(req.query.start)]);
+    mysql.query(sql, function (err, result) {
+        if(err){console.log('freetalk 조회 에러용')}
+        res.send(result);
+    })
+});
+
 
 module.exports = router;

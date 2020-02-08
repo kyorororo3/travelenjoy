@@ -10,7 +10,9 @@ class Home extends React.Component {
     super(props);
     this.state = {
       tourlistStart : 0,
-      tourlist : []
+      tourlist : [],
+      talklistStart : 0,
+      talklist : []
     }
   }
 
@@ -19,6 +21,12 @@ class Home extends React.Component {
     .then(res => res.json())
     .then(data => {
       this.setState({tourlist : data})
+    })
+
+    fetch(`http://localhost:3002/main/recommend/talklist?start=0`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({talklist : data})
     })
   }
 
@@ -77,7 +85,7 @@ class Home extends React.Component {
 
 
   render() {
-    let tourlist = this.state.tourlist;
+    let {tourlist, talklist} = this.state;
 
     return (
       <div className='container'>
@@ -102,7 +110,7 @@ class Home extends React.Component {
           <div className='recommendlist-wrapper'>
           <div className='home-subtitle'>실시간 인기글 💬</div>
             <div className='recommendlist-row'>
-              <RecommendTalk />
+              {talklist.map(talk => <RecommendTalk key={talk.seq} talk={talk} />)}
             </div>          
           </div>
 

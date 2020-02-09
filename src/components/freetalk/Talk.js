@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, Row, Col, Media} from 'react-bootstrap';
+import {Modal, Button, Row, Col, Media, Carousel} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
@@ -83,7 +83,18 @@ class Talk extends Component {
                         </div>
                         <div className="modal-image-wrap">
                             <div className="modal-image-aligner">
-                                <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                                <Carousel>
+                                    {(this.state.images.length > 0)?
+                                        this.state.images.map( (image, i) => (
+                                            <Carousel.Item>
+                                            <img key={image.seq}
+                                                 src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
+                                            </Carousel.Item>
+                                        ))
+                                        :<img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                                    }
+
+                                </Carousel>
                             </div>
                         </div>
                     </Col></Row>

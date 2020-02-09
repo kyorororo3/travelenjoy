@@ -40,16 +40,8 @@ class TalkMain extends Component {
             <div className="container">
                 <TalkSearch/>
                 <div className="talk-list-wrap">
-
                     {currentPage}
                     <TalkWriteBtn/>
-                    {/*<i className="fab fa-instagram" style={instagramIconStyle} onClick={() => this.changeMode('write')}></i>*/}
-                    <div className="talk-main-function-wrap">
-                        <input className="btn-primary" type="button" value={"글 목록"} onClick={() => this.changeMode('list')}/>
-                        <input className="btn-primary" type="button" value={"새 게시물 작성"} onClick={() => this.changeMode('write')}/>
-                        <input className="btn-primary" type="button" value={"내 글"} onClick={() => this.changeMode('my')}/>
-                        <a href={"/free/write"}>새 게시물 작성</a>
-                    </div>
                 </div>
             </div>
         );

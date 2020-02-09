@@ -10,10 +10,16 @@ class TalkList extends Component {
     }
 
     componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
         fetch('http://localhost:3002/freetalk/list')
             .then(res => res.json())
             .then(res => this.setState({list: res.list}))
             .then(res => this.setState({talkLength: this.state.list.length}))
+    }
+
+    componentWillUnmount() {
+        // 언마운트 될때에, 스크롤링 이벤트 제거
+        window.removeEventListener("scroll", this.handleScroll);
     }
 
     addTalk = (data) => {
@@ -23,9 +29,20 @@ class TalkList extends Component {
             .then(res => this.setState({talkLength: this.state.list.length}))
     }
 
-    writeTalk = () => {
-        alert('sdfsdfsdfsdf');
-    }
+    handleScroll = () => {
+        const { innerHeight } = window;
+        const { scrollHeight } = document.body;
+        const scrollTop =
+            (document.documentElement && document.documentElement.scrollTop) ||
+            document.body.scrollTop;
+        if (scrollHeight - innerHeight - scrollTop < 100) {
+            console.log("Almost Bottom Of This Browser");
+            fetch('http://localhost:3002/freetalk/list?seq=' + (this.state.talkLength + 1))
+                .then(res => res.json())
+                .then(res => this.setState({list: this.state.list.concat(res.list)}))
+                .then(res => this.setState({talkLength: this.state.list.length}))
+        }
+    };
 
     render() {
         return (
@@ -42,9 +59,6 @@ class TalkList extends Component {
                               />
                     )
                 ):' '}
-                <div className="talk-list-function-wrap">
-                    <input className="btn-primary" type="button" value={"infinite scroll로 변경 예정"} onClick={this.addTalk}/>
-                </div>
             </div>
         );
     }

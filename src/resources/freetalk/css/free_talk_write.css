@@ -1,16 +1,22 @@
 #btnFileSubmit{
     width: 100%;
 }
-#talk-write-modal .media-body{
+
+#talk-write-modal div{
+    padding: 10px;
+    margin: 10px;
 }
 #talk-write-modal .modal-content{
     width: 700px;
-    height: 600px;
+    height: 400px;
     margin: auto;
     left: -15%;
     overflow: auto !important;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+#talk-write-modal .modal-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 #talk-write-modal .modal-content div{
     width: 97%;
@@ -23,3 +29,4 @@
     width: auto;
     margin: 5px;
 }
+

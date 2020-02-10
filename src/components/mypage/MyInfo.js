@@ -116,8 +116,14 @@ class MyInfo extends Component {
       }
 
     render(){
+        let provider ='';
+        let isSns = false;
         
-        
+        if(this.props.location.state.users.provider !== null){
+            provider = this.props.location.state.users.provider;
+            isSns = true;
+        }
+
         return(
             <div className='mypage-body'>
                 <div className='body-wrapper box'>
@@ -170,7 +176,8 @@ class MyInfo extends Component {
                                     <div className='form-group' id='sns-wrapper'>
                                         <div className='info-title'>Linked SNS</div>
                                         <div className='input-wrapper'>
-                                        {/* 없음, sns 계정 연결 되어 있음으로 표시하기 연동 버튼 따로 만들기  */}
+                                            {isSns? provider === 'kakao'? <img className='sns-img' src={require('../../resources/users/images/kakao.png')}/>:<img className='sns-img' src={require('../../resources/users/images/naver.png')}/>
+                                                    :<input className='form-input-group ' readOnly type='text' name='provider' value='없음' />}
                                         </div>
                                     </div>
                                     <div id='btn-wrapper'>

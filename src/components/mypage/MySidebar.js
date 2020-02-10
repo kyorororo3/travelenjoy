@@ -40,7 +40,10 @@ class MySidebar extends Component {
                                 }}>My Travel</Link>
                             </div>
                             <div className='item'>
-                                <Link to='/mypage/scrap'>My Scrap</Link>
+                                <Link to={{
+                                    pathname:'/mypage/scrap',
+                                    state:{ users:this.props.users }
+                                }}>My Scrap</Link>
                             </div>
                             <div className='item'>
                                  <Link to='/mypage/history'>My History</Link>

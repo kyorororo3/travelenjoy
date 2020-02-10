@@ -14,6 +14,8 @@ class MyCalendar extends Component {
           email:this.props.location.state.users.email,
           list: []
         }
+
+        this.goTravelDetailHandler = this.goTravelDetailHandler.bind(this);
       }
       componentDidMount() {
         fetch(`http://localhost:3002/mypage/travel?email=${this.state.email}`)
@@ -24,25 +26,33 @@ class MyCalendar extends Component {
           );
            
       } 
+
+      goTravelDetailHandler(e){
+        console.log(e.event.id);
+        let seq = e.event.id;
+        this.props.history.push(`/travel/detail/${seq}`);
+        debugger;
+      }
+
     render(){
         let { list } = this.state
         let eventsList = list.map((event) => 
             [{
-                id:event.seq,
+                id:event.tour_seq,
                 title:event.title,
                 start:event.start_date,
                 backgroundColor:'#e1e9eb'
             }][0]
         )
 
-
+        
         return(
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
                            <div className='calendar-wrapper'>
                                 <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}    
-                                events={eventsList}
+                                events={eventsList} eventClick={this.goTravelDetailHandler}
                               />
                            </div>
                         </div>

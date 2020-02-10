@@ -62,8 +62,7 @@ class RecommendTour extends React.Component {
         return price.toLocaleString();      
     }
 
-    handleOnClick = (event) => {
-        //console.log(this.props.tour.seq);
+    handleOnClick = () => {
         this.props.history.push(`/travel/detail/${this.props.tour.seq}`);
     }
 
@@ -71,15 +70,15 @@ class RecommendTour extends React.Component {
         let {seq, category, title, price, score} = this.props.tour;
        
         return(      
-            <div className='recommendtour' onClick={this.handleOnClick}>
+            <div className='recommendtour'>
                 <div className='thumbnail'>
-                <div className ='thumbnail-like' onClick={this.handleScrap}>
-                    {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}
-                </div>
-                    <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/jeju.jpg')} />
+                    <div className ='thumbnail-like' onClick={this.handleScrap}>
+                        {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}
+                    </div>
+                    <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/jeju.jpg')} onClick={this.handleOnClick} />
                 </div>
 
-                <div className='recommendtour-body'>
+                <div className='recommendtour-body' onClick={this.handleOnClick}>
                     <div className='recommendtour-body loc'>{category}</div>
                     <div className='recommendtour-body title'>{title}</div>
                     <div className='recommendtour-body tourprice'>{this.numberFormat(price)}원 / 1인</div>

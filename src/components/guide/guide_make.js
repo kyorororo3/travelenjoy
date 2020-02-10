@@ -30,7 +30,10 @@ class GuideMake extends Component {
       uploadBtn: '',
       tour_seq: '',
       des_list: '',
-      tourUpload: false
+      tourUpload: false,
+      max_value: '',
+      min_value: '',
+      price_value: ''
     };
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
@@ -38,6 +41,7 @@ class GuideMake extends Component {
     this.onSaveHandler = this.onSaveHandler.bind(this);
     this.desHandler = this.desHandler.bind(this);
     this.upLoadonClick = this.upLoadonClick.bind(this);
+    //this.onlyNumber = this.onlyNumber.bind(this);
   }
 
   //login info
@@ -53,10 +57,50 @@ class GuideMake extends Component {
       );
   }
 
+  //숫자만 입력되게 제어
+  // onlyNumber(e) {
+  //   const re = /^[0-9\b]+$/;
+  //   if (e.target.min_value === '' || re.test(e.target.min_value)) {
+  //     this.setState({ value: e.target.min_value })
+  //   }
+  //   if (e.target.max_value === '' || re.test(e.target.max_value)) {
+  //     this.setState({ value: e.target.max_value })
+  //   }
+  //   if (e.target.price_value === '' || re.test(e.target.price_value)) {
+  //     this.setState({ value: e.target.price_value })
+  //   }
+  //   const minValue = e.target.min_people.value;
+  //   const new_minValue = minValue.replace(/[^0-9]/g, '');
+  //   this.setState({min_value: new_minValue})
+  // }
+
   //tour 저장후다음 -> des
   onSubmitHandler(e) {
     e.preventDefault();
 
+    if(e.target.title.value === ""){
+      alert("투어 제목을 입력해 주세요");
+    }
+    if(e.target.category.value === ""){
+      alert("지역을 선택해 주세요");  
+    }
+    if(e.target.thumbnail.files[0] === undefined){
+      alert("대표사진을 설정해 주세요")
+    }
+    if(e.target.min_people.value === "" || e.target.max_people.value === ""){
+      alert("참여인원을 입력해 주세요");
+    }
+    if(e.target.min_people.value >= e.target.max_people.value){
+      alert("참여인원을 정확하게 입력해 주세요");
+    }
+    if(e.target.price.value === ""){
+      alert("가격을 입력해 주세요");
+    }
+    if(this.state.text === ""){
+      alert("내용을 입력해 주세요");
+    }
+
+    console.log(this.state.text);
     const formData = new FormData();
     formData.append('email', this.state.users.email);
     formData.append('companyname', this.state.users.companyname);
@@ -205,6 +249,7 @@ class GuideMake extends Component {
               </div>
               <div className='guide-input'>
                 <select className='guide-input-category' name="category">
+                  <option value="">선택</option>
                   <option value="서울">서울</option>
                   <option value="인천">인천</option>
                   <option value="경기">경기</option>
@@ -227,14 +272,14 @@ class GuideMake extends Component {
                 <span>[최소-최대]인원</span>
               </div>
               <div className='guide-input'>
-                <input type="text" className="guide-form-input" name="min_people" readOnly={this.state.readOnly} placeHolder="최소 인원" />명 ~ <input type="text" className="guide-form-input" name="max_people" readOnly={this.state.readOnly} placeHolder="최대 인원" />명
+                <input type="text" className="guide-form-input" name="min_people" readOnly={this.state.readOnly} placeHolder="최소 인원" />명 ~ <input type="text" className="guide-form-input" name="max_people" readOnly={this.state.readOnly} placeHolder="최대 인원"/>명
               </div><br />
 
               <div className='guide-titleSpan'>
                 <span>투어 비용</span>
               </div>
               <div className='guide-input'>
-                <input type="text" className="guide-form-input" name="price" readOnly={this.state.readOnly} placeHolder="금액" /> 원  <span className='guide-price-info'>*인당 비용입니다.</span>
+                <input type="text" className="guide-form-input" name="price" readOnly={this.state.readOnly} placeHolder="금액"/> 원  <span className='guide-price-info'>*인당 비용입니다.</span>
               </div><br /><br />
 
               <div className='guide-tourinfoSpan'>

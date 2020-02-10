@@ -8,7 +8,6 @@ import '../../../resources/travel/css/travelreservation.css';
 import TravelReservationInfo from './travelreservation_tour';
 import TravelReservationClient from './travelreservation_client';
 import TravelReservationTos from './travelreservation_tos';
-import TravelReservationComplete from './travelreservation_complete';
 
 // Utility
 import * as UtilityFunctions from '../../../utils/Functions';
@@ -18,10 +17,8 @@ class TravelReservation extends React.Component {
     super(props);
 
     this.state = {
-      isPaid: false,
       phone: undefined,
-      require: undefined,
-      reservation_number: undefined
+      require: undefined
     }
   }
 
@@ -61,7 +58,9 @@ class TravelReservation extends React.Component {
             email: email,
             start_date: UtilityFunctions.dateToString(selectedDays[0]),
             join_people: person,
-            total_price: total_price
+            total_price: total_price,
+            phone: phone,
+            message: require
           }
   
           fetch('http://localhost:3002/tour/reservation', {
@@ -72,19 +71,19 @@ class TravelReservation extends React.Component {
             body: JSON.stringify(insert)
           }) 
             .then(res => res.json())
-            .then(data => {
-              if(data.result === 'succ') {
-                alert('insert 성공!');
-                this.setState({
-                  reservation_number: insert.reservation_number,
-                  isPaid: true
+            .then(result => {
+              if(result.seq !== 0) {
+                alert('insert 성공! tour_reservation_seq = ' + result.seq);
+                this.props.history.push({
+                  pathname: '/travel/reservation/complete',
+                  state: {seq: result.seq}
                 })
-              }else if(data.result === 'fail') {
+              }else if(result.seq === 0) {
                 alert('예상치 못한 오류로 결제가 취소되었습니다.');
                 
                 // 카드결제 취소 logic...ㅎ
 
-                this.props.history.push(`travel/detail/${tour_seq}`);
+                this.props.history.push(`/travel/detail/${tour_seq}`);
               }
             })
 
@@ -151,12 +150,10 @@ class TravelReservation extends React.Component {
   }
 
   render() {
-    const { tour_seq, selectedDays, person, email, reservation_number } = this.props.location.state;
-    let { isPaid } = this.state;
+    const { tour_seq, selectedDays, person, email } = this.props.location.state;
 
     return(
       <div className='container'>
-        {isPaid? <TravelReservationComplete number={reservation_number}/> : 
         <div className='travel-reservation-wrapper'>
           <TravelReservationInfo selectedDays={selectedDays} person={person} tour_seq={tour_seq} />
           <TravelReservationClient handlePhoneChange={this.handlePhoneChange} handleRequireChange={this.handleRequireChange}/>
@@ -164,7 +161,7 @@ class TravelReservation extends React.Component {
           <div className='travel-pay'>
             <button type='button' className='btn-l' onClick={this.handleClick}>결제하기</button>
           </div>
-        </div>}
+        </div>
       </div>
     )
   }

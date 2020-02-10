@@ -243,19 +243,29 @@ router.post('/question/chatmsg', (req, res) => {
 
 // 예약하기
 router.post('/reservation', (req, res) => {
-  const { reservation_number, tour_seq, email, start_date, join_people, total_price } = req.body;
+  const { reservation_number, tour_seq, email, start_date, join_people, total_price, phone, message } = req.body;
 
   console.log(start_date);
 
-  const sql = 'insert into te_tour_reservation values(?, ?, ?, ?, ?, ?)';
-  const params = [reservation_number, tour_seq, email, start_date, join_people, total_price];
-  conn.query(sql, params, (err) => {
-    if(err) {
-      console.log("ERR!! " + err);
-      res.send({result: 'fail'});
-    } else{
-      res.send({result: 'succ'}); 
-    }
+  let sql1 = 'insert into te_tour_reservation values(null, ?, ?, ?, ?, ?, ?, ?, ?);';
+  const params = [reservation_number, tour_seq, email, start_date, join_people, total_price, phone, message];
+  sql1 = mysql.format(sql1, params);
+  const sql2 = 'select last_insert_id() as seq;';
+
+  const sqls = sql1 + sql2;
+  conn.query(sqls, (err, result) => {
+    if(err) return console.log("ERR!! " + err);
+    res.send(result[1][0]); 
+  })
+})
+
+// 예약정보 조회
+router.get('/reservation/info', (req, res) => {
+  const {seq} = req.query;
+  const sql = 'select * from te_tour_reservation where seq=?';
+  conn.query(sql, seq, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows[0]);
   })
 })
 

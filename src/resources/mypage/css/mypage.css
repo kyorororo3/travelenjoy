@@ -11,6 +11,11 @@ a{
 }
 
 
+.travel-wrapper>h5{
+    text-align:center;
+    color: darkgray;
+}
+
 .mypage-heading{
     color: #495056;
     font-size: 24px;
@@ -324,4 +329,81 @@ a{
     margin-left: 8px;
     margin-bottom: 16px;
 
+}
+
+
+
+/* --------------------  My Talk CSS ------------------------- */
+
+.talk-title{
+    line-height: 30px;
+    font-weight: 700;
+    font-size:18px;
+    border-bottom: 1px solid #e9ecef;
+    
+}
+
+/* --------------------  My Review CSS ------------------------- */
+
+.wait-myreview-wrapper{
+    display:inline-block;
+    width:100%;
+}
+
+.wait-myreview-wrapper>.travel-wrapper{
+    margin:10px 0px;
+}
+.review-table{
+    float:left;
+    margin-bottom:30px;
+    width:100%;
+}
+.review-table-row span{
+    line-height: 35px;
+    padding: 7px 15px;
+    display:inline-block;
+    cursor: pointer;
+}
+
+.review-table-row>#star{
+    width:20%;
+}
+
+.review-table-row>#title{
+    width:60%;
+    overflow: hidden;
+}
+
+.review-table-row>#wdate{
+    width:20%;
+}
+/* --------------------  My Home CSS ------------------------- */
+.count-box-wrapper{
+    text-align: center;
+    margin-bottom: 45px;
+}
+.count-box-container{
+    text-align: center;
+    display: inline-block;
+    margin: 10px 50px;
+ 
+}
+.count-title{
+    font-weight: 600;
+}
+.count-number{
+    margin-top:-10px !important;
+    font-size: 30px;
+    font-weight: 600;
+    color: #2b90d9;
+}
+
+.news-title{
+    line-height: 30px;
+    font-weight: 700;
+    font-size:18px;
+    border-bottom: 1px solid #e9ecef;
+}
+.fa-bell, .fa-pencil-alt{
+    color: #2b90d9;
 }

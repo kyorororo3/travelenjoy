@@ -46,7 +46,10 @@ class MySidebar extends Component {
                                 }}>My Scrap</Link>
                             </div>
                             <div className='item'>
-                                 <Link to='/mypage/review'>My Review</Link>
+                                 <Link to={{
+                                    pathname:'/mypage/review',
+                                    state:{ users:this.props.users }
+                                }}>My Review</Link>
                             </div>
                             <div className='item'>
                                  <Link to='/mypage/talk'>My Talk</Link>

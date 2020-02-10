@@ -54,17 +54,7 @@ class TalkWriteBtn extends Component {
                     <Media.Body>
                         <div className="talk-write-body-wrap">
                             <div className="write-file">
-                                이미지 업로더
                                 <MultipleImageUploader/>
-                            </div>
-                            <div className="write-content">
-
-                            </div>
-                            <div className="write-friends">
-
-                            </div>
-                            <div className="write-location">
-
                             </div>
                         </div>
                     </Media.Body>

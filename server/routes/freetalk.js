@@ -12,6 +12,10 @@ let dbconfig = require('../config/dbconfig')();
 let connection = dbconfig.init();
 dbconfig.conn_test(connection, 'freetalk!!');
 
+state = {
+    pointer:''
+}
+
 router.get('/test', function (req, res) {
     res.json({
         list: [
@@ -24,7 +28,7 @@ router.get('/test', function (req, res) {
 
 //게시물 페이징 + 검색
 router.get('/list', function (req, res) {
-    const seq = (req.query.seq == null)?1:req.query.seq;
+    const seq = (req.query.seq == null)?0:req.query.seq;
     let stmt = "select * from te_freetalk order by seq desc limit " + seq + ", 9";
     connection.query(stmt, function (err, result) {
         if (err) console.log('connection result err : ' + result);
@@ -105,6 +109,24 @@ router.post('/free/save/image',upload.single('file'), function(req, res, next) {
 
 router.post('/free/save/images',upload.array('files'), function(req, res, next) {
     console.log('img save body : ' + JSON.stringify(req.body));
+    for (let file of req.files) {
+        console.log('files : ' + file.filename);
+        console.log('info : ' + JSON.stringify(file));
+    }
+
+    let insertTalk = "insert into te_freetalk (title, content, email, nickname, image_count) values(?, ?, ?, ?, ?)";
+    connection.query(insertTalk, ['title', req.body.content, 'guest', 'guest', req.files.length], function (err, result) {
+        if (err) console.log('connection result err : ' + err);
+
+        for (let file of req.files) {
+            let insertImages = "insert into te_freetalk_images (te_freetalk_seq, name_real, name_saved) values(?, ?, ?)";
+            connection.query(insertImages, [result.insertId, file.originalname, file.filename], function (err, result) {
+                if (err) console.log('connection result err : ' + err);
+            });
+        }
+    });
+
+
 })
 
 module.exports = router

@@ -46,7 +46,10 @@ class MySidebar extends Component {
                                 }}>My Scrap</Link>
                             </div>
                             <div className='item'>
-                                 <Link to='/mypage/history'>My History</Link>
+                                 <Link to='/mypage/review'>My Review</Link>
+                            </div>
+                            <div className='item'>
+                                 <Link to='/mypage/talk'>My Talk</Link>
                             </div>
                         </div>            
                     </div>

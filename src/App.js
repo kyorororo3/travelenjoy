@@ -14,6 +14,7 @@ import TravelMain from './components/travel/travel_main';
 import TravelDetail from './components/travel/detail/traveldetail';
 import TravelCity from './components/travel/list/travellist_city';
 import TravelReservation from './components/travel/reservation/travelreservation';
+import TravelReservationComplete from './components/travel/reservation/travelreservation_complete';
 import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
 import Member_Account from './components/account/memberaccount';
@@ -68,7 +69,8 @@ class AppTest extends React.Component {
               <Route exact path='/travel' component={TravelMain} />
               <Route path='/travel/detail/:seq' component={TravelDetail} />
               <Route path='/travel/city' component={TravelCity} />
-              <Route path='/travel/reservation' component={TravelReservation} />
+              <Route exact path='/travel/reservation' component={TravelReservation} />
+              <Route path='/travel/reservation/complete' component={TravelReservationComplete} />
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
               <Route exact path='/mypage' component={MypageHome}/>

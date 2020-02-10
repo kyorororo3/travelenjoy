@@ -31,7 +31,7 @@ class Tourdetail extends React.Component {
         isLoaded: true,
         tour_info: data.tour_info,
         tour_des: data.tour_des,
-        disabledDays: data.disabledDays
+        disabledDays: data.disabledDayse
       }) );
 
   }

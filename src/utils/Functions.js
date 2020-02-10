@@ -19,6 +19,16 @@ export function dateToString(date) {
   return dateStr;
 }
 
+export function dateToString2(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  const dateStr = year + "-" + two(month) + "-" + two(day);
+
+  return dateStr;
+}
+
 // String (yyyy-mm-dd) -> Date
 export function stringToDate(str) {
   const ymdArr = str.split('-');

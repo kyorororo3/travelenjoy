@@ -31,7 +31,7 @@ class MyCalendar extends Component {
         console.log(e.event.id);
         let seq = e.event.id;
         this.props.history.push(`/travel/detail/${seq}`);
-        debugger;
+        window.location.reload();
       }
 
     render(){

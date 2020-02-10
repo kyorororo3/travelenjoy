@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../resources/travel/css/travellist.css';
 import TravelList from '../travel/list/travellist_obj';
-
+import MySearchForm from './UI/MySearchForm';
 class MyTravel extends Component {
 
     constructor(props) {
@@ -29,17 +29,9 @@ class MyTravel extends Component {
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
-                        <form>
-                                <select className='category-selection'>
-                                    <option>title</option>
-                                    <option>location</option>
-                                    <option>date</option>
-                                </select>
-                                <input type='text' name='search' className='search-input'/>
-                                <button className='basic-btn'>search</button>
-                        </form>
+                        <MySearchForm />
                         <div className='travel-wrapper'>
-                            {isLoaded? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />) : <h1>Loading....</h1>}
+                            {isLoaded? list.length !== 0? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />):<h5>Let's make your travelling plan with Travel&joy!</h5> : <h1>Loading....</h1>}
                         </div>
                         </div>
                     </div>

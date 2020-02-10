@@ -195,7 +195,7 @@ class Member_Account extends React.Component {
     .then(data => {
       if(data.msg === 'success'){
         this.setState({signUpStatus : true});
-        alert('회원가입 완료')    
+        alert('회원가입 완료');
       }     
     })
   }
@@ -250,12 +250,6 @@ class Member_Account extends React.Component {
       return <Redirect to='/login' />
     }
 
-    // 프로필 이미지 업로드 미리보기
-    let profile_preview = null;
-    if(this.state.file !== ''){
-      profile_preview = <img className='profile_preview' src={this.state.previewURL}></img>
-    }
-
     return(
       <div className="account-wrapper">
         <h2>회원가입</h2>
@@ -296,7 +290,7 @@ class Member_Account extends React.Component {
 
             <p className='row-name'>프로필 사진</p>
             <p><input type='file' accept='image/jpg,image/png,image/jpeg,image/gif' name='profile_img' onChange={this.handleFileOnChange} /></p>
-            {profile_preview}
+            {this.state.file !== ''?<img className='profile_preview' src={this.state.previewURL} />:null}
             <p><input type='submit' className='accountBtn' value='회원가입'></input></p>
           </form>
 

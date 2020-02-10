@@ -169,8 +169,7 @@ a:hover, a:active, a:focus {
     padding-left: 15px;
     padding-right: 15px;
     float: left;
-    width: 16.66667%;
-
+    width: 21.66667%;
   }
 
   .menu-wrapper{
@@ -185,3 +184,9 @@ a:hover, a:active, a:focus {
     padding-right:15px;
     padding-left:15px;
   }
+
+  .menu-wrapper ul li a, #header-logo a{
+      text-decoration: none;
+  }
+
+  #header-logo a{}

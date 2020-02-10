@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class MyHistory extends Component {
+class MyTalk extends Component {
 
     constructor(props){
         super(props);
@@ -11,7 +11,7 @@ class MyHistory extends Component {
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
-                            My History is here. My major is Korean History
+                            talk talk
 
                         </div>
                     </div>
@@ -21,4 +21,4 @@ class MyHistory extends Component {
 }
 
 
-export default MyHistory;
+export default MyTalk;

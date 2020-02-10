@@ -20,7 +20,9 @@ class TalkModalBody extends Component {
             phone: 1111,
             auth:3
         },
-        comments: []
+        comments: [],
+        currentUser: '',
+        content: ''
     }
 
     componentDidMount() {
@@ -32,6 +34,33 @@ class TalkModalBody extends Component {
         fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
             .then(res => res.json())
             .then(res => this.setState({comments: res.comments}))
+        this.setState({currentUser: this.props.currentUser})
+    }
+
+    createComment = (e) => {
+        e.preventDefault()
+
+        let formData = new FormData();
+
+        formData.append("talk_seq", this.props.talkSeq);
+        formData.append("email", this.state.currentUser.email);
+        formData.append("nickname", this.state.currentUser.nickname);
+        formData.append("content", this.state.content);
+
+        console.log('front comment : ' + JSON.stringify(formData));
+
+        fetch('http://localhost:3002/freetalk/list/comments/create', {
+            method:'post',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+        
+        alert('저장이 완료되었습니다.')
+    }
+
+    handleCommentContent = (e) =>{
+        this.setState({content: e.target.value});
     }
 
     render() {
@@ -83,8 +112,12 @@ class TalkModalBody extends Component {
                     <br/>
                 </div>
                 <div className="modal-body-write-comment">
-                    <form>
-                        <input type="text" placeholder="댓글 입력..."/>
+                    <form onSubmit={this.createComment}>
+                        <input type="text"
+                               placeholder={(this.state.currentUser === '')?"로그인이 필요합니다.":"댓글 입력..."}
+                               disabled={(this.state.currentUser === '')?true:false}
+                               onChange={this.handleCommentContent}
+                        />
                         <a id="comment-submit" type="submit">게시</a>
                     </form>
                 </div>

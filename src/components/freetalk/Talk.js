@@ -26,7 +26,8 @@ class Talk extends Component {
             profile_img: 'default_profile_image.jpg',
             phone: 1111,
             auth:3
-        }
+        },
+        currentUser: ''
     }
 
     componentDidMount() {
@@ -43,6 +44,15 @@ class Talk extends Component {
         fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.email + '&nickname=' + this.props.nickname)
             .then(res => res.json())
             .then(res => this.setState({author: res.author}))
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                    if(data.email !== undefined)
+                        this.setState({currentUser : JSON.stringify(data)})
+                }
+            );
     }
 
     _callApi = async () => {
@@ -76,7 +86,7 @@ class Talk extends Component {
                                         />
                                     </a>
                                     <Media.Body>
-                                        <a href="#">{this.state.author.nickname}</a>
+                                        <a href="#">{this.props.nickname}</a>
                                     </Media.Body>
                                 </Media>
                             </div>
@@ -86,14 +96,13 @@ class Talk extends Component {
                                 <Carousel>
                                     {(this.state.images.length > 0)?
                                         this.state.images.map( (image, i) => (
-                                            <Carousel.Item>
+                                            <Carousel.Item key={image.seq}>
                                             <img key={image.seq}
                                                  src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
                                             </Carousel.Item>
                                         ))
                                         :<img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
                                     }
-
                                 </Carousel>
                             </div>
                         </div>
@@ -102,11 +111,13 @@ class Talk extends Component {
                         <div className="modal-content-wrap">
                             <Modal.Body>
                                 <TalkModalBody
+                                    key={this.props.seq}
                                     talkSeq={this.props.seq}
                                     email={this.props.email}
                                     nickname={this.props.nickname}
                                     regDate={this.props.reg_date}
                                     likes={this.state.likes}
+                                    currentUser={this.state.currentUser}
                                 />
                             </Modal.Body>
                         </div>

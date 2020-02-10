@@ -47,7 +47,6 @@ export default class MultipleImageUploader extends Component {
             this.setState({ file: file, imagePreviewUrl: reader.result });
         };
         this.setState({isFileUploaded: true});
-
     }
 
     uploadFiles = (e) => {
@@ -71,7 +70,13 @@ export default class MultipleImageUploader extends Component {
             .then(data => console.log(data));
 
         console.log('this.state.file ' + this.state.file);
+        alert('저장이 완료되었습니다.')
+        this.handleClose();
+        this.reloadMain();
     }
+
+    handleClose = () => this.props.handleClose();
+    reloadMain = () => this.props.reloadMain();
 
     onSubmitHandler(e){
         e.preventDefault();

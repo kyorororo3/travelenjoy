@@ -57,9 +57,10 @@ router.get('/list/likes', function(req, res) {
 
 //게시물 ID에 맞는 댓글 리턴
 router.get('/list/comments', function(req, res) {
-    const stmt = "select * from te_comment a, te_member b where talk_seq=? and a.email = b.email";
+    //const stmt = "select * from te_comment a, te_member b where talk_seq=? and a.email = b.email";
+    const stmt = "select a.seq as seq, a.content as content, a.reg_date as reg_date, b.profile_img as profile_img, b.nickname as nickname from te_comment a, te_member b where talk_seq=? and a.email = b.email";
     connection.query(stmt, req.query.talk_seq, function(err, result){
-        console.log(JSON.stringify(result))
+        console.log('return comments : ' + JSON.stringify(result))
         res.json({comments: result})
     });
 
@@ -72,6 +73,20 @@ router.get('/list/comments/count', function(req, res) {
         res.json({comments: result[0].cnt})
     });
 })
+
+//댓글 입력
+router.post('/list/comments/create', function(req, res, next) {
+    console.log('comment create body : ' + JSON.stringify(req.body))
+    const post = req.body;
+    let stmt = "insert into te_comment (talk_seq, email, nickname, content) values(?, ?, ?, ?)";
+    connection.query(stmt, [post.talk_seq, post.email, post.nickname, post.content], function (err, rows, fields) {
+        if (err) console.log('connection result err : ' + err);
+    });
+
+    res.json({
+        resp: "ok"
+    });
+});
 
 //게시글 작성자 정보 리턴
 router.get('/list/author', function(req, res) {

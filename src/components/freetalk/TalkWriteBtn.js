@@ -8,12 +8,25 @@ import '../../resources/freetalk/css/free_talk_write.css'
 
 class TalkWriteBtn extends Component {
 
-    state = {
-        file: 'cat19.jpg',
-        images: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            file: 'cat19.jpg',
+            images: [],
+            currentUser: this.props.getCurrentUser
+        }
     }
 
     componentDidMount() {
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                    if(data.email !== undefined)
+                        this.setState({currentUser : JSON.stringify(data)})
+                }
+            );
         // fetch('http://localhost:3002/freetalk/list/images?seq=' + this.props.seq)
         //     .then(res => res.json())
         //     .then(res => this.setState({images: res.images}))
@@ -27,7 +40,15 @@ class TalkWriteBtn extends Component {
     }
 
     handleClose = () => this.setState({showModal: false});
-    handleShow = () => this.setState({showModal: true});
+    handleShow = () => {
+        if (this.state.currentUser === '') {
+            alert('로그인이 필요합니다.');
+           return;
+        }
+        this.setState({showModal: true});
+    }
+
+    reloadMain = () => this.props.reloadMain();
 
     render() {
         const instagramIconStyle = {
@@ -54,7 +75,7 @@ class TalkWriteBtn extends Component {
                     <Media.Body>
                         <div className="talk-write-body-wrap">
                             <div className="write-file">
-                                <MultipleImageUploader/>
+                                <MultipleImageUploader handleClose={this.handleClose} reloadMain={this.reloadMain}/>
                             </div>
                         </div>
                     </Media.Body>

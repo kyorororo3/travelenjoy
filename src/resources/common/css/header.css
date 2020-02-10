@@ -101,10 +101,10 @@ a:hover, a:active, a:focus {
    
   }
   .header-nav ul li.login-logout-btn a:hover span {
-    -webkit-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.55);
-    -moz-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.55);
-    box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.55);
-   
+    transform: translate(-1px, -1px);
+    box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.26);
+    -webkit-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.26);
   }
   .header-nav ul li .menu.active {
     color: #000 !important;

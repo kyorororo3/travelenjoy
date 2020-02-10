@@ -48,8 +48,12 @@
 }
 
 .travel-info-images {
-  height: 500px;
-  border: 1px dotted black;
+  height: 450px;
+}
+
+.travel-info-images img {
+  width: 100%;
+  height: inherit;
 }
 
 .travel-info-contents {

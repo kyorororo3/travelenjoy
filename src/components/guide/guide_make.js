@@ -56,6 +56,7 @@ class GuideMake extends Component {
   //tour 저장후다음 -> des
   onSubmitHandler(e) {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('email', this.state.users.email);
     formData.append('companyname', this.state.users.companyname);
@@ -150,7 +151,9 @@ class GuideMake extends Component {
 
 
   //경로 등록
-  upLoadonClick = () => {
+  upLoadonClick = (e) => {
+    e.preventDefault();
+    
     for (let i = 1; i < this.state.desData.length; i++) {
 
       const formData = new FormData();

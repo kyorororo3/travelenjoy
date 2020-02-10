@@ -68,7 +68,7 @@ class TravelInfo extends React.Component {
   }
 
   render() {
-    let { email, category, title, content, thumbnail,
+    let { email, category, title, thumbnail,
       min_people, max_people } = this.props.info;
 
     return(
@@ -83,7 +83,7 @@ class TravelInfo extends React.Component {
           </span>
         </div>
         <div className='travel-info-images'>
-          이미지 들어갈 자리임!
+          <img src={require(`../../../uploads/${thumbnail}`)} />
         </div>
         <div className='travel-info-contents'>
           <div className='sub-title-text'><i className="fas fa-atlas"></i> Tour Description</div>

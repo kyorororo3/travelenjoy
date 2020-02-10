@@ -93,7 +93,7 @@ class TravelDetailModal extends React.Component {
           </div>
           <div className='chat-send'>
             <form onSubmit={this.handleSendMsg}>
-              <input type='text' name='msg'/>
+              <input type='text' name='msg' autoComplete='off'/>
               <input type='submit' value='전송' />
             </form>
           </div>

@@ -23,7 +23,7 @@ class Home extends React.Component {
       this.setState({tourlist : data})
     })
 
-    fetch(`http://localhost:3002/main/recommend/talklist?start=0`)
+    fetch(`http://localhost:3002/main/recommend/talklist?start=0&end=10`)
     .then(res => res.json())
     .then(data => {
       this.setState({talklist : data})
@@ -83,6 +83,28 @@ class Home extends React.Component {
     })
   }
 
+  handleReadMore = () => {
+    if(!document.getElementById('recommendlist-row-talk').classList.contains('fade-in')){
+      document.getElementById('recommendlist-row-talk').classList.add('fade-in');
+    }else{
+      document.getElementById('recommendlist-row-talk').classList.remove('fade-in');
+      void document.getElementById('recommendlist-row-talk').offsetWidth;
+      document.getElementById('recommendlist-row-talk').classList.add('fade-in');
+    }
+    this.setState({talklistStart : this.state.talklistStart + 10 }
+      , () => {
+        fetch(`http://localhost:3002/main/recommend/talklist?start=${this.state.talklistStart}`)
+        .then(res => res.json())
+        .then(data => {
+          let before_talklist = this.state.talklist;
+          let after_talklist = before_talklist.concat(data);
+          this.setState({talklist : after_talklist})       
+          if(this.state.talklistStart >= 10){
+            document.getElementsByClassName('readmore-btn')[0].style.display = "none";
+          }
+        })
+      })
+  }
 
   render() {
     let {tourlist, talklist} = this.state;
@@ -95,7 +117,7 @@ class Home extends React.Component {
 
           <div className='recommendlist-wrapper'>
           <div className='home-subtitle'>이런 여행 어떠세요? 👀</div>
-            <div id='recommendlist-row-tour'className='recommendlist-row'>
+            <div id='recommendlist-row-tour' className='recommendlist-row'>
               {tourlist.map(tour => <RecommendTour  key={tour.seq} tour={tour} />)}
             </div>
 
@@ -109,9 +131,10 @@ class Home extends React.Component {
 
           <div className='recommendlist-wrapper'>
           <div className='home-subtitle'>실시간 인기글 💬</div>
-            <div className='recommendlist-row'>
+            <div id='recommendlist-row-talk' className='recommendlist-row'>
               {talklist.map(talk => <RecommendTalk key={talk.seq} talk={talk} />)}
             </div>          
+            <div className='readmore-btn' onClick={this.handleReadMore}></div>
           </div>
 
         </div> 

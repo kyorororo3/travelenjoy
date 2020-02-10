@@ -68,7 +68,6 @@ class RecommendTour extends React.Component {
     }
 
     render() {
-        console.log('RecommendTour Render()')
         let {seq, category, title, price, score} = this.props.tour;
        
         return(      

@@ -91,7 +91,7 @@ a{
 .body-info-container{
     font-size: 14px;
     min-height: 465px;
-    padding: 50px 40px 40px;
+    padding: 50px 35px 40px;
     position: relative;
 }
 
@@ -248,6 +248,11 @@ a{
     background-color:#0000004d;
 }
 
+.sns-img{
+    margin-left:170px;
+    height:30px;
+    width:30px;
+}
 /* ----------------------- MyTravel CSS -------------------------- */
 
 .search-input{
@@ -307,6 +312,14 @@ a{
 }
 
 .travel-wrapper{
-    margin:50px 120px;
+    margin: 50px 0px;
+    display: inline;   
+    float: left;
+}
+
+.card-container{
+    margin-right: 0px !important;
+    margin-left: 5px !important;
+    margin-bottom: 7px !important;
 
 }

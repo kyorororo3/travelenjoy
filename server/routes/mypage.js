@@ -73,9 +73,8 @@ router.post('/info/updatemember', upload.single('profile_img'), (req,res)=>{
 router.get('/travel', function (req, res) {
     const {search} = req.query;
     const {email} = req.query;
-    console.log(
-    'calendar에서 접근 중 ', email        
-    );
+   
+
     let sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ?";
     let params = [ email ];
     sql = mysql.format(sql, params);
@@ -91,11 +90,23 @@ router.get('/travel', function (req, res) {
   
     connection.query(sql,  function (err, rows) {
       if(err) return console.log("ERR!! " + err);
-      console.log( 'calendar에서 접근 중 ', rows);
       res.send(rows);
     })
   })
 
+
+router.get('/scrap', function(req, res){
+    const {email} = req.query;
+
+    let sql = 'select * from te_tour a, te_tour_scrap b where a.seq = b.tour_seq and b.email = ?';
+    let params = [email];
+    sql= mysql.format(sql, params);
+
+    connection.query(sql, function(err, rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+})
 module.exports = router;
 
 

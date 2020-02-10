@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Button, Row, Col, Media} from 'react-bootstrap';
+import {Modal, Button, Row, Col, Media, Carousel} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
@@ -10,6 +10,8 @@ class RecommendTalk extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            file : 'cat19.jpg',
+            images : [],
             isHover : false,
             showModal : false,
             author: {
@@ -25,8 +27,18 @@ class RecommendTalk extends React.Component {
             }
         }
     }
+
+    componentDidMount() {
+        fetch(`http://localhost:3002/freetalk/list/images?seq=${this.props.talk.seq}`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res.images);
+                this.setState({images: res.images})
+            })
+            .then(res => this.setState({file:(this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
+    }
+
     handleHover = () => {
-       // console.log('마우스 오버')
        this.setState({isHover : true});
     }
     handleHoverOut = () => {
@@ -59,7 +71,8 @@ class RecommendTalk extends React.Component {
         return(
             <div className='recommendtalk-wrapper'>
                 <div className='recommendtalk' onClick={this.handleShowModal} onMouseOver={this.handleHover} onMouseLeave={this.handleHoverOut}>
-                    <img className='recommendtalk-thumbnail' alt='이미지없음' src={require('../../resources/common/images/talk.jpg')}  />
+                    <img className='recommendtalk-thumbnail' alt={require('../../resources/common/images/talk.jpg')} 
+                        src={require(`../../resources/freetalk/image/talk/${this.state.file}`)} />
                     {this.hoverDiv(this.state.isHover)}
                 </div>   
                 <div className='recommendtalk-modal-wrapper'>
@@ -85,7 +98,18 @@ class RecommendTalk extends React.Component {
                             </div>
                             <div className="modal-image-wrap">
                                 <div className="modal-image-aligner">
-                                    <img style={{width:"400px"}} src={require('../../resources/common/images/talk2.jpg')}/>
+                                    {/* <img style={{width:"400px"}} src={require('../../resources/common/images/talk2.jpg')}/> */}
+                                    <Carousel>
+                                    {(this.state.images.length > 0)?
+                                        this.state.images.map( (image, i) => (
+                                            <Carousel.Item>
+                                            <img key={image.seq}
+                                                 src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
+                                            </Carousel.Item>
+                                        ))
+                                        :<img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                                    }
+                                    </Carousel>
                                 </div>
                             </div>
                         </Col></Row>

@@ -229,8 +229,9 @@
     cursor: pointer;
 }
 .recommendtalk-thumbnail{
+    width: 220px;
+    height: 220px;
     object-fit: cover;
-    width: 100%;
 }
 .recommnedtalk-hover{
     background-color: #000;

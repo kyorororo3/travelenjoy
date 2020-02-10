@@ -69,16 +69,16 @@ class Guide_Modal extends React.Component {
       <React.Fragment>
         <div className="Modal-overlay" />
         <div className="Modal">
-          <p className="title">Modal Title</p>
+          <p className="title">1:1 채팅 문의</p>
           <div className="content">
-            {msg_list.map(obj => {
-              if(obj.writer === this.props.email) return <p className='me'>{obj.msg}</p>
-              else return <p className='you'>{obj.msg}</p>
+            {msg_list.map((obj, index) => {
+              if(obj.writer === this.props.email) return <p className='me' key={index}>{obj.msg}</p>
+              else return <p className='you' key={index}>{obj.msg}</p>
             })}
           </div>
           <div className='chat-send'>
             <form onSubmit={this.handleSendMsg}>
-              <input type='text' name='msg'/>
+              <input type='text' name='msg' autoComplete='off'/>
               <input type='submit' value='전송' />
             </form>
           </div>

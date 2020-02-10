@@ -21,7 +21,7 @@ class TravelSearch extends React.Component {
     let keyword = e.target.value;
 
     if(keyword !== '') {
-      fetch(`http://localhost:3002/tour/autocomplite?keyword=${keyword}`)
+      fetch(`http://localhost:3002/tour/list/autocomplite?keyword=${keyword}`)
         .then(res => res.json())
         .then(rows => {
           while ( el_ul.hasChildNodes() ) {
@@ -46,19 +46,8 @@ class TravelSearch extends React.Component {
     e.preventDefault();
     const searched_location = e.target.location.value;
     // alert(searched_location);
-
-    fetch(`http://localhost:3002/tour/location?loc=${searched_location}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if(data.isLoc) {
-          // alert('/city로 이동합니다.');
-          this.props.history.push(`/travel/city?category=${searched_location}`);
-        }else if(!data.isLoc) {
-          // alert('검색 결과 리스트를 갱신합니다.');
-          this.props.isSearched(searched_location);
-        }
-      })
+    
+    this.props.isSearched(searched_location);
   }
 
   render() {

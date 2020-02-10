@@ -47,25 +47,6 @@ class TravelSche extends React.Component {
           available: this.props.max - parseInt(result)
         })
       });
-
-    // // 기간에 따라 selectedDays 변경
-    // const addDay = this.props.period;
-    // const _selectedDays = [date]
-    // const day = date.getDate();
-    // const month = date.getMonth();
-    // const year = date.getFullYear();
-
-    // for(let i = 1; i < addDay; i++) {
-    //   // let addedDay = date.setDate(day + i);
-    //   let pushed = new Date(year, month, day + i);
-    //   _selectedDays.push(pushed);
-    // }
-    // console.log(_selectedDays);
-    
-    // this.setState({
-    //   isSelected: true,
-    //   selectedDays: [date]
-    // })
   }
 
   // 입력된 인원 수가 신청 가능한 인원수인지 체크
@@ -155,15 +136,6 @@ class TravelSche extends React.Component {
 
   render() {
     const { isSelected, selectedDays, available} = this.state;
-    // let startDay = undefined;
-    // let endDay = undefined;
-
-    console.log(UtilityFunctions);
-
-    // if(isSelected) {
-    //   startDay = UtilityFunctions.dateToString(selectedDays[0]);
-    //   endDay = UtilityFunctions.dateToString(selectedDays[selectedDays.length - 1]);
-    // }
 
     const disabledDaysObj = this.props.disabledDays
     let _disabledDays = [];
@@ -180,7 +152,6 @@ class TravelSche extends React.Component {
       <div className='travel-schedule-wrapper'>
         <DayPicker 
           showOutsideDays
-          // disabledDays={ [new Date(), {before: new Date()}] }
           disabledDays={_disabledDays}
           selectedDays={selectedDays}
           onDayClick={this.handleDayChange} />

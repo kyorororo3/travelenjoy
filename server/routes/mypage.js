@@ -165,6 +165,11 @@ router.get('/review', (req, res)=>{
     }
 
 });
+
+router.post('/review/register', upload.single('review_img'), function(req,res){
+    console.log('form에 있는 애들 데려오나요 ',req.body);
+
+});
 module.exports = router;
 
 

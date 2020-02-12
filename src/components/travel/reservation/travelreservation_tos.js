@@ -231,7 +231,7 @@ class TravelReservationTos extends React.Component {
             1. 이 약관은 2019년 7월 21일부터 적용됩니다.
           </div>
           <div className='tos-check'>
-            <input type='radio' id='agree'/> 위의 약관에 동의합니다.
+            <input type='radio' id='agree' onClick={this.props.handleAgree}/> 위의 약관에 동의합니다.
           </div>
         </div>
       </div>

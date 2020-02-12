@@ -8,7 +8,6 @@ class TravelReview extends React.Component {
     super(props);
 
     this.state = {
-      isLoaded: false,
       review_list: [],
       start: 0,
       total: undefined,
@@ -21,7 +20,6 @@ class TravelReview extends React.Component {
     fetch(`http://localhost:3002/tour/detail/review?tour_seq=${tour_seq}&start=0`)
       .then(res => res.json())
       .then(data => this.setState({
-        isLoaded: true,
         review_list: data,
         start: this.state.start + 5
       }))
@@ -65,7 +63,7 @@ class TravelReview extends React.Component {
   }
 
   render() {
-    const {isLoaded, review_list, isFull, average} = this.state;
+    const {review_list, isFull, average} = this.state;
 
     return(
       <div className='travel-review-wrapper'>
@@ -78,7 +76,7 @@ class TravelReview extends React.Component {
             </div>
           </div>
         </div>
-        {isLoaded && review_list.map(review => <TravelReviewObj key={review.seq} review={review} />)}
+        {review_list.length === 0? <div className='non-data'>등록된 리뷰가 없습니다.</div> : review_list.map(review => <TravelReviewObj key={review.seq} review={review} />)}
         <div className='more-btn'>
           {!isFull && <button type='button' onClick={this.handleMoreRead} className='btn-m'>MORE</button>}
         </div>

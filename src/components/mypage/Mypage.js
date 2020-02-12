@@ -41,7 +41,7 @@ class Mypage extends Component {
                 <div className='mypage-heading'>My Page</div>
                 <Sidebar users={this.state.users}/>
                 <Switch>
-                    <Route exact path='/mypage' component={Home} />
+        <Route exact path='/mypage' exact render={() => <Home users={this.state.users}/> }/>
                     <Route path='/mypage/calendar' component={Calendar} />
                     <Route path='/mypage/travel' component={Travel}/>
                     <Route path='/mypage/scrap' component={Scrap}/>

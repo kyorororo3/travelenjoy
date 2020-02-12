@@ -23,7 +23,7 @@ class Home extends React.Component {
       this.setState({tourlist : data})
     })
 
-    fetch(`http://localhost:3002/main/recommend/talklist?start=0&end=10`)
+    fetch(`http://localhost:3002/main/recommend/talklist?start=0`)
     .then(res => res.json())
     .then(data => {
       this.setState({talklist : data})

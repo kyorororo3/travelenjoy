@@ -12,7 +12,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 router.get('/recommend/tourlist', function (req, res) {
     console.log('/recommend/tourlist  req.start = ' , req.query.start);
-    let sql = 'select t.seq, t.category, t.title, t.price, ifnull(round(r.avg, 2), 0) as score '
+    let sql = 'select t.seq, t.category, t.title, t.price, t.thumbnail, ifnull(round(r.avg, 2), 0) as score '
             + 'from te_tour t '
             + 'left join (select tour_seq, avg(score) as avg from te_tour_review group by tour_seq) r '
             + 'on t.seq = r.tour_seq ' 
@@ -78,9 +78,10 @@ router.get('/recommend/talklist', function (req, res) {
             + 'on f.seq = c.talk_seq) '
             + 'left join (select te_freetalk_seq, name_saved from te_freetalk_images group by te_freetalk_seq) i '
             + 'on f.seq = i.te_freetalk_seq '
-            + 'order by likecount desc '
+            + 'order by likecount desc, f.reg_date desc '
             + 'limit ?, 10 ; ';
     sql = mysql.format(sql, [parseInt(req.query.start)]);
+    console.log(sql);
     mysql.query(sql, function (err, result) {
         if(err){console.log('freetalk 조회 에러용')}
         res.send(result);

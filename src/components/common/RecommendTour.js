@@ -67,7 +67,7 @@ class RecommendTour extends React.Component {
     }
 
     render() {
-        let {seq, category, title, price, score} = this.props.tour;
+        let {seq, category, title, price, thumbnail, score} = this.props.tour;
        
         return(      
             <div className='recommendtour'>
@@ -75,7 +75,8 @@ class RecommendTour extends React.Component {
                     <div className ='thumbnail-like' onClick={this.handleScrap}>
                         {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}
                     </div>
-                    <img className='thumbnail-img' alt='이미지없음' src={require('../../resources/common/images/jeju.jpg')} onClick={this.handleOnClick} />
+                    <img className='thumbnail-img' alt={require('../../resources/common/images/jeju.jpg')} src={require(`../../uploads/${thumbnail}`)}
+                        onClick={this.handleOnClick} />
                 </div>
 
                 <div className='recommendtour-body' onClick={this.handleOnClick}>

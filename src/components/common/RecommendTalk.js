@@ -24,7 +24,8 @@ class RecommendTalk extends React.Component {
                 profile_img: 'default_profile_image.jpg',
                 phone: 1111,
                 auth:3
-            }
+            },
+            isScrap : false
         }
     }
 
@@ -50,7 +51,8 @@ class RecommendTalk extends React.Component {
         if(result){
             return (
                 <div className='recommnedtalk-hover'>
-                    <i className="far fa-heart"/>&nbsp;{likecount}&ensp;&ensp;
+                    {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}
+                    &nbsp;{likecount}&ensp;&ensp;
                     <i className="far fa-comment-dots"/>&nbsp;{commentcount}
                 </div>
             );
@@ -98,13 +100,11 @@ class RecommendTalk extends React.Component {
                             </div>
                             <div className="modal-image-wrap">
                                 <div className="modal-image-aligner">
-                                    {/* <img style={{width:"400px"}} src={require('../../resources/common/images/talk2.jpg')}/> */}
                                     <Carousel>
                                     {(this.state.images.length > 0)?
                                         this.state.images.map( (image, i) => (
-                                            <Carousel.Item>
-                                            <img key={image.seq}
-                                                 src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
+                                            <Carousel.Item key={image.seq}>
+                                            <img src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
                                             </Carousel.Item>
                                         ))
                                         :<img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>

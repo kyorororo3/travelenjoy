@@ -260,6 +260,15 @@ a{
 }
 /* ----------------------- MyTravel CSS -------------------------- */
 
+.check-group{
+    line-height: 30px;
+    top: 34px;
+    position: absolute;
+}
+.check-title{
+    font-weight: 600;
+}
+
 .search-input{
     font-weight: 600;
     font-size: 13px;
@@ -320,6 +329,7 @@ a{
     margin: 50px 0px;
     display: inline;   
     float: left;
+    width:100%;
 }
 
 .travel-wrapper > .card-container{

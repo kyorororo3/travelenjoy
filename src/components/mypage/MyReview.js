@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../resources/travel/css/travellist.css';
-import TravelList from '../travel/list/travellist_obj';
+import TravelList from './UI/MyTravelList';
 import ReviewForm from './UI/MyReviewTableForm';
 import { Modal, Media } from 'react-bootstrap';
 import ReviewWrite from './UI/ReviewWriteModal';
@@ -66,7 +66,6 @@ class MyReview extends Component {
                                     <Media.Body>
                                          <ReviewWrite email = {this.state.email}
                                                       tour = {this.state.tour}
-                                                      review = {this.state.review}
                                                       callbackFromParent={this.CallbackFromTravel} /> 
                                     </Media.Body>
                                 </Modal>  
@@ -79,7 +78,6 @@ class MyReview extends Component {
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>
                                          <ReviewRead  email = {this.state.email}
-                                                      tour = {this.state.tour}
                                                       review = {this.state.review}
                                                       callbackFromParent={this.CallbackFromReview} /> 
                                     </Media.Body>

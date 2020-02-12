@@ -3,16 +3,13 @@ import {Form, Row, Col, Button} from 'react-bootstrap';
 
 class ReviewReadModal extends Component {
 
-    fileObj = [];
-    fileArray = [];
-    imageList = [];
-
-    file = '';
+  
 
     constructor(props){
         super(props);
 
         this.state = {
+            tour:[]
         //    isHovered:[false,false,false,false,false],
         //    score:0,
         //    isFileUploaded: false
@@ -25,6 +22,7 @@ class ReviewReadModal extends Component {
 
     }
 
+    componentDidMount(){}
     // starMouseenterHandler(e){
 
     //     const hovers = [false,false,false,false,false];
@@ -66,37 +64,10 @@ class ReviewReadModal extends Component {
 
     // }
 
-    // uploadMultipleFiles(e) {
-    //     let file = e.target.files[0];
-    //     this.fileObj.push(e.target.files)
-    //     console.log(e.target.files[0])
-    //     this.setState({file: this.fileObj[0][0]})
-    //     for (let i = 0; i < this.fileObj[0].length; i++) {
-    //         this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
-    //         console.log('type : ' + this.fileObj[0][i].type)
-    //     }
-
-    //     for(let i = 0 ; i < this.fileArray.length ; i++) {
-    //         console.log(i + ' ' + this.fileArray[0])
-    //     }
-
-    //     this.setState({ file: this.fileArray })
-
-    //     let reader = new FileReader();
-
-    //     reader.readAsArrayBuffer(this.fileObj[0][0]);
-
-    //     reader.onloadend = () => {
-    //         this.setState({ file: file, imagePreviewUrl: reader.result });
-    //     };
-    //     this.setState({isFileUploaded: true});
-
-    // }
-
-    cancelBtnHandler = (e) => {this.props.callbackFromParent({showModal:false, tour:[]})}
+    cancelBtnHandler = (e) => {this.props.callbackFromParent({showModal:false, review:[]})}
 
     render(){
-        const tour_title = `[${this.props.tour_category}] ${this.props.tour_title}`;
+        const tour_title = `[${this.props.tour.category}] ${this.props.tour.title}`;
         const {score, title, wdate} = this.props.review;
 
         let total_star = [];
@@ -127,9 +98,7 @@ class ReviewReadModal extends Component {
                     <Form.Control type='file' onChange={this.uploadMultipleFiles} multiple/>
                     </Col>
                     <div className="form-group multi-preview">
-                        {(this.fileArray || []).map((url, i) => (
-                            <img key={i} src={url} alt="..." />
-                        ))}
+                        
                     </div>
                         <Form.Text>{this.state.isFileUploaded? '':'please upload image files(jpg, png, gif) max 5 images '}</Form.Text>
                 </Form.Group>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import profile_img from '../../resources/mypage/images/profile_img.jpg';
 
 class MySidebar extends Component {
@@ -62,4 +62,4 @@ class MySidebar extends Component {
 }
 
 
-export default MySidebar;
+export default withRouter(MySidebar);

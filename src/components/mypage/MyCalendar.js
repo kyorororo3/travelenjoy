@@ -18,7 +18,11 @@ class MyCalendar extends Component {
         this.goTravelDetailHandler = this.goTravelDetailHandler.bind(this);
       }
       componentDidMount() {
-        fetch(`http://localhost:3002/mypage/travel?email=${this.state.email}`)
+        fetch(`http://localhost:3002/mypage/travel`,{
+          body:JSON.stringify({email:this.state.email}),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          method:'post'
+        })
           .then(res => res.json())
           .then(data => this.setState({
             list: data
@@ -31,7 +35,7 @@ class MyCalendar extends Component {
         console.log(e.event.id);
         let seq = e.event.id;
         this.props.history.push(`/travel/detail/${seq}`);
-        debugger;
+        window.location.reload();
       }
 
     render(){

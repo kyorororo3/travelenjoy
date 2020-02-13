@@ -22,11 +22,23 @@ class TravelReservationComplete extends React.Component {
   }
 
   render() {
+    const {isLoaded, reservation_info} = this.state;
+    
     return(
-      <div className='travel-reservation-complete-wrapper container'>
-        <div className='complete-title'>
-          <img src={require('../../../resources/travel/images/correct.png')}/>
-          <span>예약이 완료되었습니다!</span>
+      <div className='container'>
+        <div className='travel-reservation-complete-wrapper'>
+          <div className='complete-title'>
+            <img src={require('../../../resources/travel/images/correct.png')}/>
+            <span>예약이 완료되었습니다!</span>
+          </div>
+          {isLoaded && 
+            <div className='reservation-complete-info'>
+              <div className='complete-row'><span>예약 번호</span> {reservation_info.reservation_number}</div>
+              <div className='complete-row'><span>예약일</span> : {reservation_info.start_date}</div>
+              <div className='complete-row'><span>예약 인원</span> : {reservation_info.join_people}</div>
+              <div className='complete-row'><span>결제 금액</span> : {reservation_info.total_price}</div>
+            </div>
+          }
         </div>
       </div>
     )

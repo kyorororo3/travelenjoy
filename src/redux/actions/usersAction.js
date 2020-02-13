@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const REQUEST_LOGIN = 'REQUEST_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const GET_USER = 'GET_USER';
 
 function requestLogin(isRequestLogin) {
     return {
@@ -25,6 +26,13 @@ function loginError(isError) {
     }
 }
 
+function getUser(login_user) {
+    return {
+        type : 'GET_USER',
+        user : login_user
+    }
+}
+
 export function login(login_info) {
     return dispatch => {
         dispatch(requestLogin(true));
@@ -42,10 +50,32 @@ export function login(login_info) {
           .then(res => res.json())
           .then(data => {
             dispatch(requestLogin(false));
-            //   if(error){dispatch(loginError(error));}
               if(data.email !== undefined){
                 dispatch(loginSuccesss(true));
               }
+             sessionStorage.setItem('loginUser', JSON.stringify(data));    
           })
+          .catch(error => dispatch(loginError(error)))
     }
 }
+
+export function fetchGetUser() {
+    return dispatch => {
+        dispatch(getUser(null));
+        dispatch(loginSuccesss(true));
+
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.email !== undefined){
+                dispatch(getUser(data));
+            }else{
+                dispatch(getUser(null));
+                dispatch(loginSuccesss(false));
+            }
+        });
+    }
+}
+

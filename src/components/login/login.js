@@ -66,28 +66,28 @@ class Login extends React.Component {
 
   // 서버로 로그인 요청
   login = (login_info) => {
-  //  // console.log('App.js login() ' + JSON.stringify(login_info))
-  //   fetch('http://localhost:3002/users/login', {
-  //     method: 'post',
-  //     headers: {
-  //       'Content-Type': 'application/json; charset=utf-8'
-  //     },
-  //     credentials: 'include',
-  //     body: JSON.stringify(login_info)
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log('App.js login .then ' , data);
-  //     if(data.email === undefined){
-  //       alert('정확한 이메일과 비밀번호를 입력해주세요.');
-  //       this.props.getLogin(false);
-  //       document.getElementsByName('pwd')[0].value = '';
-  //     }else{
-  //       this.setState({ users : data });   
-  //       this.props.getLogin(true);
-  //     }
-  //   })
-    this.props.login(login_info);
+   // console.log('App.js login() ' + JSON.stringify(login_info))
+    fetch('http://localhost:3002/users/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      credentials: 'include',
+      body: JSON.stringify(login_info)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('App.js login .then ' , data);
+      if(data.email === undefined){
+        alert('정확한 이메일과 비밀번호를 입력해주세요.');
+        this.props.getLogin(false);
+        document.getElementsByName('pwd')[0].value = '';
+      }else{
+        this.setState({ users : data });   
+        this.props.getLogin(true);
+      }
+    })
+    // this.props.login(login_info);
   }
 
 
@@ -140,19 +140,19 @@ class Login extends React.Component {
   }
 }
 
-const mapState = (state) => {
-  return {
-    isRequestLogin: state.isRequestLogin,
-    isSuccess: state.isSuccess,
-    isError: state.isError
-  };
-}
+// const mapState = (state) => {
+//   return {
+//     isRequestLogin: state.isRequestLogin,
+//     isSuccess: state.isSuccess,
+//     isError: state.isError
+//   };
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login : (login_info) => dispatch(login(login_info))
-  };
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     login : (login_info) => dispatch(login(login_info))
+//   };
+// }
 
-export default connect(mapState, mapDispatchToProps)(Login);
-// export default Login;
+// export default connect(mapState, mapDispatchToProps)(Login);
+ export default Login;

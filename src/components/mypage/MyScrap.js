@@ -67,7 +67,7 @@ class MyScrap extends Component {
                                 <input type='submit' className='basic-btn' value='search'/>
                             </form> 
                         <div className='travel-wrapper'>
-                            {isLoaded? list.length !== 0? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />):<h5>${this.state.status}</h5> : <h1>Loading....</h1>}
+                            {isLoaded? list.length !== 0? list.map(tour =>  <TravelList key={tour.seq+tour.wdate} tour={tour} />):<h5>${this.state.status}</h5> : <h1>Loading....</h1>}
                         </div>
                         </div>
                     </div>

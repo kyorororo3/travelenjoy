@@ -15,7 +15,8 @@ class MyReview extends Component {
             myReviews: [],
             showWriteModal:false,
             tour:[],
-            review:[]
+            review:[],
+            isReloaded:false
         }
     }
     componentDidMount() {
@@ -33,25 +34,34 @@ class MyReview extends Component {
           }))
     }
     
+    
 
-    CallbackFromTravel = (dataFromChild) =>{
-        this.setState({
+    CallbackFromTravel = async(dataFromChild) =>{
+        await this.setState({
             showWriteModal:dataFromChild.showWriteModal,
-            tour:dataFromChild.tour
+            tour:dataFromChild.tour,
+            isReloaded:dataFromChild.isReloaded
         })
+        if(this.state.isReloaded){
+            window.location.reload();
+        }
     }
 
-    CallbackFromReview = (dataFromChild) =>{
-        this.setState({
+    CallbackFromReview = async(dataFromChild) =>{
+        await this.setState({
             showReadModal:dataFromChild.showReadModal,
-            review:dataFromChild.review
+            review:dataFromChild.review,
+            isReloaded:dataFromChild.isReloaded
         })
+        if(this.state.isReloaded){
+            window.location.reload();
+        }
     }
     ModalCloser = () => this.setState({showWriteModal:false});
 
     render(){
         let {unposted_list, myReviews} = this.state;
-        const command = 'myreview';
+        
         
         return(
             <div className='mypage-body'>
@@ -60,7 +70,7 @@ class MyReview extends Component {
                             <div className='wait-myreview-wrapper'>
                                 <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;Wait for your review</p>
                                 <div className='travel-wrapper'>
-                                    {unposted_list.length !== 0? unposted_list.map(tour =>  <TravelList key={tour.seq} tour={tour} command={command} callbackFromParent={this.CallbackFromTravel}/>):<h5>Nothing to review</h5>}
+                                    {unposted_list.length !== 0? unposted_list.map(tour =>  <TravelList key={tour.seq} tour={tour} command='myreview' callbackFromParent={this.CallbackFromTravel}/>):<h5>Nothing to review</h5>}
                                 </div>
                                 <Modal show={this.state.showWriteModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>
@@ -73,7 +83,12 @@ class MyReview extends Component {
                             <div className='done-myreview-wrapper'>
                                 <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;My Reviews</p>
                                 <div className='review-table'>
-                                    {myReviews.length !== 0? myReviews.map(review => <ReviewForm key={review.seq} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>Nothing to review</h5>}
+                                    <div className='review-table-row fixed-row'>
+                                        <span class='fixed-title star'>Score</span>
+                                        <span class='fixed-title thumb'>Title</span>
+                                        <span class='fixed-title wdate'>Registered</span>
+                                    </div>
+                                        {myReviews.length !== 0? myReviews.map(review => <ReviewForm key={review.seq} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
                                 </div>
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>

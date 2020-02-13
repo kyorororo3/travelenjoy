@@ -100,6 +100,20 @@ router.post('/info/updatemember', upload.single('profile_img'), (req,res)=>{
     })
 })
 
+router.get('/calendar', function(req,res){
+    const { email } =req.query;
+    
+    let sql = 'select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq and b.email =?';
+    let param = [email];
+    sql = mysql.format(sql,param);
+    console.log(sql);
+  
+    connection.query(sql,  function (err, rows) {
+      if(err) return console.log("ERR!! " + err);
+      res.send(rows);
+    })
+})
+
 //MyTravel 리스트 가져오기   ++ 검색하는 리스트까지 처리해야함 
 router.post('/travel', function (req, res) {
     const { search, keyword, email, currentPage, isChecked } = req.body;

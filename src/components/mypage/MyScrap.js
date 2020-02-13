@@ -12,7 +12,9 @@ class MyScrap extends Component {
             email:this.props.location.state.users.email,
             status:"Let's scrap travels with Travel&joy!",
             list: [],
-            isLoaded: false
+            isFull:false,
+            currentPage:0,
+            total: undefined
         }
     }
 

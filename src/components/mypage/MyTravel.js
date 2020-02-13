@@ -26,7 +26,7 @@ class MyTravel extends Component {
           keyword:'', 
           email:this.state.email,
           startPage:this.state.startPage,
-          currentPage:this.state.currentPage
+          currentPage:0
         }
         this.fetchListHandler(parameters);
         this.fetchLengthHandler(parameters);
@@ -44,7 +44,7 @@ class MyTravel extends Component {
           .then(data => this.setState({
             list: data,
             isFull: false,
-            currentPage:this.state.currentPage
+            currentPage:6
           })
         );
         
@@ -62,7 +62,6 @@ class MyTravel extends Component {
               total:data.length
             },() =>{
               const {total, currentPage} = this.state;
-              console.log('total제대로 오는가 체크', total);
               if(total <= currentPage){
                 this.setState({
                   isFull:true
@@ -79,7 +78,6 @@ class MyTravel extends Component {
           keyword:e.target.keyword.value,
           email:this.state.email,
           isChecked:this.state.isChecked,
-          startPage:this.state.startPage,
           currentPage:this.state.currentPage
         }
         this.setState({status:'No Results'});
@@ -93,8 +91,7 @@ class MyTravel extends Component {
         const parameters = {
           email:this.state.email,
           isChecked:this.state.isChecked,
-          startPage:this.state.startPage,
-          currentPage:1
+          currentPage:this.state.currentPage
         }
         this.fetchListHandler(parameters);
         this.fetchLengthHandler(parameters);
@@ -128,11 +125,18 @@ class MyTravel extends Component {
             .then(data => this.setState({
               list: this.state.list.concat(data),
               isFull: false,
-              currentPage:this.state.currentPage
+              currentPage:this.state.currentPage + 6
+            }, () =>{
+              const {total, currentPage} = this.state
+              console.log('변화를 봅세 ', total, currentPage);
+              if(total <= currentPage){
+                this.setState({
+                  isFull: true
+                })
+              }
             })
           );
           
-          this.fetchLengthHandler(parameters);
        }
 
     render(){
@@ -155,7 +159,7 @@ class MyTravel extends Component {
                               <input type='submit' className='basic-btn' value='search'/>
                           </form> 
                           <div className='travel-wrapper'>
-                              {list.length !== 0? list.map(tour =>  <TravelList key={tour.seq+tour.reservation_number} tour={tour} command='mytravel' callbackFromParent={this.CallbackFromTravel}/>):<h5>{this.state.status}</h5>}
+                              {list.length !== 0? list.map((tour,index) =>  <TravelList key={index} tour={tour} command='mytravel' callbackFromParent={this.CallbackFromTravel}/>):<h5>{this.state.status}</h5>}
                           </div>
                              {!isFull && <button type='button'  className='read-more-btn' onClick={this.ReadMoreHandler}>MORE</button>}
                           <Modal show={this.state.showResModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="reservation-modal">

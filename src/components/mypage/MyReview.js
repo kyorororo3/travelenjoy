@@ -68,10 +68,17 @@ class MyReview extends Component {
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
                             <div className='wait-myreview-wrapper'>
-                                <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;Wait for your review</p>
+                                <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;Wait For Your Review</p>
                                 <div className='travel-wrapper'>
-                                    {unposted_list.length !== 0? unposted_list.map(tour =>  <TravelList key={tour.seq} tour={tour} command='myreview' callbackFromParent={this.CallbackFromTravel}/>):<h5>Nothing to review</h5>}
+                                    {unposted_list.length !== 0? unposted_list.map((tour,index) =>  <TravelList key={index} tour={tour} command='myreview' callbackFromParent={this.CallbackFromTravel}/>):<h5>Nothing to review</h5>}
+                                    <div className='myreview-paging prev' onClick={this.prevlist}>
+                                        <i className="fas fa-chevron-left" style={{color:"#abbff6"}}/>
+                                    </div>
+                                    <div className='myreview-paging next' onClick={this.nextlist}>
+                                        <i className="fas fa-chevron-right" style={{color:"#abbff6"}}/>
+                                    </div>
                                 </div>
+                                
                                 <Modal show={this.state.showWriteModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>
                                          <ReviewWrite email = {this.state.email}
@@ -88,7 +95,7 @@ class MyReview extends Component {
                                         <span class='fixed-title thumb'>Title</span>
                                         <span class='fixed-title wdate'>Registered</span>
                                     </div>
-                                        {myReviews.length !== 0? myReviews.map(review => <ReviewForm key={review.seq} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
+                                        {myReviews.length !== 0? myReviews.map((review, index) => <ReviewForm key={index} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
                                 </div>
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>

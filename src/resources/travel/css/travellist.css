@@ -151,7 +151,12 @@
   color: #9baec8;
   font-weight: bold;
 }
-
+.tour-start_date{
+  display: inline-block;
+    float: right;
+    color: #f39200;
+    font-weight: 700;
+}
 .tour-title {
   color: #2b90d9;
   font-weight: bolder;

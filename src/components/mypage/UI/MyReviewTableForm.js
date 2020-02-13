@@ -6,8 +6,10 @@ class MyReviewTableForm extends Component {
     constructor(props){
         super(props);
 
+        this.reviewDetailHandler = this.reviewDetailHandler.bind(this);
     }
 
+    reviewDetailHandler = (e) =>{this.props.callbackFromParent({showReadModal:true, review:this.props.review})}
    
     render(){
         const {score, title, wdate} = this.props.review;
@@ -22,7 +24,7 @@ class MyReviewTableForm extends Component {
         
 
         return(
-            <div className='review-table-row'>
+            <div className='review-table-row' onClick={this.reviewDetailHandler}>
                 <span id='star'>{total_star}</span>
                 <span id='title'>{title}</span>
                 <span id='wdate'>{wdate}</span>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MySearchForm from './UI/MySearchForm';
 import RecommendTalk from '../common/RecommendTalk';
 
 
@@ -16,7 +15,7 @@ class MyTalk extends Component {
             <div className='mypage-body'>
                     <div className='body-wrapper box'>
                         <div className='body-info-container'> 
-                           <MySearchForm />
+                           
                            <div className='mypost-wrapper'>
                                 <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;My Posts</p>
                                 <div className='post-container'>

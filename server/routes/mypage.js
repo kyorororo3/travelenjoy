@@ -15,7 +15,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 
 
-
+//myHome 에서 나의 활동 카운트 
 router.get('/home', (req, res)=>{
     console.log('home에서 온 email', req.query);
     const {email} = req.query;
@@ -42,6 +42,7 @@ router.get('/home', (req, res)=>{
     });
 });
 
+//MyInfo 닉네임 중복체크
 router.post('/info/nickname', (req,res)=>{
     
     console.log(req.body.nickname);
@@ -63,6 +64,7 @@ router.post('/info/nickname', (req,res)=>{
     
 });
 
+//MyInfo 프로필 내용 수정 업뎃
 router.post('/info/updatemember', upload.single('profile_img'), (req,res)=>{
     console.log('/info/update', req.body);
     let email = req.body.email;
@@ -98,22 +100,27 @@ router.post('/info/updatemember', upload.single('profile_img'), (req,res)=>{
     })
 })
 
-router.get('/travel', function (req, res) {
-    const {search} = req.query;
-    const {email} = req.query;
+//MyTravel 리스트 가져오기   ++ 검색하는 리스트까지 처리해야함 
+router.post('/travel', function (req, res) {
+    const { search, keyword, email, currentPage, isChecked } = req.body;
    
-
-    let sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ?";
-    let params = [ email ];
-    sql = mysql.format(sql, params);
+    let sql ="select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ?";
+    let params = [email];   
 
     if(search !== undefined) {
-      sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ? and a.title like ? or a.category=?";
-      params  = [ email, `%${search}%`, search ];
-      
-      sql = mysql.format(sql, params);
+        if(search === 'title'){
+            sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ? and a.title like ? ";
+            
+        }else if(search === 'location'){
+            sql = "select * from te_tour a, te_tour_reservation b where a.seq = b.tour_seq  and b.email = ? and a.category like ? ";
+        }
+        params  = [ email, `%${keyword}%` ];
     }
-  
+    if(isChecked){
+        sql += "and b.start_date > now()";
+    }
+    sql+=' order by b.start_date asc';
+    sql = mysql.format(sql, params);
     console.log(sql);
   
     connection.query(sql,  function (err, rows) {
@@ -123,19 +130,34 @@ router.get('/travel', function (req, res) {
   })
 
 
-router.get('/scrap', function(req, res){
-    const {email} = req.query;
-
+//MyScrap 리스트 가져오기 
+router.post('/scrap', function(req, res){
+    const { search, keyword, email, currentPage } = req.body;
+   
     let sql = 'select * from te_tour a, te_tour_scrap b where a.seq = b.tour_seq and b.email = ?';
-    let params = [email];
-    sql= mysql.format(sql, params);
+    let params = [email];   
 
+    if(search !== undefined) {
+        if(search === 'title'){
+            sql = "select * from te_tour a, te_tour_scrap b where a.seq = b.tour_seq  and b.email = ? and a.title like ? ";
+            
+        }else if(search === 'location'){
+            sql = "select * from te_tour a, te_tour_scrap b where a.seq = b.tour_seq  and b.email = ? and a.category like ? ";
+        }
+        params  = [ email, `%${keyword}%` ];
+    }
+   
+    sql+=' order by a.seq asc';
+    sql = mysql.format(sql, params);
+    console.log(sql);
+  
     connection.query(sql, function(err, rows){
         if(err) return console.log('err' + err);
         res.send(rows);
     })
 })
 
+//MyReview Post 해야하는 것과 이미 Post 한것 리스트 가져오기 
 router.get('/review', (req, res)=>{
     const {command, email} = req.query;
     console.log('command', command, 'email', email);
@@ -163,6 +185,12 @@ router.get('/review', (req, res)=>{
             res.send(rows);
         })
     }
+
+});
+
+//MyReview 추가 
+router.post('/review/register', upload.single('review_img'), function(req,res){
+    console.log('form에 있는 애들 데려오나요 ',req.body);
 
 });
 module.exports = router;

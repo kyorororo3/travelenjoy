@@ -260,6 +260,15 @@ a{
 }
 /* ----------------------- MyTravel CSS -------------------------- */
 
+.check-group{
+    line-height: 30px;
+    top: 34px;
+    position: absolute;
+}
+.check-title{
+    font-weight: 600;
+}
+
 .search-input{
     font-weight: 600;
     font-size: 13px;
@@ -320,6 +329,7 @@ a{
     margin: 50px 0px;
     display: inline;   
     float: left;
+    width:100%;
 }
 
 .travel-wrapper > .card-container{
@@ -376,6 +386,85 @@ a{
 
 .review-table-row>#wdate{
     width:20%;
+}
+
+.review-write-modal{
+    width:43%;
+    max-width: none !important;
+    
+}
+.media-body{
+    padding:35px;
+}
+
+.form-label{
+    font-weight:700;
+}
+.file-upload-group{
+    background-color: rgba(242, 242, 242, 0.6);
+    padding: 10px 0px;
+    margin-right: 0;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+.form-text{
+    margin-left: 15px;
+    color: gray;
+}
+.review-score-star{
+    padding-top: 8px;
+    margin-bottom: 0px;
+
+}
+input.review-star-btn {
+	width: 24px;
+	height: 24px;
+	background: url("../images/star-inactive.png") no-repeat;
+	border: 0;
+    padding: 0;
+    outline:0;
+}
+
+input.review-star-btn-active {
+	width: 24px;
+	height: 24px;
+	background: url("../images/star-active.png") no-repeat;
+	border: 0;
+    padding: 0;
+    outline:0;
+}
+
+.score-number{
+    font-weight:700;
+   vertical-align: super;
+}
+.btn-primary{
+    font-weight: 600;
+    font-size: 13px;
+    height: 32px;
+    width: 161px;
+    z-index: 10;
+    background-color: #fff;
+    border: solid 1px #ced4da;
+    color: #495056 !important;
+    font-family: "Inconsolata", Arial, sans-serif;
+    margin: 0 10px;
+    float:right;
+}
+
+.btn-primary:hover {
+    color: #fff !important;
+    background-color: #2b90d9;
+    border-color: #2b90d9;
+}
+.multi-preview{
+    padding-top: 10px;
+    padding-left:20px;
+}
+.form-control:disabled, .form-control[readonly]{
+    background-color: #fff;
+    border:0;
+    font-weight:600;
 }
 /* --------------------  My Home CSS ------------------------- */
 .count-box-wrapper{

@@ -1,15 +1,26 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-class TravelListObj extends React.Component {
+
+class MyTravelList extends React.Component {
   goToDetail = (e) => {
     // console.log(e.target.dataset.seq);
     let seq = e.target.dataset.seq;
-    this.props.history.push(`/travel/detail/${seq}`);
- 
+    const command = this.props.command;
+    if(command === 'myreview'){
+      console.log('command 왔다', command);
+      this.props.callbackFromParent({
+        showWriteModal:true,
+        tour:this.props.tour
+      })
+    }else{
+      this.props.history.push(`/travel/detail/${seq}`);
+      window.location.reload();
+    }
   }
 
   render() {
-    const {seq, title, companyname, category, thumbnail, price} = this.props.tour;
+    const {seq, title, companyname, category, thumbnail, price, start_date} = this.props.tour;
+
 
     return(
       <div className='tour-list-obj card-container' data-seq={seq}
@@ -20,6 +31,7 @@ class TravelListObj extends React.Component {
            src={require(`../../../uploads/${thumbnail}`)}/>
         </div>
         <div className='tour-infos' data-seq={seq}>
+          <div className='tour-start_date' data-seq={seq}>{start_date}</div>
           <div className='rows tour-category' data-seq={seq}>[{category}]</div>
           <div className='rows tour-title' data-seq={seq}>{title}</div>
           <div className='rows' data-seq={seq}>
@@ -32,4 +44,4 @@ class TravelListObj extends React.Component {
   }
 }
 
-export default withRouter(TravelListObj);
+export default withRouter(MyTravelList);

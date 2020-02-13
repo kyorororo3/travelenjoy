@@ -60,7 +60,9 @@ class TalkMain extends Component {
                 <TalkSearch/>
                 <div className="talk-list-wrap">
                     {currentPage}
-                    <TalkWriteBtn currentUser={this.getCurrentUser} reloadMain={this.reloadMain}/>
+                    <TalkWriteBtn currentUser={this.getCurrentUser}
+                                  reloadMain={this.reloadMain}
+                                  />
                 </div>
             </div>
         );

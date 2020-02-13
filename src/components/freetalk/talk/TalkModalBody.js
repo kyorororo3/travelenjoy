@@ -40,27 +40,49 @@ class TalkModalBody extends Component {
     createComment = (e) => {
         e.preventDefault()
 
-        let formData = new FormData();
+        let commentData = new FormData();
 
-        formData.append("talk_seq", this.props.talkSeq);
-        formData.append("email", this.state.currentUser.email);
-        formData.append("nickname", this.state.currentUser.nickname);
-        formData.append("content", this.state.content);
-
-        console.log('front comment : ' + JSON.stringify(formData));
-
-        fetch('http://localhost:3002/freetalk/list/comments/create', {
-            method:'post',
-            body: formData
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
         })
             .then(res => res.json())
-            .then(data => console.log(data));
-        
-        alert('저장이 완료되었습니다.')
+            .then(data => {
+                    if(data.email !== undefined) {
+                        commentData.append("email", data.email);
+                        commentData.append("nickname", data.nickname);
+
+                        commentData.append("talkSeq", this.props.talkSeq);
+                        commentData.append("content", this.state.content);
+                        console.log('front comment : ' + commentData);
+                        console.log('front comment : ' + commentData.toString());
+                        console.log('front comment : ' + JSON.stringify(commentData));
+
+                        fetch('http://localhost:3002/freetalk/list/comments/create', {
+                            body: JSON.stringify({
+                                email: data.email,
+                                nickname: data.nickname,
+                                talkSeq: this.props.talkSeq,
+                                content: this.state.content
+                            }),
+                            headers: {'Content-Type': 'application/json; charset=utf-8'},
+                            method: 'post'
+                        })
+                            .then(res => res.json())
+                            .then(data => console.log(data));
+                        alert('저장이 완료되었습니다.')
+                        fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
+                            .then(res => res.json())
+                            .then(res => this.setState({comments: res.comments}))
+                        this.setState({content:''});
+                    }else
+                        alert('로그인이 필요합니다.')
+                }
+            );
     }
 
     handleCommentContent = (e) =>{
         this.setState({content: e.target.value});
+        console.log(this.state.content);
     }
 
     render() {
@@ -114,11 +136,11 @@ class TalkModalBody extends Component {
                 <div className="modal-body-write-comment">
                     <form onSubmit={this.createComment}>
                         <input type="text"
+                               value={this.state.content}
                                placeholder={(this.state.currentUser === '')?"로그인이 필요합니다.":"댓글 입력..."}
                                disabled={(this.state.currentUser === '')?true:false}
                                onChange={this.handleCommentContent}
                         />
-                        <a id="comment-submit" type="submit">게시</a>
                     </form>
                 </div>
             </div>

@@ -75,16 +75,22 @@ router.get('/list/comments/count', function(req, res) {
 })
 
 //댓글 입력
-router.post('/list/comments/create', function(req, res, next) {
+router.post('/list/comments/create', function(req, res) {
+    const {comment, email, talkSeq, nickname} = req.body;
     console.log('comment create body : ' + JSON.stringify(req.body))
+    console.log(req.body.comment + ', ' + comment);
+    console.log(req.body.email);
+    console.log(req.body.talkSeq);
+    console.log(req.body.nickname);
     const post = req.body;
     let stmt = "insert into te_comment (talk_seq, email, nickname, content) values(?, ?, ?, ?)";
-    connection.query(stmt, [post.talk_seq, post.email, post.nickname, post.content], function (err, rows, fields) {
-        if (err) console.log('connection result err : ' + err);
-    });
-
-    res.json({
-        resp: "ok"
+    connection.query(stmt, [post.talkSeq, post.email, post.nickname, post.content], function (err, rows, fields) {
+        if (err)
+            console.log('connection result err : ' + err);
+        else
+            res.json({
+                resp: "ok"
+            });
     });
 });
 
@@ -122,6 +128,7 @@ router.post('/free/save/image',upload.single('file'), function(req, res, next) {
     console.log('img save body : ' + JSON.stringify(req.body));
 })
 
+//게시글+이미지 저장
 router.post('/free/save/images',upload.array('files'), function(req, res, next) {
     console.log('img save body : ' + JSON.stringify(req.body));
     for (let file of req.files) {
@@ -130,7 +137,7 @@ router.post('/free/save/images',upload.array('files'), function(req, res, next) 
     }
 
     let insertTalk = "insert into te_freetalk (title, content, email, nickname, image_count) values(?, ?, ?, ?, ?)";
-    connection.query(insertTalk, ['title', req.body.content, 'guest', 'guest', req.files.length], function (err, result) {
+    connection.query(insertTalk, ['title', req.body.content, req.body.userEmail, req.body.userNickname, req.files.length], function (err, result) {
         if (err) console.log('connection result err : ' + err);
 
         for (let file of req.files) {

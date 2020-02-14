@@ -1,5 +1,6 @@
 import React from 'react';
-
+// CSS
+import '../../resources/guide/css/guideQuestion.css';
 // component
 import GuideHeader from './guide_Header';
 import Guide_Question_Obj from './guide_question_obj';

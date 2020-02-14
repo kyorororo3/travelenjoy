@@ -1,13 +1,37 @@
 import React from 'react'
 
 class Guide_Question_Obj extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoaded: false,
+      writer_info: undefined
+    }
+  }
+
+  componentDidMount() {
+    const {client} = this.props.question;
+    fetch(`http://localhost:3002/tour/detail/review/writer?email=${client}`)
+      .then(res => res.json())
+      .then(result => this.setState({
+        isLoaded: true,
+        writer_info: result
+      }));
+  }
 
   render() {
-    const {seq, guide, client} = this.props.question
+    const {seq, guide} = this.props.question
+    const {writer_info, isLoaded} = this.state
+
     return(
       <div className='question-obj-wrapper' data-seq={seq} onClick={this.props.handleClick}>
-        <div data-seq={seq}>채팅방 : room{seq}</div>
-        <div data-seq={seq}>문의자 : {client}</div>
+        <div className='client-profile-img' data-seq={seq}>
+          {isLoaded && <img data-seq={seq} src={require(`../../uploads/${writer_info.profile_img}`)}/>}
+        </div>
+        <div className='client-nickname' data-seq={seq}>
+          {isLoaded && writer_info.nickname}
+        </div>
       </div>
     )
   }

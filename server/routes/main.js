@@ -81,9 +81,10 @@ router.get('/recommend/talklist', function (req, res) {
             + 'order by likecount desc, f.reg_date desc '
             + 'limit ?, 10 ; ';
     sql = mysql.format(sql, [parseInt(req.query.start)]);
-    console.log(sql);
+   // console.log(sql);
     mysql.query(sql, function (err, result) {
         if(err){console.log('freetalk 조회 에러용')}
+      //  console.log(result);
         res.send(result);
     })
 });

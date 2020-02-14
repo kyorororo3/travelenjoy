@@ -16,11 +16,23 @@ export default class MultipleImageUploader extends Component {
         this.state = {
             file: [null],
             isFileUploaded: false,
-            contentText: ''
+            contentText: '',
+            currentUser: {}
         }
         this.contentRef = React.createRef();
         this.uploadMultipleFiles = this.uploadMultipleFiles.bind(this)
         this.uploadFiles = this.uploadFiles.bind(this)
+
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                    if(data.email !== undefined) {
+                        this.setState({currentUser: data})
+                    }
+                }
+            );
     }
 
     uploadMultipleFiles(e) {
@@ -47,7 +59,6 @@ export default class MultipleImageUploader extends Component {
             this.setState({ file: file, imagePreviewUrl: reader.result });
         };
         this.setState({isFileUploaded: true});
-
     }
 
     uploadFiles = (e) => {
@@ -62,6 +73,8 @@ export default class MultipleImageUploader extends Component {
             formData.append("files", file);
         }
         formData.append("content", this.state.contentText);
+        formData.append("userEmail", this.state.currentUser.email);
+        formData.append("userNickname", this.state.currentUser.nickname);
 
         fetch('http://localhost:3002/freetalk/free/save/images', {
             method:'post',
@@ -71,7 +84,13 @@ export default class MultipleImageUploader extends Component {
             .then(data => console.log(data));
 
         console.log('this.state.file ' + this.state.file);
+        alert('저장이 완료되었습니다.')
+        this.handleClose();
+        this.reloadMain();
     }
+
+    handleClose = () => this.props.handleClose();
+    reloadMain = () => this.props.reloadMain();
 
     onSubmitHandler(e){
         e.preventDefault();
@@ -85,20 +104,8 @@ export default class MultipleImageUploader extends Component {
     render() {
         return (
             <div className="uploader-wrap">
-                {/*<div className="write-content">*/}
-                {/*    <input type="text" placeholder="문구 입력..."/>*/}
-                {/*</div>*/}
-                {/*<form encType='multipart/form-data' onSubmit={this.onSubmitHandler}>*/}
-
-
-                {/*    <div className="form-group">*/}
-                {/*        <input type="file" className="form-control" onChange={this.uploadMultipleFiles} multiple />*/}
-                {/*    </div>*/}
-                {/*    <button type="button" id="btnFileSubmit" className="btn btn-danger btn-block" onClick={this.uploadFiles}>Upload</button>*/}
-                {/*    <input type="submit" value="제출테스트"/>*/}
-                {/*</form>*/}
                 <Form encType='multipart/form-data' onSubmit={this.onSubmitHandler}>
-                    <Form.Group controlId="formGroupContent">
+                    <Form.Group id="formGroupContent">
                         <Form.Label>문구 입력...</Form.Label>
                         {/*<input type="text" className="form-control" ref={this.contentRef} placeholder="문구 입력..."/>*/}
                         <Form.Control id="contentText" type="text" placeholder="문구 입력..." onChange={this.contentTextOnChange}/>

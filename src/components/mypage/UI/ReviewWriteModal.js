@@ -75,7 +75,7 @@ class ReviewWriteModal extends Component {
         reader.readAsDataURL(file);
     }
 
-    cancelBtnHandler = (e) => {this.props.callbackFromParent({showWriteModal:false, tour:[]})}
+    cancelBtnHandler = (e) => {this.props.callbackFromParent({showWriteModal:false, tour:[], isReloaded:false})}
     
     saveBtnHandler(e){
         e.preventDefault();
@@ -96,8 +96,8 @@ class ReviewWriteModal extends Component {
         })
         .then(res => res.json())
         .then (data => {
-            if(data.isCompleted){
-              this.props.callbackFromParent({showWriteModal:false, tour:[]})
+            if(data.isInsertSuccess){
+              this.props.callbackFromParent({showWriteModal:false, tour:[], isReloaded:true})
             }
         })
 
@@ -105,7 +105,7 @@ class ReviewWriteModal extends Component {
     render(){
         const tour_title = `[${this.props.tour.category}] ${this.props.tour.title}`;
         return(
-            <Form>
+            <Form onSubmit={this.saveBtnHandler}>
                 <Form.Group as={Row} >
                     <Form.Label column sm={2}>Tour</Form.Label>
                     <Col sm={10}>
@@ -119,9 +119,9 @@ class ReviewWriteModal extends Component {
                     </Col>
                 </Form.Group>
                 <Form.Group className='file-upload-group' as={Row}>
-                    <Form.Label column sm={2}>Image Upload</Form.Label>
-                    <Col sm={10}>
-                    <Form.Control type='file' name='review-img' onChange={this.imgPreviewHandler}/>
+                    <Form.Label column sm={3}>Image Upload</Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type='file' accept='image/jpg,impge/png,image/jpeg,image/gif' name='review_img' onChange={this.imgPreviewHandler}/>
                     </Col>
                     <div className="form-group multi-preview">
                     {this.state.file !== ''?<img src={this.state.previewURL} />:null}
@@ -142,10 +142,10 @@ class ReviewWriteModal extends Component {
 
                 <Form.Group>
                 <Form.Label>Content</Form.Label>
-                    <Form.Control as='textarea' rows='7' name='content'/>
+                    <Form.Control as='textarea' rows='4' name='content'/>
                 </Form.Group>
                 <Button type='button' onClick={this.cancelBtnHandler} >CANCEL</Button>
-                <Button type='submit' onSubmit={this.saveBtnHandler}>SAVE</Button>
+                <Button type='submit'>SAVE</Button>
             </Form>
         );
     }

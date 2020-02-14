@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../resources/travel/css/travellist.css';
 import TravelList from './UI/MyTravelList';
+import { Modal, Media } from 'react-bootstrap';
+import ResModal from './UI/ResModal';
 
 class MyTravel extends Component {
 
@@ -12,7 +14,10 @@ class MyTravel extends Component {
           status:"Let's make your travel plan with Travel&joy!",
           isChecked:false,
           list: [],
-          isLoaded: false
+          tour:[],
+          currentPage:0,
+          isFull: false,
+          total: undefined
         }
       }
       componentDidMount() {
@@ -20,13 +25,16 @@ class MyTravel extends Component {
           search:'', 
           keyword:'', 
           email:this.state.email,
-          currentPage:''
+          startPage:this.state.startPage,
+          currentPage:0
         }
-        this.fetchHandler(parameters);
+        this.fetchListHandler(parameters);
+        this.fetchLengthHandler(parameters);
       
+       
       }
 
-      fetchHandler = (parameters) =>{
+      fetchListHandler = (parameters) =>{
         fetch(`http://localhost:3002/mypage/travel`,{
           body:JSON.stringify(parameters),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -35,11 +43,34 @@ class MyTravel extends Component {
           .then(res => res.json())
           .then(data => this.setState({
             list: data,
-            isLoaded: true
+            isFull: false,
+            currentPage:6
+          })
+        );
+        
+
+      }
+      
+      fetchLengthHandler = (parameters) =>{
+        fetch(`http://localhost:3002/mypage/travel/length`,{
+          body:JSON.stringify(parameters),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          method:'post'
+        })
+          .then(res => res.json())
+          .then(data => this.setState({
+              total:data.length
+            },() =>{
+              const {total, currentPage} = this.state;
+              if(total <= currentPage){
+                this.setState({
+                  isFull:true
+                })
+              }
             })
           );
       }
-      
+
       SearchHandler = (e) =>{
         e.preventDefault();
         const parameters = {
@@ -47,28 +78,69 @@ class MyTravel extends Component {
           keyword:e.target.keyword.value,
           email:this.state.email,
           isChecked:this.state.isChecked,
-          currentPage:1
+          currentPage:this.state.currentPage
         }
         this.setState({status:'No Results'});
-        this.fetchHandler(parameters);
+        this.fetchListHandler(parameters);
+        this.fetchLengthHandler(parameters);
       }
 
       checkExpiryHandler = async(e) =>{
-        console.log(this.state.isChecked);
-        await this.setState({
-          isChecked:!this.state.isChecked
-        })
-        console.log(this.state.isChecked);
+        await this.setState({isChecked:!this.state.isChecked});
+
         const parameters = {
           email:this.state.email,
           isChecked:this.state.isChecked,
-          currentPage:1
+          currentPage:this.state.currentPage
         }
-        this.fetchHandler(parameters);
+        this.fetchListHandler(parameters);
+        this.fetchLengthHandler(parameters);
       }
 
+      CallbackFromTravel = (dataFromChild) =>{
+
+        this.setState({
+            showResModal:dataFromChild.showResModal,
+            tour:dataFromChild.tour
+        })
+       }
+
+       ModalCloser = () => this.setState({showResModal:false});
+
+       ReadMoreHandler = async(e) => {
+          await this.setState({currentPage:this.state.currentPage+6})
+          const parameters = {
+            search:this.state.search, 
+            keyword:this.state.keyword, 
+            email:this.state.email,
+            startPage:this.state.startPage,
+            currentPage:this.state.currentPage
+          }
+          fetch(`http://localhost:3002/mypage/travel`,{
+            body:JSON.stringify(parameters),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            method:'post'
+          })
+            .then(res => res.json())
+            .then(data => this.setState({
+              list: this.state.list.concat(data),
+              isFull: false,
+              currentPage:this.state.currentPage + 6
+            }, () =>{
+              const {total, currentPage} = this.state
+              console.log('변화를 봅세 ', total, currentPage);
+              if(total <= currentPage){
+                this.setState({
+                  isFull: true
+                })
+              }
+            })
+          );
+          
+       }
+
     render(){
-        let{ list, isLoaded, email } = this.state
+        let{ list, isFull } = this.state
         return(
             <div className='mypage-body'>
               
@@ -86,9 +158,17 @@ class MyTravel extends Component {
                               <input type='text' name='keyword' className='search-input'/>
                               <input type='submit' className='basic-btn' value='search'/>
                           </form> 
-                        <div className='travel-wrapper'>
-                            {isLoaded? list.length !== 0? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />):<h5>{this.state.status}</h5> : <h1>Loading....</h1>}
-                        </div>
+                          <div className='travel-wrapper'>
+                              {list.length !== 0? list.map((tour,index) =>  <TravelList key={index} tour={tour} command='mytravel' callbackFromParent={this.CallbackFromTravel}/>):<h5>{this.state.status}</h5>}
+                          </div>
+                             {!isFull && <button type='button'  className='read-more-btn' onClick={this.ReadMoreHandler}>MORE</button>}
+                          <Modal show={this.state.showResModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="reservation-modal">
+                            <Media.Body>
+                                <ResModal email = {this.state.email}
+                                          tour = {this.state.tour}
+                                          callbackFromParent={this.CallbackFromTravel} /> 
+                            </Media.Body>
+                          </Modal>  
                         </div>
                     </div>
             </div>

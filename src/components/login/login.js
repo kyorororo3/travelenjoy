@@ -96,7 +96,7 @@ class Login extends React.Component {
     
     if(this.state.users.email !== undefined) {
       if(this.state.users.auth === 1){
-        return <Redirect to='/guide/main' />
+        return <Redirect to='/guide' />
       }else{
         return <Redirect to='/' />
       }

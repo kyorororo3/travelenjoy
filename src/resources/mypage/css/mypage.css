@@ -11,6 +11,11 @@ a{
 }
 
 
+.travel-wrapper>h5{
+    text-align:center;
+    color: darkgray;
+}
+
 .mypage-heading{
     color: #495056;
     font-size: 24px;
@@ -80,6 +85,7 @@ a{
     min-width: 75%;
     max-width: 842px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+    margin-bottom: 30px;
 }
 
 .body-wrapper{
@@ -255,6 +261,15 @@ a{
 }
 /* ----------------------- MyTravel CSS -------------------------- */
 
+.check-group{
+    line-height: 30px;
+    top: 34px;
+    position: absolute;
+}
+.check-title{
+    font-weight: 600;
+}
+
 .search-input{
     font-weight: 600;
     font-size: 13px;
@@ -312,9 +327,10 @@ a{
 }
 
 .travel-wrapper{
-    margin: 50px 0px;
+    margin-top:50px;
     display: inline;   
     float: left;
+    width:100%;
 }
 
 .travel-wrapper > .card-container{
@@ -324,4 +340,267 @@ a{
     margin-left: 8px;
     margin-bottom: 16px;
 
+}
+
+.reservation-modal{
+    width:30%;
+    max-width: none !important;
+  
+}
+.reservation-info-label{
+    font-weight:700;
+    text-align:right;
+   
+
+}
+.reservation-info-readonly{
+    outline : 0;
+    border: none;
+    text-align: center;
+    margin-bottom:8px;
+
+}
+.modal-wrapper{
+    width:100%;
+}
+.modal-wrapper>.info.row{
+    padding:5px 5px;
+    width:100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-bottom: 1px solid #8080800f;
+}
+.modal-header{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom:15px;
+    color:#2b90d9;
+}
+
+.read-more-btn{
+    font-weight: 600;
+    font-size: 13px;
+    height: 38px;
+    width: 161px;
+    z-index: 10;
+    background-color: #fff;
+    border: solid 1px #ced4da;
+    color: #495056 !important;
+    font-family: "Inconsolata", Arial, sans-serif;
+    margin: 0 300px;
+}
+/* --------------------  My Talk CSS ------------------------- */
+
+.talk-title{
+    line-height: 30px;
+    font-weight: 700;
+    font-size:18px;
+    border-bottom: 1px solid #e9ecef;
+    
+}
+
+/* --------------------  My Review CSS ------------------------- */
+
+.wait-myreview-wrapper{
+    display:inline-block;
+    width:100%;
+}
+
+.wait-myreview-wrapper>.travel-wrapper{
+    margin:10px 0px;
+}
+.review-table{
+    float:left;
+    margin-bottom:30px;
+    width:100%;
+}
+.review-table-row.fixed-row{
+    line-height: 20px;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ececec6b;
+}
+
+.review-table-row{
+    line-height: 20px;
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ececec6b;
+}
+
+.review-table-row span{
+    display:inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.review-table-row>.star{
+    width:20%;
+}
+
+.review-table-row>.thumb{
+    width:60%;
+}
+
+.review-table-row>.wdate{
+    width:20%;
+    
+}
+
+.review-write-modal{
+    width:30%;
+    max-width: none !important;
+    
+}
+.media-body{
+    padding:35px;
+}
+
+.form-label{
+    font-weight:700;
+}
+.file-upload-group{
+    background-color: rgba(242, 242, 242, 0.6);
+    padding: 10px 0px;
+    /* margin-right: 0; */
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+.form-text{
+    margin-left: 15px;
+    color: gray;
+}
+.review-score-star{
+    padding-top: 8px;
+    margin-bottom: 0px;
+
+}
+input.review-star-btn {
+	width: 24px;
+	height: 24px;
+	background: url("../images/star-inactive.png") no-repeat;
+	border: 0;
+    padding: 0;
+    outline:0;
+}
+
+input.review-star-btn-active {
+	width: 24px;
+	height: 24px;
+	background: url("../images/star-active.png") no-repeat;
+	border: 0;
+    padding: 0;
+    outline:0;
+}
+
+.score-number{
+    font-weight:700;
+   vertical-align: super;
+}
+.btn-primary{
+    font-weight: 600;
+    font-size: 13px;
+    height: 32px;
+    width: 161px;
+    z-index: 10;
+    background-color: #fff;
+    border: solid 1px #ced4da;
+    color: #495056 !important;
+    font-family: "Inconsolata", Arial, sans-serif;
+    margin: 0 10px;
+    float:right;
+}
+
+.btn-primary:hover {
+    color: #fff !important;
+    background-color: #2b90d9;
+    border-color: #2b90d9;
+}
+.multi-preview{
+    padding-top: 10px;
+    padding-left:20px;
+}
+.form-control:disabled, .form-control[readonly]{
+    background-color: #fff;
+    border:0;
+    font-weight:600;
+}
+.score-number.readonly{
+    vertical-align: middle;
+}
+.modal-review-img{
+    display:block;
+    max-height:330px;
+    margin:auto;
+}
+.img-row{
+    width:100%;
+}
+.delete-a{
+    text-decoration: underline !important;
+    font-weight: 100;
+    font-size: 14px;
+    margin-top: 8px;
+    float: right;
+    color: #4d4c4c9e !important;
+    margin-right: -5px;
+    cursor: pointer;
+}
+
+.myreview-paging{
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    font-size: 15pt;
+    line-height: 2.1;
+    transition: 0.3s;
+    border: 1px solid #d9e1e8;
+}
+.myreview-paging:hover{
+    box-shadow: 1px 2px 4px 1px #dcdfe4;
+    cursor: pointer;
+}
+.next{
+    padding-left: 3px;
+    margin: 130px 10px 6px 739px;
+}
+.prev{
+    padding-right: 3px;
+    margin: 130px 10px 6px -17px;
+  
+}
+/* --------------------  My Home CSS ------------------------- */
+.count-box-wrapper{
+    text-align: center;
+    margin-bottom: 45px;
+}
+.count-box-container{
+    text-align: center;
+    display: inline-block;
+    margin: 10px 50px;
+ 
+}
+.count-title{
+    font-weight: 600;
+}
+.count-number{
+    margin-top:-10px !important;
+    font-size: 30px;
+    font-weight: 600;
+    color: #2b90d9;
+}
+
+.news-title{
+    line-height: 30px;
+    font-weight: 700;
+    font-size:18px;
+    border-bottom: 1px solid #e9ecef;
+}
+.fa-bell, .fa-pencil-alt{
+    color: #2b90d9;
 }

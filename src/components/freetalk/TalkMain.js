@@ -8,8 +8,25 @@ import TalkSearch from "./TalkSearch";
 //게시판 메인 컴포넌트
 
 class TalkMain extends Component {
-    state = {
-        mode: 'talk-list'
+    constructor(props) {
+        super(props);
+        this.state = {
+            mode: 'talk-list',
+            currentUser: ''
+        }
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                    if(data.email !== undefined)
+                        this.setState({currentUser : JSON.stringify(data)})
+                }
+            );
+    }
+
+    getCurrentUser = () => {
+        return this.state.currentUser;
     }
 
     componentDidMount() {
@@ -19,6 +36,8 @@ class TalkMain extends Component {
     _callApi = async () => {
 
     }
+
+    reloadMain = () => window.location.reload();
 
     changeMode = (str) => {
         this.setState({mode: str})
@@ -30,9 +49,9 @@ class TalkMain extends Component {
         switch (currentMode) {
             case "write": currentPage = <Write/>;
             break;
-            case "my": currentPage = <TalkList/>;
+            case "my": currentPage = <TalkList currentUser={this.getCurrentUser}/>;
             break;
-            default: currentPage = <TalkList/>
+            default: currentPage = <TalkList currentUser={this.getCurrentUser}/>
             break;
         }
 
@@ -41,7 +60,9 @@ class TalkMain extends Component {
                 <TalkSearch/>
                 <div className="talk-list-wrap">
                     {currentPage}
-                    <TalkWriteBtn/>
+                    <TalkWriteBtn currentUser={this.getCurrentUser}
+                                  reloadMain={this.reloadMain}
+                                  />
                 </div>
             </div>
         );

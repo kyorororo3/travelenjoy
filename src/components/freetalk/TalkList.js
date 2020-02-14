@@ -6,7 +6,8 @@ class TalkList extends Component {
 
     state = {
         talkLength: 9,
-        list: []
+        list: [],
+        currentUser: ''
     }
 
     componentDidMount() {
@@ -15,6 +16,7 @@ class TalkList extends Component {
             .then(res => res.json())
             .then(res => this.setState({list: res.list}))
             .then(res => this.setState({talkLength: this.state.list.length}))
+        this.setState({currentUser: this.props.currentUser})
     }
 
     componentWillUnmount() {
@@ -47,6 +49,7 @@ class TalkList extends Component {
     render() {
         return (
             <div className="talk-list-wrap">
+                {this.state.currentUser}
                 {(this.state.list != null)?
                     this.state.list.map( (talk, i) => (
                         <Talk key={talk.seq}
@@ -56,7 +59,8 @@ class TalkList extends Component {
                               email={talk.email}
                               nickname={talk.nickname}
                               reg_date={talk.reg_date}
-                              />
+                              current_user={this.state.currentUser}
+                        />
                     )
                 ):' '}
             </div>

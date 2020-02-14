@@ -99,6 +99,12 @@ div.DraftEditor-root {
     width: 62px;
     margin-left: 10px;
 }
+.pre-img{
+    width: 100px;
+    border: 1px solid;
+    border-color: #3d4546e3;
+    border-radius: 0.5rem;
+}
 .guide-des-plus-btn{
     margin-top: 10px;
     margin-bottom: 40px;
@@ -149,4 +155,34 @@ textarea{
     color:  #d9e1e8;
     font-weight: bold;
     border: none;
+}
+.des-List-span{
+    width: 150px;
+    display: inline-block;
+    margin-bottom: 17px;
+    font-weight: 630;
+}
+.des-List-value{
+    width: 70%;
+    display: inline-block;
+    margin-bottom: 17px;
+    font-weight: 600;
+    color: #3c2525d6;
+}
+.des-List-Num{
+    text-align: center;
+    font-size: 15pt;
+    margin-bottom: 30px;
+    font-weight: bolder;
+    color: #8e5164ad;
+    width: 100%;
+}
+.des-List-div{
+    border: 2.4px solid #ffdada91;
+    background-color: #ffebf3a6;
+    width: 68%;
+    padding: 10px;
+    margin-bottom: 50px;
+    margin-left: 17%;
+    border-radius: 0.8rem;
 }

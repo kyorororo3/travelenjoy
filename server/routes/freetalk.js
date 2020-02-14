@@ -57,9 +57,10 @@ router.get('/list/likes', function(req, res) {
 
 //게시물 ID에 맞는 댓글 리턴
 router.get('/list/comments', function(req, res) {
-    const stmt = "select * from te_comment a, te_member b where talk_seq=? and a.email = b.email";
+    //const stmt = "select * from te_comment a, te_member b where talk_seq=? and a.email = b.email";
+    const stmt = "select a.seq as seq, a.content as content, a.reg_date as reg_date, b.profile_img as profile_img, b.nickname as nickname from te_comment a, te_member b where talk_seq=? and a.email = b.email";
     connection.query(stmt, req.query.talk_seq, function(err, result){
-        console.log(JSON.stringify(result))
+        console.log('return comments : ' + JSON.stringify(result))
         res.json({comments: result})
     });
 
@@ -72,6 +73,26 @@ router.get('/list/comments/count', function(req, res) {
         res.json({comments: result[0].cnt})
     });
 })
+
+//댓글 입력
+router.post('/list/comments/create', function(req, res) {
+    const {comment, email, talkSeq, nickname} = req.body;
+    console.log('comment create body : ' + JSON.stringify(req.body))
+    console.log(req.body.comment + ', ' + comment);
+    console.log(req.body.email);
+    console.log(req.body.talkSeq);
+    console.log(req.body.nickname);
+    const post = req.body;
+    let stmt = "insert into te_comment (talk_seq, email, nickname, content) values(?, ?, ?, ?)";
+    connection.query(stmt, [post.talkSeq, post.email, post.nickname, post.content], function (err, rows, fields) {
+        if (err)
+            console.log('connection result err : ' + err);
+        else
+            res.json({
+                resp: "ok"
+            });
+    });
+});
 
 //게시글 작성자 정보 리턴
 router.get('/list/author', function(req, res) {
@@ -107,6 +128,7 @@ router.post('/free/save/image',upload.single('file'), function(req, res, next) {
     console.log('img save body : ' + JSON.stringify(req.body));
 })
 
+//게시글+이미지 저장
 router.post('/free/save/images',upload.array('files'), function(req, res, next) {
     console.log('img save body : ' + JSON.stringify(req.body));
     for (let file of req.files) {
@@ -115,7 +137,7 @@ router.post('/free/save/images',upload.array('files'), function(req, res, next) 
     }
 
     let insertTalk = "insert into te_freetalk (title, content, email, nickname, image_count) values(?, ?, ?, ?, ?)";
-    connection.query(insertTalk, ['title', req.body.content, 'guest', 'guest', req.files.length], function (err, result) {
+    connection.query(insertTalk, ['title', req.body.content, req.body.userEmail, req.body.userNickname, req.files.length], function (err, result) {
         if (err) console.log('connection result err : ' + err);
 
         for (let file of req.files) {

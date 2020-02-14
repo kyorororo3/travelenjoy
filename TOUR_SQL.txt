@@ -86,11 +86,11 @@ create table te_tour_review(
   content varchar(1000),
   score int,
   review_img varchar(300),
-  wdate datetime default now()
+  wdate date
 );
 
-insert into te_tour_review(tour_seq, email, title, content, score)
-values(1, 'aaa', '아주조아', '리뷰리븅', 5);
+insert into te_tour_review(tour_seq, email, title, content, score, wdate)
+values(42, 'aaa', '아주 좋았다는 것을 굉장히 길게 쓰면 어떻게 될', '리뷰리븅', 4, now());
 
 채팅방 
 create table te_chat_room(
@@ -141,4 +141,12 @@ create table te_comment(
     nickname varchar(4000),
     content varchar(4000),
     reg_date datetime default current_timestamp
+);
+
+create table te_tour_alert(
+  seq int auto_increment primary key,
+  tour_seq int,
+  content varchar(1000),
+  reg_date datetime default now(),
+  isread int
 );

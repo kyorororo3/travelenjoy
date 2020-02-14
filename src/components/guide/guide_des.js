@@ -9,11 +9,13 @@ class GuideDes extends Component {
             des_name: '',
             des_img: '',
             des_description: '',
-            postcode:'',
-            address:'',
-            address_detail:'',
+            postcode: '',
+            address: '',
+            address_detail: '',
             start_time: '',
-            end_time: ''
+            end_time: '',
+            file: '',
+            imagePreviewUrl: ''
         }
         this.sample6_execDaumPostcode = this.sample6_execDaumPostcode.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -38,7 +40,7 @@ class GuideDes extends Component {
                     // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                     // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                     var addr = ''; // 주소 변수
-                
+
                     //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                     if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                         addr = data.roadAddress;
@@ -58,38 +60,56 @@ class GuideDes extends Component {
 
     onSubmitHandler(e) {
         e.preventDefault();
-        console.log("des.js값 : " ,this.state.des_name);
-        console.log("des.js값 : " ,document.getElementById('sample6_postcode').value);
+        //console.log("des.js값 : " ,this.state.des_name);
+        //console.log("des.js값 : " ,document.getElementById('sample6_postcode').value);
+        if (this.state.des_name === "") {
+            alert("장소 이름을 입력해 주세요");
+        }
+        else if (document.getElementById('sample6_postcode').value === "" || document.getElementById("sample6_address").value === "") {
+            alert("장소 위치를 입력해 주세요");
+        }
+        else if (this.state.des_img === undefined || this.state.des_img === "") {
+            alert("대표사진을 설정해 주세요");
+        }
+        else if (this.state.des_description === "") {
+            alert("설명을 입력해 주세요");
+        }
+        else if (this.state.start_time === "" || this.state.end_time === "") {
+            alert("시간을 선택해 주세요");
+        }
+        else if (parseInt(this.state.start_time) >= parseInt(this.state.end_time)) {
+            alert("시간을 다시 선택해주세요");
+        }
 
-        this.props.onClick(
-            this.state.des_name,
-            this.state.des_img,
-            this.state.des_description,
-            document.getElementById('sample6_postcode').value,
-            document.getElementById("sample6_address").value,
-            this.state.address_detail,
-            this.state.start_time,
-            this.state.end_time
-        )
+        else {
+            this.props.onClick(
+                this.state.des_name,
+                this.state.des_img,
+                this.state.des_description,
+                document.getElementById('sample6_postcode').value,
+                document.getElementById("sample6_address").value,
+                this.state.address_detail,
+                this.state.start_time,
+                this.state.end_time
+            )
+        }
     }
 
-    inputFormHandler(e){
-        this.setState({[e.target.name]: e.target.value});
+    inputFormHandler(e) {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleImageChange(e){
+    handleImageChange(e) {
         e.preventDefault();
         let reader = new FileReader();
         let file = e.target.files[0];
         reader.onloadend = () => {
-          this.setState({
-            file: file,
-            imagePreviewUrl: reader.result
-          });
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
         };
-        console.log("프리뷰 파일: ", file);
-        console.log("프리뷰 경로: ", reader.result);
-    
+
         reader.readAsDataURL(file);
         this.setState({
             des_img: file
@@ -113,7 +133,7 @@ class GuideDes extends Component {
                     </div>
                     <div className='guide-input-desapi'>
                         <input type="text" className="guide-form-input" id="sample6_postcode" name="postcode" placeholder="우편번호" />
-                        <input type="button" className="des-fine-btn" onClick={this.sample6_execDaumPostcode} value="찾기" /><br/>
+                        <input type="button" className="des-fine-btn" onClick={this.sample6_execDaumPostcode} value="찾기" /><br />
                         <input type="text" className="guide-form-input" id="sample6_address" name="address" placeholder="주소" />&nbsp;
                         <input type="text" className="guide-form-input" id="sample6_detailAddress" name="address_detail" placeholder="상세주소" onChange={this.inputFormHandler} />
                     </div><br />
@@ -122,18 +142,18 @@ class GuideDes extends Component {
                         <span>대표 사진</span>
                     </div>
                     <div className='guide-input'>
-                        <input type="file" name="des_img" onChange={this.handleImageChange} ></input>
+                        <input type="file" name="des_img" onChange={this.handleImageChange} ></input>{this.state.file !== ""?<img className='pre-img' src={this.state.imagePreviewUrl}/>:null}
                     </div><br />
 
                     <div className='guide-titleSpan'>
                         <span>장소 설명</span>
                     </div>
                     <div className='guide-input'>
-                        <textArea name="des_description" onChange={this.inputFormHandler}/>
-                    <div className='guide-tourinfoSpan'>
-                        <span> * 장소에 대한 설명을 간단하게 적어주세요</span>
-                    </div>
-                    </div><br/>
+                        <textarea name="des_description" onChange={this.inputFormHandler} />
+                        <div className='guide-tourinfoSpan'>
+                            <span> * 장소에 대한 설명을 간단하게 적어주세요</span>
+                        </div>
+                    </div><br />
 
                     <div className='guide-titleSpan'>
                         <span>투어 시간</span>
@@ -175,8 +195,8 @@ class GuideDes extends Component {
                     </div><br />
 
                     <input type="button" className="guide-des-Btn" onClick={this.onSubmitHandler} value="저장"></input>
+                </div>
             </div>
-           </div>
         )
     }
 }

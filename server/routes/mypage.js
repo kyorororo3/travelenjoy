@@ -117,8 +117,10 @@ router.get('/calendar', function(req,res){
 //MyTravel 리스트 가져오기   ++ 검색하는 리스트까지 처리해야함 
 router.post('/travel', function (req, res) {
     const { search, keyword, email, currentPage, isChecked } = req.body;
-    const defaultSql =  " select a.*,  b.seq as res_seq, b.reservation_number, b.email, b.start_date, b.join_people, b.total_price, b.phone, b.message "
-                        + " from te_tour a, te_tour_reservation b where a.seq = b.tour_seq and b.email =?";
+    const defaultSql =  " select * from (select a.seq, a.category, a.title, a.content, a.thumbnail, a.price, a.companyname, "
+                     +  " b.seq as res_seq, b.reservation_number, b.email, b.start_date, b.join_people, b.total_price, b.phone, b.message "
+                     +  " from te_tour a, te_tour_reservation b "
+                     +  " where a.seq = b.tour_seq and b.email =?";
 
     let sql = defaultSql;
     let page = parseInt(currentPage);
@@ -134,9 +136,9 @@ router.post('/travel', function (req, res) {
         params  = [ email, `%${keyword}%`, page];
     }
     if(isChecked){
-        sql += "and b.start_date > now()";
+        sql += " and b.start_date > now() ";
     }
-    sql+=' order by b.start_date asc limit ?, 6';
+    sql+=' order by b.start_date asc ) A limit ?, 6 ';
 
     sql = mysql.format(sql, params);
     console.log(sql);
@@ -147,6 +149,7 @@ router.post('/travel', function (req, res) {
     })
   })
 
+  //MyTravel length 가져오기 
   router.post('/travel/length', function(req,res){
     const { email, search, keyword, isChecked} = req.body;
     
@@ -166,7 +169,6 @@ router.post('/travel', function (req, res) {
     if(isChecked){
         sql += "and b.start_date > now()";
     }
-    sql+=' order by b.start_date asc';
 
     sql = mysql.format(sql, params);
     console.log(sql);
@@ -204,17 +206,44 @@ router.post('/scrap', function(req, res){
     })
 })
 
+//MyScrap length 가져오기 
+router.post('/scrap/length', function(req,res){
+    const { email, search, keyword} = req.body;
+    
+    const defaultSql = 'select count(*) as length from te_tour a, te_tour_scrap b where a.seq = b.tour_seq and b.email =?';
+    let sql = defaultSql;
+    let params = [email];
+
+    if(search !== undefined && search !== '') {
+        if(search === 'title'){
+            sql =` ${defaultSql} and a.title like ? `;
+            
+        }else if(search === 'location'){
+            sql = ` ${defaultSql} and a.category like ? `;
+        }
+        params  = [ email, `%${keyword}%`];
+    }
+
+    sql = mysql.format(sql, params);
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows[0]);
+    })
+  
+});
+
 //MyReview Post 해야하는 것과 이미 Post 한것 리스트 가져오기 
 router.get('/review', (req, res)=>{
-    const {command, email} = req.query;
+    const {command, email, currentPage} = req.query;
     console.log('command', command, 'email', email);
     
     if(command === 'unposted'){
-        let sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate ' 
+        let sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate as length' 
                   +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
                   +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
-                  +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null';
-        let params = [email];
+                  +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null order by c.start_date asc limit ?, 3';
+        let params = [email, parseInt(currentPage)];
         sql = mysql.format(sql,params);
         console.log(sql);
         connection.query(sql, function(err,rows){
@@ -236,6 +265,24 @@ router.get('/review', (req, res)=>{
         })
     }
 
+});
+
+//unposted review length 조회
+router.get('/review/length', function(req,res){
+    const {email} = req.query;
+    let sql = 'select count(*) as length from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
+            +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
+            +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null ' 
+            +' order by c.start_date asc';
+
+    let params = [email];
+    sql = mysql.format(sql,params);
+    console.log(sql);
+    connection.query(sql, function(err,rows){
+    if(err) return console.log('err' + err);
+    console.log('unposted', rows[0]);
+    res.send(rows[0]);
+})
 });
 
 //MyReview 추가 

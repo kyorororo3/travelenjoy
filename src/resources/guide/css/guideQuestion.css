@@ -1,0 +1,28 @@
+.question-obj-wrapper {
+  width: 200px;
+  height: 150px;
+  float: left;
+  margin-right: 20px;
+  border: 1px solid #2b90d9;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
+}
+
+.client-profile-img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+.client-profile-img img{
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+}
+
+.client-nickname {
+  padding: 5px;
+  font-weight: 600;
+}

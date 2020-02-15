@@ -75,7 +75,7 @@ class RecommendTour extends React.Component {
                     <div className ='thumbnail-like' onClick={this.handleScrap}>
                         {this.state.isScrap?<i className="fas fa-heart" style={{color:"#fff"}} />:<i className="far fa-heart" style={{color:"#fff"}} />}
                     </div>
-                    <img className='thumbnail-img' src={require('../../resources/common/images/jeju.jpg')} /*src={require(`../../uploads/${thumbnail}`)}*/
+                    <img className='thumbnail-img' alt={require('../../resources/common/images/jeju.jpg')} src={require(`../../uploads/${thumbnail}`)}
                         onClick={this.handleOnClick} />
                 </div>
 

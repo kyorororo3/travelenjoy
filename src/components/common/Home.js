@@ -132,7 +132,7 @@ class Home extends React.Component {
           <div className='recommendlist-wrapper'>
           <div className='home-subtitle'>실시간 인기글 💬</div>
             <div id='recommendlist-row-talk' className='recommendlist-row'>
-              {talklist.map(talk => <RecommendTalk key={talk.seq} talk={talk} />)}
+              {/* {talklist.map(talk => <RecommendTalk key={talk.seq} talk={talk} />)} */}
             </div>          
             <div className='readmore-btn' onClick={this.handleReadMore}></div>
           </div>

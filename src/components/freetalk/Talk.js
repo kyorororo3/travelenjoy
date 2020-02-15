@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, Row, Col, Media, Carousel} from 'react-bootstrap';
+import {Modal, Button, Row, Col, Media, Carousel, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
@@ -27,7 +27,8 @@ class Talk extends Component {
             phone: 1111,
             auth:3
         },
-        currentUser: ''
+        currentUser: {},
+        isOwner: 0
     }
 
     componentDidMount() {
@@ -50,7 +51,9 @@ class Talk extends Component {
             .then(res => res.json())
             .then(data => {
                     if(data.email !== undefined)
-                        this.setState({currentUser : JSON.stringify(data)})
+                        this.setState({currentUser : data})
+                    if(this.props.email === data.email)
+                        this.setState({isOwner: 1})
                 }
             );
     }
@@ -67,6 +70,14 @@ class Talk extends Component {
 
     handleClose = () => this.setState({showModal:false});
     handleShow = () => this.setState({showModal:true});
+
+    handleModify = () => {
+        alert('수정')
+    }
+
+    handleDelete = () => {
+        alert('삭제');
+    }
 
     render() {
         return (
@@ -87,6 +98,22 @@ class Talk extends Component {
                                     </a>
                                     <Media.Body id="modal-body-profile-detail-body">
                                         <a href="#">{this.props.nickname}</a>
+                                        {(this.state.isOwner)
+                                            ?
+                                                <Dropdown className={"modify-talk"}>
+                                                    <Dropdown.Toggle>
+                                                        <i className={"fa fa-cog"}/>
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu className="modify-talk-buttons">
+                                                        <Dropdown.Item eventKey="1">
+                                                            <a onClick={this.handleModify}>글 수정</a>
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="2">
+                                                            <a onClick={this.handleDelete}>글 삭제</a>
+                                                        </Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            :''}
                                     </Media.Body>
                                 </Media>
                             </div>

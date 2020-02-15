@@ -6,10 +6,16 @@ class MyTravelList extends React.Component {
     // console.log(e.target.dataset.seq);
     let seq = e.target.dataset.seq;
     const command = this.props.command;
+    console.log('command체크 ', command);
     if(command === 'myreview'){
-      console.log('command 왔다', command);
       this.props.callbackFromParent({
         showWriteModal:true,
+        tour:this.props.tour
+      })
+    }else if(command === 'mytravel'){
+      console.log('command 잘 찾아왔다');
+      this.props.callbackFromParent({
+        showResModal:true,
         tour:this.props.tour
       })
     }else{

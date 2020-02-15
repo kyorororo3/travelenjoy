@@ -17,12 +17,9 @@ class MyCalendar extends Component {
 
         this.goTravelDetailHandler = this.goTravelDetailHandler.bind(this);
       }
+      
       componentDidMount() {
-        fetch(`http://localhost:3002/mypage/travel`,{
-          body:JSON.stringify({email:this.state.email}),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          method:'post'
-        })
+        fetch(`http://localhost:3002/mypage/calendar?email=${this.state.email}`)
           .then(res => res.json())
           .then(data => this.setState({
             list: data

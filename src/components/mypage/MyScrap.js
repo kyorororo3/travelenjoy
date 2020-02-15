@@ -12,65 +12,125 @@ class MyScrap extends Component {
             email:this.props.location.state.users.email,
             status:"Let's scrap travels with Travel&joy!",
             list: [],
-            isLoaded: false
+            isFull:false,
+            currentPage:0,
+            total: undefined
         }
     }
 
     componentDidMount() {
         const parameters = {
-            search:'', 
-            keyword:'', 
             email:this.state.email,
-            currentPage:''
+            currentPage:0
           }
-          this.fetchHandler(parameters);
+          this.fetchListHandler(parameters);
+          this.fetchLengthHandler(parameters);
     }
-    
-    fetchHandler = (parameters) =>{
+
+    shouldComponentUpdate(nextProps, nextState){
+        return this.state !== nextState
+      }
+
+    //list 조회하는 fetch handler
+    fetchListHandler = (parameters) =>{
         fetch(`http://localhost:3002/mypage/scrap`,{
+            body:JSON.stringify(parameters),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            method:'post'
+        })
+            .then(res => res.json())
+            .then(data => this.setState({
+            list: data,
+            isFull: false,
+            currentPage:6
+            })
+        );
+    }
+
+    // list length 조회하는 fetch handler 
+    fetchLengthHandler = async (parameters) =>{
+        fetch(`http://localhost:3002/mypage/scrap/length`,{
           body:JSON.stringify(parameters),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           method:'post'
         })
           .then(res => res.json())
           .then(data => this.setState({
-            list: data,
-            isLoaded: true
+              total:data.length
+            }, () =>{
+              const {total, currentPage} = this.state;
+              if(total <= currentPage){
+               this.setState({
+                  isFull:true
+                })
+              }
             })
           );
-    }
-
+          console.log('checking total', this.state.total);
+      }
     SearchHandler = (e) =>{
         e.preventDefault();
         const parameters = {
             search:e.target.search.value,
             keyword:e.target.keyword.value,
             email:this.state.email,
-            currentPage:1
+            currentPage:0
         }
         this.setState({status:'No Results'});
-        this.fetchHandler(parameters);
+        this.fetchListHandler(parameters);
+        this.fetchLengthHandler(parameters);
+    }
+     //더보기 페이징 
+    ReadMoreHandler = async(e) => {
+        const parameters = {
+        search:this.state.search, 
+        keyword:this.state.keyword, 
+        email:this.state.email,
+        currentPage:this.state.currentPage
+        }
+        fetch(`http://localhost:3002/mypage/scrap`,{
+        body:JSON.stringify(parameters),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        method:'post'
+        })
+            .then(res => res.json())
+            .then(data => this.setState({
+                list: this.state.list.concat(data),
+                isFull: false,
+                currentPage:this.state.currentPage + 6
+            }, () =>{
+                const {total, currentPage} = this.state
+                console.log('변화를 봅세 ', total, currentPage);
+                if(total <= currentPage){
+                this.setState({
+                    isFull: true
+                })
+                }
+            })
+        );
+        
     }
 
     render(){
-        let{ list, isLoaded, email } = this.state
+        let{ list, isFull } = this.state
         return(
             <div className='mypage-body'>
-                    <div className='body-wrapper box'>
-                        <div className='body-info-container'> 
-                            <form className='tour-search-form'  onSubmit={this.SearchHandler}>
-                                <select className='category-selection' name='search'>
-                                    <option>title</option>
-                                    <option>location</option>
-                                </select>
-                                <input type='text' name='keyword' className='search-input'/>
-                                <input type='submit' className='basic-btn' value='search'/>
-                            </form> 
+                <div className='body-wrapper box'>
+                    <div className='body-info-container'> 
+                        <form className='tour-search-form'  onSubmit={this.SearchHandler}>
+                            <select className='category-selection' name='search'>
+                                <option>title</option>
+                                <option>location</option>
+                            </select>
+                            <input type='text' name='keyword' className='search-input'/>
+                            <input type='submit' className='basic-btn' value='search'/>
+                        </form> 
                         <div className='travel-wrapper'>
-                            {isLoaded? list.length !== 0? list.map(tour =>  <TravelList key={tour.seq} tour={tour} />):<h5>${this.state.status}</h5> : <h1>Loading....</h1>}
-                        </div>
+                            {list.length !== 0? list.map(tour =>  <TravelList key={tour.seq+tour.wdate} tour={tour} />):<h5>{this.state.status}</h5>}
+                            {!isFull && <button type='button'  className='read-more-btn' onClick={this.ReadMoreHandler}>MORE</button>}
                         </div>
                     </div>
+                </div>
             </div>
         );
     }

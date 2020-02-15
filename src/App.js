@@ -19,7 +19,7 @@ import TalkMain from './components/freetalk/TalkMain';
 import TalkWrite from "./components/freetalk/TalkWrite";
 import Member_Account from './components/account/memberaccount';
 import Guide_Account from './components/account/guideaccount';
-import Guide_Main from './components/guide/guide_main';
+import Guide_Main from './components/guide/guide';
 import Guide_Make from './components/guide/guide_make';
 import Guide_Tour_List from './components/guide/guide_tour_list';
 import Guide_List_Detail from './components/guide/guide_list_detail';
@@ -74,11 +74,11 @@ class AppTest extends React.Component {
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
               <Route exact path='/mypage' component={MypageHome}/>
-              <Route path='/guide/main' component={Guide_Main}></Route>
+              <Route exact path='/guide' component={Guide_Main}></Route>
               <Route path='/guide/make' component={Guide_Make}></Route>
               <Route path='/guide/list' component={Guide_Tour_List}></Route>
               <Route path='/guide/question' component={Guide_Question}></Route>
-              <Route path='/guide/list/detail/:seq' component={Guide_List_Detail}></Route>
+              <Route path='/guide/detail/:seq' component={Guide_List_Detail}></Route>
             </Switch>
           </div>
         </Router>

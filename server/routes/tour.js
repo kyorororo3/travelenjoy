@@ -201,7 +201,18 @@ router.get('/detail/review/average', (req, res) => {
   })
 })
 
-  // 문의하기 채팅방 생성
+// Detail-Review-Writer Infomation 조회
+router.get('/detail/review/writer', (req, res) => {
+  const {email} = req.query;
+  const sql = 'select nickname, profile_img from te_member where email=?';
+  
+  conn.query(sql, email, (err, rows) => {
+    if(err) return console.log(err);
+    res.send(rows[0]);
+  })
+});
+
+// 문의하기 채팅방 생성
 router.post('/question/chatroom', (req, res) => {
   const {guide, client} = req.body;
   let sql = 'select * from te_chat_room where guide=? and client=?';

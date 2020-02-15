@@ -1,5 +1,6 @@
 import React from 'react';
-
+// CSS
+import '../../resources/guide/css/guideQuestion.css';
 // component
 import GuideHeader from './guide_Header';
 import Guide_Question_Obj from './guide_question_obj';
@@ -11,7 +12,8 @@ class Guide_Question extends React.Component {
     this.state = {
       chat_list: [],
       modal: false,
-      seq: undefined
+      seq: undefined,
+      email: this.props.location.state.users
     }
   }
 
@@ -38,7 +40,7 @@ class Guide_Question extends React.Component {
     const {chat_list, modal, seq} = this.state;
     return(
       <div className='container'>
-        <GuideHeader />
+        <GuideHeader users={this.state.email}/>
         {chat_list.map(obj => {
           return <Guide_Question_Obj key={obj.seq} handleClick={this.handleClick} question={obj}/>
         })}

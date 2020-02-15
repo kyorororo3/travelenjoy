@@ -3,7 +3,9 @@
     position: absolute;
     top: 20%;
 }
-
+#modal-body-profile-detail-body{
+    padding:2px;
+}
 .modal-image-wrap {
     width: 100%;
     height: auto;

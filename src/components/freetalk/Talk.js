@@ -85,7 +85,7 @@ class Talk extends Component {
                                             onError={(e)=>{e.target.onerror = null; e.target.src=require('../../resources/mypage/images/profile_img.jpg')}}
                                         />
                                     </a>
-                                    <Media.Body>
+                                    <Media.Body id="modal-body-profile-detail-body">
                                         <a href="#">{this.props.nickname}</a>
                                     </Media.Body>
                                 </Media>

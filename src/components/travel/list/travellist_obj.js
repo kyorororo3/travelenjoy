@@ -1,16 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
 class TravelListObj extends React.Component {
   goToDetail = (e) => {
     // console.log(e.target.dataset.seq);
     let seq = e.target.dataset.seq;
     this.props.history.push(`/travel/detail/${seq}`);
+ 
   }
 
   render() {
     const {seq, title, companyname, category, thumbnail, price} = this.props.tour;
-    
+
     return(
       <div className='tour-list-obj card-container' data-seq={seq}
        onClick={this.goToDetail}>

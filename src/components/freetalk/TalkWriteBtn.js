@@ -41,11 +41,19 @@ class TalkWriteBtn extends Component {
 
     handleClose = () => this.setState({showModal: false});
     handleShow = () => {
-        if (this.state.currentUser === '') {
-            alert('로그인이 필요합니다.');
-           return;
-        }
-        this.setState({showModal: true});
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                    if(data.email !== undefined){
+                        this.setState({currentUser : JSON.stringify(data)});
+                        this.setState({showModal: true});
+                    } else {
+                        alert('로그인이 필요합니다.');
+                    }
+                }
+            );
     }
 
     reloadMain = () => this.props.reloadMain();

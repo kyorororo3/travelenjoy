@@ -9,9 +9,8 @@ class TravelList extends React.Component {
     super(props);
 
     this.state = {
-      isLoaded: false,
       isFull: false,
-      list: undefined,
+      list: [],
       start: 0,
       total: undefined
     }
@@ -19,7 +18,7 @@ class TravelList extends React.Component {
   
   handleMoreRead = () => {
       const {isSearched, search} = this.props;
-      const {list, start, total} = this.state;
+      const {list, start} = this.state;
 
       let url = `http://localhost:3002/tour/list?start=${start}`;
       if(isSearched) {
@@ -47,7 +46,6 @@ class TravelList extends React.Component {
     .then(res => res.json())
     .then(data => this.setState({
         list: data,
-        isLoaded: true,
         start: this.state.start + 12
       })
     );
@@ -100,7 +98,8 @@ class TravelList extends React.Component {
   }
 
   render() {
-    let { list, isLoaded, isFull } = this.state
+    const { list, isFull } = this.state
+    const {isSearched} = this.props
     // console.log(list);
     return(
       <div className='travel-list-wrapper'>
@@ -108,7 +107,7 @@ class TravelList extends React.Component {
           Travel <span>&</span>Joy Guide Tour
         </div>
         <div className='travel-lists'>
-          {isLoaded && list.map(tour => <TravelListObj key={tour.seq} tour={tour} />)}
+          {list.length === 0 && isSearched ? <div className='non-data'>검색 결과가 없습니다.</div> : list.map(tour => <TravelListObj key={tour.seq} tour={tour} />)}
         </div>
         <div className='more-btn' style={{textAlign: "center", marginBottom: 20 + "px"}}>
           {!isFull && <button type='button' id='more-btn' className='btn-m' onClick={this.handleMoreRead}>MORE</button>}

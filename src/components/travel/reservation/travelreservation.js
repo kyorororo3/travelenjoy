@@ -17,8 +17,19 @@ class TravelReservation extends React.Component {
     super(props);
 
     this.state = {
-      phone: undefined,
-      require: undefined
+      agree: false,
+      phone: '',
+      require: ''
+    }
+  }
+
+  handleAgree = (e) => {
+    const val = e.target.value;
+
+    if(val === 'on') {
+      this.setState({
+        agree: true
+      })
     }
   }
 
@@ -38,7 +49,7 @@ class TravelReservation extends React.Component {
 
   handleClick = () => {
     const { tour_seq, selectedDays, person, email } = this.props.location.state;
-    const { phone, require } = this.state;
+    const { phone, require, agree } = this.state;
     const total_price = document.getElementsByClassName('total-price')[0].dataset.total_price;
     // alert(tour_seq + " " + selectedDays + " " + person + " " + email + " " + phone + " " + require + " " + total_price);
     
@@ -52,6 +63,15 @@ class TravelReservation extends React.Component {
           alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
           this.props.history.push('/login');  // 로그인 페이지로 이동.
         }else if(user.email === email){ // 로그인 정보가 있을 경우
+
+          if(phone === '') {
+            alert('[필수] 연락 받을 번호를 입력해주세요.');
+            return;
+          }
+          if(!agree) {
+            alert('[필수] 이용약관에 동의해주세요.');
+            return;
+          }
           const insert = {
             reservation_number: new Date().getTime() + "_" + tour_seq,
             tour_seq: tour_seq,
@@ -157,7 +177,7 @@ class TravelReservation extends React.Component {
         <div className='travel-reservation-wrapper'>
           <TravelReservationInfo selectedDays={selectedDays} person={person} tour_seq={tour_seq} />
           <TravelReservationClient handlePhoneChange={this.handlePhoneChange} handleRequireChange={this.handleRequireChange}/>
-          <TravelReservationTos />
+          <TravelReservationTos handleAgree={this.handleAgree}/>
           <div className='travel-pay'>
             <button type='button' className='btn-l' onClick={this.handleClick}>결제하기</button>
           </div>

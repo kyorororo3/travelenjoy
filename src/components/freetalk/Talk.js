@@ -11,7 +11,7 @@ import TalkModalBody from "./talk/TalkModalBody";
 class Talk extends Component {
 
     state = {
-        file: 'cat19.jpg',
+        file: 'cat1.jpg',
         images: [],
         likes: 0,
         comments: 0,
@@ -34,7 +34,7 @@ class Talk extends Component {
         fetch('http://localhost:3002/freetalk/list/images?seq=' + this.props.seq)
             .then(res => res.json())
             .then(res => this.setState({images: res.images}))
-            .then(res => this.setState({file: (this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
+            .then(res => this.setState({file: (this.state.images.length>0)?this.state.images[0].name_saved:this.state.file}))
         fetch('http://localhost:3002/freetalk/list/likes?seq=' + this.props.seq)
             .then(res => res.json())
             .then(res => this.setState({likes: res.likes}))
@@ -82,7 +82,7 @@ class Talk extends Component {
                                             height={32}
                                             src='https://logodix.com/logo/1707081.png'
                                             alt='profile image'
-                                            onError={(e)=>{e.target.onerror = null; e.target.src=require('../../resources/mypage/images/profile_img.jpg')}}
+                                            onError={(e)=>{e.target.onerror = null; e.target.src=require('../../uploads/cat1.jpg')}}
                                         />
                                     </a>
                                     <Media.Body id="modal-body-profile-detail-body">
@@ -98,10 +98,10 @@ class Talk extends Component {
                                         this.state.images.map( (image, i) => (
                                             <Carousel.Item key={image.seq}>
                                             <img key={image.seq}
-                                                 src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
+                                                 src={require('../../uploads/' + image.name_saved)}/>
                                             </Carousel.Item>
                                         ))
-                                        :<img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                                        :<img src={require('../../uploads/' + this.state.file)}/>
                                     }
                                 </Carousel>
                             </div>
@@ -129,13 +129,13 @@ class Talk extends Component {
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <i className="far fa-comment-dots"/> {this.state.comments}
                     </div>
-                    <img src={require('../../resources/freetalk/image/talk/' + this.state.file)}/>
+                    <img src={require('../../uploads/' + this.state.file)}/>
 
                     <div className={"talk-image-files"} style={{display:'none'}}>
                         {(this.state.images.length > 0)?
                             this.state.images.map( (image, i) => (
                                     <img key={image.seq}
-                                         src={require('../../resources/freetalk/image/talk/' + image.name_real)}/>
+                                         src={require('../../uploads/' + image.name_saved)}/>
                                 ))
                             :' '}
                     </div>

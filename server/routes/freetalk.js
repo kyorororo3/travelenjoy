@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const upload = multer({dest:'public/uploads/'})
+const upload = multer({dest:'src/uploads/'})
 
 router.use(express.static("/public/uploads"));
 router.use(bodyParser.json());
@@ -40,6 +40,7 @@ router.get('/list/images', function(req, res) {
     // const {seq} = req.query.seq;
     const stmt = "select * from te_freetalk_images where te_freetalk_seq=?";
     connection.query(stmt, req.query.seq, function(err, result){
+        console.log('/list/images result : ' + JSON.stringify(result))
         if(result == null)
             res.send(false)
         else

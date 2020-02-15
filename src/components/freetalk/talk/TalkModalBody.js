@@ -55,7 +55,7 @@ class TalkModalBody extends Component {
         })
             .then(res => res.json())
             .then(data => console.log(data));
-        
+
         alert('저장이 완료되었습니다.')
     }
 

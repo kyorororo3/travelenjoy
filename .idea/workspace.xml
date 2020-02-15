@@ -2,56 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
-      <change afterPath="$PROJECT_DIR$/src/uploads/0bc038066a75af9ed767b33ff2c82d34" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/0c23378a95a7e323996ff4d6831ff4c7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/100502573bf5e26b8b1e90f3894c5d1d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/141402b8be259438d5150ee7cca7276e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/1b3ae88c4c19d9bcb5199c61ac23c2b4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/1cc78bcb5c20dd9ce26bd591d3704014" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/1ea2de1d4d914675b5158cf0c0716c58" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/23cd21b11886969943204521e9a6f407" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/288ba8a8072e380cdfe26090edc65fd5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/3a1441ddb94afd242a7081d88b60ef52" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/3d47dbe70a55361025bfd81c3b8379c6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/4050a86277262e805d92f62bd736b5c1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/4549fea354d7558295530cd3eb44e60d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/4a8404ad299c62d46a88cda3a7025399" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/4bea674a33dc6ed6bb66029208053098" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/50cae51727559dfb81e08e683f5f57fe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/5348c1ffcbff9f41f5274b998383c753" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/55731670f55c26f32e2793328c962b88" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/571de4bf3a74cef09badca402a74f9c1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/599313f7a76f2e37c27f9cf1c6902525" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/6ab02d61654aaec54eb8f40427babcda" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/6db594844f0ac92b1dd1a1e06bf878eb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/7afc00b3ad3680f9f411aec08b8a43a8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/7b509ba56ae4d6d8746cc2d85707d3ce" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/85031cfa9450eeba8183fc0dbcab853d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/8895c500b09e38973f6707fc62d11a4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/8dcc54149471984d2ddcb4452f4d25a6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/92742790cd8c6c8c76a666c557b74238" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/95a9d21f9489ab511699240dc062b375" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/9b66b8c9709686e6f7bc04f4fc33c94b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/a304748c0f3f6401395b2a5ebe215af7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/a4a198872a8852d0536cb47f3fb207db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/ab1f4905e923391c58aaa77b00f50c12" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/acf08d89d9e7ff53184c0d58f00bf7b1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/ad63fb50a8c7d315098a995ad93a942f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/af3838ee2ff75aa5535e4b37973bc688" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/b519bfcc8ce590e5b44ff0f715faeb56" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/b66270ca3ba1df17c4a172eb4e5ed107" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/b8c96aa30785fad201021b134febba35" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/bcdc011fb00b52ad66bbcbc256ed9f6a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/c252bcfec2b79b73c24de80c573cf7d2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/cat1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/cb038d07248b7d51a6499696e8288320" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/e005a4a955750b89700dd77fcb1fd801" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/e4c77ce09441544dda68bc89fd59b51b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/f748b8073f45182b9795620bd3f937be" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/uploads/ff023ab95b6f2caa92e560ee23a7d0da" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/freetalk/Talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +122,7 @@
       <workItem from="1580096435575" duration="17736000" />
       <workItem from="1580120769657" duration="623000" />
       <workItem from="1581326563252" duration="216000" />
-      <workItem from="1581731853998" duration="4645000" />
+      <workItem from="1581731853998" duration="4945000" />
     </task>
     <task id="LOCAL-00001" summary="자유게시판 틀 작성 중">
       <created>1578803653702</created>

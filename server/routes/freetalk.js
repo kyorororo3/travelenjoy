@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const upload = multer({dest:'src/uploads/'})
+const upload = multer({dest:'../src/uploads/'})
 
-router.use(express.static("/public/uploads"));
+// router.use(express.static("/public/uploads"));
 router.use(bodyParser.json());
 
 const mysql = require('mysql');

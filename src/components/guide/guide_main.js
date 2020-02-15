@@ -9,7 +9,7 @@ class guideMain extends Component {
   }
 
   render() {
-    console.log("guide Main render() ", this.props.users)
+    console.log("guide Main render() ", this.props.users);
     return (
       <div className='container'>
         <GuideHeader users={this.props.users}/>

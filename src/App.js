@@ -31,7 +31,7 @@ class AppTest extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {isLogin: false}
+    this.state = {isLogin: false, isGuide:'', users:[]}
   }
 
   componentDidMount() {
@@ -41,7 +41,7 @@ class AppTest extends React.Component {
       .then(res => res.json())
       .then(data => {
         if(data.email !== undefined){
-          this.setState({isLogin: true})
+          this.setState({isLogin: true, isGuide: data.auth, users:data})
         }else{
           this.setState({isLogin: false})
         }
@@ -52,17 +52,27 @@ class AppTest extends React.Component {
     this.setState({isLogin: result})
   }
 
+  guideHome = (data) => {
+    this.setState({isGuide : data})
+  }
+  
+  getMemberInfo = (data) =>{
+    this.setState({users : data})
+  }
+
   render() {
     console.log('App.js ' , this.state.isLogin);
+    console.log('App.js ' , this.state.isGuide);
+    console.log('App.js ' , this.state.users);
     return(
       <div className="app-wrapper">
         <Router>
-          <Header isAuth={this.state.isLogin} getLogout={this.isAuth}/>
+          <Header isAuth={this.state.isLogin} getLogout={this.isAuth} isGuide={this.state.isGuide} users={this.state.users}/>
           <div className="contents-wrapper">        
             <Switch>  {/* Switch: 불필요한 트래픽 방지. 해당 컴포넌트만 불러오게 해준다. */}
               <Route exact path='/' component={Home} />
               {/* <Route path='/login' isLogin={this.isAuth} component={Login} /> */}
-              <Route path='/login' render={props => <Login getLogin = {this.isAuth} />}  />
+              <Route path='/login' render={props => <Login getLogin = {this.isAuth}  getAuth = {this.guideHome} getInfo = {this.getMemberInfo} />}  />
               <Route exact path='/account' component={Account} />
               <Route path='/account/member' component={Member_Account} />
               <Route path='/account/guide' component={Guide_Account} />

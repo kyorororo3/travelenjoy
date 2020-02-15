@@ -23,12 +23,34 @@ class Header extends React.Component {
   render() {
     let isLogin = '';
     let mypage = '';
-    if(this.props.isAuth){       
-      isLogin = <li><NavLink exact to='/mypage' className='menu'>Mypage</NavLink></li>
-      mypage = <li className='login-logout-btn'><NavLink exact to='/'><span onClick={this.handleLogout}>Logout</span></NavLink></li>
-    }else{
+    let home = '';
+    let make = '';
+    let talk ='';
+    let travel ='';
+
+    if (this.props.isAuth) { //로그인을 했을 때
+      if (this.props.isGuide === 1) { //가이드인 경우의 메뉴 바
+        home = <li><NavLink exact to='/guide' className='menu' activeClassName='active'>Home</NavLink></li>
+        make = <li><NavLink to={{pathname:'/guide/make' , state: {users: this.props.users}}} className='menu'>Make</NavLink></li>
+        mypage = <li className='login-logout-btn'><NavLink exact to='/'><span onClick={this.handleLogout}>Logout</span></NavLink></li>
+        talk = <li><NavLink to={{pathname:'/guide/list' , state: {users: this.props.users}}} className='menu'>MyTour</NavLink></li>
+        travel = <li><NavLink to={{pathname:'/guide/question' , state: {users: this.props.users}}} className='menu'>Q&A</NavLink></li>
+      }//가이드가 아닌 경우의 메뉴 바
+      else {
+        home = <li><NavLink exact to='/' className='menu' activeClassName='active'>Home</NavLink></li>
+        isLogin = <li><NavLink exact to='/mypage' className='menu'>Mypage</NavLink></li>
+        mypage = <li className='login-logout-btn'><NavLink exact to='/'><span onClick={this.handleLogout}>Logout</span></NavLink></li>
+        talk = <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>
+        travel = <li><NavLink to='/travel' className='menu'>Travel</NavLink></li>
+      }
+    }
+    else { //로그아웃을 했을 때(기본 메뉴 바)
+      home = <li><NavLink exact to='/' className='menu' activeClassName='active'>Home</NavLink></li>
+      talk = <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>
+      travel = <li><NavLink to='/travel' className='menu'>Travel</NavLink></li>
       isLogin = <li className='login-logout-btn'><NavLink to='/login'><span>Login</span></NavLink></li>
     }
+  
 
     return(
       
@@ -48,9 +70,13 @@ class Header extends React.Component {
                         </div>
                         <div className='menu-wrapper'>
                             <ul>
-                                <li><NavLink exact to='/' className='menu' activeClassName='active'>Home</NavLink></li>
+                                {/* <li><NavLink exact to='/' className='menu' activeClassName='active'>Home</NavLink></li>
                                 <li><NavLink to='/travel' className='menu'>Travel</NavLink></li>
-                                <li><NavLink to='/talk' className='menu'>Talk</NavLink></li>
+                                <li><NavLink to='/talk' className='menu'>Talk</NavLink></li> */}
+                                {home}
+                                {make}
+                                {travel}
+                                {talk}
                                 {/* <li><NavLink to='/mypage' className='menu'>Mypage</NavLink></li> */}
                                 {/* <li className='login-btn'><NavLink to='/login'><span>Login</span></NavLink></li> */}
                                 {isLogin}

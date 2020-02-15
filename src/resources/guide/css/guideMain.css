@@ -1,14 +1,38 @@
 .guide-main-bar{
-    margin-top: 25px;
+    margin-top: 40px;
     display: block;
-    background-color: #2b90d9;
+    background-color: #2c5f86de;
+    border: 1px solid #e6eaec;
     color: #041225;
     width: 100%;
     height: 120px;
+    box-shadow: 4px 4px 1px -1px #c3d7e7af;
+    
+}
+.guide-mode{
+    float: right;
+    margin-top: 4px;
+    margin-right: 10px;
+    padding: 5px;
+    background-color: #71b8e0;
+    font-size: 10pt;
+    font-weight: 600;
+    color: #101618e7;
+    border-radius: 0.4rem;
+    box-shadow: 2px 2px 1px -1px #3776a7af;
+}
+.guide-main-info-bar{
+    margin-top: 30px;
+    margin-left: 20px;
+    color: rgba(101, 249, 249, 0.438);
+}
+.guide-id-span{
+    font-weight: bolder;
+    color: rgba(19, 18, 18, 0.924);
 }
 
 .guide-main-div{
-   margin-top: 30px;
+   margin-top: 110px;
 }
 
 .guide-tour-img{
@@ -24,6 +48,15 @@
     width: auto;
     display: inline-block;
     /* border: 1px solid; */
+}
+.guide-tour-btn1 label:hover{
+    color: rgba(18, 92, 177, 0.938);
+}
+.guide-tour-btn2 label:hover{
+    color: rgba(18, 92, 177, 0.938);
+}
+.guide-tour-btn3 label:hover{
+    color: rgba(18, 92, 177, 0.938);
 }
 
 .guide-tour-btn2{

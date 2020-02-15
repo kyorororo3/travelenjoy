@@ -54,7 +54,7 @@ class GuideDeTour extends Component {
                         </tr>
                         <tr>
                             <th>참여 회원</th>
-                            <td><input type="button" onClick={this.Clickhandler} value="참여회원 보기" /></td>
+                            <td><input className='guide-Isjoin-Btn' type="button" onClick={this.Clickhandler} value="참여회원 보기" /></td>
                         </tr>
                         <tr>
                             <th colSpan="2">투어 설명</th>

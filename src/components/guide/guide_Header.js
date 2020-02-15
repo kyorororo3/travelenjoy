@@ -10,13 +10,16 @@ class GuideHeader extends Component {
     render() {
         return (
             <div className='guide-main-bar'>
-                <div className='guide-main-name'>
-                    [ {this.props.users.email} ] 가이드 님
-                </div>
-                <div className='guide-main-home'>
-                  <Link to='/guide'>
-                    <span><img className='guide-tour-home-img' src={require('../../resources/guide/images/house.png')} /></span>
-                  </Link>
+                <div className='guide-mode'>
+                    GUIDE MODE
+                </div><br/>
+                <div className='guide-main-info-bar'>
+                    <div className='guide-main-name'>
+                        <span className="guide-id-span">{this.props.users.email}</span> 님
+                    </div>
+                    <div className='guide-main-company'>
+                        companmy is <span className="guide-id-span">{this.props.users.companyname}</span> 
+                    </div>
                 </div>
             </div>
         )

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Modal, Button, Row, Col, Media} from 'react-bootstrap';
 import 'moment/locale/ko';
+import update from 'react-addons-update';
 //게시물 Modal 프로필, 댓글, 기능
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
 
@@ -23,7 +24,9 @@ class TalkModalBody extends Component {
         comments: [],
         currentUser: '',
         content: '',
-        editContent: ''
+        editContent: '',
+        editSeq: 0,
+        editCommentMode: false
     }
 
     componentDidMount() {
@@ -34,7 +37,9 @@ class TalkModalBody extends Component {
 
         fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
             .then(res => res.json())
-            .then(res => this.setState({comments: res.comments}))
+            .then(res => {
+                this.setState({comments: res.comments})
+            })
         this.setState({currentUser: this.props.currentUser})
     }
 
@@ -86,9 +91,76 @@ class TalkModalBody extends Component {
         console.log(this.state.content);
     }
 
-    handleEditComment = (e) => {
-        this.setState({editContent: e.target.value})
+    handleEditMode (value) {
+        this.state.comments.map( (comment, i) => {
+            if(comment.seq === value.seq){
+                this.setState({
+                        comments: update(this.state.comments,{
+                                [i]: {
+                                    seq: {$set: comment.seq},
+                                    content: {$set: comment.content},
+                                    reg_date: {$set: comment.reg_date},
+                                    profile_img: {$set: comment.profile_img},
+                                    nickname: {$set: comment.nickname},
+                                    email: {$set: comment.email},
+                                    iseditmodeon: {$set: value.toggle}
+                                }
+                        }
+                    )
+                })
+            }
+        })
+        this.setState({editSeq: value.seq})
     }
+
+    commentContentTextOnChange = (e) => {
+        e.preventDefault()
+        this.setState({editContent: e.target.value} );
+    }
+
+    handleEditCommentContent = (e) => {
+        e.preventDefault();
+
+        let formData = {
+            content: this.state.editContent,
+            talk_seq: this.state.editSeq
+        }
+
+        fetch('http://localhost:3002/freetalk/list/comments/update', {
+            method:'post',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            });
+        this.finishEditComment(formData.talk_seq, formData.content);
+    }
+
+    finishEditComment = (talk_seq, content) => {
+        this.state.comments.map( (comment, i) => {
+            if(comment.seq === talk_seq){
+                this.setState({
+                    comments: update(this.state.comments,{
+                            [i]: {
+                                seq: {$set: comment.seq},
+                                content: {$set: content},
+                                reg_date: {$set: comment.reg_date},
+                                profile_img: {$set: comment.profile_img},
+                                nickname: {$set: comment.nickname},
+                                email: {$set: comment.email},
+                                iseditmodeon: {$set: false}
+                            }
+                        }
+                    )
+                })
+            }
+        })
+    }
+
+    handleEditCommentModeOn = (e) => { this.setState({editCommentMode: true}) }
+    handleEditCommentModeOff = (e) => { this.setState({editCommentMode: false}) }
 
     render() {
         return(
@@ -127,17 +199,26 @@ class TalkModalBody extends Component {
                                     <div className="comment-registration-date">
                                         <a className="moment-info">{moment(comment.reg_date, 'YYYY-MM-DDTHH:mm:ss.SSS').fromNow()}</a>
                                         {(this.state.currentUser.email === comment.email)
-                                            ?<div className="comment-function">
-                                                <i className="fa fa-edit"/>&nbsp;
+                                            ?<div className="comment-function">                                                
+                                                <i className="fa fa-edit" onClick={(e) => this.handleEditMode({seq: comment.seq, toggle: true}, e)}/>&nbsp;
                                                 <i className="fa fa-trash-alt"/>
                                             </div>
-                                            :'불일치'}
+                                            :''}
                                     </div>
                                 </div>
                                 <div className="comment-body">
-                                    <div className="comment-body-content">
-                                        &nbsp;&nbsp;{comment.content}
-                                    </div>
+                                    {(comment.iseditmodeon)
+                                        ?<div className="comment-body-content" key={comment.seq} number={i}>
+                                            <form onSubmit={this.handleEditCommentContent}>
+                                                &nbsp;&nbsp;<input type="text" name={"content"} placeholder={this.state.comments[i].content} onChange={this.commentContentTextOnChange} value={this.state.editContent}/>
+                                                <i className={"fa fa-window-close"} onClick={(e) => this.handleEditMode({seq:comment.seq, toggle:false}, e)}/>
+                                            </form>
+                                        </div>
+                                        :<div className="comment-body-content" key={comment.seq} number={i}>
+                                            &nbsp;&nbsp;{comment.content}
+                                        </div>
+                                    }
+                                    
                                 </div>
                             </div>
                         ))

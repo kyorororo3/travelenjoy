@@ -181,7 +181,7 @@ class MyReview extends Component {
                                         <span class='fixed-title thumb'>Title</span>
                                         <span class='fixed-title wdate'>Registered</span>
                                     </div>
-                                        {myReviews.length !== 0? myReviews.map((review, index) => <ReviewForm key={index} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
+                                    {myReviews.length !== 0? myReviews.map((review, index) => <ReviewForm key={index} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
                                 </div>
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>

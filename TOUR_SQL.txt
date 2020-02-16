@@ -143,7 +143,7 @@ create table te_comment(
     reg_date datetime default current_timestamp
 );
 
-create table te_tour_alert(
+create table te_tour_msg(
   seq int auto_increment primary key,
   tour_seq int,
   content varchar(1000),

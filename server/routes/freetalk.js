@@ -95,12 +95,18 @@ router.post('/list/comments/create', function(req, res) {
     });
 });
 
+//댓글 수정
 router.post('/list/comments/update', function(req, res) {
     console.log('update comment : ' + JSON.stringify(req.body))
     let stmt = "update te_comment set content=? where seq=?"
     connection.query(stmt, [req.body.content, req.body.talk_seq], function(err, rows) {
         if (err) console.log('connection result err : ' + err);
     })
+});
+
+//댓글 삭제
+router.post('/list/comments/delete', function(req, res) {
+
 });
 
 //게시글 작성자 정보 리턴

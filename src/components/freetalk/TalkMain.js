@@ -49,9 +49,9 @@ class TalkMain extends Component {
         switch (currentMode) {
             case "write": currentPage = <Write/>;
             break;
-            case "my": currentPage = <TalkList currentUser={this.getCurrentUser}/>;
+            case "my": currentPage = <TalkList currentUser={this.getCurrentUser} reloadMain={this.reloadMain}/>;
             break;
-            default: currentPage = <TalkList currentUser={this.getCurrentUser}/>
+            default: currentPage = <TalkList currentUser={this.getCurrentUser} reloadMain={this.reloadMain}/>
             break;
         }
 

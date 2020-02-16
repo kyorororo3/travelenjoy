@@ -22,7 +22,8 @@ class TalkModalBody extends Component {
         },
         comments: [],
         currentUser: '',
-        content: ''
+        content: '',
+        editContent: ''
     }
 
     componentDidMount() {
@@ -85,6 +86,10 @@ class TalkModalBody extends Component {
         console.log(this.state.content);
     }
 
+    handleEditComment = (e) => {
+        this.setState({editContent: e.target.value})
+    }
+
     render() {
         return(
             <div className="modal-body-wrap">
@@ -105,7 +110,7 @@ class TalkModalBody extends Component {
                 <div className="modal-body-comments">
                     {(this.state.comments.length > 0)?
                         this.state.comments.map( (comment, i) => (
-                            <div className="comment-wrap" key = {comment.seq}>
+                            <div className="comment-wrap" key={comment.seq} number={i}>
                                 <div className="comment-author">
                                     <div className="comment-author-profile">
                                         <a href="#">
@@ -121,6 +126,12 @@ class TalkModalBody extends Component {
                                     </div>
                                     <div className="comment-registration-date">
                                         <a className="moment-info">{moment(comment.reg_date, 'YYYY-MM-DDTHH:mm:ss.SSS').fromNow()}</a>
+                                        {(this.state.currentUser.email === comment.email)
+                                            ?<div className="comment-function">
+                                                <i className="fa fa-edit"/>&nbsp;
+                                                <i className="fa fa-trash-alt"/>
+                                            </div>
+                                            :'불일치'}
                                     </div>
                                 </div>
                                 <div className="comment-body">

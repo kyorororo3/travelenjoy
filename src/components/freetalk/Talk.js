@@ -27,7 +27,7 @@ class Talk extends Component {
             phone: 1111,
             auth:3
         },
-        currentUser: {},
+        currentUser: '',
         isOwner: 0
     }
 
@@ -71,12 +71,33 @@ class Talk extends Component {
     handleClose = () => this.setState({showModal:false});
     handleShow = () => this.setState({showModal:true});
 
-    handleModify = () => {
-        alert('수정')
+    handleAddImages = () => {
+        alert('사진수정')
+    }
+
+    handleDeleteImage = () => {
+        alert('사진삭제')
     }
 
     handleDelete = () => {
-        alert('삭제');
+        if(this.delete()){
+            alert('삭제가 완료되었습니다.');
+            this.props.deleteOneFromList();
+        }
+    }
+
+    async delete () {
+        let seq ={seq : this.props.seq};
+
+        fetch('http://localhost:3002/freetalk/free/delete', {
+            method:'post',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify(seq)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        return true;
     }
 
     render() {
@@ -106,10 +127,13 @@ class Talk extends Component {
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu className="modify-talk-buttons">
                                                         <Dropdown.Item eventKey="1">
-                                                            <a onClick={this.handleModify}>글 수정</a>
+                                                            <a onClick={this.handleDelete}>글 삭제</a>
                                                         </Dropdown.Item>
                                                         <Dropdown.Item eventKey="2">
-                                                            <a onClick={this.handleDelete}>글 삭제</a>
+                                                            <a onClick={this.handleAddImages}>사진 추가</a>
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="3">
+                                                            <a onClick={this.handleDeleteImage}>사진 삭제</a>
                                                         </Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>

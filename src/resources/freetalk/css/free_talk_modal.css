@@ -56,6 +56,13 @@
 .comment-author a{
     vertical-align: middle;
 }
+.comment-function {
+    float: right;
+    margin: 3px;
+}
+.comment-function i{
+    cursor: pointer;
+}
 .modal-body-comments .media{
 
 }

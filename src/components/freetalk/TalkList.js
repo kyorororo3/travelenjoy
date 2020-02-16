@@ -46,6 +46,15 @@ class TalkList extends Component {
         }
     };
 
+    handleDeleteOneItemFromList = () => {
+        this.deleteOneItem();
+    }
+
+    async deleteOneItem() {
+        if(this.state.list.length > 0 )
+            this.setState({list: this.state.list.splice(1, (this.state.list.length -1) )})
+    }
+
     render() {
         return (
             <div className="talk-list-wrap">
@@ -60,6 +69,8 @@ class TalkList extends Component {
                               nickname={talk.nickname}
                               reg_date={talk.reg_date}
                               current_user={this.state.currentUser}
+                              reloadMain={this.props.reloadMain}
+                              deleteOneFromList={this.handleDeleteOneItemFromList}
                         />
                     )
                 ):' '}

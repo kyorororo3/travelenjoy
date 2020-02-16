@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, Row, Col, Media, Carousel} from 'react-bootstrap';
+import {Modal, Button, Row, Col, Media, Carousel, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
@@ -27,7 +27,8 @@ class Talk extends Component {
             phone: 1111,
             auth:3
         },
-        currentUser: ''
+        currentUser: '',
+        isOwner: 0
     }
 
     componentDidMount() {
@@ -50,7 +51,9 @@ class Talk extends Component {
             .then(res => res.json())
             .then(data => {
                     if(data.email !== undefined)
-                        this.setState({currentUser : JSON.stringify(data)})
+                        this.setState({currentUser : data})
+                    if(this.props.email === data.email)
+                        this.setState({isOwner: 1})
                 }
             );
     }
@@ -67,6 +70,35 @@ class Talk extends Component {
 
     handleClose = () => this.setState({showModal:false});
     handleShow = () => this.setState({showModal:true});
+
+    handleAddImages = () => {
+        alert('사진수정')
+    }
+
+    handleDeleteImage = () => {
+        alert('사진삭제')
+    }
+
+    handleDelete = () => {
+        if(this.delete()){
+            alert('삭제가 완료되었습니다.');
+            this.props.deleteOneFromList();
+        }
+    }
+
+    async delete () {
+        let seq ={seq : this.props.seq};
+
+        fetch('http://localhost:3002/freetalk/free/delete', {
+            method:'post',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify(seq)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        return true;
+    }
 
     render() {
         return (
@@ -87,6 +119,25 @@ class Talk extends Component {
                                     </a>
                                     <Media.Body id="modal-body-profile-detail-body">
                                         <a href="#">{this.props.nickname}</a>
+                                        {(this.state.isOwner)
+                                            ?
+                                                <Dropdown className={"modify-talk"}>
+                                                    <Dropdown.Toggle>
+                                                        <i className={"fa fa-cog"}/>
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu className="modify-talk-buttons">
+                                                        <Dropdown.Item eventKey="1">
+                                                            <a onClick={this.handleDelete}>글 삭제</a>
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="2">
+                                                            <a onClick={this.handleAddImages}>사진 추가</a>
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="3">
+                                                            <a onClick={this.handleDeleteImage}>사진 삭제</a>
+                                                        </Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            :''}
                                     </Media.Body>
                                 </Media>
                             </div>

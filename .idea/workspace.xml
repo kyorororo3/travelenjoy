@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +125,7 @@
       <workItem from="1580096435575" duration="17736000" />
       <workItem from="1580120769657" duration="623000" />
       <workItem from="1581326563252" duration="216000" />
-      <workItem from="1581731853998" duration="4945000" />
+      <workItem from="1581731853998" duration="7247000" />
     </task>
     <task id="LOCAL-00001" summary="자유게시판 틀 작성 중">
       <created>1578803653702</created>
@@ -200,11 +203,11 @@
     </state>
     <state width="1188" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581336258574" />
     <state width="1407" height="281" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1581239827418" />
-    <state x="916" y="247" key="RollbackChangesDialog" timestamp="1581736148841">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="1527" y="431" key="RollbackChangesDialog" timestamp="1581823425699">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="916" y="247" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581736148841" />
-    <state x="1527" y="431" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1580825120031" />
+    <state x="1527" y="431" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1581823425699" />
     <state x="196" y="110" key="SettingsEditor" timestamp="1578491646647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -231,23 +234,24 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1549" y="351" width="1039" height="676" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1580628804862" />
-    <state x="908" y="186" width="618" height="538" key="find.popup" timestamp="1581736093601">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="1514" y="316" width="613" height="807" key="find.popup" timestamp="1581832087547">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="908" y="186" width="618" height="538" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1581736093601" />
-    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1581595179176" />
+    <state x="908" y="186" width="618" height="538" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1581737945585" />
+    <state x="1514" y="316" width="613" height="807" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1581832087547" />
     <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog" timestamp="1579180717821">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1636" y="199" key="git4idea.branch.GitSmartOperationDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1579180717821" />
-    <state x="699" y="181" key="run.anything.popup" timestamp="1580104419061">
+    <state x="1165" y="308" key="run.anything.popup" timestamp="1581824286288">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="699" y="181" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1581738900159" />
+    <state x="1165" y="308" key="run.anything.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1581824286288" />
+    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581738527053">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="699" y="181" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1580104419061" />
-    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581736332087">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581736332087" />
+    <state x="366" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581738527053" />
     <state x="610" y="246" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1581594195776" />
   </component>
   <component name="XDebuggerManager">

@@ -6,6 +6,16 @@
 #modal-body-profile-detail-body{
     padding:2px;
 }
+#modal-body-profile-detail-body .modify-talk{
+    float: right;
+    cursor: pointer;
+}
+#modal-body-profile-detail-body .dropdown-toggle{
+    width: 50px;
+}
+.modify-talk-buttons a {
+    width: 100%;
+}
 .modal-image-wrap {
     width: 100%;
     height: auto;
@@ -45,6 +55,13 @@
 }
 .comment-author a{
     vertical-align: middle;
+}
+.comment-function {
+    float: right;
+    margin: 3px;
+}
+.comment-function i{
+    cursor: pointer;
 }
 .modal-body-comments .media{
 

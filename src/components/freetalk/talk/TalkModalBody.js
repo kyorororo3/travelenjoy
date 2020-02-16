@@ -157,6 +157,7 @@ class TalkModalBody extends Component {
                 })
             }
         })
+        this.setState({editContent:'', editSeq:0})
     }
 
     handleEditCommentModeOn = (e) => { this.setState({editCommentMode: true}) }

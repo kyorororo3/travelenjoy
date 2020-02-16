@@ -236,53 +236,56 @@ router.post('/scrap/length', function(req,res){
 //MyReview Post 해야하는 것과 이미 Post 한것 리스트 가져오기 
 router.get('/review', (req, res)=>{
     const {command, email, currentPage} = req.query;
-    console.log('command', command, 'email', email);
-    
+    let sql, params = ''; 
     if(command === 'unposted'){
-        let sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate as length' 
-                  +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
-                  +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
-                  +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null order by c.start_date asc limit ?, 3';
-        let params = [email, parseInt(currentPage)];
+        sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate as length' 
+            +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
+            +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
+            +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null order by c.start_date asc limit ?, 3';
+        params = [email, parseInt(currentPage)];
         sql = mysql.format(sql,params);
         console.log(sql);
-        connection.query(sql, function(err,rows){
-            if(err) return console.log('err' + err);
-            console.log('unposted', rows);
-            res.send(rows);
-        })
+   
     }
     if(command === 'completed'){
-        let sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';
+        sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';
         // select * from te_tour_review a, te_tour b where a.tour_seq = b.seq and a.email = ?
-        let params = [email];
+        params = [email];
         sql = mysql.format(sql,params);
         console.log(sql);
-        connection.query(sql, function(err,rows){
-            if(err) return console.log('err' + err);
-            console.log('completed', rows);
-            res.send(rows);
-        })
     }
+
+    connection.query(sql, function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
 
 });
 
 //unposted review length 조회
 router.get('/review/length', function(req,res){
-    const {email} = req.query;
-    let sql = 'select count(*) as length from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
+    const {command, email} = req.query;
+    let sql, params = '';
+    if(command === 'unposted'){
+        sql = 'select count(*) as length from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
             +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
             +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null ' 
             +' order by c.start_date asc';
+    }
 
-    let params = [email];
+    if(command === 'completed'){
+        sql = 'select count(*) from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';   
+    }
+
+    params = [email];
     sql = mysql.format(sql,params);
     console.log(sql);
+
     connection.query(sql, function(err,rows){
-    if(err) return console.log('err' + err);
-    console.log('unposted', rows[0]);
-    res.send(rows[0]);
-})
+        if(err) return console.log('err' + err);
+        res.send(rows[0]);
+    })
+
 });
 
 //MyReview 추가 

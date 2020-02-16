@@ -24,6 +24,7 @@ class MyReview extends Component {
         }
         this.checkTotalFetcher = this.checkTotalFetcher.bind(this);
     }
+
     componentDidMount() {
         const {email, currentPage} = this.state;
         fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
@@ -34,7 +35,7 @@ class MyReview extends Component {
             })
         
         );
-        fetch(`http://localhost:3002/mypage/review/length?email=${email}`)
+        fetch(`http://localhost:3002/mypage/review/length?command=unposted&email=${email}`)
             .then(res => res.json())
             .then(data => this.setState({
                 total:data.length
@@ -53,7 +54,7 @@ class MyReview extends Component {
           .then(data => this.setState({
               myReviews:data
           }))
-          console.log('total check ', this.state.total , 'state check', this.state.prev, 'check', this.state.next );
+          
     }
     
     
@@ -61,38 +62,13 @@ class MyReview extends Component {
         return this.state !== nextState
     }
 
-    checkTotalFetcher = async (email,currentPage) =>{
-
-       await fetch(`http://localhost:3002/mypage/review/length?email=${email}`)
-            .then(res => res.json())
-            .then(data => this.setState({
-                total:data.length
-            }, async() =>{
-                const {total} = this.state;
-                if(currentPage <= 0 && total <= 3) {
-                    await this.setState({ prev:false, next:false })
-                }else{
-                    if(currentPage <3){
-                        await this.setState({ prev:false, next:true})
-                    }else if(total <= currentPage){
-                        console.log('여기들어왔니');
-                        await this.setState({ prev:true, next:false})
-                    }
-                    else{
-                        await this.setState({ prev:true, next:true})
-                    }
-                }
-                
-            })
-        );
-        console.log('total', this.state.total, 'current', this.state.currentPage);
-    }
+   
     
 
-    prevBtnHandler = (e) =>{
-      
+    prevBtnHandler = async (e) =>{
+        
         let {email, currentPage} = this.state;
-        fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
+        await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
           .then(res => res.json())
           .then(data => this.setState({
             unposted_list: data,
@@ -102,10 +78,10 @@ class MyReview extends Component {
         this.checkTotalFetcher(email,currentPage);
     }
 
-    nextBtnHandler = (e) =>{
+    nextBtnHandler = async (e) =>{
        
         let {email, currentPage} = this.state;
-        fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
+        await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
           .then(res => res.json())
           .then(data => this.setState({
             unposted_list: data,
@@ -114,6 +90,36 @@ class MyReview extends Component {
         );
 
         this.checkTotalFetcher(email,currentPage);
+    }
+
+    checkTotalFetcher = (email,currentPage) =>{
+
+        fetch(`http://localhost:3002/mypage/review/length?command=unposted&email=${email}`)
+            .then(res => res.json())
+            .then(data => this.setState({
+                total:data.length
+            }, async() =>{
+                const {total} = this.state;
+                if(total < 4) {
+                    await this.setState({ prev:false, next:false })
+                }else{
+                    if(currentPage === 0){
+                        console.log( 'if 1 : current가 0 이다 ' , currentPage)
+                        await this.setState({ prev:false, next:true})
+
+                    }else if(total <= currentPage){
+                        console.log('if 2: total이 current보다 작아졌다 ', total, currentPage);
+                        await this.setState({ prev:true, next:false})
+                    
+                    }else{
+                        console.log('if 3 : total이 current보다 아직 큰 상태', total, currentPage);
+                        await this.setState({ prev:true, next:true})
+                    }
+                }
+                
+            })
+        );
+        console.log('total', this.state.total, 'current', this.state.currentPage);
     }
 
     CallbackFromTravel = async(dataFromChild) =>{

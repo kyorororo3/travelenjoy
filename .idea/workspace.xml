@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
-      <change afterPath="$PROJECT_DIR$/src/components/freetalk/talk/DeleteTalkImage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/freetalk/css/delete_talk_image.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/freetalk.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/freetalk.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/freetalk/Talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/Talk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/TalkList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk_modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk_modal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/freetalk/talk/DeleteTalkImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/talk/DeleteTalkImage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>

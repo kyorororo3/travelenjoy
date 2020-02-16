@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
 import TalkModalBody from "./talk/TalkModalBody";
+import DeleteTalkImage from "./talk/DeleteTalkImage";
 
 //게시물
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
@@ -28,7 +29,8 @@ class Talk extends Component {
             auth:3
         },
         currentUser: '',
-        isOwner: 0
+        isOwner: 0,
+        showDeleteImageModal: false
     }
 
     componentDidMount() {
@@ -71,12 +73,16 @@ class Talk extends Component {
     handleClose = () => this.setState({showModal:false});
     handleShow = () => this.setState({showModal:true});
 
+    handleCloseDeleteImage = () => this.setState({showDeleteImageModal:false});
+    handleShowDeleteImage = () => this.setState({showDeleteImageModal:true});
+
     handleAddImages = () => {
         alert('사진추가')
     }
 
     handleDeleteImage = () => {
         alert('사진삭제')
+        this.handleShowDeleteImage()
     }
 
     handleDelete = () => {
@@ -112,6 +118,9 @@ class Talk extends Component {
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
                 <Modal id="talk-modal-wrap" show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
                     <Row><Col>
+                        <Modal id="talk-delete-image-wrap" show={this.state.showDeleteImageModal} onHide={this.handleCloseDeleteImage} centered={"true"}>
+                            <DeleteTalkImage images={this.state.images}/>
+                        </Modal>
                         <div className="modal-author-profile">
                             <div className="modal-body-profile-detail">
                                 <Media>

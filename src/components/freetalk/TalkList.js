@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Talk from "./Talk";
+
 //게시물 리스트
 
 class TalkList extends Component {

@@ -26,7 +26,8 @@ class TalkModalBody extends Component {
         content: '',
         editContent: '',
         editSeq: 0,
-        editCommentMode: false
+        editCommentMode: false,
+        isMarkLike: false
     }
 
     componentDidMount() {
@@ -41,6 +42,13 @@ class TalkModalBody extends Component {
                 this.setState({comments: res.comments})
             })
         this.setState({currentUser: this.props.currentUser})
+        fetch('http://localhost:3002/freetalk/like/ismarked?seq=' + this.props.talkSeq + '&email=' + this.props.currentUser.email)
+            .then(res => res.json())
+            .then(res => {
+                if(res > 0){
+                    this.setState({isMarkLike: true})
+                }
+            })
     }
 
     createComment = (e) => {
@@ -160,6 +168,44 @@ class TalkModalBody extends Component {
         this.setState({editContent:'', editSeq:0})
     }
 
+    handleDeleteComment (value) {
+        fetch('http://localhost:3002/freetalk/list/comments/delete', {
+            method:'post',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify({seq: value.seq})
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            });
+        this.setState({list: this.state.comments.splice(value.number, 1 )})
+    }
+    async deleteCommentInComponent (number) {
+
+    }
+
+    handleLike = (e) => {
+        if(this.props.currentUser === ''){
+            alert('로그인이 필요합니다.')
+            return;
+        }
+        fetch('http://localhost:3002/freetalk/like?seq=' + this.props.talkSeq + '&email=' + this.props.currentUser.email)
+            .then(res => res.json())
+        this.setState({isMarkLike: true})
+        this.props.handleAddLikes()
+    }
+
+    handleDisLike = (e) => {
+        if(this.props.currentUser === ''){
+            alert('로그인이 필요합니다.')
+            return;
+        }
+        fetch('http://localhost:3002/freetalk/dislike?seq=' + this.props.talkSeq + '&email=' + this.props.currentUser.email)
+            .then(res => res.json())
+        this.setState({isMarkLike: false})
+        this.props.handleSubLikes()
+    }
+
     handleEditCommentModeOn = (e) => { this.setState({editCommentMode: true}) }
     handleEditCommentModeOff = (e) => { this.setState({editCommentMode: false}) }
 
@@ -168,7 +214,11 @@ class TalkModalBody extends Component {
             <div className="modal-body-wrap">
                 <div className="modal-body-function">
                     <div className="modal-body-function-left">
-                        <i className="far fa-heart"></i>
+                        {(this.state.isMarkLike === false)
+                            ?<i className="far fa-heart" onClick={this.handleLike}></i>
+                            :<i style={{color:"red"}} className="fas fa-heart" onClick={this.handleDisLike}></i>
+                        }
+
                         <i className="far fa-comment"></i>
                         <i className="fas fa-upload"></i>
                     </div>
@@ -202,7 +252,7 @@ class TalkModalBody extends Component {
                                         {(this.state.currentUser.email === comment.email)
                                             ?<div className="comment-function">                                                
                                                 <i className="fa fa-edit" onClick={(e) => this.handleEditMode({seq: comment.seq, toggle: true}, e)}/>&nbsp;
-                                                <i className="fa fa-trash-alt"/>
+                                                <i className="fa fa-trash-alt" onClick={(e) => this.handleDeleteComment({seq:comment.seq, number:i})}/>
                                             </div>
                                             :''}
                                     </div>

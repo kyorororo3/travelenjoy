@@ -72,7 +72,7 @@ class Talk extends Component {
     handleShow = () => this.setState({showModal:true});
 
     handleAddImages = () => {
-        alert('사진수정')
+        alert('사진추가')
     }
 
     handleDeleteImage = () => {
@@ -84,6 +84,13 @@ class Talk extends Component {
             alert('삭제가 완료되었습니다.');
             this.props.deleteOneFromList();
         }
+    }
+
+    handleAddLikes = () => {
+        this.setState({likes: (this.state.likes + 1)})
+    }
+    handleSubLikes = () => {
+        this.setState({likes: (this.state.likes - 1)})
     }
 
     async delete () {
@@ -168,6 +175,8 @@ class Talk extends Component {
                                     nickname={this.props.nickname}
                                     regDate={this.props.reg_date}
                                     likes={this.state.likes}
+                                    handleAddLikes={this.handleAddLikes}
+                                    handleSubLikes={this.handleSubLikes}
                                     currentUser={this.state.currentUser}
                                 />
                             </Modal.Body>

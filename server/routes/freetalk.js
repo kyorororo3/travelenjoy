@@ -106,7 +106,11 @@ router.post('/list/comments/update', function(req, res) {
 
 //댓글 삭제
 router.post('/list/comments/delete', function(req, res) {
-
+    console.log('delete comment : ' + JSON.stringify(req.body));
+    let stmt = "delete from te_comment where seq=?";
+    connection.query(stmt, req.body.seq, function(err, rows) {
+        if (err) console.log('connection result err : ' + err);
+    })
 });
 
 //게시글 작성자 정보 리턴
@@ -187,5 +191,31 @@ router.post('/free/delete', function(req, res) {
         });
     });
 })
+
+//좋아요 표시여부 확인
+router.get('/like/ismarked', function(req, res) {
+    let stmt = "select count(*) as cnt from te_freetalk_likes where te_freetalk_seq=? and email=?"
+    connection.query(stmt, [req.query.seq, req.query.email], function(err, result) {
+        res.json(result[0].cnt)
+    })
+})
+
+//좋아요 표시
+router.get('/like', function(req, res) {
+    console.log('유저 : ' + req.query.email + ', 글seq : ' + req.query.seq);
+    let stmt = "insert into te_freetalk_likes (te_freetalk_seq, email, nickname) values (?,?,?)";
+    connection.query(stmt, [req.query.seq, req.query.email, ''], function(err, result) {
+
+    })
+})
+//좋아요 취소
+router.get('/dislike', function(req, res) {
+    console.log('유저 : ' + req.query.email + ', 글seq : ' + req.query.seq);
+    let stmt = "delete from te_freetalk_likes where te_freetalk_seq=? and email=?";
+    connection.query(stmt, [req.query.seq, req.query.email], function(err, result) {
+
+    })
+})
+
 
 module.exports = router

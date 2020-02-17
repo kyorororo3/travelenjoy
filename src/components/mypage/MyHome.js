@@ -16,9 +16,6 @@ class MyHome extends Component {
 
     }
 
-    componentWillMount(){
-        
-    }
     componentDidMount(){
         fetch('http://localhost:3002/users/getUser',{
           credentials: 'include'
@@ -35,8 +32,15 @@ class MyHome extends Component {
                 comment_count : data.comment_count
               })
             );
+            fetch(`http://localhost:3002/mypage/home/msg?email=${data.email}`)
+            .then(res => res.json())
+            .then(data => this.setState({
+                msg_lists:data
+            }))
+
             }
           );
+
       
     }
     render(){
@@ -64,12 +68,12 @@ class MyHome extends Component {
                             </div>
                         </div>
                         <div className='msg-wrapper'>
-                                <p className='msg-title'><i class="fas fa-bell"></i> My Messages</p>
+                                <p className='msg-title'><i className="fas fa-bell"></i> My Messages</p>
                             <div className='msg-table'>
-                                <div classnName='msg-table-row fixed-row'>
-                                    <span class='fixed-title msg-icon'> </span>
-                                    <span class='fixed-title msg-content'>Content</span>
-                                    <span class='fixed-title msg-reg-date'>Registered</span>
+                                <div className='msg-table-row fixed-row'>
+                                    <span className='fixed-title msg-icon'><i class="fas fa-envelope"></i></span>
+                                    <span className='fixed-title msg-content'>Content</span>
+                                    <span className='fixed-title msg-reg-date'>Registered</span>
                                 </div>
                                 {msg_lists.length !== 0? msg_lists.map(msg => <MsgForm msg={msg}/>):<h5>You don't have any messages</h5>}
                             </div>

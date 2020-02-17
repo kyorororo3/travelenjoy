@@ -24,9 +24,9 @@ class MyReviewTableForm extends Component {
 
         return(
             <div className='review-table-row' onClick={this.reviewDetailHandler}>
-                <span class='star'>{total_star}</span>
-                <span class='thumb'>{title}</span>
-                <span class='wdate'>{wdate}</span>
+                <span className='star'>{total_star}</span>
+                <span className='thumb'>{title}</span>
+                <span className='wdate'>{wdate}</span>
             </div>
         );
     }

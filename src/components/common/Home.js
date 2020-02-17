@@ -47,11 +47,11 @@ class Home extends React.Component {
       .then(res => res.json())
       .then(data => {
         this.setState({tourlist : data})
-        document.getElementsByClassName('recommendtourbtn prev')[0].style.display = "block";
+        document.getElementsByClassName('recommendtourbtn prevlist')[0].style.display = "block";
         if(this.state.tourlistStart >= 8){
-          document.getElementsByClassName('recommendtourbtn next')[0].style.display = "none";
+          document.getElementsByClassName('recommendtourbtn nextlist')[0].style.display = "none";
         }else{
-          document.getElementsByClassName('recommendtourbtn next')[0].style.display = "block";
+          document.getElementsByClassName('recommendtourbtn nextlist')[0].style.display = "block";
         }
       })
     }) 
@@ -75,9 +75,9 @@ class Home extends React.Component {
       .then(data => {
         this.setState({tourlist : data})       
         if(this.state.tourlistStart <= 0){
-          document.getElementsByClassName('recommendtourbtn prev')[0].style.display = "none";
+          document.getElementsByClassName('recommendtourbtn prevlist')[0].style.display = "none";
         }else{
-          document.getElementsByClassName('recommendtourbtn next')[0].style.display = "block";
+          document.getElementsByClassName('recommendtourbtn nextlist')[0].style.display = "block";
         }
       })
     })
@@ -121,10 +121,10 @@ class Home extends React.Component {
               {tourlist.map(tour => <RecommendTour  key={tour.seq} tour={tour} />)}
             </div>
 
-            <div className='recommendtourbtn prev' onClick={this.prevlist}>
+            <div className='recommendtourbtn prevlist' onClick={this.prevlist}>
               <i className="fas fa-chevron-left" style={{color:"#abbff6"}}/>
             </div>
-            <div className='recommendtourbtn next' onClick={this.nextlist}>
+            <div className='recommendtourbtn nextlist' onClick={this.nextlist}>
               <i className="fas fa-chevron-right" style={{color:"#abbff6"}}/>
             </div>
           </div>
@@ -132,8 +132,8 @@ class Home extends React.Component {
           <div className='recommendlist-wrapper'>
           <div className='home-subtitle'>실시간 인기글 💬</div>
             <div id='recommendlist-row-talk' className='recommendlist-row'>
-              {/* {talklist.map(talk => <RecommendTalk key={talk.seq} talk={talk} />)} */}
-            </div>          
+              {talklist.map(talk => <RecommendTalk key={talk.seq} talk={talk} />)} 
+            </div>         
             <div className='readmore-btn' onClick={this.handleReadMore}></div>
           </div>
 

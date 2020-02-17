@@ -4,6 +4,9 @@ const router = express.Router();
 
 // MODULES
 const bodyParser = require('body-parser');
+const axios = require('axios');
+const await = require('await');
+const async = require('async');
 
 // DB CONNECTION
 const mysql = require('mysql');
@@ -297,6 +300,65 @@ router.post('/available', (req, res) => {
     }
     res.send(count);
   })
+})
+
+// 투어 취소하기 rest api 요청
+router.post('/cancle', async (req, res, next) => {
+  try {
+    /* 액세스 토큰(access token) 발급 */
+    const getToken = await (axios({
+      url: "https://api.iamport.kr/users/getToken",
+      method: "post",
+      headers: { 
+        "Content-Type": "application/json" 
+      },
+      data: {
+        imp_key: "1276512919449348", // [아임포트 관리자] REST API키
+        imp_secret: "QfSbPuGY4IKUEJlp06POTiJcKWROJHzAXrMNVtL0bwUQggggn55goPs8LkXv2w5ZYSMUlyVx4Pok6EBt" // [아임포트 관리자] REST API Secret
+      }
+    }));
+    
+    const { access_token } = getToken.data.response; // 엑세스 토큰
+    const {reservation_number} = req.body; // 클라이언트로부터 전달받은 주문번호
+
+    console.log(reservation_number)
+
+    const sql = 'select * from te_tour_reservation where reservation_number=?';
+
+    conn.query(sql, reservation_number, async (err, rows) => {
+      if(err) return console.log(err);
+      else {
+        /* 아임포트 REST API로 결제환불 요청 */
+        const getCancelData = await (axios({
+          url: "https://api.iamport.kr/payments/cancel",
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": access_token // 아임포트 서버로부터 발급받은 엑세스 토큰
+          },
+          data: {
+            reason: 'none', // 가맹점 클라이언트로부터 받은 환불사유
+            merchant_uid: reservation_number, // imp_uid를 환불 고유번호로 입력
+            // amount: rows[0].total_price
+            amount: 10
+          }
+        }))
+        const { response } = getCancelData.data;
+        console.log(response);
+        const { merchant_uid } = response;
+        const delete_sql = "delete from te_tour_reservation where reservation_number=?";
+        conn.query(delete_sql, merchant_uid, (err) => {
+          if(err) return console.log(err);
+          res.send({isSucc: true});
+        });
+      }
+    })
+
+  } catch(error) {
+    console.log(error);
+    res.send({isSucc: false});
+  }
+  
 })
 
 module.exports = router;

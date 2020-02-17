@@ -21,8 +21,29 @@ class ResModal extends Component {
 
     closeBtnHandler = (e) => {this.props.callbackFromParent({showResModal:false, tour:[]})}
     
-    cancleBtnHandler = (e) => {
+    cancleBtnHandler = () => {
       alert("cancle button");
+      const {reservation_number} = this.props.tour;
+      fetch('http://localhost:3002/tour/cancle', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify({
+          reservation_number: reservation_number
+        })
+      })
+        .then(res => res.json())
+        .then(result => {
+          alert(result);
+          const {isSucc} = result;
+          if(isSucc) {
+            window.location.reload();
+          }else {
+            alert('환불 안됬지롱 ㅋ');
+          }
+        });
+        
     }
     
  

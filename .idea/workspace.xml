@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01c0d009-6efc-4be3-b81f-53db10664d6c" name="Default Changelist" comment="자유게시판 틀 작성 중">
-      <change afterPath="$PROJECT_DIR$/src/uploads/default_profile_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/freetalk/talk/TalkModalBody.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk_modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/freetalk/css/free_talk_modal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/config/dbconfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/config/dbconfig.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

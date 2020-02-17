@@ -17,13 +17,13 @@ module.exports = function () {
         conn_test: function (connection) {
             connection.connect(function (err){
                 if (err) console.error("mysql connection error : " + err);
-                else console.info("mysql connect success");
+                // else console.info("mysql connect success");
             })
         },
         conn_test: function (connection, msg) {
             connection.connect(function (err){
                 if (err) console.error("mysql connection error : " + err);
-                else console.info("mysql connect success : " + msg);
+                // else console.info("mysql connect success : " + msg);
             })
         }
     }

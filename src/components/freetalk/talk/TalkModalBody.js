@@ -33,7 +33,7 @@ class TalkModalBody extends Component {
     componentDidMount() {
         fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.email + '&nickname=' + this.props.nickname)
             .then(res => res.json())
-            // .then(res => this.setState({author: res.author}))
+            // .then(res => this.setState(f{author: res.author}))
             .then(res => console.log(res.author.profile_img) )
 
         fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
@@ -240,7 +240,7 @@ class TalkModalBody extends Component {
                                             <img
                                                 width={32}
                                                 height={32}
-                                                src={require('../../../../public/uploads/' + comment.profile_img)}
+                                                src={require('../../../uploads/' + comment.profile_img)}
                                                 alt='profile image'
                                                 onError={(e)=>{e.target.onerror = null; e.target.src=require('../../../resources/mypage/images/profile_img.jpg')}}
                                             />

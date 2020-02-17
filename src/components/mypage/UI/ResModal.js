@@ -12,7 +12,7 @@ class ResModal extends Component {
 
     }
 
-    closeBtnHandler = (e) => {this.props.callbackFromParent({showResModal:false, tour:[]})}
+    closeBtnHandler = (e) => {this.props.callbackFromParent({showResModal:false, tour:[this.props.tour]})}
     
  
     render(){

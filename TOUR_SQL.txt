@@ -143,10 +143,10 @@ create table te_comment(
     reg_date datetime default current_timestamp
 );
 
-create table te_tour_alert(
-  seq int auto_increment primary key,
+create table te_tour_msg(
+  msg_seq int auto_increment primary key,
   tour_seq int,
-  content varchar(1000),
-  reg_date datetime default now(),
+  msg_content varchar(1000),
+  msg_reg_date datetime default now(),
   isread int
 );

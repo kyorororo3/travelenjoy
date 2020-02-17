@@ -1,9 +1,10 @@
 import React, {Component} from "react";
-import {Modal, Button, Row, Col, Media, Carousel} from 'react-bootstrap';
+import {Modal, Button, Row, Col, Media, Carousel, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
 import TalkModalBody from "./talk/TalkModalBody";
+import DeleteTalkImage from "./talk/DeleteTalkImage";
 
 //게시물
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
@@ -27,7 +28,9 @@ class Talk extends Component {
             phone: 1111,
             auth:3
         },
-        currentUser: ''
+        currentUser: '',
+        isOwner: 0,
+        showDeleteImageModal: false
     }
 
     componentDidMount() {
@@ -50,7 +53,9 @@ class Talk extends Component {
             .then(res => res.json())
             .then(data => {
                     if(data.email !== undefined)
-                        this.setState({currentUser : JSON.stringify(data)})
+                        this.setState({currentUser : data})
+                    if(this.props.email === data.email)
+                        this.setState({isOwner: 1})
                 }
             );
     }
@@ -68,11 +73,54 @@ class Talk extends Component {
     handleClose = () => this.setState({showModal:false});
     handleShow = () => this.setState({showModal:true});
 
+    handleCloseDeleteImage = () => this.setState({showDeleteImageModal:false});
+    handleShowDeleteImage = () => this.setState({showDeleteImageModal:true});
+
+    handleAddImages = () => {
+        alert('사진추가')
+    }
+
+    handleDeleteImage = () => {
+        alert('사진삭제')
+        this.handleShowDeleteImage()
+    }
+
+    handleDelete = () => {
+        if(this.delete()){
+            alert('삭제가 완료되었습니다.');
+            this.props.deleteOneFromList();
+        }
+    }
+
+    handleAddLikes = () => {
+        this.setState({likes: (this.state.likes + 1)})
+    }
+    handleSubLikes = () => {
+        this.setState({likes: (this.state.likes - 1)})
+    }
+
+    async delete () {
+        let seq ={seq : this.props.seq};
+
+        fetch('http://localhost:3002/freetalk/free/delete', {
+            method:'post',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify(seq)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        return true;
+    }
+
     render() {
         return (
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
                 <Modal id="talk-modal-wrap" show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
                     <Row><Col>
+                        <Modal id="talk-delete-image-wrap" show={this.state.showDeleteImageModal} onHide={this.handleCloseDeleteImage} centered={"true"}>
+                            <DeleteTalkImage images={this.state.images}/>
+                        </Modal>
                         <div className="modal-author-profile">
                             <div className="modal-body-profile-detail">
                                 <Media>
@@ -87,6 +135,25 @@ class Talk extends Component {
                                     </a>
                                     <Media.Body id="modal-body-profile-detail-body">
                                         <a href="#">{this.props.nickname}</a>
+                                        {(this.state.isOwner)
+                                            ?
+                                                <Dropdown className={"modify-talk"}>
+                                                    <Dropdown.Toggle>
+                                                        <i className={"fa fa-cog"}/>
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu className="modify-talk-buttons">
+                                                        <Dropdown.Item eventKey="1">
+                                                            <a onClick={this.handleDelete}>글 삭제</a>
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="2">
+                                                            <a onClick={this.handleAddImages}>사진 추가</a>
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item eventKey="3">
+                                                            <a onClick={this.handleDeleteImage}>사진 삭제</a>
+                                                        </Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            :''}
                                     </Media.Body>
                                 </Media>
                             </div>
@@ -117,6 +184,8 @@ class Talk extends Component {
                                     nickname={this.props.nickname}
                                     regDate={this.props.reg_date}
                                     likes={this.state.likes}
+                                    handleAddLikes={this.handleAddLikes}
+                                    handleSubLikes={this.handleSubLikes}
                                     currentUser={this.state.currentUser}
                                 />
                             </Modal.Body>

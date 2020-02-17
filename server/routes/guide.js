@@ -130,10 +130,88 @@ router.get('/reservationList', function (req, res) {
   })
 });
 
+//Guide 게시글 삭제 - 참여회원 수
+router.get('/guideDelReser', function(req, res) {
+  console.log('guide/guideDelReser 접속!');
+  console.log(req.query);
+  const sql = 'select count(*) as count from te_tour_reservation where tour_seq = ?'
+  var val = req.query.seq;
+
+  conn.query(sql, val, function (err, data) {
+    if (err) return console.log("Tour list err!! " + err);
+    else res.send(data[0]);
+  })
+})
+
+//Guide 게시글 삭제 - 리뷰 수
+router.get('/guideDelReview', function(req, res) {
+  console.log('guide/guideDelReview 접속!');
+  console.log(req.query);
+  const sql = 'select count(*) as count from te_tour_review where tour_seq = ?'
+  var val = req.query.seq;
+
+  conn.query(sql, val, function (err, data) {
+    if (err) return console.log("Tour list err!! " + err);
+    else res.send(data[0]);
+  })
+})
+
+//Guide 게시글 삭제 - 스크랩 수
+router.get('/guideDelScrap', function(req, res) {
+  console.log('guide/guideDelScrap 접속!');
+  console.log(req.query);
+  const sql = 'select count(*) as count from te_tour_scrap where tour_seq = ?'
+  var val = req.query.seq;
+
+  conn.query(sql, val, function (err, data) {
+    if (err) return console.log("Tour list err!! " + err);
+    else res.send(data[0]);
+  })
+})
+
+
 //Guide 게시글 삭제
 router.get('/guideDelete', function(req, res) {
   console.log('guide/guideDelete 접속!');
-  console.log(req.query);
+  console.log('guide/guideDelete :' ,req.query);
+  let {seq, email, reser, review, scrap} = req.query;
+
+  let sqls =''; 
+
+    if(reser !== 0 ){
+      let sql_reser = 'delete from te_tour_reservation where tour_seq = ?;'
+      sql_reser = mysql.format(sql_reser, seq);
+      sqls += sql_reser;
+      console.log('sql_reser 접속!');
+    }
+    if(review !== 0 ){
+      let sql_review = 'delete from te_tour_review where tour_seq = ?;'
+      sql_review = mysql.format(sql_review, seq);
+      sqls += sql_review;
+      console.log('sql_review 접속!');
+    }
+    if(scrap !== 0 ){
+      let sql_scrap = 'delete from te_tour_scrap where tour_seq = ?;'
+      sql_scrap = mysql.format(sql_scrap, seq);
+      sqls += sql_scrap;
+      console.log('sql_scrap 접속!');
+    }
+    let sql1 ='delete from te_tour_des where tour_seq = ?; '
+    sql1 = mysql.format(sql1, seq);
+
+    let sql2 ='delete from te_tour where seq=?;'
+    sql2 = mysql.format(sql2, seq);
+
+    let sql3 ='insert into te_tour_msg(tour_seq, msg_content, msg_reg_date, isread)'+
+              ' value(?, "신청하신 투어가 삭제되었습니다. 해당 가이드에게 문의해주세요.", now(), 0) '
+    sql3 = mysql.format(sql3, seq);
+
+    sqls += sql1 + sql2 + sql3; 
+
+    conn.query(sqls, function (err, data) {
+      if (err) return console.log("Tour list err!! " + err);
+      else res.send({data:email});
+    })
 })
 
 // Question List

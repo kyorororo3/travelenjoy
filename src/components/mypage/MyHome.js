@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import MsgForm from './UI/MyMsgTableForm';
 
 class MyHome extends Component {
 
@@ -10,14 +10,12 @@ class MyHome extends Component {
             travel_count : 0,
             scrap_count : 0,
             post_count : 0,
-            comment_count : 0
+            comment_count : 0,
+            msg_lists:[]
         }
 
     }
 
-    componentWillMount(){
-        
-    }
     componentDidMount(){
         fetch('http://localhost:3002/users/getUser',{
           credentials: 'include'
@@ -34,11 +32,19 @@ class MyHome extends Component {
                 comment_count : data.comment_count
               })
             );
+            fetch(`http://localhost:3002/mypage/home/msg?email=${data.email}`)
+            .then(res => res.json())
+            .then(data => this.setState({
+                msg_lists:data
+            }))
+
             }
           );
+
       
     }
     render(){
+        const {travel_count, scrap_count, post_count, comment_count, msg_lists} = this.state;
         return(
             <div className='mypage-body'>
                 <div className='body-wrapper box'>
@@ -46,24 +52,30 @@ class MyHome extends Component {
                         <div className='count-box-wrapper'>
                             <div className='count-box-container'>
                                 <p className='count-title'>My Travels</p>
-                                <p className='count-number'>{this.state.travel_count}</p>
+                                <p className='count-number'>{travel_count}</p>
                             </div>
                             <div className='count-box-container'>
                                 <p className='count-title'>My Scraps</p>
-                                <p className='count-number'>{this.state.scrap_count}</p>
+                                <p className='count-number'>{scrap_count}</p>
                             </div>
                             <div className='count-box-container'>
                                 <p className='count-title'>My Posts</p>
-                                <p className='count-number'>{this.state.post_count}</p>
+                                <p className='count-number'>{post_count}</p>
                             </div>
                             <div className='count-box-container'>
                                 <p className='count-title'>My Comments</p>
-                                <p className='count-number'>{this.state.comment_count}</p>
+                                <p className='count-number'>{comment_count}</p>
                             </div>
                         </div>
-                        <div className='my-news-container'>
-                            <div className='news-title'>
-                                <p><i class="fas fa-bell"></i> My News</p>
+                        <div className='msg-wrapper'>
+                                <p className='msg-title'><i className="fas fa-bell"></i> My Messages</p>
+                            <div className='msg-table'>
+                                <div className='msg-table-row fixed-row'>
+                                    <span className='fixed-title msg-icon'><i class="fas fa-envelope"></i></span>
+                                    <span className='fixed-title msg-content'>Content</span>
+                                    <span className='fixed-title msg-reg-date'>Registered</span>
+                                </div>
+                                {msg_lists.length !== 0? msg_lists.map(msg => <MsgForm msg={msg}/>):<h5>You don't have any messages</h5>}
                             </div>
                         </div>
                     </div>

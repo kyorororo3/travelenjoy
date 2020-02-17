@@ -255,9 +255,9 @@ a{
 }
 
 .sns-img{
-    margin-left:170px;
-    height:30px;
-    width:30px;
+    margin-left: 125px;
+    border-radius: 12px;
+    height: 30px;
 }
 /* ----------------------- MyTravel CSS -------------------------- */
 
@@ -392,13 +392,114 @@ a{
 /* --------------------  My Talk CSS ------------------------- */
 
 .talk-title{
+    text-align:left;
     line-height: 30px;
     font-weight: 700;
     font-size:18px;
     border-bottom: 1px solid #e9ecef;
     
 }
+.mypost-wrapper, .wait-myreview-wrapper {
+    min-height:300px;
+}
+.done-myreview-wrapper, .mycomment-wrapper {
+    min-height:200px;
+}
+.cmt-table{
+    float:left;
+    margin-bottom:30px;
+    width:100%;
+}
+.cmt-table-row.fixed-row{
+    line-height: 20px;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ececec6b;
+}
 
+.cmt-table-row{
+    line-height: 20px;
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ececec6b;
+}
+
+.cmt-table-row span{
+    display:inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.cmt-table-row>.cmt-content{
+    width:80%;
+}
+
+.cmt-table-row>.cmt-reg-date{
+    width:20%;   
+}
+.mypost-wrapper{
+    width:100%;
+    text-align:center;
+    margin: 15px 0;
+}
+.post-wrapper{
+    display: inline-block;
+    margin: 1px 1px 1px 1px;
+}
+.mytalk{
+    width: 240px;
+    display: inline-block;
+    cursor: pointer;
+}
+.talk-thumbnail{
+    object-fit: cover;
+    width: 100%;
+}
+.mytalk-hover{
+    background-color: #000;
+    opacity: 0.5;
+    color: #fff;
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    transform: translate(0px, -240px);
+    text-align: center;
+    font-size: 15pt;
+    font-weight: 400;
+    line-height: 11;
+    transition: 0.5s;
+}
+
+
+.mytalk-paging{
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    font-size: 15pt;
+    line-height: 2.1;
+    transition: 0.3s;
+    border: 1px solid #d9e1e8;
+}
+.mytalk-paging:hover{
+    box-shadow: 1px 2px 4px 1px #dcdfe4;
+    cursor: pointer;
+}
+.mytalk-paging.next{
+    padding-left: 3px;
+    margin: -144px 10px 6px 724px;
+  
+}
+.mytalk-paging.prev{
+    padding-right: 3px;
+    margin: -144px 10px 6px -8px;
+    display:block !important;
+  
+}
 /* --------------------  My Review CSS ------------------------- */
 
 .wait-myreview-wrapper{
@@ -565,7 +666,7 @@ input.review-star-btn-active {
     box-shadow: 1px 2px 4px 1px #dcdfe4;
     cursor: pointer;
 }
-.next{
+.myreview-paging.next{
     padding-left: 3px;
     margin: 123px 10px 6px 739px;
   
@@ -597,7 +698,7 @@ input.review-star-btn-active {
     color: #2b90d9;
 }
 
-.news-title{
+.msg-title{
     line-height: 30px;
     font-weight: 700;
     font-size:18px;
@@ -605,4 +706,44 @@ input.review-star-btn-active {
 }
 .fa-bell, .fa-pencil-alt{
     color: #2b90d9;
+}
+
+.msg-table{
+    float:left;
+    margin-bottom:30px;
+    width:100%;
+}
+.msg-table-row.fixed-row{
+    line-height: 20px;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ececec6b;
+}
+
+.msg-table-row{
+    line-height: 20px;
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #ececec6b;
+}
+
+.msg-table-row span{
+    display:inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.msg-table-row>.msg-icon{
+    width:20%;
+}
+
+.msg-table-row>.msg-content{
+    width:60%;
+}
+
+.msg-table-row>.msg-reg-date{
+    width:20%;
+    
 }

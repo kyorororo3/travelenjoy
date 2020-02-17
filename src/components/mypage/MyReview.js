@@ -24,6 +24,7 @@ class MyReview extends Component {
         }
         this.checkTotalFetcher = this.checkTotalFetcher.bind(this);
     }
+
     componentDidMount() {
         const {email, currentPage} = this.state;
         fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
@@ -34,7 +35,7 @@ class MyReview extends Component {
             })
         
         );
-        fetch(`http://localhost:3002/mypage/review/length?email=${email}`)
+        fetch(`http://localhost:3002/mypage/review/length?command=unposted&email=${email}`)
             .then(res => res.json())
             .then(data => this.setState({
                 total:data.length
@@ -53,7 +54,7 @@ class MyReview extends Component {
           .then(data => this.setState({
               myReviews:data
           }))
-          console.log('total check ', this.state.total , 'state check', this.state.prev, 'check', this.state.next );
+          
     }
     
     
@@ -61,24 +62,58 @@ class MyReview extends Component {
         return this.state !== nextState
     }
 
-    checkTotalFetcher = async (email,currentPage) =>{
+    
 
-       await fetch(`http://localhost:3002/mypage/review/length?email=${email}`)
+    prevBtnHandler = async (e) =>{
+        
+        await this.setState((prevState) => ({currentPage:prevState.currentPage - 6}))
+        let {email, currentPage} = this.state;
+        await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
+          .then(res => res.json())
+          .then(data => this.setState((prevState) =>({
+            unposted_list: data,
+            currentPage:currentPage +3
+            }))
+        );
+        
+        this.checkTotalFetcher(email, currentPage);
+    }
+
+    nextBtnHandler = async(e) =>{
+       
+        let {email, currentPage} = this.state;
+       await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
+          .then(res => res.json())
+          .then(data => this.setState((prevState) => ({
+            unposted_list: data,
+            currentPage:prevState.currentPage + 3
+            }))
+        );
+
+        this.checkTotalFetcher(this.state.email,this.state.currentPage);
+    }
+
+    checkTotalFetcher = (email,currentPage) =>{
+
+        fetch(`http://localhost:3002/mypage/review/length?command=unposted&email=${email}`)
             .then(res => res.json())
             .then(data => this.setState({
                 total:data.length
             }, async() =>{
                 const {total} = this.state;
-                if(currentPage <= 0 && total <= 3) {
+                if(total < 4) {
                     await this.setState({ prev:false, next:false })
                 }else{
-                    if(currentPage <3){
+                    if(currentPage === 0){
+                        console.log( 'if 1 : current가 0 이다 ' , currentPage)
                         await this.setState({ prev:false, next:true})
+
                     }else if(total <= currentPage){
-                        console.log('여기들어왔니');
+                        console.log('if 2 : total이 current보다 작아졌다 ', total, currentPage);
                         await this.setState({ prev:true, next:false})
-                    }
-                    else{
+                    
+                    }else{
+                        console.log('if 3 : total이 current보다 아직 큰 상태', total, currentPage);
                         await this.setState({ prev:true, next:true})
                     }
                 }
@@ -86,34 +121,6 @@ class MyReview extends Component {
             })
         );
         console.log('total', this.state.total, 'current', this.state.currentPage);
-    }
-    
-
-    prevBtnHandler = (e) =>{
-      
-        let {email, currentPage} = this.state;
-        fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
-          .then(res => res.json())
-          .then(data => this.setState({
-            unposted_list: data,
-            currentPage:currentPage - 3
-            })
-        );
-        this.checkTotalFetcher(email,currentPage);
-    }
-
-    nextBtnHandler = (e) =>{
-       
-        let {email, currentPage} = this.state;
-        fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
-          .then(res => res.json())
-          .then(data => this.setState({
-            unposted_list: data,
-            currentPage:currentPage + 3
-            })
-        );
-
-        this.checkTotalFetcher(email,currentPage);
     }
 
     CallbackFromTravel = async(dataFromChild) =>{
@@ -175,7 +182,7 @@ class MyReview extends Component {
                                         <span class='fixed-title thumb'>Title</span>
                                         <span class='fixed-title wdate'>Registered</span>
                                     </div>
-                                        {myReviews.length !== 0? myReviews.map((review, index) => <ReviewForm key={index} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
+                                    {myReviews.length !== 0? myReviews.map(review => <ReviewForm review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
                                 </div>
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>

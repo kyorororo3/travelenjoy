@@ -36,6 +36,10 @@ div.DraftEditor-root {
     font-weight: bold;
     border: none;
 }
+.tour-submit-btn:hover{
+	background-color: #0c6ac3;
+	color: #c4d9eb;
+}
 .guide-input-category{
     border: none;
     outline: none;
@@ -108,15 +112,19 @@ div.DraftEditor-root {
 .guide-des-plus-btn{
     margin-top: 10px;
     margin-bottom: 40px;
-	width: 110px;
+    width: 110px;
     height: 40px;
     outline: none;
-    border-radius: 3em;
-    background-color: #f1aeae;   
+    border-radius: 8px;
+    background-color: #477496;
     font-size: 18px;
-    color:  #474a50;
+    color: #d9e1e8;
     font-weight: bold;
     border: none;
+}
+.guide-des-plus-btn:hover{
+	background-color: #699ece;
+	color: #343e47;
 }
 .guide-make-des-div{
     margin-top: 35px;
@@ -156,33 +164,39 @@ textarea{
     font-weight: bold;
     border: none;
 }
+.guide-final-submit-btn:hover{
+	background-color: #0c6ac3;
+	color: #c4d9eb;
+}
 .des-List-span{
     width: 150px;
     display: inline-block;
     margin-bottom: 17px;
     font-weight: 630;
+    color: #155fa2;;
 }
 .des-List-value{
     width: 70%;
     display: inline-block;
     margin-bottom: 17px;
     font-weight: 600;
-    color: #3c2525d6;
+    color: #130f0fd6;
 }
 .des-List-Num{
     text-align: center;
     font-size: 15pt;
     margin-bottom: 30px;
     font-weight: bolder;
-    color: #8e5164ad;
+    color: #155fa2;
     width: 100%;
 }
 .des-List-div{
-    border: 2.4px solid #ffdada91;
-    background-color: #ffebf3a6;
+    border: 1px solid #0f82ca4d;
+    background-color: #60bfe647;
     width: 68%;
     padding: 10px;
     margin-bottom: 50px;
     margin-left: 17%;
-    border-radius: 0.8rem;
+    border-radius: 7rem;
 }
+

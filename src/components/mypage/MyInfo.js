@@ -176,7 +176,7 @@ class MyInfo extends Component {
                                     <div className='form-group' id='sns-wrapper'>
                                         <div className='info-title'>Linked SNS</div>
                                         <div className='input-wrapper'>
-                                            {isSns? provider === 'kakao'? <img className='sns-img' src={require('../../resources/users/images/kakao.png')}/>:<img className='sns-img' src={require('../../resources/users/images/naver.png')}/>
+                                            {isSns?<img className='sns-img' src={require(`../../resources/mypage/images/${provider}.jpg`)}/>
                                                     :<input className='form-input-group ' readOnly type='text' name='provider' value='없음' />}
                                         </div>
                                     </div>

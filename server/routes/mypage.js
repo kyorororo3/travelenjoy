@@ -42,6 +42,22 @@ router.get('/home', (req, res)=>{
     });
 });
 
+//myHome 에서 나의 메시지 체크
+router.get('/home/msg', function(req,res){
+    const {email} = req.query;
+    let param = [email];
+    let sql = 'select * from te_tour a, te_tour_reservation b, te_tour_msg c '
+            + ' where a.seq = b.tour_seq and a.seq = c.tour_seq and b.email = ? '
+    
+    sql = mysql.format(sql, param);
+
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows);
+    });
+});
+
 //MyInfo 닉네임 중복체크
 router.post('/info/nickname', (req,res)=>{
     
@@ -236,53 +252,56 @@ router.post('/scrap/length', function(req,res){
 //MyReview Post 해야하는 것과 이미 Post 한것 리스트 가져오기 
 router.get('/review', (req, res)=>{
     const {command, email, currentPage} = req.query;
-    console.log('command', command, 'email', email);
-    
+    let sql, params = ''; 
     if(command === 'unposted'){
-        let sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate as length' 
-                  +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
-                  +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
-                  +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null order by c.start_date asc limit ?, 3';
-        let params = [email, parseInt(currentPage)];
+        sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate as length' 
+            +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
+            +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
+            +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null order by c.start_date asc limit ?, 3';
+        params = [email, parseInt(currentPage)];
         sql = mysql.format(sql,params);
         console.log(sql);
-        connection.query(sql, function(err,rows){
-            if(err) return console.log('err' + err);
-            console.log('unposted', rows);
-            res.send(rows);
-        })
+   
     }
     if(command === 'completed'){
-        let sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';
+        sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';
         // select * from te_tour_review a, te_tour b where a.tour_seq = b.seq and a.email = ?
-        let params = [email];
+        params = [email];
         sql = mysql.format(sql,params);
         console.log(sql);
-        connection.query(sql, function(err,rows){
-            if(err) return console.log('err' + err);
-            console.log('completed', rows);
-            res.send(rows);
-        })
     }
+
+    connection.query(sql, function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
 
 });
 
 //unposted review length 조회
 router.get('/review/length', function(req,res){
-    const {email} = req.query;
-    let sql = 'select count(*) as length from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
+    const {command, email} = req.query;
+    let sql, params = '';
+    if(command === 'unposted'){
+        sql = 'select count(*) as length from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
             +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
             +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null ' 
             +' order by c.start_date asc';
+    }
 
-    let params = [email];
+    if(command === 'completed'){
+        sql = 'select count(*) from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';   
+    }
+
+    params = [email];
     sql = mysql.format(sql,params);
     console.log(sql);
+
     connection.query(sql, function(err,rows){
-    if(err) return console.log('err' + err);
-    console.log('unposted', rows[0]);
-    res.send(rows[0]);
-})
+        if(err) return console.log('err' + err);
+        res.send(rows[0]);
+    })
+
 });
 
 //MyReview 추가 
@@ -322,6 +341,70 @@ router.get('/review/delete', function(req,res){
     })
 
 });
+
+//mytalk - post 조회
+router.get('/talk/post', function(req, res){
+    const { email, postPage } =req.query;
+    
+    let sql = 'select f.seq, f.title, f.content, f.email, f.nickname, f.reg_date, ifnull(l.likecount, 0) as likecount, ifnull(c.commentcount, 0) as commentcount, i.name_saved '
+             + 'from ((te_freetalk f '
+             + 'left join (select te_freetalk_seq, count(*) as likecount from te_freetalk_likes group by te_freetalk_seq) l '
+             + 'on f.seq = l.te_freetalk_seq) '
+             + 'left join (select talk_seq, count(*) as commentcount from te_comment group by talk_seq) c '
+             + 'on f.seq = c.talk_seq) '
+             + 'left join (select te_freetalk_seq, name_saved from te_freetalk_images group by te_freetalk_seq) i '
+             + 'on f.seq = i.te_freetalk_seq '
+             + 'where f.email = ? '
+             + 'order by f.reg_date desc '
+             + 'limit ?, 3 ; ';
+    
+    connection.query(sql, [email, parseInt(postPage)], function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+});
+
+//mytalk - post length 조회 
+router.get('/talk/post/length', function(req,res){
+    const {email} = req.query;
+    let sql = 'select count(*) as length from te_freetalk where email = ? ';
+
+    connection.query(sql, [email], function(err,rows){
+    if(err) return console.log('err' + err);
+    console.log('post length', rows[0]);
+    res.send(rows[0]);
+    })
+});
+
+//mytalk - comment 조회 
+router.get('/talk/comment', function(req, res){
+    const { email, pageNumber } = req.query;
+
+    // let sql = 'select * from (select row_number()over(order by reg_date desc) as rnum, '
+    //         + ' seq, talk_seq, email, nickname, content, reg_date te_comment where email = ? ) '
+    //         + ' where rnum > = ? and rnum <= ?  ';
+    
+    let sql = ' select * from te_comment where email = ? order by reg_date desc limit ? , 5 ';
+
+    connection.query(sql, [email, parseInt(pageNumber)], function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+})
+
+//mytalk - comment length 조회 
+router.get('/talk/comment/length', function(req, res){
+    const { email } = req.query;
+
+    let sql = 'select count(*) as length from te_comment where email = ?';
+    
+    connection.query(sql, [email], function(err,rows){
+        if(err) return console.log('err' + err);
+        console.log('cmt length', rows[0]);
+        res.send(rows[0]);
+    })
+})
+
 
 module.exports = router;
 

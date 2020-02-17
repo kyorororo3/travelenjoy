@@ -11,9 +11,12 @@ class GuideDetail extends Component {
         this.state = {
             tourInfo: undefined,
             desInfo: undefined,
-            isLoaded: false
+            isLoaded: false,
+            reserCount: 0,
+            reviewCount: 0,
+            scrapCount:0
         }
-        this.updateBtn = this.updateBtn.bind(this);
+        // this.updateBtn = this.updateBtn.bind(this);
         this.deleteBtn = this.deleteBtn.bind(this);
     }
 
@@ -29,18 +32,55 @@ class GuideDetail extends Component {
             );
     }
 
-    updateBtn = (e) =>{
-        e.preventDefault();
-        alert("수정");
-    }
+    // updateBtn = (e) =>{
+    //     e.preventDefault();
+    //     alert("수정");
+    // }
 
     deleteBtn = (e) => {
         e.preventDefault();
-        alert("삭제");
-        let tour_seq = this.props.match.params.seq;
-        console.log("삭제할 seq: ", tour_seq);
+        if(window.confirm('투어를 삭제합니다.')){
+            let email = this.props.location.state.users;
+            let tour_seq = this.props.match.params.seq;
 
-        //fetch(`http://localhost:3002/guide/guideDelete?seq=${tour_seq}`)
+            console.log("삭제할 seq: ", tour_seq);
+
+            fetch(`http://localhost:3002/guide/guideDelReser?seq=${tour_seq}`)
+            .then(res => res.json())
+            .then(data => {
+                this.setState({reserCount:data.count});
+                console.log(this.state.reserCount);
+
+                fetch(`http://localhost:3002/guide/guideDelReview?seq=${tour_seq}`)
+                .then(res => res.json())
+                .then(data => { 
+                    this.setState({reviewCount:data.count});
+                    console.log(this.state.reviewCount);
+
+                    fetch(`http://localhost:3002/guide/guideDelScrap?seq=${tour_seq}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.setState({scrapCount:data.count});
+                        console.log(this.state.scrapCount);
+
+                        fetch(`http://localhost:3002/guide/guideDelete?seq=${tour_seq}&email=${email}&reser=${this.state.reserCount}&review=${this.state.reviewCount}&scrap=${this.state.scrapCount}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            alert("투어가 삭제 되었습니다.");
+                            this.props.history.push({
+                                pathname: '/guide/list',
+                                state: {users: this.props.location.state.users}
+                              })
+                        });
+                    })
+                })
+            })
+
+
+
+
+        }
     }
 
 
@@ -51,8 +91,10 @@ class GuideDetail extends Component {
             <div className="container">
                 <GuideHeader users={this.props.location.state.users} />
                 <div className='guide-detail-div'>
-                    <input type='button' onClick={this.updateBtn} value='수정'></input>
-                    <input type='button' onClick={this.deleteBtn} value='삭제'></input>
+                    <div className='guide-detail-UpDelBtn'>
+                        {/* <input type='button' className='guide-detail-UpBtn' onClick={this.updateBtn} value='Edit'></input> */}
+                        <input type='button' className='guide-detail-DelBtn' onClick={this.deleteBtn} value='Delete'></input>
+                    </div>
                     {isLoaded &&
                         (<Fragment>
                             <GuideDeTour tour={tourInfo} />

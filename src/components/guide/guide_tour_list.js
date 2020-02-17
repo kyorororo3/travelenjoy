@@ -137,7 +137,7 @@ class GuideList extends Component {
                             <input type="text" name="search" onChange={this.inputFormHandler} placehodler="검색"></input>
                         </div>
                         <div className="search-btn-div">
-                            <input type="button" onClick={this.searchClick} value="검색"></input>
+                            <input type="button" className='search-btn' onClick={this.searchClick}></input>
                         </div>
                     </div>
                 </div>

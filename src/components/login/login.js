@@ -85,6 +85,8 @@ class Login extends React.Component {
       }else{
         this.setState({ users : data });   
         this.props.getLogin(true);
+        this.props.getAuth(data.auth);
+        this.props.getInfo(data);
       }
     })
     // this.props.login(login_info);

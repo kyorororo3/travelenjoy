@@ -59,7 +59,7 @@ router.get('/list/likes', function(req, res) {
 //게시물 ID에 맞는 댓글 리턴
 router.get('/list/comments', function(req, res) {
     //const stmt = "select * from te_comment a, te_member b where talk_seq=? and a.email = b.email";
-    const stmt = "select a.seq as seq, a.content as content, a.reg_date as reg_date, b.profile_img as profile_img, b.nickname as nickname from te_comment a, te_member b where talk_seq=? and a.email = b.email";
+    const stmt = "select a.seq as seq, a.content as content, a.reg_date as reg_date, b.profile_img as profile_img, b.nickname as nickname, b.email as email, a.is_edit_mode as iseditmodeon from te_comment a, te_member b where talk_seq=? and a.email = b.email";
     connection.query(stmt, req.query.talk_seq, function(err, result){
         console.log('return comments : ' + JSON.stringify(result))
         res.json({comments: result})
@@ -93,6 +93,24 @@ router.post('/list/comments/create', function(req, res) {
                 resp: "ok"
             });
     });
+});
+
+//댓글 수정
+router.post('/list/comments/update', function(req, res) {
+    console.log('update comment : ' + JSON.stringify(req.body))
+    let stmt = "update te_comment set content=? where seq=?"
+    connection.query(stmt, [req.body.content, req.body.talk_seq], function(err, rows) {
+        if (err) console.log('connection result err : ' + err);
+    })
+});
+
+//댓글 삭제
+router.post('/list/comments/delete', function(req, res) {
+    console.log('delete comment : ' + JSON.stringify(req.body));
+    let stmt = "delete from te_comment where seq=?";
+    connection.query(stmt, req.body.seq, function(err, rows) {
+        if (err) console.log('connection result err : ' + err);
+    })
 });
 
 //게시글 작성자 정보 리턴
@@ -147,9 +165,57 @@ router.post('/free/save/images',upload.array('files'), function(req, res, next) 
                 if (err) console.log('connection result err : ' + err);
             });
         }
+
+        let insertComment = "insert into te_comment (talk_seq, email, nickname, content) values (?, ?, ?, ?)";
+        connection.query(insertComment, [result.insertId, req.body.userEmail, req.body.userNickname, req.body.content], function(err, result) {
+            if (err) console.log('connection result err : ' + err);
+        });
     });
+});
 
+//게시글 및 연관정보 삭제
+router.post('/free/delete', function(req, res) {
+    console.log('delete talk : ' + JSON.stringify(req.body));
+    console.log('delete talk seq : ' + req.body.seq)
 
+    let deleteTalk = 'delete from te_freetalk where seq=?';
+    connection.query(deleteTalk, req.body.seq, function(err, result) {
+        if (err) console.log('connection result err : ' + err);
+        let deleteImages = 'delete from te_freetalk_images where te_freetalk_seq=?';
+        connection.query(deleteImages, req.body.seq, function(err, result) {
+            if (err) console.log('connection result err : ' + err);
+        });
+        let deleteComment = 'delete from te_comment where talk_seq=?';
+        connection.query(deleteComment, req.body.seq, function(err, result) {
+            if (err) console.log('connection result err : ' + err);
+        });
+    });
 })
+
+//좋아요 표시여부 확인
+router.get('/like/ismarked', function(req, res) {
+    let stmt = "select count(*) as cnt from te_freetalk_likes where te_freetalk_seq=? and email=?"
+    connection.query(stmt, [req.query.seq, req.query.email], function(err, result) {
+        res.json(result[0].cnt)
+    })
+})
+
+//좋아요 표시
+router.get('/like', function(req, res) {
+    console.log('유저 : ' + req.query.email + ', 글seq : ' + req.query.seq);
+    let stmt = "insert into te_freetalk_likes (te_freetalk_seq, email, nickname) values (?,?,?)";
+    connection.query(stmt, [req.query.seq, req.query.email, ''], function(err, result) {
+
+    })
+})
+//좋아요 취소
+router.get('/dislike', function(req, res) {
+    console.log('유저 : ' + req.query.email + ', 글seq : ' + req.query.seq);
+    let stmt = "delete from te_freetalk_likes where te_freetalk_seq=? and email=?";
+    connection.query(stmt, [req.query.seq, req.query.email], function(err, result) {
+
+    })
+})
+
 
 module.exports = router

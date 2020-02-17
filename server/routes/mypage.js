@@ -385,8 +385,11 @@ router.get('/talk/comment', function(req, res){
     //         + ' where rnum > = ? and rnum <= ?  ';
     
     let sql = ' select * from te_comment where email = ? order by reg_date desc limit ? , 5 ';
+    let params = [email, parseInt(pageNumber)]
 
-    connection.query(sql, [email, parseInt(pageNumber)], function(err,rows){
+    sql = mysql.format(sql, params);
+
+    connection.query(sql, function(err,rows){
         if(err) return console.log('err' + err);
         res.send(rows);
     })
@@ -397,9 +400,11 @@ router.get('/talk/comment/length', function(req, res){
     const { email } = req.query;
 
     let sql = 'select count(*) as length from te_comment where email = ?';
-    
-    connection.query(sql, [email], function(err,rows){
-        if(err) return console.log('err' + err);
+    let param = [ email ];
+    sql = mysql.format(sql, param);
+
+    connection.query(sql, function(err,rows){
+        if(err) return console.log('여기서 오는 건가요err' + err);
         console.log('cmt length', rows[0]);
         res.send(rows[0]);
     })

@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const upload = multer({dest:'../src/uploads/'})
+const upload = multer({dest:'src/uploads/'})
 
 // router.use(express.static("/public/uploads"));
+router.use(express.static("/public/uploads"));
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: false }));
 
 const mysql = require('mysql');
 let dbconfig = require('../config/dbconfig')();
@@ -154,6 +156,7 @@ router.post('/free/save/images',upload.array('files'), function(req, res, next) 
         console.log('files : ' + file.filename);
         console.log('info : ' + JSON.stringify(file));
     }
+    
 
     let insertTalk = "insert into te_freetalk (title, content, email, nickname, image_count) values(?, ?, ?, ?, ?)";
     connection.query(insertTalk, ['title', req.body.content, req.body.userEmail, req.body.userNickname, req.files.length], function (err, result) {
@@ -162,6 +165,7 @@ router.post('/free/save/images',upload.array('files'), function(req, res, next) 
         for (let file of req.files) {
             let insertImages = "insert into te_freetalk_images (te_freetalk_seq, name_real, name_saved) values(?, ?, ?)";
             connection.query(insertImages, [result.insertId, file.originalname, file.filename], function (err, result) {
+                console.log('filenameJSON  : ' + JSON.stringify(file))
                 if (err) console.log('connection result err : ' + err);
             });
         }

@@ -43,7 +43,7 @@ class MyTalk extends Component {
             }
         })
     );
-        fetch(`http://localhost:3002/mypage/talk/comment?email=${email}`)
+        fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${0}`)
         .then(res => res.json())
         .then(data => this.setState({
             cmt_lists:data
@@ -54,9 +54,10 @@ class MyTalk extends Component {
         .then(res => res.json())
         .then(data => this.setState({
             cmtTotal:data.length
+        }, () => {
+            console.log('cmtTotal check', this.state.cmtTotal);
         })
         );
-        console.log('cmtTotal check', this.state.cmtTotal);
     }
 
     shouldComponentUpdate(nextProps, nextState){

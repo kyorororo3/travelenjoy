@@ -12,6 +12,7 @@ class RecommendTalk extends React.Component {
         this.state = {
             file : 'cat19.jpg',
             images : [],
+            likes : this.props.talk.likecount,
             isHover : false,
             showModal : false,
             author: {
@@ -25,18 +26,35 @@ class RecommendTalk extends React.Component {
                 phone: 1111,
                 auth:3
             },
-            isScrap : false
+            isScrap : false,
+            currentUser : ''
         }
     }
 
     componentDidMount() {
         fetch(`http://localhost:3002/freetalk/list/images?seq=${this.props.talk.seq}`)
-            .then(res => res.json())
-            .then(res => {
-                console.log(res.images);
-                this.setState({images: res.images})
-            })
-            .then(res => this.setState({file:(this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
+        .then(res => res.json())
+        .then(res => {
+            console.log(res.images);
+            this.setState({images: res.images})
+        })
+        .then(res => this.setState({file:(this.state.images.length>0)?this.state.images[0].name_real:this.state.file}))
+        
+        fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.talk.email + '&nickname=' + this.props.talk.nickname)
+        .then(res => res.json())
+        .then(res => this.setState({author: res.author}))    
+
+        fetch('http://localhost:3002/users/getUser',{
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+                if(data.email !== undefined)
+                    this.setState({currentUser : data})
+                if(this.props.email === data.email)
+                    this.setState({isOwner: 1})
+            }
+        )
     }
 
     handleHover = () => {
@@ -68,6 +86,14 @@ class RecommendTalk extends React.Component {
         this.setState({showModal : false})
     }
 
+    handleAddLikes = () => {
+        this.setState({likes: (this.state.likes + 1)})
+    }
+    handleSubLikes = () => {
+        this.setState({likes: (this.state.likes - 1)})
+    }
+
+
     render() {
         let {seq, email, nickname, reg_date, likecount} = this.props.talk;
         return(
@@ -83,7 +109,7 @@ class RecommendTalk extends React.Component {
                             <div className="modal-author-profile">
                                 <div className="modal-body-profile-detail">
                                     <Media>
-                                        <a href="#">
+                                        <a>
                                             <img
                                                 width={32}
                                                 height={32}
@@ -92,9 +118,9 @@ class RecommendTalk extends React.Component {
                                                 onError={(e)=>{e.target.onerror = null; e.target.src=require('../../resources/mypage/images/profile_img.jpg')}}
                                             />
                                         </a>
-                                        <Media.Body>
-                                            <a href="#">{this.state.author.nickname}</a>
-                                        </Media.Body>
+                                       
+                                        <a>{this.state.author.nickname}</a>
+                                     
                                     </Media>
                                 </div>
                             </div>
@@ -121,7 +147,10 @@ class RecommendTalk extends React.Component {
                                         email={email}
                                         nickname={nickname}
                                         regDate={reg_date}
-                                        likes={likecount}
+                                        likes={this.state.likes}
+                                        handleAddLikes={this.handleAddLikes}
+                                        handleSubLikes={this.handleSubLikes}
+                                        currentUser={this.state.currentUser}
                                     />
                                 </Modal.Body>
                             </div>

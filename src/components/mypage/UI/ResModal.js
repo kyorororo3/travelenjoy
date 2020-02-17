@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
 
+// Utility
+import {stringToDate} from '../../../utils/Functions';
+
 class ResModal extends Component {
 
 
     constructor(props){
         super(props);
-
+        
+        const {start_date} = this.props.tour;
+        let _after = false;
+        if(stringToDate(start_date) < new Date()) _after = true;
+        
         this.state = {
-
+          after: _after,
         }
 
     }
 
     closeBtnHandler = (e) => {this.props.callbackFromParent({showResModal:false, tour:[]})}
     
+    cancleBtnHandler = (e) => {
+      alert("cancle button");
+    }
+    
  
     render(){
 
         const {category, title, reservation_number, start_date, join_people, total_price, phone, message} = this.props.tour;
-      
+        const {after} = this.state;
+
         return(
             <div className='modal-wrapper'>
                 <div className='modal-header'>
@@ -49,6 +61,7 @@ class ResModal extends Component {
                     <input className='col-sm-7 reservation-info-readonly' type='text' value={message? message:'N/A'} readOnly/>
                 </div>       
                 <div className='modal-footer'>
+                    {!after && <button type='button' className='btn-primary' onClick={this.cancleBtnHandler}>CANCLE</button>}
                     <button type='button' className='btn-primary' onClick={this.closeBtnHandler}>CLOSE</button>
                 </div>
             </div>

@@ -144,9 +144,9 @@ create table te_comment(
 );
 
 create table te_tour_msg(
-  seq int auto_increment primary key,
+  msg_seq int auto_increment primary key,
   tour_seq int,
-  content varchar(1000),
-  reg_date datetime default now(),
+  msg_content varchar(1000),
+  msg_reg_date datetime default now(),
   isread int
 );

@@ -52,7 +52,10 @@ class MySidebar extends Component {
                                 }}>My Review</Link>
                             </div>
                             <div className='item'>
-                                 <Link to='/mypage/talk'>My Talk</Link>
+                                 <Link to={{
+                                    pathname:'/mypage/talk',
+                                    state:{ users:this.props.users }
+                                }}>My Talk</Link>
                             </div>
                         </div>            
                     </div>

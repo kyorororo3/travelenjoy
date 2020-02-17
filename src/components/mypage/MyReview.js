@@ -62,34 +62,35 @@ class MyReview extends Component {
         return this.state !== nextState
     }
 
-   
     
 
     prevBtnHandler = async (e) =>{
         
+        await this.setState((prevState) => ({currentPage:prevState.currentPage - 6}))
         let {email, currentPage} = this.state;
         await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
           .then(res => res.json())
-          .then(data => this.setState({
+          .then(data => this.setState((prevState) =>({
             unposted_list: data,
-            currentPage:currentPage - 3
-            })
+            currentPage:currentPage +3
+            }))
         );
-        this.checkTotalFetcher(email,currentPage);
+        
+        this.checkTotalFetcher(email, currentPage);
     }
 
-    nextBtnHandler = async (e) =>{
+    nextBtnHandler = async(e) =>{
        
         let {email, currentPage} = this.state;
-        await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
+       await fetch(`http://localhost:3002/mypage/review?command=unposted&email=${email}&currentPage=${currentPage}`)
           .then(res => res.json())
-          .then(data => this.setState({
+          .then(data => this.setState((prevState) => ({
             unposted_list: data,
-            currentPage:currentPage + 3
-            })
+            currentPage:prevState.currentPage + 3
+            }))
         );
 
-        this.checkTotalFetcher(email,currentPage);
+        this.checkTotalFetcher(this.state.email,this.state.currentPage);
     }
 
     checkTotalFetcher = (email,currentPage) =>{
@@ -108,7 +109,7 @@ class MyReview extends Component {
                         await this.setState({ prev:false, next:true})
 
                     }else if(total <= currentPage){
-                        console.log('if 2: total이 current보다 작아졌다 ', total, currentPage);
+                        console.log('if 2 : total이 current보다 작아졌다 ', total, currentPage);
                         await this.setState({ prev:true, next:false})
                     
                     }else{
@@ -181,7 +182,7 @@ class MyReview extends Component {
                                         <span class='fixed-title thumb'>Title</span>
                                         <span class='fixed-title wdate'>Registered</span>
                                     </div>
-                                    {myReviews.length !== 0? myReviews.map((review, index) => <ReviewForm key={index} review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
+                                    {myReviews.length !== 0? myReviews.map(review => <ReviewForm review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
                                 </div>
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>

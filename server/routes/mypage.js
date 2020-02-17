@@ -42,6 +42,22 @@ router.get('/home', (req, res)=>{
     });
 });
 
+//myHome 에서 나의 메시지 체크
+router.get('/home/msg', function(req,res){
+    const {email} = req.query;
+    let param = [email];
+    let sql = 'select * from te_tour a, te_tour_reservation b, te_tour_msg c '
+            + ' where a.seq = b.tour_seq and a.seq = c.tour_seq and b.email = ? '
+    
+    sql = mysql.format(sql, param);
+
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows);
+    });
+});
+
 //MyInfo 닉네임 중복체크
 router.post('/info/nickname', (req,res)=>{
     
@@ -325,6 +341,70 @@ router.get('/review/delete', function(req,res){
     })
 
 });
+
+//mytalk - post 조회
+router.get('/talk/post', function(req, res){
+    const { email, postPage } =req.query;
+    
+    let sql = 'select f.seq, f.title, f.content, f.email, f.nickname, f.reg_date, ifnull(l.likecount, 0) as likecount, ifnull(c.commentcount, 0) as commentcount, i.name_saved '
+             + 'from ((te_freetalk f '
+             + 'left join (select te_freetalk_seq, count(*) as likecount from te_freetalk_likes group by te_freetalk_seq) l '
+             + 'on f.seq = l.te_freetalk_seq) '
+             + 'left join (select talk_seq, count(*) as commentcount from te_comment group by talk_seq) c '
+             + 'on f.seq = c.talk_seq) '
+             + 'left join (select te_freetalk_seq, name_saved from te_freetalk_images group by te_freetalk_seq) i '
+             + 'on f.seq = i.te_freetalk_seq '
+             + 'where f.email = ? '
+             + 'order by f.reg_date desc '
+             + 'limit ?, 3 ; ';
+    
+    connection.query(sql, [email, parseInt(postPage)], function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+});
+
+//mytalk - post length 조회 
+router.get('/talk/post/length', function(req,res){
+    const {email} = req.query;
+    let sql = 'select count(*) as length from te_freetalk where email = ? ';
+
+    connection.query(sql, [email], function(err,rows){
+    if(err) return console.log('err' + err);
+    console.log('post length', rows[0]);
+    res.send(rows[0]);
+    })
+});
+
+//mytalk - comment 조회 
+router.get('/talk/comment', function(req, res){
+    const { email, pageNumber } = req.query;
+
+    // let sql = 'select * from (select row_number()over(order by reg_date desc) as rnum, '
+    //         + ' seq, talk_seq, email, nickname, content, reg_date te_comment where email = ? ) '
+    //         + ' where rnum > = ? and rnum <= ?  ';
+    
+    let sql = ' select * from te_comment where email = ? order by reg_date desc limit ? , 5 ';
+
+    connection.query(sql, [email, parseInt(pageNumber)], function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+})
+
+//mytalk - comment length 조회 
+router.get('/talk/comment/length', function(req, res){
+    const { email } = req.query;
+
+    let sql = 'select count(*) as length from te_comment where email = ?';
+    
+    connection.query(sql, [email], function(err,rows){
+        if(err) return console.log('err' + err);
+        console.log('cmt length', rows[0]);
+        res.send(rows[0]);
+    })
+})
+
 
 module.exports = router;
 

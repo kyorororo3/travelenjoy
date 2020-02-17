@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class MyReviewTableForm extends Component {
+class MyMsgTableForm extends Component {
     
     constructor(props){
         super(props);
@@ -11,15 +11,17 @@ class MyReviewTableForm extends Component {
 
     render(){
 
+        const {msg} = this.props;
+
         return(
             <div className='msg-table-row' onClick={this.alertDetailHandler}>
-                <span class='msg-icon'> </span>
-                <span class='msg-content'> </span>
-                <span class='msg-reg-date'> </span>
+                <span className='msg-icon'> </span>
+                <span className='msg-content'>{msg.msg_content}</span>
+                <span className='msg-reg-date'>{msg.msg_reg_date}</span>
             </div>
         );
     }
 }
 
 
-export default MyReviewTableForm;
+export default MyMsgTableForm;

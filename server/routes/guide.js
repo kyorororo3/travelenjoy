@@ -202,7 +202,7 @@ router.get('/guideDelete', function(req, res) {
     let sql2 ='delete from te_tour where seq=?;'
     sql2 = mysql.format(sql2, seq);
 
-    let sql3 ='insert into te_tour_msg(tour_seq, content, reg_date, isread)'+
+    let sql3 ='insert into te_tour_msg(tour_seq, msg_content, msg_reg_date, isread)'+
               ' value(?, "신청하신 투어가 삭제되었습니다. 해당 가이드에게 문의해주세요.", now(), 0) '
     sql3 = mysql.format(sql3, seq);
 

@@ -3,6 +3,9 @@
     position: absolute;
     top: 20%;
 }
+.carousel-item{
+    height: 300px;
+}
 #modal-body-profile-detail-body{
     padding:2px;
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import GuideDes from './guide_des';
 import GuideHeader from './guide_Header';
 import DesList from './guide_desList';
@@ -18,7 +17,7 @@ class GuideMake extends Component {
     super(props);
     this.id = 1;
     this.state = {
-      email: this.props.location.state.users,
+      users : [],
       editorState: EditorState.createEmpty(),
       uploadedImages: [],
       text: '',
@@ -43,18 +42,23 @@ class GuideMake extends Component {
     this.upLoadonClick = this.upLoadonClick.bind(this);
   }
 
+  //login info
+  componentDidMount() {
+    console.log("guide.js DidMount");
+    fetch('http://localhost:3002/users/getUser', {
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.email !== undefined)
+          this.setState({ users: data })
+      }
+      );
+  }
+
   //tour 저장후다음 -> des
   onSubmitHandler = (e) => {
     e.preventDefault();
-
-    // this.setState({
-    //   readOnly: true, //readonly로 다 바꾸기
-    //   desform: <input type="button" className="guide-des-plus-btn" value="경로추가" onClick={this.onSaveHandler}></input>,
-    //   submitBtn: '',
-    //   email: this.props.location.state.users,
-    //   Isdisabled : true,
-    //   Isfile: 'hidden'
-    // })
 
     if (e.target.title.value === "") {
       alert("투어 제목을 입력해 주세요");
@@ -79,8 +83,8 @@ class GuideMake extends Component {
     }
     else {
       const formData = new FormData();
-      formData.append('email', this.state.email.email);
-      formData.append('companyname', this.state.email.companyname);
+      formData.append('email', this.state.users.email);
+      formData.append('companyname', this.state.users.companyname);
       formData.append('category', e.target.category.value);
       formData.append('title', e.target.title.value);
       formData.append('content', this.state.text);
@@ -101,7 +105,7 @@ class GuideMake extends Component {
               readOnly: true, //readonly로 다 바꾸기
               desform: <input type="button" className="guide-des-plus-btn" value="경로추가" onClick={this.onSaveHandler}></input>,
               submitBtn: '',
-              email: this.props.location.state.users,
+              email: this.state.users.email,
               Isdisabled : true,
               Isfile: 'hidden'
             })
@@ -205,11 +209,11 @@ class GuideMake extends Component {
   }
 
   render() {
-    console.log("guide Make render() ", this.state.email)
+    console.log("guide Make render() ", this.state.user);
     const { editorState } = this.state;
     return (
       <div className="container" >
-        <GuideHeader users={this.state.email} />
+        <GuideHeader users={this.state.users} />
         <div className="guide-make-h"><span className="guide-make-s"> 1 > 투어 등록</span><img className='guide-tour-img' src={require('../../resources/guide/images/map.png')} /></div>
         <div className='guide-make-form-div'>
           <form onSubmit={this.onSubmitHandler} encType='multipart/form-data'>

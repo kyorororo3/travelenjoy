@@ -92,3 +92,86 @@
 .guide-tour-home-img{
     width: 37px;
 }
+.guide-main-info{
+    display: inline-block;
+    margin-left: 10px;
+}
+.guide-main-info-btn{
+    width: max-content;
+    text-align: center;
+    cursor: pointer;
+    color: rgba(230, 234, 241, 0.733);
+    background-color: rgba(26, 92, 126, 0.829);
+    border: none;
+    border-radius: 3rem; 
+    box-shadow: 1.9px 1.9px 1px -1px #7baed8af;
+    font-size: 10pt;
+    font-weight: bolder;   
+}
+.guide-info-popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+.guide-info-popup_inner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 410px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+    overflow: scroll;
+}
+.guide-info-all{
+    margin-top: 30px;
+}
+.guide-info-div{
+    margin-left: 23%;
+    margin-bottom: 10px;
+}
+.guide-info-title{
+    display: inline-block;
+    color: #2b90d9;
+}
+.guide-info-val{
+    display: inline-block;
+    margin-right: 27%;
+    float: right;
+    color: rgb(42, 42, 46);
+}
+.guide-info-btn{
+    margin-top: 30px;
+    width: 30%;
+    margin-left: 35%;
+    text-align: center;
+    cursor: pointer;
+    color: rgba(76, 76, 92, 0.733);
+    border: 1px solid rgb(194, 207, 216);
+}
+.guide-info-btn:hover{
+    color: rgba(18, 92, 177, 0.938);
+    background-color: rgba(185, 205, 228, 0.938);
+}
+/* .guide-info-edit-btn{
+    margin-top: 11px;
+    float: right;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgb(194, 207, 216);
+} */
+.guide-info-img{
+    margin-top: 30px;
+    margin-left: 25%;
+    width: 50%;
+    border-radius: 10rem;
+    border: 1px solid rgba(46, 45, 45, 0.329);
+}

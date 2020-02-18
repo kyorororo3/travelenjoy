@@ -40,7 +40,7 @@ class GuideDetail extends Component {
     deleteBtn = (e) => {
         e.preventDefault();
         if(window.confirm('투어를 삭제합니다.')){
-            let email = this.props.location.state.users;
+            let email = this.props.location.state.users.email;
             let tour_seq = this.props.match.params.seq;
 
             console.log("삭제할 seq: ", tour_seq);
@@ -70,7 +70,7 @@ class GuideDetail extends Component {
                             alert("투어가 삭제 되었습니다.");
                             this.props.history.push({
                                 pathname: '/guide/list',
-                                state: {users: this.props.location.state.users}
+                                state: {users: this.props.location.state.users.email}
                               })
                         });
                     })

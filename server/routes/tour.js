@@ -62,6 +62,8 @@ router.get('/list/autocomplite', (req, res) => {
   const {keyword} = req.query;
   const sql = "select * from te_tour_search where location like ?";
 
+  if(keyword === '') return res.send([]);
+
   conn.query(sql, `${keyword}%`, (err, rows) => {
     if(err) return console.log("ERR!! " + err);
     res.send(rows);

@@ -51,17 +51,23 @@ class TravelSche extends React.Component {
 
   // 입력된 인원 수가 신청 가능한 인원수인지 체크
   checkPerson = () => {
+    
     const {available} = this.state;
     const input = document.getElementById('_person');
-    const input_val = parseInt(input.value);
-
+    
     const {selectedDays} = this.state;
+    
+    const regex= /[^0-9]/g;
+
+    if(regex.test(input.value)) {
+      input.value = input.value.replace(regex,'');
+    }
 
     if(selectedDays.length <= 0) {
       alert('투어 날짜를 먼저 선택해주세요.');
       input.value = '';
     }else {
-      if(input_val > available) {
+      if(parseInt(input.value) > available) {
         alert(`현재 예약 가능 인원을 초과했습니다.\n예약가능인원 : ${available}`);
         input.value = available;
       }

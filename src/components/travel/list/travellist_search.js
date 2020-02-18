@@ -1,56 +1,57 @@
 import React from 'react';
 
 class TravelSearch extends React.Component {
-  
-  handleLink = (e) => {
-    const {loc} = e.target.dataset;
-    this.props.history.push(`/travel/city?category=${loc}`);
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      location: [],
+      show: false
+    }
   }
   
   handleFocus = () => {
-    const el_ul = document.getElementsByClassName('tour-search-autocomplete')[0];
-    el_ul.style.display = 'block';
+    this.setState({show: true})
   }
-  handleBlur = () => {
-    const el_ul = document.getElementsByClassName('tour-search-autocomplete')[0];
-    el_ul.style.display = 'none';
+
+  handleHide = () => {
+    document.getElementsByTagName('body')[0].addEventListener('click', e => {
+      const _class = e.target.className;
+      if(_class === 'tour-search-input'
+          || _class === 'autocomplete-li') return;
+      this.setState({show: false})
+    })
   }
 
   handleAutocomplete = (e) => {
-    const el_ul = document.getElementsByClassName('tour-search-autocomplete')[0];
     let keyword = e.target.value;
 
-    if(keyword !== '') {
-      fetch(`http://localhost:3002/tour/list/autocomplite?keyword=${keyword}`)
-        .then(res => res.json())
-        .then(rows => {
-          while ( el_ul.hasChildNodes() ) {
-            el_ul.removeChild( el_ul.firstChild ); 
-          }
-          rows.map((data) => {
-            let el_li = document.createElement('li');
-            el_li.setAttribute('data-loc', data.location);
-            el_li.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.location}, ${data.country}`;
-            el_ul.appendChild(el_li);
-
-            el_li.addEventListener('click', this.handleLink);
-          });
-          el_ul.style.display = 'block';
-        });
-    }else {
-      el_ul.style.display = 'none';
-    }
+    fetch(`http://localhost:3002/tour/list/autocomplite?keyword=${keyword}`)
+      .then(res => res.json())
+      .then(rows => {
+        this.setState({
+          location: rows
+        })
+      })
   }
 
   handleSearch = (e) => {
     e.preventDefault();
     const searched_location = e.target.location.value;
-    // alert(searched_location);
-    
     this.props.isSearched(searched_location);
   }
 
+  handleClick = (e) => {
+    const {loc} = e.target.dataset;
+    this.props.isSearched(loc);
+    document.getElementsByClassName('tour-search-input')[0].value=loc;
+    this.setState({show: false});
+  }
+
   render() {
+    const {location, show} = this.state;
+    this.handleHide();
+
     return(
       <div className='tour-search-wrapper'>
         <div className='main-text'>
@@ -63,13 +64,19 @@ class TravelSearch extends React.Component {
              placeholder='여행지를 입력해주세요' 
              onChange={this.handleAutocomplete} 
              onFocus={this.handleFocus}
-             onBlur={this.handleBlur}/>
+            />
             <input className='btn-search' type='submit' value=''/>
           </form>
         </div>
         <div className='tour-search-autocomplete-wrapper'>
-          <ul className='tour-search-autocomplete'>
-          </ul>
+          {show && 
+            <ul className='tour-search-autocomplete'>
+              {location.map((data, index) => 
+                <li key={index} onClick={this.handleClick} data-loc={data.location} className='autocomplete-li'>
+                  <i className="fas fa-map-marker-alt"></i> {data.location}, {data.country}
+                </li>
+              )}
+            </ul>}
         </div>
       </div>
     )

@@ -24,39 +24,40 @@ class MyTalk extends Component {
         const {email, postPage} = this.state;
 
         fetch(`http://localhost:3002/mypage/talk/post?email=${email}&postPage=${postPage}`)
-        .then(res => res.json())
-        .then(data => this.setState({
-            post_lists:data,
-            postPage:3
-        }))
+            .then(res => res.json())
+            .then(data => this.setState({
+                post_lists:data,
+                postPage:3
+             })
+        )
 
         fetch(`http://localhost:3002/mypage/talk/post/length?email=${email}`)
-        .then(res => res.json())
-        .then(data => this.setState({
-            postTotal:data.length
-        }, () =>{
-            const {postTotal} = this.state;
-            if(postTotal <= 3){
-                this.setState({next:false})
-            }else{
-                this.setState({next:true})
-            }
+            .then(res => res.json())
+            .then(data => this.setState({
+                postTotal:data.length
+            }, () =>{
+                const {postTotal} = this.state;
+                if(postTotal <= 3){
+                    this.setState({next:false})
+                }else{
+                    this.setState({next:true})
+                }
         })
     );
         fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${0}`)
-        .then(res => res.json())
-        .then(data => this.setState({
-            cmt_lists:data
-        })
+            .then(res => res.json())
+            .then(data => this.setState({
+                cmt_lists:data
+            })
         );
 
         fetch(`http://localhost:3002/mypage/talk/comment/length?email=${email}`)
-        .then(res => res.json())
-        .then(data => this.setState({
-            cmtTotal:data.length
-        }, () => {
-            console.log('cmtTotal check', this.state.cmtTotal);
-        })
+            .then(res => res.json())
+            .then(data => this.setState({
+                cmtTotal:data.length
+            }, () => {
+                console.log('cmtTotal check', this.state.cmtTotal);
+            })
         );
     }
 
@@ -125,10 +126,10 @@ class MyTalk extends Component {
         console.log('postTotal', this.state.postTotal, 'current', this.state.postPage);
     }
 
-    cmtPageFetcher = (pageNumber) => {
+    cmtPageFetcher = async(pageNumber) => {
         pageNumber = pageNumber * 5;
         const { email } = this.state;
-        fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${pageNumber}`)
+        await fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${pageNumber}`)
         .then(res => res.json())
         .then(data => this.setState({
             cmt_lists:data

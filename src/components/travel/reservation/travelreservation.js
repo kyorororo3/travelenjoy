@@ -34,7 +34,13 @@ class TravelReservation extends React.Component {
   }
 
   handlePhoneChange = (e) => {
+    const regex= /[^0-9]/g;
     const val = e.target.value;
+
+    if(regex.test(val)) {
+      e.target.value = val.replace(regex,'');
+    }
+
     this.setState({
       phone: val
     })

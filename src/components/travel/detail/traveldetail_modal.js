@@ -1,6 +1,8 @@
 import React from 'react';
 import socketio from 'socket.io-client';
 import '../../../resources/travel/css/modal.scss';
+import ChatMsgMe from './chat_msg_me';
+import ChatMsgYou from './chat_msg_you';
 
 class TravelDetailModal extends React.Component {
   constructor(props) {
@@ -39,6 +41,29 @@ class TravelDetailModal extends React.Component {
     })
   }
 
+  handleLeave = () => {
+    const {seq, socket} = this.state;
+    socket.emit('leave', {
+      seq: seq
+    })
+
+    this.props.handleModal();
+  }
+
+  handleJoin = () => {
+    this.state.socket.on('join', data => {
+      alert(data.msg);
+      const {msg_list} = this.state;
+      msg_list.map(msg => {
+        msg.isread = 0
+      });
+
+      this.setState({
+        msg_list : msg_list
+      })
+    })
+  }
+
   componentDidMount() {
 
     fetch('http://localhost:3002/tour/question/chatroom', {
@@ -61,12 +86,13 @@ class TravelDetailModal extends React.Component {
             headers: {
               'Content-Type': 'application/json; charset=utf-8'
             },
-            body: JSON.stringify({seq: seq})
+            body: JSON.stringify({seq: seq, email: this.props.client})
           })
             .then(res => res.json())
             .then(result => {
               this.setState({msg_list: result})
               this.handleRecvMsg();
+              this.handleJoin();
             });
         })
       });
@@ -87,8 +113,8 @@ class TravelDetailModal extends React.Component {
           <p className="title">1:1 채팅문의</p>
           <div className="content">
             {msg_list.map(obj => {
-              if(obj.writer === this.props.client) return <p className='me'>{obj.msg}</p>
-              else return <p className='you'>{obj.msg}</p>
+              if(obj.writer === this.props.client) return <ChatMsgMe chat={obj}/>
+              else return <ChatMsgYou chat={obj}/>
             })}
           </div>
           <div className='chat-send'>
@@ -98,7 +124,7 @@ class TravelDetailModal extends React.Component {
             </form>
           </div>
           <div className="button-wrap">
-            <button type='button' onClick={this.props.handleModal}> 나가기 </button>
+            <button type='button' onClick={this.handleLeave}> 나가기 </button>
           </div>
         </div>
       </React.Fragment>

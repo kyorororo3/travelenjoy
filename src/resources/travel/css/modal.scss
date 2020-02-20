@@ -35,12 +35,21 @@
       margin-bottom: 20px;
       height: 380px;
       overflow: scroll;
+      .chat-msg {
+        overflow: auto;
+      }
+      .isread {
+        font-size: 9px;
+        color: #999; 
+        float: left;
+        transform: translate(25px, 16px);
+      }
       p{
         padding: 8px;
-        font-size: 12pt;
+        font-size: 13px;
         margin-bottom: 5px;
         border-radius: 5px;
-        width: 250px;
+        width: 200px;
         &.me {
           background: #eee;
           float: right;

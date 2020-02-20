@@ -89,7 +89,7 @@ router.get('/detail', (req, res) => {
   console.log(seq);
 
   let sql1 = "select * from te_tour where seq=?; ";
-  let sql2 = "select * from te_tour_des where tour_seq=?; ";
+  let sql2 = "select * from te_tour_des where tour_seq=? order by start_time; ";
 
   sql1 = mysql.format(sql1, seq);
   sql2 = mysql.format(sql2, seq);

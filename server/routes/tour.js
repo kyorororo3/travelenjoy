@@ -175,7 +175,7 @@ router.get('/detail/guide', (req, res) => {
 router.get('/detail/review', (req, res) => {
   const {tour_seq, start} = req.query
   console.log(`/tour/detail/review?tour_seq=${tour_seq}`);
-  let sql = 'select * from te_tour_review where tour_seq=? ';
+  let sql = 'select * from te_tour_review where tour_seq=? order by seq desc ';
   sql += 'limit ?, 5';
 
   const params = [tour_seq, parseInt(start)];

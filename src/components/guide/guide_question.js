@@ -13,7 +13,7 @@ class Guide_Question extends React.Component {
       chat_list: [],
       modal: false,
       seq: undefined,
-      email: this.props.location.state.users
+      users: []
     }
   }
 
@@ -31,16 +31,29 @@ class Guide_Question extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3002/guide/questionList?email=${this.props.location.state.users.email}`)
+    fetch('http://localhost:3002/users/getUser', {
+      credentials: 'include'
+    })
       .then(res => res.json())
-      .then(result => this.setState({ chat_list: result }))
+      .then(data => {
+        if (data.email !== undefined){
+          this.setState({ users: data });
+            fetch(`http://localhost:3002/guide/questionList?email=${data.email}`)
+            .then(res => res.json())
+            .then(result => this.setState({ chat_list: result }))
+        }
+          
+      }
+      );
+            
+
   }
 
   render() {
     const { chat_list, modal, seq } = this.state;
     return (
       <div className='container'>
-        <GuideHeader users={this.state.email} />
+        <GuideHeader users={this.state.users} />
         <div className='list-title-qa'>
           <span className='list-qa-span'>Q & A</span> <img className='guide-tour-img' src={require('../../resources/guide/images/qa2.png')} />
         </div>
@@ -60,7 +73,7 @@ class Guide_Question extends React.Component {
         </div>
             {modal && <Guide_Modal
               handleModal={this.handleModal}
-              email={this.props.location.state.users.email}
+              email={this.state.users.email}
               seq={seq} />}
         </div>
     )

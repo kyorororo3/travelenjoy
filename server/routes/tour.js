@@ -62,6 +62,8 @@ router.get('/list/autocomplite', (req, res) => {
   const {keyword} = req.query;
   const sql = "select * from te_tour_search where location like ?";
 
+  if(keyword === '') return res.send([]);
+
   conn.query(sql, `${keyword}%`, (err, rows) => {
     if(err) return console.log("ERR!! " + err);
     res.send(rows);
@@ -87,7 +89,7 @@ router.get('/detail', (req, res) => {
   console.log(seq);
 
   let sql1 = "select * from te_tour where seq=?; ";
-  let sql2 = "select * from te_tour_des where tour_seq=?; ";
+  let sql2 = "select * from te_tour_des where tour_seq=? order by start_time; ";
 
   sql1 = mysql.format(sql1, seq);
   sql2 = mysql.format(sql2, seq);

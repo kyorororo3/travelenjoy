@@ -78,13 +78,11 @@ class Login extends React.Component {
       console.log('App.js login .then ' , data);
       if(data.email === undefined){
         alert('정확한 이메일과 비밀번호를 입력해주세요.');
-        this.props.getLogin(false);
+        this.props.getLogin(false);                                                                                                      
         document.getElementsByName('pwd')[0].value = '';
       }else{
         this.setState({ users : data });   
-        this.props.getLogin(true);
-        this.props.getAuth(data.auth);
-        this.props.getInfo(data);
+        this.props.getLogin({login:true, auth:data.auth});
       }
     })
     // this.props.login(login_info);

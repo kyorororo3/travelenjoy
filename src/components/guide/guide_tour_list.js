@@ -10,11 +10,11 @@ class GuideList extends Component {
 
         this.state = {
             list: [],
-            email: this.props.location.state.users,
             startNum: 0,
             totalList: 0,
             keyword: '',
-            search: ''
+            search: '',
+            users: []
         }
         this.preClick = this.preClick.bind(this);
         this.nextClick = this.nextClick.bind(this);
@@ -23,19 +23,26 @@ class GuideList extends Component {
     }
 
     componentDidMount() {
-        const email = this.props.location.state.users.email;
-        let startNum = this.state.startNum;
         let category = this.state.keyword;
         let search = this.state.search;
 
-        console.log("list.js ", this.props.location.state.users.email);
-        fetch(`http://localhost:3002/guide//tourList?email=${email}&startNum=0&keyword=${category}&search=${search}`)
+        fetch('http://localhost:3002/users/getUser', {
+            credentials: 'include'
+        })
             .then(res => res.json())
-            .then(data =>
-                this.setState({
-                    list: data,
-                    totalList: data.length
-                }))
+            .then(data => {
+                if (data.email !== undefined) {
+                    this.setState({ users: data });
+                    fetch(`http://localhost:3002/guide//tourList?email=${data.email}&startNum=0&keyword=${category}&search=${search}`)
+                        .then(res => res.json())
+                        .then(data =>
+                            this.setState({
+                                list: data,
+                                totalList: data.length
+                            }))
+                }
+
+            });
     }
 
     inputFormHandler(e) {
@@ -45,7 +52,7 @@ class GuideList extends Component {
     preClick = (e) => {
         e.preventDefault();
         //alert("이전");
-        const email = this.props.location.state.users.email;
+        const email = this.state.users.email;
         let startNum = this.state.startNum - 10;
         let category = this.state.keyword;
         let search = this.state.search;
@@ -77,9 +84,8 @@ class GuideList extends Component {
         if (this.state.totalList != 10) {
             alert("마지막 페이지 입니다.");
         } else {
-            const email = this.props.location.state.users.email;
+            const email = this.state.users.email;
             let startNum = this.state.startNum + 10;
-            let total = this.state.totalList;
             let category = this.state.keyword;
             let search = this.state.search;
 
@@ -99,8 +105,7 @@ class GuideList extends Component {
 
     searchClick = (e) => {
         e.preventDefault();
-        const email = this.props.location.state.users.email;
-        let startNum = this.state.startNum;
+        const email = this.state.users.email;
         let category = this.state.keyword;
         let search = this.state.search;
         if(category === ""){
@@ -122,7 +127,7 @@ class GuideList extends Component {
         const { list } = this.state
         return (
             <div className="container">
-                <GuideHeader users={this.state.email} />
+                <GuideHeader users={this.state.users} />
                 <div className='list-title'>
                     <span className='list-title-span'>나의 투어 목록</span><img className='guide-tour-img' src={require('../../resources/guide/images/mylist.png')} />
                     <div className="all-search-div">
@@ -155,7 +160,7 @@ class GuideList extends Component {
                     </div>
 
                     {list.map(list => {
-                        return <List key={list.seq} list={list} users={this.state.email} />
+                        return <List key={list.seq} list={list} users={this.state.users} />
                     })}
                 </div>
                 <div className='pageBtndiv'>

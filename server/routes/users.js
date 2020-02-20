@@ -24,8 +24,8 @@ router.use(cookieParser('keyboard cat'));
 router.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true,
-  cookie:{maxAge:3000000} //30분으로 변경함 
+  saveUninitialized: true
+  // cookie:{maxAge:3000000} //30분으로 변경함 
 }));
 router.use(passport.initialize());
 router.use(passport.session());

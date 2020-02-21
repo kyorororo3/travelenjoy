@@ -158,7 +158,7 @@ class TravelSche extends React.Component {
       <div className='travel-schedule-wrapper'>
         <DayPicker 
           showOutsideDays
-          // disabledDays={_disabledDays}
+          disabledDays={_disabledDays}
           selectedDays={selectedDays}
           onDayClick={this.handleDayChange} />
           {isSelected?

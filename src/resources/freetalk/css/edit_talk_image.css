@@ -1,0 +1,16 @@
+.edit-images-wrap{
+    width: 90% !important;
+    margin: auto;
+}
+
+#talk-edit-images-wrap .modal-content{
+    width: 1000px;
+    height: 500px;
+    overflow: auto !important;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    margin:auto;
+}
+#talk-edit-images-wrap .modal-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}

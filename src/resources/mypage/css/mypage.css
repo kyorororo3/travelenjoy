@@ -405,9 +405,12 @@ a{
 .done-myreview-wrapper, .mycomment-wrapper {
     min-height:200px;
 }
+.mycomment-wrapper{
+    text-align:center;
+}
 .cmt-table{
     float:left;
-    margin-bottom:30px;
+    /* margin-bottom:30px; */
     width:100%;
 }
 .cmt-table-row.fixed-row{
@@ -441,7 +444,6 @@ a{
 }
 .mypost-wrapper{
     width:100%;
-    text-align:center;
     margin: 15px 0;
 }
 .post-wrapper{
@@ -499,6 +501,20 @@ a{
     margin: -144px 10px 6px -8px;
     display:block !important;
   
+}
+.pagination {
+    display: inline-flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+.page-number.active{
+    background-color: rgba(201, 238, 255, 0.3);
+    border-radius: 30%;
+    font-weight: 900 !important;
+}
+.page-number{
+    cursor: pointer;
 }
 /* --------------------  My Review CSS ------------------------- */
 

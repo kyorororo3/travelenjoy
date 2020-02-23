@@ -214,7 +214,7 @@ router.post('/scrap', function(req, res){
    
     sql+=' order by a.seq asc';
     sql = mysql.format(sql, params);
-    console.log(sql);
+    console.log(sql); 
   
     connection.query(sql, function(err, rows){
         if(err) return console.log('err' + err);
@@ -254,10 +254,10 @@ router.get('/review', (req, res)=>{
     const {command, email, currentPage} = req.query;
     let sql, params = ''; 
     if(command === 'unposted'){
-        sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img, d.wdate as length' 
+        sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img' 
             +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
             +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
-            +' te_tour_review as d on c.seq = d.tour_seq where c.email =? and c.start_date < now() and d.seq is null order by c.start_date asc limit ?, 3';
+            +' te_tour_review as d on c.res_seq = d.res_seq where c.email =? and c.start_date < now() order by c.start_date asc limit ?, 3';
         params = [email, parseInt(currentPage)];
         sql = mysql.format(sql,params);
         console.log(sql);

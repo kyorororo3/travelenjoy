@@ -81,6 +81,7 @@ create table te_tour_scrap(
 create table te_tour_review(
   seq int auto_increment primary key,
   tour_seq int,
+  res_seq int, 
   email varchar(50),
   title varchar(200),
   content varchar(1000),

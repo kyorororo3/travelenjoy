@@ -22,6 +22,14 @@ class MyTalk extends Component {
     
     componentDidMount(){
         const {email, postPage} = this.state;
+        fetch(`http://localhost:3002/mypage/talk/comment/length?email=${email}`)
+        .then(res => res.json())
+        .then(data => this.setState({
+            cmtTotal:data.length
+        }, () => {
+            console.log('cmtTotal check', this.state.cmtTotal);
+        })
+        );
 
         fetch(`http://localhost:3002/mypage/talk/post?email=${email}&postPage=${postPage}`)
             .then(res => res.json())
@@ -51,14 +59,7 @@ class MyTalk extends Component {
             })
         );
 
-        fetch(`http://localhost:3002/mypage/talk/comment/length?email=${email}`)
-            .then(res => res.json())
-            .then(data => this.setState({
-                cmtTotal:data.length
-            }, () => {
-                console.log('cmtTotal check', this.state.cmtTotal);
-            })
-        );
+     
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -126,8 +127,8 @@ class MyTalk extends Component {
         console.log('postTotal', this.state.postTotal, 'current', this.state.postPage);
     }
 
-    cmtPageFetcher = async(pageNumber) => {
-        pageNumber = pageNumber * 5;
+    cmtPageFetcher = async(data) => {
+        let pageNumber = data.pageNumber * 5;
         const { email } = this.state;
         await fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${pageNumber}`)
         .then(res => res.json())
@@ -165,7 +166,9 @@ class MyTalk extends Component {
                                     </div>
                                     {cmt_lists.length !== 0? cmt_lists.map(cmt => <CmtForm cmt={cmt}/>):<h5>Let's Leave Comments!</h5>}
                                 </div>
-                                <Pagination listLength={cmtTotal} pageFetcher={this.cmtPageFetcher}  />
+                                <Pagination listLength={cmtTotal}
+                                            pageFetcher={this.cmtPageFetcher}
+                                            getPageNumber={this.getPageNumber}  />
                            </div>
 
                         </div>

@@ -376,6 +376,19 @@ router.get('/talk/post/length', function(req,res){
     })
 });
 
+router.get('/talk/post/images', function(req,res){
+    const {email, seq} = req.query;
+  
+    let sql = 'select name_saved  from te_freetalk a, te_freetalk_images b  where a.seq = b.te_freetalk_seq and a.email = ? and b.te_freetalk_seq = ? ';
+    let params = [email, seq];
+    sql = mysql.format(sql, params);
+
+    connection.query(sql, function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+
+});
 //mytalk - comment 조회 
 router.get('/talk/comment', function(req, res){
     const { email, pageNumber } = req.query;

@@ -149,13 +149,16 @@ class MyTalk extends Component {
                            
                            <div className='mypost-wrapper'>
                                 <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;My Posts</p>
-                                {post_lists.length !==0 ? post_lists.map(talk => <TalkList key={talk.seq} talk={talk} user={this.props.location.state.users} /> ): <h5>Let's Post:D </h5>}
-                                {prev && <div className='mytalk-paging prev' onClick={this.prevBtnHandler}>
-                                    <i className="fas fa-chevron-left" style={{color:"#abbff6"}}/>
-                                </div>}
-                                {next && <div className='mytalk-paging next' onClick={this.nextBtnHandler}>
-                                    <i className="fas fa-chevron-right" style={{color:"#abbff6"}}/>
-                                </div>}
+                                <div className='mypost-container'>
+                                    {post_lists.length !==0 ? post_lists.map(talk => <TalkList key={talk.seq} talk={talk} user={this.props.location.state.users} /> ): <h5>Let's Post:D </h5>}
+                                    {prev && <div className='mytalk-paging prev' onClick={this.prevBtnHandler}>
+                                        <i className="fas fa-chevron-left" style={{color:"#abbff6"}}/>
+                                    </div>}
+                                    {next && <div className='mytalk-paging next' onClick={this.nextBtnHandler}>
+                                        <i className="fas fa-chevron-right" style={{color:"#abbff6"}}/>
+                                    </div>}
+
+                                </div>
                            </div>
                            <div className='mycomment-wrapper'>
                                 <p className='talk-title'><i class="fas fa-pencil-alt"></i>&nbsp;My Comments</p>

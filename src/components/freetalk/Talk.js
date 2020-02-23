@@ -138,7 +138,7 @@ class Talk extends Component {
                                         <img
                                             width={32}
                                             height={32}
-                                            src='https://logodix.com/logo/1707081.png'
+                                            src={require('../../uploads/' + this.state.author.profile_img)}
                                             alt='profile image'
                                             onError={(e)=>{e.target.onerror = null; e.target.src=require('../../uploads/cat1.jpg')}}
                                         />

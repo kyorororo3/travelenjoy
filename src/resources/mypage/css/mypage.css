@@ -404,6 +404,7 @@ a{
 }
 .done-myreview-wrapper, .mycomment-wrapper {
     min-height:200px;
+    text-align: center;
 }
 .mycomment-wrapper{
     text-align:center;
@@ -535,7 +536,6 @@ a{
 }
 .review-table{
     float:left;
-    margin-bottom:30px;
     width:100%;
 }
 .review-table-row.fixed-row{
@@ -722,6 +722,7 @@ input.review-star-btn-active {
 }
 
 .msg-title{
+    text-align:left;
     line-height: 30px;
     font-weight: 700;
     font-size:18px;
@@ -730,10 +731,13 @@ input.review-star-btn-active {
 .fa-bell, .fa-pencil-alt{
     color: #2b90d9;
 }
+.msg-wrapper{
+    width:100%;
+    text-align: center;
+}
 
 .msg-table{
     float:left;
-    margin-bottom:30px;
     width:100%;
 }
 .msg-table-row.fixed-row{

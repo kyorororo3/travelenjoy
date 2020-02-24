@@ -28,8 +28,6 @@ class MyTalk extends Component {
         .then(data => this.setState({
             isLoaded:true,
             cmtTotal:data.length
-        }, () => {
-            console.log('cmtTotal check', this.state.cmtTotal);
         })
         );
 
@@ -127,9 +125,10 @@ class MyTalk extends Component {
     }
 
     cmtPageFetcher = async(data) => {
-        let pageNumber = data.pageNumber * 5;
+        console.log('myTalk 으로 넘어온 페이지 수', data.pageNumber);
+        const pageNum = data.pageNumber * 5; 
         const { email } = this.state;
-        await fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${pageNumber}`)
+        await fetch(`http://localhost:3002/mypage/talk/comment?email=${email}&pageNumber=${pageNum}`)
         .then(res => res.json())
         .then(data => this.setState({
             cmt_lists:data
@@ -169,8 +168,7 @@ class MyTalk extends Component {
                                     {cmt_lists.length !== 0? cmt_lists.map(cmt => <CmtForm cmt={cmt}/>):<h5>Let's Leave Comments!</h5>}
                                 </div>
                                 {isLoaded ? <Pagination listLength={cmtTotal}
-                                            pageFetcher={this.cmtPageFetcher}
-                                            getPageNumber={this.getPageNumber}  /> : ''}
+                                            pageFetcher={this.cmtPageFetcher}/> : ''}
                            </div>
 
                         </div>

@@ -44,9 +44,9 @@ router.get('/home', (req, res)=>{
 
 //myHome 에서 나의 메시지 체크
 router.get('/home/msg', function(req,res){
-    const {email} = req.query;
-    let param = [email];
-    let sql = 'select * from te_freetalk_msg where recipient = ? order by msg_reg_date desc';
+    const {email, pageNumber} = req.query;
+    let param = [email, parseInt(pageNumber)];
+    let sql = 'select * from te_freetalk_msg where recipient = ? order by msg_reg_date desc limit ?, 5';
     
     sql = mysql.format(sql, param);
 
@@ -54,6 +54,21 @@ router.get('/home/msg', function(req,res){
     connection.query(sql,  function (err, rows) {
         if(err) return console.log("ERR!! " + err);
         res.send(rows);
+    });
+});
+
+//myHome 에서 나의 메시지 length 조회
+router.get('/home/msg/length', function(req,res){
+    const {email} = req.query;
+    let param = [email];
+    let sql = 'select count(*) as length from te_freetalk_msg where recipient = ? ';
+    
+    sql = mysql.format(sql, param);
+
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows[0]);
     });
 });
 
@@ -72,7 +87,7 @@ router.get('/home/msg/update', function(req,res){
     });
 });
 
-//myHome 에서 msg 읽음 처리
+//myHome 에서 msg 읽음 처리 후 자동 삭제 하는 부분 
 router.get('/home/msg/delete', function(req,res){
     const {seq} = req.query;
     let param = [seq];
@@ -230,7 +245,8 @@ router.post('/scrap', function(req, res){
     const { search, keyword, email, currentPage } = req.body;
     const defaultSql =  " select * from te_tour a, te_tour_scrap b where a.seq = b.tour_seq and b.email =?";
     let sql = defaultSql;
-    let params = [email];   
+    let page = parseInt(currentPage);
+    let params = [email,page];   
 
     if(search !== undefined) {
         if(search === 'title'){
@@ -239,10 +255,10 @@ router.post('/scrap', function(req, res){
         }else if(search === 'location'){
             sql = ` ${defaultSql} and a.category like ? `;
         }
-        params  = [ email, `%${keyword}%` ];
+        params  = [ email, `%${keyword}%`, page ];
     }
    
-    sql+=' order by a.seq asc';
+    sql+=' order by a.seq asc limit ?, 6';
     sql = mysql.format(sql, params);
     console.log(sql); 
   
@@ -281,7 +297,7 @@ router.post('/scrap/length', function(req,res){
 
 //MyReview Post 해야하는 것과 이미 Post 한것 리스트 가져오기 
 router.get('/review', (req, res)=>{
-    const {command, email, currentPage} = req.query;
+    const {command, email, currentPage, pageNumber} = req.query;
     let sql, params = ''; 
     if(command === 'unposted'){
         sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img' 
@@ -294,9 +310,9 @@ router.get('/review', (req, res)=>{
    
     }
     if(command === 'completed'){
-        sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';
+        sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by b.wdate desc limit ?,5';
         // select * from te_tour_review a, te_tour b where a.tour_seq = b.seq and a.email = ?
-        params = [email];
+        params = [email, parseInt(pageNumber)];
         sql = mysql.format(sql,params);
         console.log(sql);
     }
@@ -320,7 +336,7 @@ router.get('/review/length', function(req,res){
     }
 
     if(command === 'completed'){
-        sql = 'select count(*) from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';   
+        sql = 'select count(*) as length from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? ';   
     }
 
     params = [email];

@@ -64,6 +64,7 @@ class MyTravel extends Component {
           .then(data => this.setState({
               total:data.length
             }, () =>{
+              console.log('checking total', this.state.total);
               const {total, currentPage} = this.state;
               if(total <= currentPage){
                this.setState({
@@ -72,7 +73,6 @@ class MyTravel extends Component {
               }
             })
           );
-          console.log('checking total', this.state.total);
       }
 
       //검색하는 handler

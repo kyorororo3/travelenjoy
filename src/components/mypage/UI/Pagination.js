@@ -15,24 +15,11 @@ class Pagination extends Component {
     }
 
     componentDidMount(){
-        console.log('pagination componentDidMount 들어옴')
-        //this.getInitialPageHandler();
-        console.log('pagination getPageSize 들어옴')
-
         const { listLength } = this.props;
         const { rowsPerPage } = this.state;
 
-        console.log('listLength', listLength, 'rowsPerPage', rowsPerPage);
-
-        let totalPages = parseInt(listLength / rowsPerPage);
-        console.log('totalPages 나눗셈 계산 중 :',totalPages);
-        if(parseInt(listLength % rowsPerPage) !== 0){
-            totalPages++;
-            console.log('totalPages 나머지가 0이 아니래 :',totalPages);
-        }
-
         this.setState({
-            pageSize: totalPages
+            pageSize: this.getPageSize(listLength, rowsPerPage)
         }, () =>{
             console.log('props length', listLength, 'state ', rowsPerPage, 'pageSize : ', this.state.pageSize);
             this.startHandler(0, this.state.pageSize);
@@ -46,17 +33,27 @@ class Pagination extends Component {
         return this.props !== nextProps || this.state !== nextState
     }
 
-    
+    getPageSize = (listLength, rowsPerPage) => {
+        let totalPages = parseInt(listLength / rowsPerPage);
+      
+        if(parseInt(listLength % rowsPerPage) !== 0){
+            totalPages++;
+        }
+
+        return totalPages;
+    }
+
     pageHandler = async (e) => {
-        let pageNum = e.target.page;
-        console.log('이리로 오는가',pageNum);
+        
+        this.setState({pageNumber:parseInt(e.target.dataset.page)}) 
+        console.log('e check ', this.state.pageNumber );
+
         const {listLength} = this.props;
         const {rowsPerPage} = this.state;
         await this.setState({
             pageSize: this.getPageSize(listLength, rowsPerPage)
         }, () => {
-            this.startHandler(this.state.pageNumber, this.state.pageSize);
-            this.endHandler(this.state.pageNumber, this.state.pageSize, listLength);
+           
             this.props.pageFetcher({pageNumber:this.state.pageNumber});
         })
     }
@@ -96,27 +93,26 @@ class Pagination extends Component {
         })
     }
 
-    getPageNumber = () =>{
-        return this.state.pageNumber
-    }
-
     render() {
-        const { startIndex, endIndex, pageNumber, listLength, pages} = this.state;
+        const { pageNumber, pages} = this.state;
         return (
             <ul className="pagination">
-               
+               {pages.length !==0 &&
                     <li>
-                        <a  {...startIndex > 1 && `onClick='${this.pageHandler}`}><i className="fas fa-arrow-alt-circle-left"></i></a>    
+                        <a><i className="fas fa-arrow-alt-circle-left"></i></a>    
                     </li>
-              
+                }
+                
                 {pages.map(page  =>
-                    <li key={page} className={page === pageNumber + 1 ? 'page-number active' : 'page-number'}>
-                        <a name='page' onClick={this.pageHandler} value={page} >{page}</a>
+                    <li key={page} className={page === pageNumber +1? 'page-number active' : 'page-number'}>
+                        <a name='page' onClick={this.pageHandler} data-page={page-1} >{page}</a>
                     </li>
                 )}
+               {pages.length !==0 &&
                     <li>
-                    <a  {...endIndex < listLength && `onClick='${this.pageHandler}`}><i className="fas fa-arrow-alt-circle-right"></i></a>    
+                        <a><i className="fas fa-arrow-alt-circle-right"></i></a>    
                     </li>
+                }
             </ul>
         );
     }

@@ -58,6 +58,7 @@ class MyScrap extends Component {
           .then(data => this.setState({
               total:data.length
             }, () =>{
+                console.log('checking total', this.state.total);
               const {total, currentPage} = this.state;
               if(total <= currentPage){
                this.setState({
@@ -66,7 +67,6 @@ class MyScrap extends Component {
               }
             })
           );
-          console.log('checking total', this.state.total);
       }
     SearchHandler = (e) =>{
         e.preventDefault();
@@ -127,8 +127,8 @@ class MyScrap extends Component {
                         </form> 
                         <div className='travel-wrapper'>
                             {list.length !== 0? list.map(tour =>  <TravelList key={tour.seq+tour.wdate} tour={tour} />):<h5>{this.state.status}</h5>}
-                            {!isFull && <button type='button'  className='read-more-btn' onClick={this.ReadMoreHandler}>MORE</button>}
                         </div>
+                            {!isFull && <button type='button'  className='read-more-btn' onClick={this.ReadMoreHandler}>MORE</button>}
                     </div>
                 </div>
             </div>

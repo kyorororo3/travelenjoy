@@ -5,33 +5,42 @@ class Pagination extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            listLength : 10,  //전체 글 수
             pageNumber : 0,  //현재 페이지
             pageSize : 0, // 한페이지당 페이지 수
             rowsPerPage: 5, //한 페이지에 표시할 글 수 
-            // totalPages: 0, // 총 페이지 수 
             startIndex: 0,
             endIndex: 0,
-            pages:[],
-            pageNumber:0
+            pages:[]
          };
     }
 
-
     componentDidMount(){
         console.log('pagination componentDidMount 들어옴')
-        console.log('props check', this.props.listLength);
-        const { listLength,  rowsPerPage } = this.state;
+        //this.getInitialPageHandler();
+        console.log('pagination getPageSize 들어옴')
+
+        const { listLength } = this.props;
+        const { rowsPerPage } = this.state;
+
+        console.log('listLength', listLength, 'rowsPerPage', rowsPerPage);
+
+        let totalPages = parseInt(listLength / rowsPerPage);
+        console.log('totalPages 나눗셈 계산 중 :',totalPages);
+        if(parseInt(listLength % rowsPerPage) !== 0){
+            totalPages++;
+            console.log('totalPages 나머지가 0이 아니래 :',totalPages);
+        }
+
         this.setState({
-            pageSize: this.getPageSize(listLength, rowsPerPage)
+            pageSize: totalPages
         }, () =>{
-            console.log('props length', listLength, 'state ', rowsPerPage);
-            this.startHandler(1, this.state.pageSize);
-            this.endHandler(1, this.state.pageSize, listLength);
+            console.log('props length', listLength, 'state ', rowsPerPage, 'pageSize : ', this.state.pageSize);
+            this.startHandler(0, this.state.pageSize);
+            this.endHandler(0, this.state.pageSize, listLength);
         })
+    
 
     }
-
     
     shouldComponentUpdate(nextProps, nextState){
         return this.props !== nextProps || this.state !== nextState
@@ -52,22 +61,12 @@ class Pagination extends Component {
         })
     }
 
-    getPageSize = (listLength, rowsPerPage) => {
-        console.log('pagination getPageSize 들어옴')
-        let totalPages = listLength / rowsPerPage;
-        if((listLength % rowsPerPage) !== 0){
-            totalPages++;
-        }
-        console.log('pagination getPageSize totalPage 들어옴', totalPages);
-        return totalPages;
-    }
+   
 
-    startHandler = async (pageNumber, pageSize) => {
-        console.log('pagination startHandler 들어옴')
+    startHandler =  (pageNumber, pageSize) => {
         const startIndex = ((pageNumber + 1) / pageSize) * pageSize;
-        await this.setState({
-            startIndex:startIndex
-        }); 
+        Object.assign(this.state,{startIndex:startIndex}); 
+       
     }
 
     
@@ -75,6 +74,9 @@ class Pagination extends Component {
         console.log('pagination endHandler 들어옴')
         let end =  (((pageNumber + 1) / pageSize) * pageSize) + pageSize; 
         let start = this.state.startIndex;
+
+        console.log('end : ', end, 'start : ', start) ; 
+
         if(end > listLength){
             end = listLength;
         }
@@ -83,7 +85,7 @@ class Pagination extends Component {
             end = pageNumber + 1; 
         }
         let pages = [];
-        for(let i = start+1 ; i <= end ; i++){
+        for(let i = start; i < end ; i++){
             pages.push(i);
             console.log('pages check',pages);
         }

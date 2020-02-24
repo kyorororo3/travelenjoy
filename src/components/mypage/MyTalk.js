@@ -16,7 +16,8 @@ class MyTalk extends Component {
             prev:false,
             next:true,
             postTotal:undefined,
-            cmtTotal:undefined
+            cmtTotal:undefined,
+            isLoaded: false
         }
     }
     
@@ -25,6 +26,7 @@ class MyTalk extends Component {
         fetch(`http://localhost:3002/mypage/talk/comment/length?email=${email}`)
         .then(res => res.json())
         .then(data => this.setState({
+            isLoaded:true,
             cmtTotal:data.length
         }, () => {
             console.log('cmtTotal check', this.state.cmtTotal);
@@ -109,15 +111,12 @@ class MyTalk extends Component {
                     await this.setState({ prev:false, next:false })
                 }else{
                     if(postPage === 0){
-                        console.log( 'if 1 : current가 0 이다 ' , postPage)
                         await this.setState({ prev:false, next:true})
 
                     }else if(postTotal <= postPage){
-                        console.log('if 2: postTotal이 current보다 작아졌다 ', postTotal, postPage);
                         await this.setState({ prev:true, next:false})
                     
                     }else{
-                        console.log('if 3 : postTotal이 current보다 아직 큰 상태', postTotal, postPage);
                         await this.setState({ prev:true, next:true})
                     }
                 }
@@ -140,7 +139,7 @@ class MyTalk extends Component {
 
     render(){
      
-        const { cmt_lists, post_lists, prev, next, cmtTotal } = this.state;
+        const { cmt_lists, post_lists, prev, next, cmtTotal, isLoaded } = this.state;
 
         return(
             <div className='mypage-body'>
@@ -169,9 +168,9 @@ class MyTalk extends Component {
                                     </div>
                                     {cmt_lists.length !== 0? cmt_lists.map(cmt => <CmtForm cmt={cmt}/>):<h5>Let's Leave Comments!</h5>}
                                 </div>
-                                <Pagination listLength={cmtTotal}
+                                {isLoaded ? <Pagination listLength={cmtTotal}
                                             pageFetcher={this.cmtPageFetcher}
-                                            getPageNumber={this.getPageNumber}  />
+                                            getPageNumber={this.getPageNumber}  /> : ''}
                            </div>
 
                         </div>

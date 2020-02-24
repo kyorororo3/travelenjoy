@@ -452,12 +452,14 @@ a{
 }
 .mytalk{
     width: 240px;
+    height: 240px;
     display: inline-block;
     cursor: pointer;
 }
 .talk-thumbnail{
     object-fit: cover;
     width: 100%;
+    height:100%;
 }
 .mytalk-hover{
     background-color: #000;
@@ -493,14 +495,18 @@ a{
 }
 .mytalk-paging.next{
     padding-left: 3px;
-    margin: -144px 10px 6px 724px;
+    margin: -144px 10px 6px 706px;
   
 }
 .mytalk-paging.prev{
     padding-right: 3px;
-    margin: -144px 10px 6px -8px;
+    margin: -144px 10px 6px -24px;
     display:block !important;
   
+}
+.mypost-container{
+    width:100%;
+    padding:0 19px;
 }
 .pagination {
     display: inline-flex;
@@ -516,6 +522,7 @@ a{
 .page-number{
     cursor: pointer;
 }
+
 /* --------------------  My Review CSS ------------------------- */
 
 .wait-myreview-wrapper{
@@ -759,6 +766,9 @@ input.review-star-btn-active {
     width:60%;
 }
 
+.msg-content.bold{
+    font-weight: bold;
+}
 .msg-table-row>.msg-reg-date{
     width:20%;
     

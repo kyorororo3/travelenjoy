@@ -81,6 +81,7 @@ class ReviewWriteModal extends Component {
         e.preventDefault();
 
         const formData = new FormData();
+        formData.append('res_seq', this.props.tour.res_seq);
         formData.append('tour_seq',this.props.tour.seq); 
         formData.append('email',this.props.email);
         formData.append('title',e.target.title.value);

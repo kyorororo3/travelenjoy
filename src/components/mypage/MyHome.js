@@ -71,7 +71,7 @@ class MyHome extends Component {
                                 <p className='msg-title'><i className="fas fa-bell"></i> My Messages</p>
                             <div className='msg-table'>
                                 <div className='msg-table-row fixed-row'>
-                                    <span className='fixed-title msg-icon'><i class="fas fa-envelope"></i></span>
+                                    <span className='fixed-title msg-icon'><i className="fas fa-envelope"></i></span>
                                     <span className='fixed-title msg-content'>Content</span>
                                     <span className='fixed-title msg-reg-date'>Registered</span>
                                 </div>

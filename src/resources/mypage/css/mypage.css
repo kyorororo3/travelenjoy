@@ -766,6 +766,9 @@ input.review-star-btn-active {
     width:60%;
 }
 
+.msg-content.bold{
+    font-weight: bold;
+}
 .msg-table-row>.msg-reg-date{
     width:20%;
     

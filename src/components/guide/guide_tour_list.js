@@ -81,7 +81,7 @@ class GuideList extends Component {
         e.preventDefault();
         //alert("다음");
         //alert(this.state.totalList);
-        if (this.state.totalList != 10) {
+        if (this.state.totalList !== 10) {
             alert("마지막 페이지 입니다.");
         } else {
             const email = this.state.users.email;

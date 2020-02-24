@@ -28,7 +28,12 @@
     -ms-interpolation-mode: bicubic; /* Better image scaling in IE */
 }
 
+.talk-image-wrap img{
+    display: inline-block;
+    height: 100%;
 
+    -ms-interpolation-mode: bicubic; /* Better image scaling in IE */
+}
 
 .talk-list-wrap .talk-list-function-wrap{
     background: black;

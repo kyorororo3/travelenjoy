@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
 import TalkModalBody from "./talk/TalkModalBody";
-import DeleteTalkImage from "./talk/DeleteTalkImage";
+import EditImages from "./talk/EditImages";
 
 //게시물
 //modal 문서 : https://react-bootstrap.github.io/components/modal/
@@ -60,6 +60,13 @@ class Talk extends Component {
             );
     }
 
+    handleUpdateCarousel = () => {
+        fetch('http://localhost:3002/freetalk/list/images?seq=' + this.props.seq)
+            .then(res => res.json())
+            .then(res => this.setState({images: res.images}))
+            .then(res => this.setState({file: (this.state.images.length>0)?this.state.images[0].name_saved:this.state.file}))
+    }
+
     _callApi = async () => {
 
     }
@@ -73,16 +80,17 @@ class Talk extends Component {
     handleClose = () => this.setState({showModal:false});
     handleShow = () => this.setState({showModal:true});
 
-    handleCloseDeleteImage = () => this.setState({showDeleteImageModal:false});
-    handleShowDeleteImage = () => this.setState({showDeleteImageModal:true});
-
-    handleAddImages = () => {
-        alert('사진추가')
+    handleCloseEditImage = () => {
+        this.setState({showEditImageModal:false});
+        this.setState({showModal:true});
+    }
+    handleShowEditImage = () => {
+        this.setState({showEditImageModal:true});
+        this.setState({showModal:false});
     }
 
-    handleDeleteImage = () => {
-        alert('사진삭제')
-        this.handleShowDeleteImage()
+    handleEditImages = () => {
+        this.handleShowEditImage()
     }
 
     handleDelete = () => {
@@ -116,11 +124,13 @@ class Talk extends Component {
     render() {
         return (
             <div className="talk-wrap" onClick={this.handleOnClickTalk}>
+                <Modal id="talk-edit-images-wrap" show={this.state.showEditImageModal} onHide={this.handleCloseEditImage} centered={"true"}>
+                    <EditImages images={this.state.images}
+                                seq={this.props.seq}
+                                handleCloseEditImage={this.handleCloseEditImage}/>
+                </Modal>
                 <Modal id="talk-modal-wrap" show={this.state.showModal} onHide={this.handleClose} centered={"true"}>
                     <Row><Col>
-                        <Modal id="talk-delete-image-wrap" show={this.state.showDeleteImageModal} onHide={this.handleCloseDeleteImage} centered={"true"}>
-                            <DeleteTalkImage images={this.state.images}/>
-                        </Modal>
                         <div className="modal-author-profile">
                             <div className="modal-body-profile-detail">
                                 <Media>
@@ -128,7 +138,7 @@ class Talk extends Component {
                                         <img
                                             width={32}
                                             height={32}
-                                            src='https://logodix.com/logo/1707081.png'
+                                            src={require('../../uploads/' + this.state.author.profile_img)}
                                             alt='profile image'
                                             onError={(e)=>{e.target.onerror = null; e.target.src=require('../../uploads/cat1.jpg')}}
                                         />
@@ -146,10 +156,7 @@ class Talk extends Component {
                                                             <a onClick={this.handleDelete}>글 삭제</a>
                                                         </Dropdown.Item>
                                                         <Dropdown.Item eventKey="2">
-                                                            <a onClick={this.handleAddImages}>사진 추가</a>
-                                                        </Dropdown.Item>
-                                                        <Dropdown.Item eventKey="3">
-                                                            <a onClick={this.handleDeleteImage}>사진 삭제</a>
+                                                            <a onClick={this.handleEditImages}>사진 수정</a>
                                                         </Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>

@@ -30,10 +30,14 @@ router.get('/test', function (req, res) {
 
 //게시물 페이징 + 검색
 router.get('/list', function (req, res) {
+    console.log('list params : ' + JSON.stringify(req.query))
     const seq = (req.query.seq == null)?0:req.query.seq;
-    let stmt = "select * from te_freetalk order by seq desc limit " + seq + ", 9";
-    connection.query(stmt, function (err, result) {
+    const keyword = (req.query.keyword == null)?'%%':'%'+req.query.keyword+'%';
+    console.log('seq : ' + seq + ' , key : ' + keyword)
+    let stmt = "select * from te_freetalk where seq in(select distinct talk_seq from te_comment a where a.content like ?) order by seq desc limit " + seq + ", 9";
+    connection.query(stmt,[keyword] , function (err, result) {
         if (err) console.log('connection result err : ' + result);
+        console.log('list 결과입니다! ' + JSON.stringify(result))
         res.json({list: result});
     });
 });
@@ -175,6 +179,21 @@ router.post('/free/save/images',upload.array('files'), function(req, res, next) 
             if (err) console.log('connection result err : ' + err);
         });
     });
+});
+
+//이미지 수정
+router.post('/free/update/images', upload.array('files'), function(req, res, next) {
+   console.log('img update body : ' + JSON.stringify(req.body));
+   console.log('files : ' + JSON.stringify(req.files));
+   let deleteImages = 'delete from te_freetalk_images where te_freetalk_seq=?';
+   connection.query(deleteImages, req.body.seq, function(err, result) {
+       for (let file of req.files) {
+           let insertImages = "insert into te_freetalk_images (te_freetalk_seq, name_real, name_saved) values(?, ?, ?)";
+           connection.query(insertImages, [req.body.seq, file.originalname, file.filename], function(err, result){
+              console.log('file ' + file.originalname + ' saved');
+           });
+       }
+   })
 });
 
 //게시글 및 연관정보 삭제

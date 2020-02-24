@@ -79,103 +79,103 @@ class TravelReservation extends React.Component {
             return;
           }
           
-          // const insert = {
-          //   reservation_number: new Date().getTime() + "_" + tour_seq,
-          //   tour_seq: tour_seq,
-          //   email: email,
-          //   start_date: UtilityFunctions.dateToString(selectedDays[0]),
-          //   join_people: person,
-          //   total_price: total_price,
-          //   phone: phone,
-          //   message: require
-          // }
+          const insert = {
+            reservation_number: new Date().getTime() + "_" + tour_seq,
+            tour_seq: tour_seq,
+            email: email,
+            start_date: UtilityFunctions.dateToString(selectedDays[0]),
+            join_people: person,
+            total_price: total_price,
+            phone: phone,
+            message: require
+          }
   
-          // fetch('http://localhost:3002/tour/reservation', {
-          //   method: 'post',
-          //   headers: {
-          //     'Content-Type': 'application/json; charset=utf-8'
-          //   },
-          //   body: JSON.stringify(insert)
-          // }) 
-          //   .then(res => res.json())
-          //   .then(result => {
-          //     if(result.seq !== 0) {
-          //       alert('insert 성공! tour_reservation_seq = ' + result.seq);
-          //       this.props.history.push({
-          //         pathname: '/travel/reservation/complete',
-          //         state: {seq: result.seq}
-          //       })
-          //     }else if(result.seq === 0) {
-          //       alert('예상치 못한 오류로 결제가 취소되었습니다.');
-                
-          //       // 카드결제 취소 logic...ㅎ
-
-          //       this.props.history.push(`/travel/detail/${tour_seq}`);
-          //     }
-          //   })
-
-          const IMP = window.IMP;
-          IMP.init('imp00240527');
-
-          IMP.request_pay({
-            pg : 'inicis', // version 1.1.0부터 지원.
-            pay_method : 'card',
-            merchant_uid : new Date().getTime() + "_" + tour_seq,
-            name : 'Travel&Joy',
-            // amount : total_price,
-            amount: 10,
-            buyer_email : email,
-            buyer_name : user.name,
-            buyer_tel : phone,
-          }, function(rsp) {
-            if ( rsp.success ) {
-              var msg = '결제가 완료되었습니다.\n';
-              msg += '고유ID : ' + rsp.imp_uid + '\n';
-              msg += '상점 거래ID : ' + rsp.merchant_uid + '\n';
-              msg += '결제 금액 : ' + rsp.paid_amount + '\n';
-              msg += '카드 승인번호 : ' + rsp.apply_num;
-      
-              const insert = {
-                reservation_number: rsp.merchant_uid,
-                tour_seq: tour_seq,
-                email: email,
-                start_date: UtilityFunctions.dateToString(selectedDays[0]),
-                join_people: person,
-                total_price: total_price,
-                phone: phone,
-                message: require
-              }
-      
-              fetch('http://localhost:3002/tour/reservation', {
-                method: 'post',
-                headers: {
-                  'Content-Type': 'application/json; charset=utf-8'
-                },
-                body: JSON.stringify(insert)
-              }) 
-                .then(res => res.json())
-                .then(result => {
-                  if(result.seq !== 0) {
-                    alert('insert 성공! tour_reservation_seq = ' + result.seq);
-                    this.props.history.push({
-                      pathname: '/travel/reservation/complete',
-                      state: {seq: result.seq}
-                    })
-                  }else if(result.seq === 0) {
-                    alert('예상치 못한 오류로 결제가 취소되었습니다.');
-                    
-                    // 카드결제 취소 logic...ㅎ
-
-                    this.props.history.push(`/travel/detail/${tour_seq}`);
-                  }
+          fetch('http://localhost:3002/tour/reservation', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(insert)
+          }) 
+            .then(res => res.json())
+            .then(result => {
+              if(result.seq !== 0) {
+                alert('insert 성공! tour_reservation_seq = ' + result.seq);
+                this.props.history.push({
+                  pathname: '/travel/reservation/complete',
+                  state: {seq: result.seq}
                 })
+              }else if(result.seq === 0) {
+                alert('예상치 못한 오류로 결제가 취소되었습니다.');
+                
+                // 카드결제 취소 logic...ㅎ
 
-            } else {
-              var msg = '결제에 실패하였습니다.';
-              msg += '에러내용 : ' + rsp.error_msg;
-              alert(msg);
-            }
-          }.bind(this))
+                this.props.history.push(`/travel/detail/${tour_seq}`);
+              }
+            })
+
+          // const IMP = window.IMP;
+          // IMP.init('imp00240527');
+
+          // IMP.request_pay({
+          //   pg : 'inicis', // version 1.1.0부터 지원.
+          //   pay_method : 'card',
+          //   merchant_uid : new Date().getTime() + "_" + tour_seq,
+          //   name : 'Travel&Joy',
+          //   // amount : total_price,
+          //   amount: 10,
+          //   buyer_email : email,
+          //   buyer_name : user.name,
+          //   buyer_tel : phone,
+          // }, function(rsp) {
+          //   if ( rsp.success ) {
+          //     var msg = '결제가 완료되었습니다.\n';
+          //     msg += '고유ID : ' + rsp.imp_uid + '\n';
+          //     msg += '상점 거래ID : ' + rsp.merchant_uid + '\n';
+          //     msg += '결제 금액 : ' + rsp.paid_amount + '\n';
+          //     msg += '카드 승인번호 : ' + rsp.apply_num;
+      
+          //     const insert = {
+          //       reservation_number: rsp.merchant_uid,
+          //       tour_seq: tour_seq,
+          //       email: email,
+          //       start_date: UtilityFunctions.dateToString(selectedDays[0]),
+          //       join_people: person,
+          //       total_price: total_price,
+          //       phone: phone,
+          //       message: require
+          //     }
+      
+          //     fetch('http://localhost:3002/tour/reservation', {
+          //       method: 'post',
+          //       headers: {
+          //         'Content-Type': 'application/json; charset=utf-8'
+          //       },
+          //       body: JSON.stringify(insert)
+          //     }) 
+          //       .then(res => res.json())
+          //       .then(result => {
+          //         if(result.seq !== 0) {
+          //           alert('insert 성공! tour_reservation_seq = ' + result.seq);
+          //           this.props.history.push({
+          //             pathname: '/travel/reservation/complete',
+          //             state: {seq: result.seq}
+          //           })
+          //         }else if(result.seq === 0) {
+          //           alert('예상치 못한 오류로 결제가 취소되었습니다.');
+                    
+          //           // 카드결제 취소 logic...ㅎ
+
+          //           this.props.history.push(`/travel/detail/${tour_seq}`);
+          //         }
+          //       })
+
+          //   } else {
+          //     var msg = '결제에 실패하였습니다.';
+          //     msg += '에러내용 : ' + rsp.error_msg;
+          //     alert(msg);
+          //   }
+          // }.bind(this))
         }
       })
   }

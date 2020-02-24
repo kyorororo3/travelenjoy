@@ -12,7 +12,10 @@ class TalkMain extends Component {
         super(props);
         this.state = {
             mode: 'talk-list',
-            currentUser: ''
+            currentUser: '',
+            keyword: '',
+            talkLength: 9,
+            list: []
         }
         fetch('http://localhost:3002/users/getUser',{
             credentials: 'include'
@@ -30,11 +33,10 @@ class TalkMain extends Component {
     }
 
     componentDidMount() {
-
     }
 
-    _callApi = async () => {
-
+    getKeyword = () => {
+        return this.state.keyword;
     }
 
     reloadMain = () => window.location.reload();
@@ -49,15 +51,15 @@ class TalkMain extends Component {
         switch (currentMode) {
             case "write": currentPage = <Write/>;
             break;
-            case "my": currentPage = <TalkList currentUser={this.getCurrentUser} reloadMain={this.reloadMain}/>;
+            case "my": currentPage = <TalkList currentUser={this.getCurrentUser} reloadMain={this.reloadMain} getKeyword={this.getKeyword} keyword={this.state.keyword} mainList={this.state.list}/>;
             break;
-            default: currentPage = <TalkList currentUser={this.getCurrentUser} reloadMain={this.reloadMain}/>
+            default: currentPage = <TalkList currentUser={this.getCurrentUser} reloadMain={this.reloadMain} getKeyword={this.getKeyword} keyword={this.state.keyword} mainList={this.state.list}/>
             break;
         }
 
         return (
             <div className="container">
-                <TalkSearch/>
+                {/*<TalkSearch handleSearch={this.handleSearch}/>*/}
                 <div className="talk-list-wrap">
                     {currentPage}
                     <TalkWriteBtn currentUser={this.getCurrentUser}

@@ -32,6 +32,7 @@ router.post('/emailAuth', async(req, res) => {
     let rnum = Math.random().toString().substr(2,6);
     setRandomNumber(rnum);
     let authNum = getRandomNumber();
+    console.log('rnum : ' + rnum)
 
    let emailTemplete;
    ejs.renderFile('./src/resources/users/emailtemplete.ejs', {authCode : authNum}, function (err, data) {

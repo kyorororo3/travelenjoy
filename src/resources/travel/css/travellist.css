@@ -144,31 +144,44 @@
 }
 
 .tour-infos .rows {
-  height: 33px;
+  overflow: auto;
 }
 
 .tour-category {
   color: #9baec8;
-  font-weight: bold;
+  font-size: 14px
 }
-.tour-start_date{
-  display: inline-block;
-    float: right;
-    color: #f39200;
-    font-weight: 700;
-}
+
 .tour-title {
   color: #2b90d9;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 16px;
+  margin-top: 3px;
 }
 
-.tour-nickname {
-  display: inline-block;
+.tour-avg {
   float: right;
 }
 
+.avg-inactive {
+  width: 75px;
+  height: 15px;
+  background-image: url('../images/ss-star-inactive.png');
+  transform: translateY(3px);
+  float: right;
+}
+
+.avg-active {
+  height: 15px;
+  background-image: url('../images/ss-star-active.png');
+}
+
 .tour-price {
-  display: inline-block;
   float: left;
+}
+
+.tour-company {
+  float: right;
+  font-size: 14px;
+  margin-top: 5px;
 }

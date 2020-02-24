@@ -22,12 +22,15 @@ router.get('/list', function (req, res) {
   console.log("search : " + search + ", start : " + start);
   
   let params = [parseInt(start)];
-  let sql = "select * from te_tour ";
+  let sql = "select t.*, r.avg from te_tour t " 
+  sql += "left join (select tour_seq, avg(score) as avg from te_tour_review group by tour_seq) r ";
+  sql += "on t.seq = r.tour_seq ";
   if(search !== undefined) {
     sql += "where title like ? or category=? "
     params = [ `%${search}%`, search ].concat(params);
   }
-  sql += "limit ?, 12";  
+  sql += "order by r.avg desc, t.seq desc "
+  sql += "limit ?, 12";
   sql = mysql.format(sql, params);
 
   console.log(sql);

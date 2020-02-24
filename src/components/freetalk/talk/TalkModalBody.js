@@ -33,8 +33,8 @@ class TalkModalBody extends Component {
     componentDidMount() {
         fetch('http://localhost:3002/freetalk/list/author?email=' + this.props.email + '&nickname=' + this.props.nickname)
             .then(res => res.json())
-            // .then(res => this.setState(f{author: res.author}))
-            .then(res => console.log(res.author.profile_img) )
+            .then(res => this.setState({author: res.author}))
+            // .then(res => console.log(res.author.profile_img) )
 
         fetch('http://localhost:3002/freetalk/list/comments?talk_seq=' + this.props.talkSeq)
             .then(res => res.json())

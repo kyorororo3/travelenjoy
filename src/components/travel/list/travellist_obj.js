@@ -16,8 +16,8 @@ class TravelListObj extends React.Component {
        onClick={this.goToDetail}>
         <div className='tour-thumbnail' data-seq={seq}>
           <img data-seq={seq}
-           src={require('../../../resources/travel/images/nyang.jpg')}
-          //  src={require(`../../../uploads/${thumbnail}`)}
+          //  src={require('../../../resources/travel/images/nyang.jpg')}
+           src={require(`../../../uploads/${thumbnail}`)}
           />
         </div>
         <div className='tour-infos' data-seq={seq}>

@@ -5,6 +5,8 @@ import ReviewForm from './UI/MyReviewTableForm';
 import { Modal, Media } from 'react-bootstrap';
 import ReviewWrite from './UI/ReviewWriteModal';
 import ReviewRead from './UI/ReviewReadModal';
+import Pagination from './UI/Pagination';
+
 class MyReview extends Component {
 
     constructor(props){
@@ -20,7 +22,9 @@ class MyReview extends Component {
             currentPage:0,
             prev:false,
             next:true,
-            total:undefined
+            unpostedTotal:undefined,
+            completedTotal:undefined,
+            isLoaded:false
         }
         this.checkTotalFetcher = this.checkTotalFetcher.bind(this);
     }
@@ -38,10 +42,10 @@ class MyReview extends Component {
         fetch(`http://localhost:3002/mypage/review/length?command=unposted&email=${email}`)
             .then(res => res.json())
             .then(data => this.setState({
-                total:data.length
+                unpostedTotal:data.length
             }, () =>{
-                const {total} = this.state;
-                if(total <= 3){
+                const {unpostedTotal} = this.state;
+                if(unpostedTotal <= 3){
                     this.setState({next:false})
                 }else{
                     this.setState({next:true})
@@ -49,12 +53,20 @@ class MyReview extends Component {
             })
         );
        
-        fetch(`http://localhost:3002/mypage/review?command=completed&email=${email}`)
+        fetch(`http://localhost:3002/mypage/review?command=completed&email=${email}&pageNumber=${0}`)
           .then(res => res.json())
           .then(data => this.setState({
               myReviews:data
-          }))
-          
+        }))
+
+        fetch(`http://localhost:3002/mypage/review/length?command=completed&email=${email}`)
+        .then(res => res.json())
+        .then(data => this.setState({
+            isLoaded:true,
+            completedTotal:data.length
+        
+        })
+      );
     }
     
     
@@ -98,29 +110,29 @@ class MyReview extends Component {
         fetch(`http://localhost:3002/mypage/review/length?command=unposted&email=${email}`)
             .then(res => res.json())
             .then(data => this.setState({
-                total:data.length
+                unpostedTotal:data.length
             }, async() =>{
-                const {total} = this.state;
-                if(total < 4) {
+                const {unpostedTotal} = this.state;
+                if(unpostedTotal < 4) {
                     await this.setState({ prev:false, next:false })
                 }else{
                     if(currentPage === 0){
                         console.log( 'if 1 : current가 0 이다 ' , currentPage)
                         await this.setState({ prev:false, next:true})
 
-                    }else if(total <= currentPage){
-                        console.log('if 2 : total이 current보다 작아졌다 ', total, currentPage);
+                    }else if(unpostedTotal <= currentPage){
+                        console.log('if 2 : unpostedTotal이 current보다 작아졌다 ', unpostedTotal, currentPage);
                         await this.setState({ prev:true, next:false})
                     
                     }else{
-                        console.log('if 3 : total이 current보다 아직 큰 상태', total, currentPage);
+                        console.log('if 3 : unpostedTotal이 current보다 아직 큰 상태', unpostedTotal, currentPage);
                         await this.setState({ prev:true, next:true})
                     }
                 }
                 
             })
         );
-        console.log('total', this.state.total, 'current', this.state.currentPage);
+        console.log('unpostedTotal', this.state.unpostedTotal, 'current', this.state.currentPage);
     }
 
     CallbackFromTravel = async(dataFromChild) =>{
@@ -144,10 +156,23 @@ class MyReview extends Component {
             window.location.reload();
         }
     }
+
+    reviewPageFetcher = async(data) => {
+        console.log('myTalk 으로 넘어온 페이지 수', data.pageNumber);
+        const pageNum = data.pageNumber * 5; 
+        const { email } = this.state;
+        await fetch(`http://localhost:3002/mypage/review?command=completed&email=${email}&pageNumber=${pageNum}`)
+        .then(res => res.json())
+        .then(data => this.setState({
+            myReviews:data
+        })
+        );
+    }
+
     ModalCloser = () => this.setState({showWriteModal:false});
 
     render(){
-        let {unposted_list, myReviews, prev, next} = this.state;
+        let {unposted_list, myReviews, prev, next, isLoaded, completedTotal} = this.state;
         
         
         return(
@@ -184,6 +209,9 @@ class MyReview extends Component {
                                     </div>
                                     {myReviews.length !== 0? myReviews.map(review => <ReviewForm review={review} callbackFromParent={this.CallbackFromReview}/>):<h5>No Results</h5>}
                                 </div>
+                                {isLoaded ? <Pagination listLength={completedTotal}
+                                            pageFetcher={this.reviewPageFetcher}/> : ''}
+
                                 <Modal show={this.state.showReadModal} onHide={this.ModalCloser} centered={"true"} dialogClassName="review-write-modal">
                                     <Media.Body>
                                          <ReviewRead  email = {this.state.email}

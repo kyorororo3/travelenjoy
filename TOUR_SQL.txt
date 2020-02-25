@@ -151,3 +151,12 @@ create table te_tour_msg(
   msg_reg_date datetime default now(),
   isread int
 );
+
+create table te_freetalk_msg(
+  msg_seq int auto_increment primary key,
+  talk_seq int,
+  recipient varchar(4000),
+  msg_content varchar(1000),
+  msg_reg_date datetime default now(),
+  isread int
+);

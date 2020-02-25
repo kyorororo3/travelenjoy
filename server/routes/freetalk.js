@@ -99,6 +99,17 @@ router.post('/list/comments/create', function(req, res) {
                 resp: "ok"
             });
     });
+    let sql = 'select * from te_freetalk where seq = ? ';
+    connection.query(sql, [post.talkSeq], function(err,result){
+        sql = 'insert into te_freetalk_msg value(null, ?,?,"You\'ve got a new comment ",now(),0)';
+        let params = [post.talkSeq, result[0].email];
+        sql = mysql.format(sql,params);
+        console.log(sql);
+        connection.query(sql, function(err, row){
+            if (err) console.log('connection result err : ' + err);
+            else console.log('insert성공')
+        });
+    })
 });
 
 //댓글 수정
@@ -228,7 +239,17 @@ router.get('/like', function(req, res) {
     console.log('유저 : ' + req.query.email + ', 글seq : ' + req.query.seq);
     let stmt = "insert into te_freetalk_likes (te_freetalk_seq, email, nickname) values (?,?,?)";
     connection.query(stmt, [req.query.seq, req.query.email, ''], function(err, result) {
-
+    })
+    let sql = 'select nickname, email from te_member where email = (select email from te_freetalk where seq = ?) ';
+    connection.query(sql, [req.query.seq], function(err,result){
+        sql = `insert into te_freetalk_msg value(null, ?,?,'${result[0].nickname} likes your post',now(),0)`;
+        let params = [req.query.seq, result[0].email];
+        sql = mysql.format(sql,params);
+        console.log(sql);
+        connection.query(sql, function(err, row){
+            if (err) console.log('connection result err : ' + err);
+            else console.log('insert성공')
+        });
     })
 })
 //좋아요 취소

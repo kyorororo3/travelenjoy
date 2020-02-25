@@ -44,10 +44,9 @@ router.get('/home', (req, res)=>{
 
 //myHome 에서 나의 메시지 체크
 router.get('/home/msg', function(req,res){
-    const {email} = req.query;
-    let param = [email];
-    let sql = 'select * from te_tour a, te_tour_reservation b, te_tour_msg c '
-            + ' where a.seq = b.tour_seq and a.seq = c.tour_seq and b.email = ? '
+    const {email, pageNumber} = req.query;
+    let param = [email, parseInt(pageNumber)];
+    let sql = 'select * from te_freetalk_msg where recipient = ? order by msg_reg_date desc limit ?, 5';
     
     sql = mysql.format(sql, param);
 
@@ -57,6 +56,52 @@ router.get('/home/msg', function(req,res){
         res.send(rows);
     });
 });
+
+//myHome 에서 나의 메시지 length 조회
+router.get('/home/msg/length', function(req,res){
+    const {email} = req.query;
+    let param = [email];
+    let sql = 'select count(*) as length from te_freetalk_msg where recipient = ? ';
+    
+    sql = mysql.format(sql, param);
+
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows[0]);
+    });
+});
+
+//myHome 에서 msg 읽음 처리
+router.get('/home/msg/update', function(req,res){
+    const {seq} = req.query;
+    let param = [seq];
+    let sql = 'update te_freetalk_msg set isread = 1 where msg_seq = ?';
+    
+    sql = mysql.format(sql, param);
+
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows);
+    });
+});
+
+//myHome 에서 msg 읽음 처리 후 자동 삭제 하는 부분 
+router.get('/home/msg/delete', function(req,res){
+    const {seq} = req.query;
+    let param = [seq];
+    let sql = 'delete from te_freetalk_msg where msg_seq = ?';
+    
+    sql = mysql.format(sql, param);
+
+    console.log(sql);
+    connection.query(sql,  function (err, rows) {
+        if(err) return console.log("ERR!! " + err);
+        res.send(rows);
+    });
+});
+
 
 //MyInfo 닉네임 중복체크
 router.post('/info/nickname', (req,res)=>{
@@ -200,7 +245,8 @@ router.post('/scrap', function(req, res){
     const { search, keyword, email, currentPage } = req.body;
     const defaultSql =  " select * from te_tour a, te_tour_scrap b where a.seq = b.tour_seq and b.email =?";
     let sql = defaultSql;
-    let params = [email];   
+    let page = parseInt(currentPage);
+    let params = [email,page];   
 
     if(search !== undefined) {
         if(search === 'title'){
@@ -209,10 +255,10 @@ router.post('/scrap', function(req, res){
         }else if(search === 'location'){
             sql = ` ${defaultSql} and a.category like ? `;
         }
-        params  = [ email, `%${keyword}%` ];
+        params  = [ email, `%${keyword}%`, page ];
     }
    
-    sql+=' order by a.seq asc';
+    sql+=' order by a.seq asc limit ?, 6';
     sql = mysql.format(sql, params);
     console.log(sql); 
   
@@ -251,22 +297,22 @@ router.post('/scrap/length', function(req,res){
 
 //MyReview Post 해야하는 것과 이미 Post 한것 리스트 가져오기 
 router.get('/review', (req, res)=>{
-    const {command, email, currentPage} = req.query;
+    const {command, email, currentPage, pageNumber} = req.query;
     let sql, params = ''; 
     if(command === 'unposted'){
         sql = 'select c.*, d.seq as review_seq, d.email, d.title as review_title, d.content as review_content, d.score, d.review_img' 
             +' from (select a.seq, a.category, a.thumbnail, a.price, a.title, b.seq as res_seq, '
             +' b.email, b.start_date from te_tour a, te_tour_reservation b where a.seq = b.tour_seq) as c left join '
-            +' te_tour_review as d on c.res_seq = d.res_seq where c.email =? and c.start_date < now() order by c.start_date asc limit ?, 3';
+            +' te_tour_review as d on c.res_seq = d.res_seq where c.email =? and c.start_date < now() and d.res_seq is null order by c.start_date asc limit ?, 3';
         params = [email, parseInt(currentPage)];
         sql = mysql.format(sql,params);
         console.log(sql);
    
     }
     if(command === 'completed'){
-        sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';
+        sql = 'select a.category, a.title as tour_title, b.* from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by b.wdate desc limit ?,5';
         // select * from te_tour_review a, te_tour b where a.tour_seq = b.seq and a.email = ?
-        params = [email];
+        params = [email, parseInt(pageNumber)];
         sql = mysql.format(sql,params);
         console.log(sql);
     }
@@ -290,7 +336,7 @@ router.get('/review/length', function(req,res){
     }
 
     if(command === 'completed'){
-        sql = 'select count(*) from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? order by seq desc';   
+        sql = 'select count(*) as length from te_tour a, te_tour_review b  where a.seq = b.tour_seq and b.email = ? ';   
     }
 
     params = [email];
@@ -306,7 +352,7 @@ router.get('/review/length', function(req,res){
 
 //MyReview 추가 
 router.post('/review/register', upload.single('review_img'), function(req,res){
-    const { tour_seq, email, title, content, score} = req.body;
+    const { tour_seq, res_seq, email, title, content, score} = req.body;
     console.log('file 체크' , req.file)
     let review_img = '';
     if(req.file === undefined){
@@ -315,8 +361,8 @@ router.post('/review/register', upload.single('review_img'), function(req,res){
         review_img = req.file.filename;
         console.log('review_img 파일명 체크 ', review_img)
     }
-    let sql = 'insert into te_tour_review values(null,?,?,?,?,?,?,now())';
-    let params = [tour_seq, email, title, content, score, review_img];
+    let sql = 'insert into te_tour_review values(null,?,?,?,?,?,?,?,now())';
+    let params = [tour_seq, res_seq, email, title, content, score, review_img];
     sql = mysql.format(sql,params);
 
     console.log(sql);
@@ -376,6 +422,19 @@ router.get('/talk/post/length', function(req,res){
     })
 });
 
+router.get('/talk/post/images', function(req,res){
+    const {email, seq} = req.query;
+  
+    let sql = 'select name_saved  from te_freetalk a, te_freetalk_images b  where a.seq = b.te_freetalk_seq and a.email = ? and b.te_freetalk_seq = ? ';
+    let params = [email, seq];
+    sql = mysql.format(sql, params);
+
+    connection.query(sql, function(err,rows){
+        if(err) return console.log('err' + err);
+        res.send(rows);
+    })
+
+});
 //mytalk - comment 조회 
 router.get('/talk/comment', function(req, res){
     const { email, pageNumber } = req.query;

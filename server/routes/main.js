@@ -79,7 +79,8 @@ router.get('/recommend/talklist', function (req, res) {
             + 'on f.seq = c.talk_seq) '
             + 'left join (select te_freetalk_seq, name_saved from te_freetalk_images group by te_freetalk_seq) i '
             + 'on f.seq = i.te_freetalk_seq '
-            + 'order by likecount desc, f.reg_date desc '
+            + 'order by f.reg_date desc '
+            // + 'order by likecount desc, f.reg_date desc '
             + 'limit ?, 10 ; ';
     sql = mysql.format(sql, [parseInt(req.query.start)]);
    // console.log(sql);

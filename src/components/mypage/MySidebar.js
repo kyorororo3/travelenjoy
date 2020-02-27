@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import profile_img from '../../resources/mypage/images/profile_img.jpg';
+import { Link } from 'react-router-dom';
+import profileImg from '../../resources/mypage/images/profile_img.jpg';
+
 
 class MySidebar extends Component {
 
@@ -9,16 +10,17 @@ class MySidebar extends Component {
     }
 
     render(){
+        const { profile_img, nickname, email} = this.props.users
         return( 
                 <div className='mypage-sidebar'>
                     <div className='sidebar-wrapper'>
                         <div className='profile-container box'>
                             <div className='profile-img-wrapper'>
-                                <img className ='profile-img' src={`../../uploads/${this.props.users.profile_img}`}/>
+                                <img className ='profile-img' src={`../../uploads/${profile_img}`} alt={profileImg} />
                             </div>
                             <div className='profile-info'>
-                                <p>{this.props.users.nickname}</p>
-                                <p>( {this.props.users.email} )</p>
+                                <p>{nickname}</p>
+                                <p>( {email} )</p>
                                 <Link to={{
                                     pathname:'/mypage/info',
                                     state:{ users:this.props.users }
@@ -65,4 +67,4 @@ class MySidebar extends Component {
 }
 
 
-export default withRouter(MySidebar);
+export default MySidebar;

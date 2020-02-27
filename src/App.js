@@ -24,8 +24,16 @@ import Guide_Make from './components/guide/guide_make';
 import Guide_Tour_List from './components/guide/guide_tour_list';
 import Guide_List_Detail from './components/guide/guide_list_detail';
 import Guide_Question from './components/guide/guide_question';
-
+import MypageSidebar from './components/mypage/MySidebar';
 import MypageHome from './components/mypage/Mypage';
+import MypageCalendar from './components/mypage/MyCalendar';
+import MypageInfo from './components/mypage/MyInfo';
+import MypageReview from './components/mypage/MyReview';
+import MypageScrap from './components/mypage/MyScrap';
+import MypageTalk from './components/mypage/MyTalk';
+import MypageTravel from './components/mypage/MyTravel';
+
+
 
 class AppTest extends React.Component {
 
@@ -77,6 +85,12 @@ class AppTest extends React.Component {
               <Route path='/talk' component={TalkMain} />
               <Route path='/talk/write' component={TalkWrite} />
               <Route exact path='/mypage' component={MypageHome}/>
+              {/* <Route path='/mypage/calendar' component={MypageCalendar}/>
+              <Route path='/mypage/travel' component={MypageTravel}/>
+              <Route path='/mypage/scrap' component={MypageScrap}/>
+              <Route path='/mypage/review' component={MypageReview}/>
+              <Route path='/mypage/talk' component={MypageTalk}/>
+              <Route path='/mypage' component={MypageInfo}/> */}
               <Route exact path='/guide' component={Guide_Main}></Route>
               <Route path='/guide/make' component={Guide_Make}></Route>
               <Route path='/guide/list' component={Guide_Tour_List}></Route>

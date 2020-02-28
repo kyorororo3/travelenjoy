@@ -149,13 +149,13 @@
     box-shadow: 1px 2px 4px 1px #dcdfe4;
     cursor: pointer;
 }
-.next{
+.nextlist{
     padding-left: 3px;
-    margin: 130px 10px 6px 480px;
+    margin: -170px 10px 6px 1085px;
 }
-.prev{
+.prevlist{
     padding-right: 3px;
-    margin: 130px 1090px 0px -21px;
+    margin: -170px 1090px 0px -21px;
     display: none;
 }
 
@@ -229,8 +229,9 @@
     cursor: pointer;
 }
 .recommendtalk-thumbnail{
+    width: 220px;
+    height: 220px;
     object-fit: cover;
-    width: 100%;
 }
 .recommnedtalk-hover{
     background-color: #000;

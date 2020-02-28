@@ -72,8 +72,13 @@ class AppTest extends React.Component {
           <div className="contents-wrapper">        
             <Switch>  {/* Switch: 불필요한 트래픽 방지. 해당 컴포넌트만 불러오게 해준다. */}
               <Route exact path='/' component={Home} />
-              {/* <Route path='/login' isLogin={this.isAuth} component={Login} /> */}
-              <Route path='/login' render={props => <Login getLogin = {this.isAuth}  />}  />
+              {/* <Provider store={store}>
+              <Route path='/login' render={props => <Login getLogin = {this.isAuth} />}  />
+              </Provider> */}
+              <Route path='/login' render={props => <Login getLogin = {this.isAuth}  getAuth = {this.guideHome} getInfo = {this.getMemberInfo} />}  />
+
+              {/* <Route path='/login' render={props => <Login getLogin = {this.isAuth}  />}  /> */}
+
               <Route exact path='/account' component={Account} />
               <Route path='/account/member' component={Member_Account} />
               <Route path='/account/guide' component={Guide_Account} />

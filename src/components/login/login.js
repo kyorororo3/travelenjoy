@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
 import  '../../resources/users/css/login.css';
 
 class Login extends React.Component {
@@ -84,6 +85,7 @@ class Login extends React.Component {
         this.props.getLogin({login:true, auth:data.auth});
       }
     })
+    // this.props.login(login_info);
   }
 
 
@@ -136,4 +138,19 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+// const mapState = (state) => {
+//   return {
+//     isRequestLogin: state.isRequestLogin,
+//     isSuccess: state.isSuccess,
+//     isError: state.isError
+//   };
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     login : (login_info) => dispatch(login(login_info))
+//   };
+// }
+
+// export default connect(mapState, mapDispatchToProps)(Login);
+ export default Login;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Button, Row, Col, Media, Carousel, Dropdown} from 'react-bootstrap';
+import {Modal, Row, Col, Media, Carousel, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../resources/freetalk/css/free_talk.css'
 import '../../resources/freetalk/css/free_talk_modal.css'
@@ -36,7 +36,7 @@ class RecommendTalk extends React.Component {
         fetch(`http://localhost:3002/freetalk/list/images?seq=${this.props.talk.seq}`)
         .then(res => res.json())
         .then(res => {
-            console.log(res.images);
+            // console.log(res.images);
             this.setState({images: res.images})
             this.setState({file:(this.state.images.length>0)?this.state.images[0].name_saved:this.state.file})
         })

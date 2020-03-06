@@ -11,7 +11,7 @@ class RecommendTour extends React.Component {
         }
     }
     componentDidMount() {
-        console.log('RecommendTour componentDidMount() 실행');
+        // console.log('RecommendTour componentDidMount() 실행');
         fetch('http://localhost:3002/users/getUser',{
           credentials: 'include'
         })
@@ -67,7 +67,7 @@ class RecommendTour extends React.Component {
     }
 
     render() {
-        let {seq, category, title, price, thumbnail, score} = this.props.tour;
+        let {category, title, price, thumbnail, score} = this.props.tour;
        
         return(      
             <div className='recommendtour'>
